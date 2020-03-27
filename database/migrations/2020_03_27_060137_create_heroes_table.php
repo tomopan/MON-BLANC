@@ -14,12 +14,11 @@
                 {
                     Schema::create("heroes", function (Blueprint $table) {
 						$table->increments('id');
-						$table->integer('img_url')->nullable();
-						$table->integer('hero_description')->nullable();
+						$table->text('img_url')->nullable();
+						$table->text('hero_description')->nullable();
 						$table->integer('novel_count')->nullable();
 						$table->timestamps();
 						$table->softDeletes();
-
                     });
                 }
     

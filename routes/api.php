@@ -14,12 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//最初から記述があったルーティング
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 
-// エピソード（第一話など）を書いて投稿
+//ここから追記//
+
+
+// -----------Heroesテーブル----------- //
+Route::get('get/hero', 'Api\HeroesController@show');
+
+
+// -----------Episodeテーブル----------- //
+
 //小説タイトルを投稿
 Route::post('post/episode', 'Api\EpisodesController@save');
 

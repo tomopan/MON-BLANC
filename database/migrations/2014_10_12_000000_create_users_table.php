@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             //追記
-            $table->string('api_token');
-            $table->string('image');
+            $table->string('api_token')->nullable();;
+            $table->string('image')->nullable();;
             $table->integer('follow_count')->nullable();
             $table->integer('follower_count')->nullable();
             $table->rememberToken();
