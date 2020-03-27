@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 use Auth;
 use Validate;
 use DB;
+
 use App\Heroe;
     
     //=======================================================================
@@ -68,10 +71,10 @@ use App\Heroe;
          *
          * @return \Illuminate\View\View
          */
-        public function show($id)
+        public function show()
         {
-            $heroe = Heroe::findOrFail($id);
-            return view("heroe.show", compact("heroe"));
+            $heroes = Heroe::all();
+            return response()->json($heroes);
         }
     
         /**
