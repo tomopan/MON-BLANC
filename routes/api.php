@@ -36,10 +36,11 @@ Route::post('post/episode', 'Api\EpisodesController@save');
 
 // -----------Novelsテーブル----------- //
 
-//小説
+//小説のデータを取得
 Route::get('get/novels/{id}', 'Api\NovelsController@show');
 
-
+//小説のタイトルを保存
+Route::post('post/noveltitle/{id}', 'Api\NovelsController@save');
 
 
 
