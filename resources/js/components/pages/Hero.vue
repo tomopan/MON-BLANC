@@ -1,25 +1,29 @@
 <template>
 <div>
     <h1>主人公ページ</h1>
+    <!-- 主人公の画像 -->
+      <v-img
+        :src="hero.img_url"
+        height="400px"
+        width="400px"
+      >
+        <v-card-title class="title white--text">
+            <v-row
+            class="fill-height flex-column"
+            justify="space-between"
+            >
+            <p class="mt-4 subheading text-left" style="color:white">主人公ID : {{hero.id}}</p>
+            <p class="mt-4 subheading text-left" style="color:white">名前 : {{hero.hero_description}}</p>
+            </v-row>
+        </v-card-title>
+      </v-img>
 
-               <v-img
-                  :src="hero.img_url"
-                  height="400px"
-                  width="400px"
-               >
-                  <v-card-title class="title white--text">
-                     <v-row
-                     class="fill-height flex-column"
-                     justify="space-between"
-                     >
-                     <p class="mt-4 subheading text-left" style="color:white">主人公ID : {{hero.id}}</p>
-                     <p class="mt-4 subheading text-left" style="color:white">名前 : {{hero.hero_description}}</p>
-                     </v-row>
-                  </v-card-title>
-               </v-img>
-  <!-- 執筆ボタンコンポーネント -->
-    <WriteBtnComponent/>
-
+    <!-- 執筆ボタン -->
+    <router-link :to="{name:'NovelTitle',params:{id:$route.params.id}}">
+      <v-btn class="ma-2" tile outlined color="success">
+          <v-icon left>mdi-pencil</v-icon> 執筆する
+      </v-btn>
+    </router-link>
 
   <!-- 書かれている小説を表示 -->
   <ul>
@@ -72,6 +76,7 @@ export default {
               console.log(err.response.data);　//ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
             })
       },
+    //主人公に書かれている小説のタイトルを表示
     showNovels:function(){
         axios
             .get("api/get/novels/"+this.$route.params.id)

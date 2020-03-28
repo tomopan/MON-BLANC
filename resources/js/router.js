@@ -13,6 +13,7 @@ import Bookshelf from './components/pages/profiles/Bookshelf.vue';
 import Writedbooks from './components/pages/profiles/Writedbooks.vue';
 import Writingbooks from './components/pages/profiles/Writingbooks.vue';
 import Episodes from './components/pages/Episodes.vue';
+import NovelTitle from './components/pages/NovelTitle.vue';
 
 
 Vue.use(VueRouter);
@@ -37,6 +38,11 @@ const routes = [
         path: '/read',
         component: Read,
         name:"Read"
+    },
+    {
+        path: '/noveltitle/:id',
+        component: NovelTitle,
+        name:"NovelTitle"
     },
     {
         path: '/write',

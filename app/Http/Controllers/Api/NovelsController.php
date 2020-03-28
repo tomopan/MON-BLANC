@@ -16,6 +16,21 @@ use App\Novel;
     //=======================================================================
     class NovelsController extends Controller
     {
+
+        //小説のタイトルを保存
+        public function save(Request $request,$id)
+        {
+            //ユーザー情報取得
+
+            //登録する情報を格納
+            $novel = new Novel;
+            //ユーザー情報を登録
+
+            //小説情報を登録
+            $novel->hero_id = $id;
+            $novel->title = $request->title;
+            $novel->save();
+        }
         /**
          * Display a listing of the resource.
          *

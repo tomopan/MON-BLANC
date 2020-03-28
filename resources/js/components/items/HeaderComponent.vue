@@ -19,10 +19,10 @@
       <router-link :to="{ name: 'Hero'}">
         <p style="color:white"> 主人公</p>
       </router-link>
-      /
+      <!-- /
       <router-link :to="{ name: 'HeroDetail'}">
         <p style="color:white"> 主人公紹介</p>
-      </router-link>
+      </router-link> -->
       /
       <router-link :to="{ name: 'Episodes'}">
         <p style="color:white"> 目次</p>
