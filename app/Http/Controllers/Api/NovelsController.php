@@ -77,13 +77,12 @@ use App\Novel;
          *
          * @return \Illuminate\View\View
          */
-        public function show()
+        public function show($id)
         {
-            //例外処理らしい
-            // $novel = Novel::findOrFail();
-            $novel =  Novel::all();
+            $novels =  Novel::where('hero_id','=',$id)
+                            ->get();
 
-            return response()->json($novel);
+            return response()->json($novels);
             // json(['profile'=>$array,'tastes'=>$taste,'notEntered'=>$genderNotEntered,'selectedTastes'=>$selectedTastes], 200);
         }
     
