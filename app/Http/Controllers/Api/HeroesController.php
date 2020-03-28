@@ -76,6 +76,13 @@ use App\Heroe;
             $heroes = Heroe::all();
             return response()->json($heroes);
         }
+
+        public function fetch($id)
+        {
+            $hero = Heroe::where('id','=',$id)
+                            ->get();
+            return response()->json($hero);
+        }
     
         /**
          * Show the form for editing the specified resource.

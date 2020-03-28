@@ -24,7 +24,7 @@ const routes = [
         name:"Top"
     },
     {
-        path: '/hero',
+        path: '/hero/:id',
         component: Hero,
         name:"Hero",
     },

@@ -25,12 +25,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // -----------Heroesテーブル----------- //
 Route::get('get/hero', 'Api\HeroesController@show');
+Route::get('get/hero/{id}', 'Api\HeroesController@fetch');
 
 
 // -----------Episodeテーブル----------- //
 
-//小説タイトルを投稿
+//小説のエピソードを投稿
 Route::post('post/episode', 'Api\EpisodesController@save');
+
+
+// -----------Novelsテーブル----------- //
+
+//小説
+Route::get('get/novels/{id}', 'Api\NovelsController@show');
+
+
+
+
+
+
+//---------------未実装----------------//
 
 // 読書ページのフォロー(コントローラーを書く時にidを変数にいれる記載をしようと思います)
 Route::post('post/follow/{id}', 'Api\FollowsController@uid');
@@ -46,7 +60,6 @@ Route::get('get/novel/', 'Api\NovelsController@show');
     Route::get('get/episode/writed', 'Api\EpisodesController@showWrited');
 
 // 主人公ページの「キャラクター概要」
-Route::get('post/hero/{id}', 'Api\HerosController@show');
 // 読書ページの「目次」から取るエピソード
 // Route::get('post/episode/{id}', 'Api\NovelsController@show');
 // 新規登録ユーザー
