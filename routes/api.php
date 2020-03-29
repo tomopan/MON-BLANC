@@ -36,8 +36,11 @@ Route::post('post/episode', 'Api\EpisodesController@save');
 
 // -----------Novelsテーブル----------- //
 
-//小説のデータを取得
+//hero_idにマッチした小説のデータを取得
 Route::get('get/novels/{id}', 'Api\NovelsController@show');
+
+//novel_idにマッチしたデータをひとつだけ取得
+Route::get('get/novel/{novel_id}', 'Api\NovelsController@fetch');
 
 //小説のタイトルを保存
 Route::post('post/noveltitle/{id}', 'Api\NovelsController@save');

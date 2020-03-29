@@ -25,14 +25,9 @@ const routes = [
         name:"Top"
     },
     {
-        path: '/hero/:id',
+        path: '/hero/:hero_id',
         component: Hero,
         name:"Hero",
-    },
-    {
-        path: '/herodetail',
-        component: HeroDetail,
-        name:"HeroDetail"
     },
     {
         path: '/read',
@@ -40,14 +35,15 @@ const routes = [
         name:"Read"
     },
     {
-        path: '/noveltitle/:id',
+        path: '/noveltitle/:hero_id',
         component: NovelTitle,
         name:"NovelTitle"
     },
     {
-        path: '/write',
+        path: '/write/:hero_id/:novel_id',
         component: Write,
-        name:"Write"
+        name:"Write",
+        props: true
     },
     {
         path: '/episodes',

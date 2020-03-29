@@ -29,6 +29,7 @@ use App\Episode;
 
             
             //小説情報を登録
+            $episodes->novel_id = $request->novel_id;
             $episodes->episode_title = $request->episode_title;
             $episodes->text = $request->text;
             $episodes->status = $request->status;

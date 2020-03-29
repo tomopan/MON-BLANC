@@ -19,7 +19,7 @@
       </v-img>
 
     <!-- 執筆ボタン -->
-    <router-link :to="{name:'NovelTitle',params:{id:$route.params.id}}">
+    <router-link :to="{name:'NovelTitle',params:{hero_id:$route.params.hero_id}}">
       <v-btn class="ma-2" tile outlined color="success">
           <v-icon left>mdi-pencil</v-icon> 執筆する
       </v-btn>
@@ -67,7 +67,7 @@ export default {
     //API叩いてマッチした主人公データを取得
     showHero:function(){
         axios
-            .get("api/get/hero/"+this.$route.params.id)
+            .get("api/get/hero/"+this.$route.params.hero_id)
             .then(res => {
               console.log(res.data)
               this.hero = res.data[0];
@@ -79,7 +79,7 @@ export default {
     //主人公に書かれている小説のタイトルを表示
     showNovels:function(){
         axios
-            .get("api/get/novels/"+this.$route.params.id)
+            .get("api/get/novels/"+this.$route.params.hero_id)
             .then(res => {
               console.log(res.data)
               this.novels = res.data;

@@ -1,10 +1,11 @@
 <template>
 <div>
     <p>新規エピソードを作成</p>
-    <p>Hero_id : {{hero_id}}</p>
-    <HeroImgComponent/>
 
-    <p>ルネ・デカルト▶︎『風の歌を聴け』▶︎第1話</p>
+
+    <p>{{hero.hero_description}}</p>
+    <p>小説ID：{{$route.params.novel_id}}</p>
+    <p>小説タイトル：</p>
     <!-- タイトル入力 -->
     <v-form>
     <v-text-field
@@ -44,14 +45,43 @@ export default {
     return {
       //タイトルとテキストを格納
       episodePost:{},
-      hero_id:""
+      hero:{}
     };
   },
 
   created() {
-    this.episodePost.hero_id = this.hero_id;
+    this.showHero();
+    this.showNovel();
+    this.episodePost.novel_id = this.$route.params.novel_id;
+
   },
   methods: {
+    //主人公を表示する
+    showHero:function(){
+      axios
+          .get("api/get/hero/"+this.$route.params.hero_id)
+          .then(res => {
+          console.log(res.data)
+          this.hero = res.data[0];
+          })
+          .catch(err => {
+          console.log(err.response.data);　//ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
+          })
+    },
+
+    //小説の情報を取得する
+    showNovel:function(){
+    axios
+        .get("api/get/novel/"+this.episodePost.novel_id)
+        .then(res => {
+        console.log(res.data)
+        this.hero = res.data[0];
+        })
+        .catch(err => {
+        console.log(err.response.data);　//ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
+        })
+        },
+
     //一時保存：エピソードタイトルとテキストをEpisodesテーブルに保存,statusを0
     saveEpisode:function(){
       //ステータスを0

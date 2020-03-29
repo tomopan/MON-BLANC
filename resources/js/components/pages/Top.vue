@@ -4,7 +4,7 @@
        <v-container class="pa-4 text-center">
       <v-row class="fill-height" align="center" justify="center">
          <div v-for="(hero, id) in heroes" :key="id">
-         <router-link :to="{name:'Hero',params:{id:hero.id,url:hero.img_url}}">
+         <router-link :to="{name:'Hero',params:{hero_id:hero.id,url:hero.img_url}}">
          <v-col
             :key="id"
             cols="12"
