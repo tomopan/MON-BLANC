@@ -40,14 +40,7 @@ export default {
     created() {
         this.showHero();
     },
-    // watch: {
-    //     // ルートが変更されたらこのメソッドを再び呼び出します
-    //     '$route': 'fetchData'
-    // },
     methods: {
-        // fetchData:function(){
-        //     this.postNovelId = this.novelTitlePost.novel_id
-        // },
         //小説のタイトルを保存
         saveNovelTitle:function(){
             axios
