@@ -96,9 +96,9 @@ use App\Novel;
          */
 
         //hero_idにマッチした小説のデータを取得
-        public function show($id)
+        public function show($hero_id)
         {
-            $novels =  Novel::where('hero_id','=',$id)
+            $novels =  Novel::where('hero_id','=',$hero_id)
                             ->get();
 
             return response()->json($novels);

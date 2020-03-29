@@ -5,8 +5,10 @@
 
     <p>{{hero.hero_description}}</p>
     <p>小説ID：{{$route.params.novel_id}}</p>
-    <p>小説タイトル：</p>
-    <!-- タイトル入力 -->
+    <p>小説タイトル：{{novelTitle}}</p>
+  {{episodePost}}
+
+    <!-- エピソードタイトル入力 -->
     <v-form>
     <v-text-field
       label="エピソードタイトル"
@@ -43,6 +45,7 @@ export default {
   },
   data() {
     return {
+      novelTitle:"",
       //タイトルとテキストを格納
       episodePost:{},
       hero:{}
@@ -50,10 +53,9 @@ export default {
   },
 
   created() {
+    this.episodePost.novel_id = this.$route.params.novel_id;
     this.showHero();
     this.showNovel();
-    this.episodePost.novel_id = this.$route.params.novel_id;
-
   },
   methods: {
     //主人公を表示する
@@ -72,13 +74,13 @@ export default {
     //小説の情報を取得する
     showNovel:function(){
     axios
-        .get("api/get/novel/"+this.episodePost.novel_id)
+        .get("api/get/novel/"+this.$route.params.novel_id)
         .then(res => {
-        console.log(res.data)
-        this.hero = res.data[0];
+          console.log(res.data[0].title)
+          this.novelTitle = res.data[0].title;
         })
         .catch(err => {
-        console.log(err.response.data);　//ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
+          console.log(err.response.data);　//ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
         })
         },
 
@@ -86,26 +88,27 @@ export default {
     saveEpisode:function(){
       //ステータスを0
         this.episodePost.status = 0;
-        // this.episodePost.hero_id = this.hero_id;
-         axios
+
+        axios
           .post("api/post/episode",this.episodePost)
           .then(res => {
           })
           .catch(err => {
             console.log(err.response.data);　//ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
-            })
+          })
     },
     //公開：エピソードタイトルとテキストをEpisodesテーブルに保存,statusを1
     openEpisode:function(){
       //ステータスを1
         this.episodePost.status = 1;
-         axios
+
+        axios
           .post("api/post/episode",this.episodePost)
           .then(res => {
           })
           .catch(err => {
             console.log(err.response.data);　//ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
-            })
+          })
     }
   }
 };
