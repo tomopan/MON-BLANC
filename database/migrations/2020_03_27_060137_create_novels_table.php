@@ -17,7 +17,6 @@
 						$table->integer('hero_id')->nullable();
 						$table->integer('writer_id')->nullable();
 						$table->text('title')->nullable();
-						$table->integer('episode_id')->nullable();
 						$table->integer('viewer_count')->nullable();
 						$table->integer('status')->nullable();
 						$table->timestamps();
