@@ -18,9 +18,7 @@ class DatabaseSeeder extends Seeder
 		$this->call(NovelsTableSeeder::class);
 		$this->call(HeroesTableSeeder::class);
 		$this->call(EpisodesTableSeeder::class);
-		$this->call(FollowsTableSeeder::class);
-		$this->call(ViewersTableSeeder::class);
-		$this->call(BookshelvesTableSeeder::class);
-		$this->call(BookmarksTableSeeder::class);
+		$this->call(UsersTableSeeder::class);
+
    }
 }
