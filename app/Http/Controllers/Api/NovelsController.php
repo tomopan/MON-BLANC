@@ -30,6 +30,8 @@ use App\Novel;
             $novel->hero_id = $id;
             $novel->title = $request->title;
             $novel->save();
+            
+            return $novel;
         }
         /**
          * Display a listing of the resource.
@@ -92,13 +94,25 @@ use App\Novel;
          *
          * @return \Illuminate\View\View
          */
+
+        //hero_idにマッチした小説のデータを取得
         public function show($id)
         {
             $novels =  Novel::where('hero_id','=',$id)
                             ->get();
 
             return response()->json($novels);
-            // json(['profile'=>$array,'tastes'=>$taste,'notEntered'=>$genderNotEntered,'selectedTastes'=>$selectedTastes], 200);
+
+        }
+
+        //novel_idにマッチした小説のデータをひとつだけ取得
+        public function fetch($novel_id)
+        {
+            $novel =  Novel::where('id','=',$novel_id)
+                            ->get();
+
+            return response()->json($novel);
+
         }
     
         /**
