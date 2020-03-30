@@ -1,52 +1,45 @@
 <template>
-<div>
+  <div>
     <h1>執筆中ページ</h1>
-  <!-- {{writingEpisodes}} -->
-    <li v-for="writingEpisode in writingEpisodes" :key="writingEpisode.novel_id">
-      小説No.:{{writingEpisode.novel_id}}/エピソードタイトル:{{ writingEpisode.episode_title }}
-    </li>
-</div>
+    <!-- {{writingEpisodes}} -->
+    <li v-for="writingNovel in writingNovels" :key="writingNovel.id">{{writingNovel.title}}</li>
+  </div>
 </template>
 
 <!-- 以下にscript/cssを記述 -->
 <script>
-
 export default {
   components: {
-      //執筆中の小説のエピソード名を格納
+    //執筆中の小説のエピソード名を格納
   },
   data() {
     return {
-      writingEpisodes:[]
+      writingNovels: []
     };
   },
 
   created() {
-    this.showWritingEpisode();
+    this.showWritingNovel();
   },
   methods: {
-    showWritingEpisode:function(){
-    //Episodesテーブルから情報を取得
-        axios
-        .get("api/get/episode/writing")
+    showWritingNovel: function() {
+      axios
+        .get("api/get/novel/writing")
         .then(res => {
-          //配列に格納
-          this.writingEpisodes = res.data.map(data => {
-            const obj = {}; 
-             obj['novel_id'] = data.novel_id;
-             obj['episode_title'] = data.episode_title;
-             return obj;
-            })
-          console.log(this.writingEpisodes);
+          console.log(res);
+          this.writingNovels = res.data.map(data => {
+            const obj = {};
+            obj["title"] = data.title;
+            return obj;
+          });
         })
         .catch(err => {
-            console.log(err.response.data);　//ここにエラーの箇所とどんなエラーなのか書いてあります〜
-        })
+          console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
+        });
     }
   }
 };
 </script>
 
 <style scoped>
-
 </style>

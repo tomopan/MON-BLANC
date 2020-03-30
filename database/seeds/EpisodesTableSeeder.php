@@ -49,7 +49,7 @@ use Illuminate\Database\Seeder;
             );
             DB::table('episodes')->insert(
             [
-                "novel_id" => 2,
+                "novel_id" => 4,
                 "episode_number" => 1,
                 "episode_title" => "玉井の下書き",
                 "text" => "玉井 詩織はとにかく下書きをする",

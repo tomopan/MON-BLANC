@@ -42,6 +42,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     // -----------Novelsテーブル----------- //
 
+        //プロフィールで公開中の小説を取得
+    Route::get('get/novel/writed', 'Api\NovelsController@showWrited');
+
+    //プロフィールで非公開の小説を取得
+    Route::get('get/novel/writing', 'Api\NovelsController@showWriting');
+
     //hero_idにマッチした小説のデータを取得
     Route::get('get/novels/{id}', 'Api\NovelsController@show');
 
@@ -52,6 +58,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::post('post/noveltitle/{id}', 'Api\NovelsController@save');
 
 
+
+
+
+    // -----------Usersテーブル----------- //
+    Route::get('get/user', 'Api\UsersController@show');
 
 
     //---------------未実装----------------//
