@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+// use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,55 +20,60 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+
+
 //ここから追記//
+//　API定義
+//　認証後であれば下記ルート定義が有効になる
+// Route::group(['middleware' => 'auth'], function () {
 
 
-// -----------Heroesテーブル----------- //
-Route::get('get/hero', 'Api\HeroesController@show');
-Route::get('get/hero/{id}', 'Api\HeroesController@fetch');
+    // -----------Heroesテーブル----------- //
+    Route::get('get/hero', 'Api\HeroesController@show');
+    Route::get('get/hero/{id}', 'Api\HeroesController@fetch');
 
 
-// -----------Episodeテーブル----------- //
+    // -----------Episodeテーブル----------- //
 
-//小説のエピソードを投稿
-Route::post('post/episode', 'Api\EpisodesController@save');
-
-
-// -----------Novelsテーブル----------- //
-
-//hero_idにマッチした小説のデータを取得
-Route::get('get/novels/{id}', 'Api\NovelsController@show');
-
-//novel_idにマッチしたデータをひとつだけ取得
-Route::get('get/novel/{novel_id}', 'Api\NovelsController@fetch');
-
-//小説のタイトルを保存
-Route::post('post/noveltitle/{id}', 'Api\NovelsController@save');
+    //小説のエピソードを投稿
+    Route::post('post/episode', 'Api\EpisodesController@save');
 
 
+    // -----------Novelsテーブル----------- //
 
+    //hero_idにマッチした小説のデータを取得
+    Route::get('get/novels/{id}', 'Api\NovelsController@show');
 
-//---------------未実装----------------//
+    //novel_idにマッチしたデータをひとつだけ取得
+    Route::get('get/novel/{novel_id}', 'Api\NovelsController@fetch');
 
-// 読書ページのフォロー(コントローラーを書く時にidを変数にいれる記載をしようと思います)
-Route::post('post/follow/{id}', 'Api\FollowsController@uid');
-// トップページの主人公選択(@の後ろがわからない。。。。)
-Route::get('post/hero/{id}', 'Api\HerosController@save');
-
-// 主人公ページの「書かれた小説閲覧」
-Route::get('get/novel/', 'Api\NovelsController@show');
-// プロフィールの小説データ取得
-    //執筆中の小説
-    Route::get('get/episode/writing', 'Api\EpisodesController@showWriting');
-    //執筆中の小説
-    Route::get('get/episode/writed', 'Api\EpisodesController@showWrited');
-
-// 主人公ページの「キャラクター概要」
-// 読書ページの「目次」から取るエピソード
-// Route::get('post/episode/{id}', 'Api\NovelsController@show');
-// 新規登録ユーザー
-Route::get('post/user/{id}', 'Api\UsersController@store');
-//
+    //小説のタイトルを保存
+    Route::post('post/noveltitle/{id}', 'Api\NovelsController@save');
 
 
 
+
+    //---------------未実装----------------//
+
+    // 読書ページのフォロー(コントローラーを書く時にidを変数にいれる記載をしようと思います)
+    // Route::post('post/follow/{id}', 'Api\FollowsController@uid');
+    // トップページの主人公選択(@の後ろがわからない。。。。)
+    // Route::get('post/hero/{id}', 'Api\HerosController@save');
+// 
+    // 主人公ページの「書かれた小説閲覧」
+    // Route::get('get/novel/', 'Api\NovelsController@show');
+    // プロフィールの小説データ取得
+        //執筆中の小説
+        // Route::get('get/episode/writing', 'Api\EpisodesController@showWriting');
+        //執筆中の小説
+        // Route::get('get/episode/writed', 'Api\EpisodesController@showWrited');
+
+    // 主人公ページの「キャラクター概要」
+    // 読書ページの「目次」から取るエピソード
+    // Route::get('post/episode/{id}', 'Api\NovelsController@show');
+    // 新規登録ユーザー
+    // Route::get('post/user/{id}', 'Api\UsersController@store');
+    //
+
+
+// });

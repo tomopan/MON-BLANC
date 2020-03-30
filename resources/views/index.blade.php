@@ -11,9 +11,15 @@
 
     </head>
     <body>
-    index.blade.php
+        <p>index.blade.php</p>
+        <p>user_id:{{ Auth::id()}} </p>
         <div id="app">
         </div>
+        <script>
+            window.Laravel = {!! json_encode([
+                'apiToken' => \Auth::user()->api_token ?? null
+            ]) !!};
+        </script>
         <script src="{{asset('js/app.js')}}"></script>
     </body>
 </html>

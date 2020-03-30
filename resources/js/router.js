@@ -6,7 +6,6 @@ import Top from './components/pages/Top.vue';
 import Hero from './components/pages/Hero.vue';
 import Read from './components/pages/Read.vue';
 import Write from './components/pages/Write.vue';
-import HeroDetail from './components/pages/HeroDetail.vue';
 import Profile from './components/pages/Profile.vue';
 import Bookmark from './components/pages/profiles/Bookmark.vue';
 import Bookshelf from './components/pages/profiles/Bookshelf.vue';
