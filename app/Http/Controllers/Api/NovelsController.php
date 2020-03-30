@@ -1,33 +1,38 @@
 <?php
 
 //変更
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 //追記
 use App\Http\Controllers\Controller;
-
-
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Auth;
 use Auth;
 use Validate;
 use DB;
+
+use App\User;
 use App\Novel;
-    
+
+
+
     //=======================================================================
     class NovelsController extends Controller
     {
 
         //小説のタイトルを保存
-        public function save(Request $request,$id)
+        public function save(Request $request,$hero_id)
         {
             //ユーザー情報取得
+            $userId = Auth::id();
+            // $userId = 100;
 
             //登録する情報を格納
             $novel = new Novel;
             //ユーザー情報を登録
-
+            $novel->user_id = $userId;
             //小説情報を登録
-            $novel->hero_id = $id;
+            $novel->hero_id = $hero_id;
             $novel->title = $request->title;
             $novel->save();
             
@@ -98,6 +103,7 @@ use App\Novel;
         //hero_idにマッチした小説のデータを取得
         public function show($hero_id)
         {
+
             $novels =  Novel::where('hero_id','=',$hero_id)
                             ->get();
 
@@ -110,7 +116,7 @@ use App\Novel;
         {
             $novel =  Novel::where('id','=',$novel_id)
                             ->get();
-
+            // $novel->user_id = 1;
             return response()->json($novel);
 
         }

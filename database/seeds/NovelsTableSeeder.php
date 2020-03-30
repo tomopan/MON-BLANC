@@ -17,7 +17,7 @@ use Illuminate\Database\Seeder;
             DB::table('novels')->insert(
             [
                 "hero_id" => 1,
-                "writer_id" => 2,
+                "user_id" => 2,
                 "title" => "デカルトの冒険",
                 "status" => 1,
                 "created_at" => $faker->dateTime("now"),
@@ -27,7 +27,7 @@ use Illuminate\Database\Seeder;
             DB::table('novels')->insert(
             [
                 "hero_id" => 2,
-                "writer_id" => 1,
+                "user_id" => 1,
                 "title" => "しおりんの冒険",
                 "status" => 1,
                 "created_at" => $faker->dateTime("now"),
@@ -37,7 +37,7 @@ use Illuminate\Database\Seeder;
             DB::table('novels')->insert(
             [
                 "hero_id" => 1,
-                "writer_id" => 2,
+                "user_id" => 2,
                 "title" => "下書きデカルトの冒険",
                 "status" => 0,
                 "created_at" => $faker->dateTime("now"),
@@ -47,7 +47,7 @@ use Illuminate\Database\Seeder;
             DB::table('novels')->insert(
             [
                 "hero_id" => 2,
-                "writer_id" => 1,
+                "user_id" => 1,
                 "title" => "下書きしおりんの冒険",
                 "status" => 0,
                 "created_at" => $faker->dateTime("now"),

@@ -4,6 +4,7 @@
     <header-component />
     <main>
         <div class="container">
+
         <RouterView />
         </div>
     </main>

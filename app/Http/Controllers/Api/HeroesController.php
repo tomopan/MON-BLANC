@@ -10,6 +10,7 @@ use Validate;
 use DB;
 
 use App\Heroe;
+use App\User;
     
     //=======================================================================
     class HeroesController extends Controller
@@ -79,8 +80,12 @@ use App\Heroe;
 
         public function fetch($id)
         {
+            $userId = Auth::id();
             $hero = Heroe::where('id','=',$id)
                             ->get();
+
+            // $hero->user_id = 1;
+
             return response()->json($hero);
         }
     
