@@ -1,52 +1,53 @@
 <template>
-<div>
-    <h1>執筆済みページ</h1>
-  <!-- {{writingEpisodes}} -->
-    <li v-for="writedEpisode in writedEpisodes" :key="writedEpisode.novel_id">
-      小説No.:{{writedEpisode.novel_id}}/エピソードタイトル:{{ writedEpisode.episode_title }}
+  <div>
+    <h1>公開中の小説</h1>
+    <!-- {{writedNovels}} -->
+    <li v-for="(writedNovel,i) in writedNovels" :key="i">
+      <router-link
+        :to="{name:'Read',params:{hero_id:writedNovel.hero_id,novel_id:writedNovel.novel_id}}"
+      >{{writedNovel.title}}</router-link>
     </li>
-</div>
+  </div>
 </template>
 
 <!-- 以下にscript/cssを記述 -->
 <script>
-
 export default {
   components: {
-      //執筆中の小説のエピソード名を格納
+    //執筆中の小説のエピソード名を格納
   },
   data() {
     return {
-      writedEpisodes:[]
+      writedEpisodes: [],
+      writedNovels: []
     };
   },
 
   created() {
-    this.showwritedEpisode();
+    // this.showWritedEpisode();
+    this.showWritedNovel();
   },
   methods: {
-    showwritedEpisode:function(){
-    //Episodesテーブルから情報を取得
-        axios
-        .get("api/get/episode/writed")
+    showWritedNovel: function() {
+      axios
+        .get("api/get/novel/writed")
         .then(res => {
-          //配列に格納
-          this.writedEpisodes = res.data.map(data => {
-            const obj = {}; 
-             obj['novel_id'] = data.novel_id;
-             obj['episode_title'] = data.episode_title;
-             return obj;
-            })
-          console.log(this.writedEpisodes);
+          console.log(res);
+          this.writedNovels = res.data.map(data => {
+            const obj = {};
+            obj["title"] = data.title;
+            obj["hero_id"] = data.hero_id;
+            obj["novel_id"] = data.id;
+            return obj;
+          });
         })
         .catch(err => {
-            console.log(err.response.data);　//ここにエラーの箇所とどんなエラーなのか書いてあります〜
-        })
+          console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
+        });
     }
   }
 };
 </script>
 
 <style scoped>
-
 </style>

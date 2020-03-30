@@ -20,10 +20,11 @@
 
     <!-- 書かれている小説を表示 -->
     <ul>
-      <li v-for="novel in novels" :key="novel.id">
+      <li v-for="(novel,i) in novels" :key="i">
         <router-link
-          :to="{name:'Read',params:{hero_id:novel.hero_id,novel_id:novel.id}}"
+          :to="{name:'Read',params:{hero_id:$route.params.hero_id,novel_id:novel.id}}"
         >{{novel.title}}</router-link>
+        by {{novel.name}}
       </li>
     </ul>
   </div>
