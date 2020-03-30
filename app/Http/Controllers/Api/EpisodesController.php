@@ -8,6 +8,7 @@ use Auth;
 use Validate;
 use DB;
 use App\Episode;
+use App\User;
     
     //=======================================================================
     class EpisodesController extends Controller
@@ -22,7 +23,7 @@ use App\Episode;
         {
             //ユーザー情報取得
 
-
+            
             //エピソードを保存
             $episodes = new Episode;
             //ユーザー情報を登録
@@ -90,9 +91,10 @@ use App\Episode;
          *
          * @return \Illuminate\View\View
          */
-        public function show()
+        public function show($novel_id)
         {
-            $episode =  Episode::all();
+            $episode =  Episode::where('novel_id','=',$novel_id)
+                ->get();
             return response()->json($episode);
         }
 

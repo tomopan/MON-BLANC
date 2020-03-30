@@ -36,6 +36,28 @@ use Illuminate\Database\Seeder;
                 "updated_at" => $faker->dateTime("now")
             ]
             );
+            DB::table('episodes')->insert(
+            [
+                "novel_id" => 3,
+                "episode_number" => 1,
+                "episode_title" => "デカルトの下書き",
+                "text" => "デカルトはとにかく下書きをする",
+                "status" => "0",
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('episodes')->insert(
+            [
+                "novel_id" => 2,
+                "episode_number" => 1,
+                "episode_title" => "玉井の下書き",
+                "text" => "玉井 詩織はとにかく下書きをする",
+                "status" => "0",
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
 
 
 					

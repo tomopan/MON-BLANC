@@ -29,7 +29,7 @@ const routes = [
         name:"Hero",
     },
     {
-        path: '/read',
+        path: '/read/:hero_id/:novel_id',
         component: Read,
         name:"Read"
     },
