@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>主人公ページ</h1>
+    <h1>最初の一文ページ</h1>
     <v-container class="d-flex flex-row mb-6" color="grey lighten-2" flat tile>
       <div>
         <!-- 主人公の画像 -->
@@ -15,23 +15,9 @@
             </v-row>
           </v-card-title>
         </v-img>
-
-        <!-- 読むボタン -->
-        <router-link :to="{name:'ReadFirst',params:{hero_id:$route.params.hero_id}}">
-          <v-btn class="ma-2" tile outlined color="success">
-            <v-icon left>mdi-book-open-page-variant</v-icon>読む
-          </v-btn>
-        </router-link>
-
-        <!-- 書くボタン -->
-        <router-link :to="{name:'NovelTitle',params:{hero_id:$route.params.hero_id}}">
-          <v-btn class="ma-2" tile outlined color="success">
-            <v-icon left>mdi-pencil</v-icon>書く
-          </v-btn>
-        </router-link>
       </div>
       <!-- 書かれている小説を表示 -->
-      <!-- <div class="pa-md-4 mx-lg-auto">
+      <div class="pa-md-4 mx-lg-auto">
         <ul>
           <li v-for="(novel,i) in novels" :key="i">
             <router-link
@@ -40,15 +26,21 @@
             by {{novel.name}}
           </li>
         </ul>
-      </div> -->
+      </div>
     </v-container>
   </div>
 </template>
 
 <!-- 以下にscript/cssを記述 -->
 <script>
+import WriteBtnComponent from "../items/WriteBtnComponent.vue";
+import HeroImgComponent from "../items/HeroImgComponent.vue";
+
 export default {
-  components: {},
+  components: {
+    WriteBtnComponent,
+    HeroImgComponent
+  },
 
   data() {
     return {
