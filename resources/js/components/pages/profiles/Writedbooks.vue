@@ -6,6 +6,7 @@
       <router-link
         :to="{name:'Read',params:{hero_id:writedNovel.hero_id,novel_id:writedNovel.novel_id}}"
       >{{writedNovel.title}}</router-link>
+      <v-btn class="ma-2" tile outlined color="success" @click="closeNovel(i,writedNovel.novel_id)">非公開にする</v-btn>
     </li>
   </div>
 </template>
@@ -44,6 +45,18 @@ export default {
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
         });
+    },
+    closeNovel: function(i, novel_id) {
+      axios
+        .post("api/update/novel/close/" + novel_id)
+        .then(res => {
+          console.log(this.writingNovels);
+        })
+        .catch(err => {
+          console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
+        });
+      // 配列からも削除してデータバインディング
+      this.writedNovels.splice(i, 1);
     }
   }
 };

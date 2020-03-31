@@ -18,7 +18,7 @@
       </router-link>
       <!-- 公開ボタン -->
       <router-link :to="{name:'Hero',params:{hero_id:$route.params.hero_id}}">
-      <v-btn color="success" id="open" dark @click="openEpisode">公開</v-btn>
+        <v-btn color="success" id="open" dark @click="openEpisode">公開</v-btn>
       </router-link>
     </v-form>
   </div>
@@ -85,6 +85,15 @@ export default {
       axios
         .post("api/post/episode", this.episodePost)
         .then(res => {})
+        .catch(err => {
+          console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
+        });
+
+      axios
+        .post("api/update/novel/close/"+this.episodePost.novel_id)
+        .then(res => {
+          console.log(res);
+        })
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
         });

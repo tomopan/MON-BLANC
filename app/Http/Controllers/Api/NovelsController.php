@@ -93,60 +93,23 @@ use App\Novel;
                         ->get();
             return response()->json($novels);
         }
-    
-        /**
-         * Show the form for editing the specified resource.
-         *
-         * @param  int  $id
-         *
-         * @return \Illuminate\View\View
-         */
-        public function edit($id)
-        {
-            $novel = Novel::findOrFail($id);
-    
-            return view("novel.edit", compact("novel"));
-        }
-    
-        /**
-         * Update the specified resource in storage.
-         *
-         * @param  int  $id
-         * @param \Illuminate\Http\Request $request
-         *
-         * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-         */
-        public function update(Request $request, $id)
-        {
-            $this->validate($request, [
-				"hero_id" => "nullable|integer", //integer('hero_id')->nullable()
-				"user_id" => "nullable|integer", //integer('user_id')->nullable()
-				"title" => "nullable", //text('title')->nullable()
-				"viewer_count" => "nullable|integer", //integer('viewer_count')->nullable()
-				"status" => "nullable|integer", //integer('status')->nullable()
 
-            ]);
-            $requestData = $request->all();
-            
-            $novel = Novel::findOrFail($id);
-            $novel->update($requestData);
-    
-            return redirect("novel")->with("flash_message", "novel updated!");
-        }
-    
-        /**
-         * Remove the specified resource from storage.
-         *
-         * @param  int  $id
-         *
-         * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-         */
-        public function destroy($id)
+        //小説のステータスを変更（公開→非公開）
+        public function closeNovelStatus($novel_id)
         {
-            Novel::destroy($id);
-    
-            return redirect("novel")->with("flash_message", "novel deleted!");
+            $novel =  Novel::where('id','=',$novel_id) 
+                        ->update(['status' => 0]);
+            return $novel;
+            // return response()->json($novels);
+        }
+
+        //小説のステータスを変更（非公開→公開）
+        public function openNovelStatus($novel_id)
+        {
+            $novel =  Novel::where('id','=',$novel_id) 
+                        ->update(['status' => 1]);
+            return $novel_id;
+            // return response()->json($novels);
         }
     }
-
     

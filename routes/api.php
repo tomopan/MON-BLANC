@@ -57,6 +57,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     //小説のタイトルを保存
     Route::post('post/noveltitle/{id}', 'Api\NovelsController@save');
 
+    //小説のステータスを変更(公開→非公開)
+    Route::post('update/novel/close/{novel_id}', 'Api\NovelsController@closeNovelStatus');
+
+    //小説のステータスを変更(公開→非公開)
+    Route::post('update/novel/open/{novel_id}', 'Api\NovelsController@openNovelStatus');
+
 
 
 
