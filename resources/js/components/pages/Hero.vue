@@ -24,7 +24,7 @@
         </router-link>
 
         <!-- 書くボタン -->
-        <router-link :to="{name:'NovelTitle',params:{hero_id:$route.params.hero_id}}">
+        <router-link :to="{name:'WriteFirstSentence',params:{hero_id:$route.params.hero_id}}">
           <v-btn class="ma-2" tile outlined color="success">
             <v-icon left>mdi-pencil</v-icon>書く
           </v-btn>

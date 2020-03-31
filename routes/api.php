@@ -42,7 +42,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     // -----------Novelsテーブル----------- //
 
-        //プロフィールで公開中の小説を取得
+    //プロフィールで公開中の小説を取得
     Route::get('get/novel/writed', 'Api\NovelsController@showWrited');
 
     //プロフィールで非公開の小説を取得
@@ -54,8 +54,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     //novel_idにマッチしたデータをひとつだけ取得
     Route::get('get/novel/{novel_id}', 'Api\NovelsController@fetch');
 
-    //小説のタイトルを保存
-    Route::post('post/noveltitle/{id}', 'Api\NovelsController@save');
+    //小説の一行目を保存
+    Route::post('post/firstsentence/{id}', 'Api\NovelsController@saveFirst');
 
     //小説のステータスを変更(公開→非公開)
     Route::post('update/novel/close/{novel_id}', 'Api\NovelsController@closeNovelStatus');

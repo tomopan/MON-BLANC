@@ -19,6 +19,7 @@ use Illuminate\Database\Seeder;
                 "hero_id" => 1,
                 "user_id" => 2,
                 "title" => "デカルトの冒険",
+                "first_sentence" => "デカルトの一文目です。",
                 "status" => 1,
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")
@@ -29,6 +30,7 @@ use Illuminate\Database\Seeder;
                 "hero_id" => 2,
                 "user_id" => 1,
                 "title" => "玉井の冒険",
+                "first_sentence" => "玉井の一文目です。",
                 "status" => 1,
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")
@@ -39,6 +41,7 @@ use Illuminate\Database\Seeder;
                 "hero_id" => 1,
                 "user_id" => 2,
                 "title" => "下書きデカルトの冒険",
+                "first_sentence" => "下書きデカルトの一文目です。",
                 "status" => 0,
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")
@@ -49,6 +52,7 @@ use Illuminate\Database\Seeder;
                 "hero_id" => 2,
                 "user_id" => 1,
                 "title" => "下書き玉井の冒険",
+                "first_sentence" => "下書き玉井の一文目です。",
                 "status" => 0,
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")
