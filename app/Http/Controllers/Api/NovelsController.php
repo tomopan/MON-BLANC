@@ -20,8 +20,8 @@ use App\Novel;
     class NovelsController extends Controller
     {
 
-        //小説のタイトルを保存
-        public function save(Request $request,$hero_id)
+        //小説の一文目を保存
+        public function saveFirst(Request $request,$hero_id)
         {
             //ユーザー情報取得
             $userId = Auth::id();
@@ -33,7 +33,7 @@ use App\Novel;
             $novel->user_id = $userId;
             //小説情報を登録
             $novel->hero_id = $hero_id;
-            $novel->title = $request->title;
+            $novel->first_sentence = $request->first_sentence;
             $novel->status = 1;
             $novel->save();
             return $novel;

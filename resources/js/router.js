@@ -14,6 +14,7 @@ import Writingbooks from "./components/pages/profiles/Writingbooks.vue";
 import Episodes from "./components/pages/Episodes.vue";
 import NovelTitle from "./components/pages/NovelTitle.vue";
 import ReadFirstSentence from "./components/pages/ReadFirstSentence.vue";
+import WriteFirstSentence from "./components/pages/WriteFirstSentence.vue";
 
 Vue.use(VueRouter);
 
@@ -45,10 +46,14 @@ const routes = [
         name: "NovelTitle"
     },
     {
+        path: "/write/firstsentence/:hero_id",
+        component: WriteFirstSentence,
+        name: "WriteFirstSentence"
+    },
+    {
         path: "/write/:hero_id/:novel_id",
         component: Write,
         name: "Write",
-        props: true
     },
     {
         path: "/episodes",
