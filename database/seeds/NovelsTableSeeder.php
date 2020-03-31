@@ -28,7 +28,7 @@ use Illuminate\Database\Seeder;
             [
                 "hero_id" => 2,
                 "user_id" => 1,
-                "title" => "しおりんの冒険",
+                "title" => "玉井の冒険",
                 "status" => 1,
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")
@@ -48,7 +48,7 @@ use Illuminate\Database\Seeder;
             [
                 "hero_id" => 2,
                 "user_id" => 1,
-                "title" => "下書きしおりんの冒険",
+                "title" => "下書き玉井の冒険",
                 "status" => 0,
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")

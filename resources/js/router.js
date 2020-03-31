@@ -2,57 +2,63 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 // ページコンポーネントをインポート
-import Top from './components/pages/Top.vue';
-import Hero from './components/pages/Hero.vue';
-import Read from './components/pages/Read.vue';
-import Write from './components/pages/Write.vue';
-import Profile from './components/pages/Profile.vue';
-import Bookmark from './components/pages/profiles/Bookmark.vue';
-import Bookshelf from './components/pages/profiles/Bookshelf.vue';
-import Writedbooks from './components/pages/profiles/Writedbooks.vue';
-import Writingbooks from './components/pages/profiles/Writingbooks.vue';
-import Episodes from './components/pages/Episodes.vue';
-import NovelTitle from './components/pages/NovelTitle.vue';
-
+import Top from "./components/pages/Top.vue";
+import Hero from "./components/pages/Hero.vue";
+import Read from "./components/pages/Read.vue";
+import Write from "./components/pages/Write.vue";
+import Profile from "./components/pages/Profile.vue";
+import Bookmark from "./components/pages/profiles/Bookmark.vue";
+import Bookshelf from "./components/pages/profiles/Bookshelf.vue";
+import Writedbooks from "./components/pages/profiles/Writedbooks.vue";
+import Writingbooks from "./components/pages/profiles/Writingbooks.vue";
+import Episodes from "./components/pages/Episodes.vue";
+import NovelTitle from "./components/pages/NovelTitle.vue";
+import ReadFirstSentence from "./components/pages/ReadFirstSentence.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
     {
-        path: '/',
+        path: "/",
         component: Top,
-        name:"Top"
+        name: "Top"
     },
     {
-        path: '/hero/:hero_id',
+        path: "/hero/:hero_id",
         component: Hero,
-        name:"Hero",
+        name: "Hero"
     },
     {
-        path: '/read/:hero_id/:novel_id',
+        path: "/readfirst/:hero_id/",
+        component: ReadFirstSentence,
+        name: "ReadFirst"
+    },
+    {
+        path: "/read/:hero_id/:novel_id",
         component: Read,
-        name:"Read"
+        name: "Read"
     },
+
     {
-        path: '/noveltitle/:hero_id',
+        path: "/noveltitle/:hero_id",
         component: NovelTitle,
-        name:"NovelTitle"
+        name: "NovelTitle"
     },
     {
-        path: '/write/:hero_id/:novel_id',
+        path: "/write/:hero_id/:novel_id",
         component: Write,
-        name:"Write",
+        name: "Write",
         props: true
     },
     {
-        path: '/episodes',
+        path: "/episodes",
         component: Episodes,
-        name:"Episodes"
+        name: "Episodes"
     },
     {
-        path: '/profile',
+        path: "/profile",
         component: Profile,
-        name:"Profile",
+        name: "Profile",
         children: [
             {
                 path: "/profile/bookshelf",
@@ -75,16 +81,15 @@ const routes = [
                 name: "Writingbooks"
             }
         ]
-    },
+    }
 ];
-
 
 // VueRouterインスタンスを作成する
 const router = new VueRouter({
     routes
-  })
+});
 
 // app.jsでインポートするため
-export default router
+export default router;
 
 // export default new VueRouter({ routes });

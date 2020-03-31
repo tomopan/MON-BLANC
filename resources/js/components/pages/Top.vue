@@ -7,8 +7,6 @@
          <router-link :to="{name:'Hero',params:{hero_id:hero.id,url:hero.img_url}}">
          <v-col
             :key="id"
-            cols="12"
-            md="3"
          >
             <v-hover v-slot:default="{ hover }">
                <v-card
@@ -25,8 +23,8 @@
                      class="fill-height flex-column"
                      justify="space-between"
                      >
-                     <p class="mt-4 subheading text-left" style="color:white">主人公ID : {{hero.id}}</p>
-                     <p class="mt-4 subheading text-left" style="color:white">名前 : {{hero.hero_description}}</p>
+
+                     <p class="mt-4 subheading text-left" style="color:white"> {{hero.hero_description}}</p>
                      </v-row>
                   </v-card-title>
                </v-img>
@@ -35,7 +33,7 @@
          </v-col>
          </router-link>
          </div>
-         <!-- <router-view @alert="alert"></router-view> -->
+
       </v-row>
    </v-container>
 
