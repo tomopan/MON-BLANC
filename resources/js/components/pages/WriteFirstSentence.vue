@@ -15,7 +15,7 @@
       >{{text}}</p>
       <br />
       <!-- <router-link :to="{name:'Write',params:{hero_id:$route.params.hero_id,novel_id:postNovelId}}"> -->
-      <v-btn style="display:none" color="primary" id="save" dark @click="saveFirstSentence">完了</v-btn>
+      <v-btn style="display:none" color="" id="save" dark @click="saveFirstSentence">完了</v-btn>
 
       <!-- </router-link> -->
     </v-form>
