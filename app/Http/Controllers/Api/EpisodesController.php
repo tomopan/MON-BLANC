@@ -41,6 +41,15 @@ use App\User;
             return response()->json($episode);
         }
 
+        // 小説idにマッチしたペーパーを取得
+        public function showPapers($novel_id)
+        {
+             $papers =  Episode::where('novel_id','=',$novel_id)
+                                ->orderBy('created_at')
+                                ->get();
+            return response()->json($papers);
+        }
+
         // 執筆中ページを取得
         public function showWriting()
         {
