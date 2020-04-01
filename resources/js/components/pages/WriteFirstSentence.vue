@@ -7,7 +7,12 @@
 
     <!-- タイトル入力 -->
     <v-form>
-      <p class="paper" contenteditable="true" id="first_sentence">{{text}}</p>
+      <p
+        class="paper"
+        contenteditable="true"
+        placeholder="最初の一文を書いてください"
+        id="first_sentence"
+      >{{text}}</p>
       <br />
       <!-- <router-link :to="{name:'Write',params:{hero_id:$route.params.hero_id,novel_id:postNovelId}}"> -->
       <v-btn style="display:none" color="primary" id="save" dark @click="saveFirstSentence">完了</v-btn>
@@ -18,6 +23,8 @@
 </template>
 
 <!-- 以下にscript/cssを記述 -->
+
+
 <script>
 // Vueの処理
 export default {
@@ -28,7 +35,7 @@ export default {
       firstSentencePost: {},
       postNovelId: null,
       hero: {},
-      text: "最初の一文を入力してください"
+      text: ""
     };
   },
 
@@ -37,7 +44,7 @@ export default {
   },
   mounted() {
     console.log(document.getElementById("first_sentence").textContent);
-    this.hoge();
+    this.openBtn();
   },
   methods: {
     ToConsole: function() {
@@ -81,7 +88,7 @@ export default {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
         });
     },
-    hoge() {
+    openBtn() {
       //句読点が押されたらボタンを出現させる処理
       const target = document.getElementById("first_sentence");
 
@@ -107,6 +114,13 @@ export default {
 </script>
 
 <style scoped>
+[contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block; /* For Firefox */
+  color: #a9a9a9;
+}
+
 * {
   margin: 0;
   padding: 0;

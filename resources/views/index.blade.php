@@ -11,8 +11,6 @@
 
     </head>
     <body>
-        <p>index.blade.php</p>
-        <p>user_id:{{ Auth::id()}} </p>
         <div id="app">
         </div>
         <script>
