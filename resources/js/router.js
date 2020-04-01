@@ -15,6 +15,8 @@ import Episodes from "./components/pages/Episodes.vue";
 import NovelTitle from "./components/pages/NovelTitle.vue";
 import ReadFirstSentence from "./components/pages/ReadFirstSentence.vue";
 import WriteFirstSentence from "./components/pages/WriteFirstSentence.vue";
+import PaperEdit from "./components/pages/PaperEdit.vue";
+import AddPaper from "./components/pages/AddPaper.vue";
 
 Vue.use(VueRouter);
 
@@ -51,9 +53,19 @@ const routes = [
         name: "WriteFirstSentence"
     },
     {
+        path: "/write/paperedit/:novel_id",
+        component: PaperEdit,
+        name: "PaperEdit"
+    },
+    {
+        path: "/write/addpaper/:novel_id",
+        component: AddPaper,
+        name: "AddPaper"
+    },
+    {
         path: "/write/:hero_id/:novel_id",
         component: Write,
-        name: "Write",
+        name: "Write"
     },
     {
         path: "/episodes",

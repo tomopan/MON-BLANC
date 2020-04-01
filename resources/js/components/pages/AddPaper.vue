@@ -1,27 +1,24 @@
 <template>
   <div>
+    <!-- エピソードタイトル入力 -->
     <v-form>
       <div class="input-area">
-        <p class="paper" contenteditable="true" id="novel_title" placeholder="タイトルを入力してください"></p>
         <div id="episode_text">
           <p
             class="paper"
             contenteditable="true"
             id="episode_text_input"
-          >{{novelData.first_sentence}}</p>
+            placeholder="新しいペーパーで小説を書く"
+          ></p>
         </div>
       </div>
       <!-- 小説入力 -->
 
       <br />
-      <!-- 一時保存ボタン -->
+      <!-- 保存ボタン -->
       <router-link :to="{name:'PaperEdit',param:{novel_id:episodePost.novel_id}}">
         <v-btn color="primary" id="save" dark @click="saveEpisode">保存する</v-btn>
       </router-link>
-      <!-- 公開ボタン -->
-      <!-- <router-link :to="{name:'Hero',params:{hero_id:$route.params.hero_id}}">
-        <v-btn color="success" id="open" dark @click="openEpisode">公開</v-btn>
-      </router-link>-->
     </v-form>
   </div>
 </template>
@@ -44,43 +41,11 @@ export default {
 
   created() {
     this.episodePost.novel_id = this.$route.params.novel_id;
-    this.showHero();
-    this.showNovel();
   },
   methods: {
-    //主人公を表示する
-    showHero: function() {
-      axios
-        .get("api/get/hero/" + this.$route.params.hero_id)
-        .then(res => {
-          console.log(res.data);
-          this.hero = res.data[0];
-        })
-        .catch(err => {
-          console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
-        });
-    },
-
-    //小説の情報を取得する
-    showNovel: function() {
-      axios
-        .get("api/get/novel/" + this.$route.params.novel_id)
-        .then(res => {
-          console.log(res);
-          this.novelData = res.data;
-        })
-        .catch(err => {
-          console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
-        });
-    },
-
     //一時保存：エピソードタイトルとテキストをEpisodesテーブルに保存,statusを0
     saveEpisode: function() {
       //PostするオブジェクトにDOMの内容をぶちこむ
-      //タイトル
-      this.episodePost.title = document.getElementById(
-        "novel_title"
-      ).textContent;
       //テキスト
       this.episodePost.text = document.getElementById(
         "episode_text_input"
@@ -92,6 +57,7 @@ export default {
       //ステータスを0
       this.episodePost.status = 0;
 
+    //内容をPost
       axios
         .post("api/post/episode", this.episodePost)
         .then(res => {})
@@ -99,24 +65,12 @@ export default {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
         });
 
+    //ステータスを登録
       axios
         .post("api/update/novel/close/" + this.$route.params.novel_id)
         .then(res => {
           console.log(res);
         })
-        .catch(err => {
-          console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
-        });
-    },
-
-    //公開：エピソードタイトルとテキストをEpisodesテーブルに保存,statusを1
-    openEpisode: function() {
-      //ステータスを1
-      this.episodePost.status = 1;
-
-      axios
-        .post("api/post/episode", this.episodePost)
-        .then(res => {})
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
         });
