@@ -51,7 +51,7 @@ use App\Novel;
                     ->join('users as u','u.id','=','n.user_id')
                     ->where('n.hero_id', '=', $hero_id)
                     ->where('n.status', '=', 1)
-                    ->select('u.name','n.id','n.hero_id','n.title','n.user_id','n.status')
+                    ->select('u.name','n.id','n.hero_id','n.title','n.user_id','n.status','n.first_sentence')
                     ->get();
             // $novels =  Novel::where('hero_id','=',$hero_id)
             //                 ->get();

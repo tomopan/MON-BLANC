@@ -7,11 +7,9 @@
     <v-container class="grey lighten-5">
       <v-row>
         <v-col v-for="(paper, i) in papers" :key="i" md="4">
-          <!--ペーパー表示 -->
           <v-card style="height: 200px;width:400px" tile outlined>
             <p class="paper_text">{{paper.text}}</p>
           </v-card>
-          <!-- 小説入力 -->
         </v-col>
       </v-row>
     </v-container>
