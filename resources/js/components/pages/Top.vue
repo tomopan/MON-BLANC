@@ -23,7 +23,6 @@
                      class="fill-height flex-column"
                      justify="space-between"
                      >
-
                      <p class="mt-4 subheading text-left" style="color:white"> {{hero.hero_description}}</p>
                      </v-row>
                   </v-card-title>

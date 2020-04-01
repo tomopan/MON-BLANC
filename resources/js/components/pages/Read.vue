@@ -1,27 +1,17 @@
 <template>
-  <div>
-    <h1>読書ページ</h1>
     <v-container>
-      <h1>『{{novelData.title}}』</h1>
-      <p>作者：{{novelData.name}}</p>
+        <h1>『{{ novelData.title }}』</h1>
 
-      <FollowBtnComponent />
-
-      <br />
-      <v-divider></v-divider>
-      <br />
-      <!-- ダミーテキスト -->
-      <p>{{episodeData.text}}</p>
-      <!-- 章の移動ボタン -->
-      <v-btn class="ma-2" color="orange darken-2" dark>
-        <v-icon dark left>mdi-arrow-left</v-icon>Back
-      </v-btn>
-
-      <v-btn class="ma-2" color="orange darken-2">
-        <v-icon dark left>mdi-arrow-right</v-icon>NEXT
-      </v-btn>
+        <v-col v-for="(episode, i) in episodes" :key="i">
+            <div class="paper">
+                <div id="episode_text">
+                    <p class="episode_text">
+                        {{ episode.text }}
+                    </p>
+                </div>
+            </div>
+        </v-col>
     </v-container>
-  </div>
 </template>
 
 <!-- 以下にscript/cssを記述 -->
@@ -29,50 +19,68 @@
 import FollowBtnComponent from "../items/FollowBtnComponent.vue";
 
 export default {
-  components: {
-    FollowBtnComponent
-  },
-  data() {
-    return {
-      novelData: [],
-      episodeData: []
-    };
-  },
-
-  created() {
-    this.showNovel();
-    this.showEpisode();
-  },
-  methods: {
-    showNovel: function() {
-      //Novelテーブルから情報を取得
-      axios
-        .get("api/get/novel/" + this.$route.params.novel_id)
-        .then(res => {
-          this.novelData = res.data;
-          console.log(res);
-
-          // console.log(res.data[0].title);
-        })
-        .catch(err => {
-          console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
-        });
+    components: {
+        FollowBtnComponent
     },
-    showEpisode: function() {
-      //Episodesテーブルから情報を取得
-      axios
-        .get("api/get/episode/" + this.$route.params.novel_id)
-        .then(res => {
-          this.episodeData = res.data[0];
-          console.log(res.data);
-        })
-        .catch(err => {
-          console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
-        });
+    data() {
+        return {
+            novelData: [],
+            episodes: []
+        };
+    },
+
+    created() {
+        this.showNovel();
+        this.showEpisode();
+    },
+    methods: {
+        showNovel: function() {
+            //Novelテーブルから情報を取得
+            axios
+                .get("api/get/novel/" + this.$route.params.novel_id)
+                .then(res => {
+                    this.novelData = res.data;
+                    console.log(res);
+
+                    // console.log(res.data[0].title);
+                })
+                .catch(err => {
+                    console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
+                });
+        },
+        showEpisode: function() {
+            //Episodesテーブルから情報を取得
+            axios
+                .get("api/get/episode/" + this.$route.params.novel_id)
+                .then(res => {
+                    this.episodes = res.data;
+                    console.log(this.episodes);
+                })
+                .catch(err => {
+                    console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
+                });
+        }
     }
-  }
 };
 </script>
 
 <style scoped>
+.paper {
+    margin: auto;
+    padding-top: 50px;
+    height: 600px;
+    right: 0;
+    border: 1px solid #000000;
+}
+
+.episode_text {
+    margin: 0 10px 0 auto;
+    -webkit-writing-mode: vertical-rl;
+    -ms-writing-mode: tb-rl;
+    writing-mode: vertical-rl;
+    font-size: 20px;
+    line-height: 2em;
+    overflow-x: scroll;
+    outline: none;
+}
 </style>
