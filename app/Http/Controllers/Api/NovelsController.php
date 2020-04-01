@@ -65,7 +65,7 @@ use App\Novel;
             $novel = DB::table('novels as n')
                     ->join('users as u','u.id','=','n.user_id')
                     ->where('n.id', '=', $novel_id)
-                    ->select('u.name','u.id','n.id','n.title','n.user_id','n.status')
+                    ->select('u.name','u.id','n.id','n.title','n.user_id','n.status','n.first_sentence')
                     ->first();
             // $novel =  Novel::where('id','=',$novel_id)
             //                 ->get();
