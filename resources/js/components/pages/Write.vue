@@ -29,12 +29,6 @@
                             <v-icon>mdi-pencil</v-icon>
                         </v-btn>
                     </div>
-
-                    <!-- <v-divider></v-divider>
-
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                    </v-card-actions> -->
                 </v-card>
             </v-dialog>
         </div>

@@ -1,38 +1,36 @@
 <template>
     <div>
-        <h1>最初の一文ページ</h1>
         <v-container
             class="d-flex flex-row mb-6"
             color="grey lighten-2"
             flat
             tile
         >
-            <!-- <div> -->
-            <!-- 主人公の画像 -->
-            <!-- <v-img :src="hero.img_url" height="400px" width="400px">
-                    <v-card-title class="title white--text">
-                        <v-row
-                            class="fill-height flex-column"
-                            justify="space-between"
-                        >
-                            <p
-                                class="mt-4 subheading text-left"
-                                style="color:white"
+            <!-- モーダルを表示 -->
+            <div class="text-center">
+                <v-dialog v-model="dialog" fullscreen>
+                    <v-card>
+                        <div id="modal">
+                            <v-img
+                                :src="hero.img_url"
+                                id="modal_img"
+                                width="300px"
+                                height="400px"
                             >
-                                主人公ID : {{ hero.id }}
-                            </p>
-                            <p
-                                class="mt-4 subheading text-left"
-                                style="color:white"
-                            >
-                                名前 : {{ hero.hero_description }}
-                            </p>
-                        </v-row>
-                    </v-card-title>
-                </v-img>
-            </div> -->
-            <!-- 書かれている小説を表示 -->
-
+                            </v-img>
+                              <p id="modal_text">
+                                  好きな著者の第一文を選びましょう。
+                                  <br>
+                                  <br>
+                                  スワイプで、それぞれ別の著者が書いた第一文を見ることができます。
+                              </p>
+                            <v-btn icon id="modal_btn" @click="dialog = false">
+                                <v-icon x-large dark>mdi-transfer-down</v-icon>
+                            </v-btn>
+                        </div>
+                    </v-card>
+                </v-dialog>
+            </div>
             <!-- カルーセルで表示 -->
             <v-carousel
                 cycle
@@ -67,35 +65,6 @@
                     </v-sheet>
                 </v-carousel-item>
             </v-carousel>
-
-            <!-- ペーパー表示 -->
-            <!-- <v-container class="grey lighten-5">
-                <v-row>
-                    <v-col v-for="(novel, i) in novels" :key="i">
-                        <v-card style="height:100%;width:1000px" tile outlined>
-                            <p class="paper_text">{{ novel.first_sentence }}</p>
-                        </v-card>
-                    </v-col>
-                </v-row>
-            </v-container> -->
-
-            <!-- <div class="pa-md-4 mx-lg-auto">
-                <ul>
-                    <li v-for="(novel, i) in novels" :key="i">
-                        <router-link
-                            :to="{
-                                name: 'Read',
-                                params: {
-                                    hero_id: $route.params.hero_id,
-                                    novel_id: novel.id
-                                }
-                            }"
-                            >{{ novel.first_sentence }}</router-link
-                        >
-                        by {{ novel.name }}
-                    </li>
-                </ul>
-            </div> -->
         </v-container>
     </div>
 </template>
@@ -108,7 +77,8 @@ export default {
     data() {
         return {
             hero: {},
-            novels: []
+            novels: [],
+            dialog: true
         };
     },
     watch: {
@@ -150,6 +120,35 @@ export default {
 </script>
 
 <style scoped>
+/* モーダル */
+#modal {
+    margin: auto;
+    padding-top: 10%;
+    position: relative;
+    text-align: center;
+}
+#modal_text{
+  position: absolute;/*絶対配置*/
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  margin:0;
+  padding:0;
+  font-size: 20px;
+
+  }
+  #modal_img{
+    margin: auto;
+    opacity: 0.5;
+  }
+#modal_btn{
+  margin-top: 5%;
+  margin:auto;
+}
+
+/* テキスト */
 .paper_text {
     writing-mode: vertical-rl;
     margin: auto;
