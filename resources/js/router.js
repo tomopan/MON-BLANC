@@ -17,6 +17,7 @@ import ReadFirstSentence from "./components/pages/ReadFirstSentence.vue";
 import WriteFirstSentence from "./components/pages/WriteFirstSentence.vue";
 import PaperEdit from "./components/pages/PaperEdit.vue";
 import AddPaper from "./components/pages/AddPaper.vue";
+import WriteTitle from "./components/pages/WriteTitle.vue";
 
 Vue.use(VueRouter);
 
@@ -61,6 +62,11 @@ const routes = [
         path: "/write/addpaper/:novel_id",
         component: AddPaper,
         name: "AddPaper"
+    },
+    {
+        path: "/write/title/:novel_id",
+        component: WriteTitle,
+        name: "WriteTitle"
     },
     {
         path: "/write/:hero_id/:novel_id",

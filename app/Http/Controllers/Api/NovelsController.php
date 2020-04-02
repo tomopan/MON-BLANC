@@ -38,11 +38,6 @@ use App\Novel;
             $novel->save();
             return $novel;
         }
-        /**
-         * Display a listing of the resource.
-         *
-         * @return \Illuminate\View\View
-         */
 
         //hero_idにマッチした、公開されている小説のデータを取得
         public function show($hero_id)
@@ -67,10 +62,7 @@ use App\Novel;
                     ->where('n.id', '=', $novel_id)
                     ->select('u.name','u.id','n.id','n.title','n.user_id','n.status','n.first_sentence')
                     ->first();
-            // $novel =  Novel::where('id','=',$novel_id)
-            //                 ->get();
-            
-            // $novel->user_id = 1;
+
             return response()->json($novel);
         }
 
@@ -109,6 +101,15 @@ use App\Novel;
             $novel =  Novel::where('id','=',$novel_id) 
                         ->update(['status' => 1]);
             return $novel_id;
+            // return response()->json($novels);
+        }
+
+        //小説のタイトルを変更
+        public function postTitle(Request $request,$novel_id)
+        {
+            $title =  Novel::where('id','=',$novel_id) 
+                        ->update(['title' => $request->title]);
+            return $title;
             // return response()->json($novels);
         }
     }

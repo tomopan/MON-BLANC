@@ -32,16 +32,18 @@
                 </v-card>
             </v-dialog>
         </div>
+        <!-- モーダルここまで -->
 
         <!-- 入力エリア -->
         <v-form>
             <div class="input-area">
-                <p
+                <!-- <p
                     class="paper"
                     contenteditable="true"
                     id="novel_title"
                     placeholder="タイトルを入力してください"
-                ></p>
+                ></p> -->
+                <!-- 小説入力 -->
                 <div id="episode_text">
                     <p
                         class="paper"
@@ -52,7 +54,6 @@
                     </p>
                 </div>
             </div>
-            <!-- 小説入力 -->
 
             <br />
             <!-- 一時保存ボタン -->
@@ -62,15 +63,12 @@
                     param: { novel_id: episodePost.novel_id }
                 }"
             >
-                <v-btn color="primary" id="save" dark @click="saveEpisode"
+                <v-btn id="save" dark @click="saveEpisode"
                     >保存する</v-btn
                 >
             </router-link>
-            <!-- 公開ボタン -->
-            <!-- <router-link :to="{name:'Hero',params:{hero_id:$route.params.hero_id}}">
-        <v-btn color="success" id="open" dark @click="openEpisode">公開</v-btn>
-      </router-link>-->
         </v-form>
+        <!-- 入力エリアここまで -->
     </div>
 </template>
 
@@ -127,9 +125,9 @@ export default {
         saveEpisode: function() {
             //PostするオブジェクトにDOMの内容をぶちこむ
             //タイトル
-            this.episodePost.title = document.getElementById(
-                "novel_title"
-            ).textContent;
+            // this.episodePost.title = document.getElementById(
+            //     "novel_title"
+            // ).textContent;
             //テキスト
             this.episodePost.text = document.getElementById(
                 "episode_text_input"
