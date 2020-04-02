@@ -18,7 +18,6 @@ use Illuminate\Database\Seeder;
             [
                 "novel_id" => 1,
                 "episode_number" => 1,
-                "episode_title" => "デカルトのはじまり",
                 "text" => "我思う故に我あり",
                 "status" => "1",
                 "created_at" => $faker->dateTime("now"),
@@ -29,7 +28,6 @@ use Illuminate\Database\Seeder;
             [
                 "novel_id" => 2,
                 "episode_number" => 1,
-                "episode_title" => "玉井のはじまり",
                 "text" => "玉井 詩織（たまい しおり、1995年6月4日 - ）は、ももいろクローバーZのメンバー、女優である。グループでのイメージカラーは黄色で、ボーカル・ギター・ピアノ担当。",
                 "status" => "1",
                 "created_at" => $faker->dateTime("now"),
@@ -40,7 +38,6 @@ use Illuminate\Database\Seeder;
             [
                 "novel_id" => 3,
                 "episode_number" => 1,
-                "episode_title" => "デカルトの下書き",
                 "text" => "デカルトはとにかく下書きをする",
                 "status" => "0",
                 "created_at" => $faker->dateTime("now"),
@@ -51,7 +48,6 @@ use Illuminate\Database\Seeder;
             [
                 "novel_id" => 4,
                 "episode_number" => 1,
-                "episode_title" => "玉井の下書き",
                 "text" => "玉井 詩織はとにかく下書きをする",
                 "status" => "0",
                 "created_at" => $faker->dateTime("now"),

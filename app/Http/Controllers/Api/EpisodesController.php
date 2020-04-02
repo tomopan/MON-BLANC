@@ -20,10 +20,19 @@ use App\User;
             
             //エピソードを保存
             $episodes = new Episode;
+            
+            //エピソード番号を取得
+            $writed_episode_number = Episode::where('novel_id','=',$request->novel_id)
+                                ->max('episode_number');
+                //既に書かれていたら、numberに+1
+                if($writed_episode_number) $episode_number = $writed_episode_number + 1;
+                //はじめの1ページなら、1を代入
+                else $episode_number = 1;
 
             //小説情報を登録
             $episodes->novel_id = $request->novel_id;
             $episodes->text = $request->text;
+            $episodes->episode_number = $episode_number;
             $episodes->status = $request->status;
             $episodes->save();
 
@@ -45,7 +54,7 @@ use App\User;
         public function showPapers($novel_id)
         {
              $papers =  Episode::where('novel_id','=',$novel_id)
-                                ->orderBy('created_at')
+                                ->orderBy('episode_number')
                                 ->get();
             return response()->json($papers);
         }

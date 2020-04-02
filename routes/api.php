@@ -68,6 +68,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     //小説のステータスを変更(公開→非公開)
     Route::post('update/novel/open/{novel_id}', 'Api\NovelsController@openNovelStatus');
 
+    //小説のタイトルを変更
+    Route::post('update/novel/title/{novel_id}', 'Api\NovelsController@postTitle');
+
 
 
 
