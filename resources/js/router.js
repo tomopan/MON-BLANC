@@ -82,6 +82,7 @@ const routes = [
         path: "/profile",
         component: Profile,
         name: "Profile",
+        redirect: "/profile/writedbooks",
         children: [
             {
                 path: "/profile/bookshelf",

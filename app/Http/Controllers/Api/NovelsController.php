@@ -13,6 +13,7 @@ use DB;
 
 use App\User;
 use App\Novel;
+use App\Heroe;
 
 
 
@@ -69,9 +70,12 @@ use App\Novel;
         //プロフィールページで公開中の小説のデータ取得
         public function showWrited()
         {
-            $novels =  Novel::where('user_id','=', Auth::id())
-                        ->where('status',1)
-                        ->orderBy('created_at')
+            $novels =DB::table('novels as n')
+                        ->join('heroes as h','h.id','=','n.hero_id')
+                        ->where('n.user_id','=', Auth::id())
+                        ->where('n.status',1)
+                        ->select('n.id','n.title','n.user_id','n.status','n.hero_id','h.img_url')
+                        ->orderBy('n.created_at')
                         ->get();
             return response()->json($novels);
         }
@@ -79,9 +83,12 @@ use App\Novel;
         //プロフィールページで非公開の小説のデータ取得
         public function showWriting()
         {
-            $novels =  Novel::where('user_id','=', Auth::id())
-                        ->where('status',0)
-                        ->orderBy('created_at')
+            $novels =DB::table('novels as n')
+                        ->join('heroes as h','h.id','=','n.hero_id')
+                        ->where('n.user_id','=', Auth::id())
+                        ->where('n.status',0)
+                        ->select('n.id','n.title','n.user_id','n.status','n.hero_id','h.img_url')
+                        ->orderBy('n.created_at')
                         ->get();
             return response()->json($novels);
         }
