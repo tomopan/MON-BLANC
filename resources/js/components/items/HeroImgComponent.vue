@@ -1,10 +1,10 @@
 <template>
-   <router-link :to="{name:'Hero'}">
    <v-container class="pa-4 text-center">
       <v-row class="fill-height" align="center" justify="center">
-         <template v-for="(item, i) in items">
+         <div v-for="(hero, id) in heroes" :key="id">
+         <router-link :to="{name:'Hero'}">
          <v-col
-            :key="i"
+            :key="id"
             cols="12"
             md="3"
          >
@@ -14,71 +14,51 @@
                :class="{ 'on-hover': hover }"
                >
                <v-img
-                  :src="item.img"
+                  :src="hero.img_url"
                   height="400px"
-               
+                  width="400px"
                >
                   <v-card-title class="title white--text">
                      <v-row
                      class="fill-height flex-column"
                      justify="space-between"
                      >
-                     <p class="mt-4 subheading text-left">{{ item.title }}</p>
-
-                     <div>
-                        <p class="ma-0 body-1 font-weight-bold font-italic text-left">
-                           {{ item.text }}
-                        </p>
-                        <p class="caption font-weight-medium font-italic text-left">
-                           {{ item.subtext }}
-                        </p>
-                     </div>
-
-                     <div class="align-self-center">
-                        <v-btn
-                           v-for="(icon, index) in icons"
-                           :key="index"
-                           :class="{ 'show-btns': hover }"
-                           color="transparent"
-                           icon
-                        >
-                           <v-icon
-                           :class="{ 'show-btns': hover }"
-                           color="transparent"
-                           >
-                           {{ icon }}
-                           </v-icon>
-                        </v-btn>
-                     </div>
+                     <p class="mt-4 subheading text-left" style="color:white">主人公ID : {{hero.id}}</p>
+                     <p class="mt-4 subheading text-left" style="color:white">名前 : {{hero.hero_description}}</p>
                      </v-row>
                   </v-card-title>
                </v-img>
                </v-card>
             </v-hover>
          </v-col>
-         </template>
+         </router-link>
+         </div>
+         <router-view @alert="alert"></router-view>
       </v-row>
    </v-container>
-   </router-link>
-      
+
 </template>
+
 
 <script>
 export default {
+   props:{
+      heroes:{
+         type:Array
+      },
+   },
+
    data: () => ({
-      icons: ['mdi-rewind', 'mdi-play', 'mdi-fast-forward'],
-      items: [
-      {
-         title: 'New Releases',
-         text: "It's New Release Friday",
-         subtext: 'Newly released songs. Updated daily.',
-         img:'https://assets.st-note.com/production/uploads/images/17220311/rectangle_large_type_2_e0050b10549e41bb8deb5a3d00e732d4.jpeg?fit=bounds&format=jpeg&quality=45&width=960',
-      }
-      ],
-      hero_id:1,
+      hero_id:""
    }),
-   created:function(){
-      this.$parent.hero_id = this.hero_id
+   created() {
+      this.hero_id = this.heroes.id
+      console.log(this.hero_id)
+   },
+   methods: {
+       alert: function (msg) {
+         alert(msg)
+      }
    }
 }
 </script>

@@ -14,17 +14,50 @@ use Illuminate\Database\Seeder;
             
             $faker = Faker\Factory::create("ja_JP");
             
-            for( $i=0; $i<10; $i++ ){
+            DB::table('episodes')->insert(
+            [
+                "novel_id" => 1,
+                "episode_number" => 1,
+                "text" => "我思う故に我あり",
+                "status" => "1",
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('episodes')->insert(
+            [
+                "novel_id" => 2,
+                "episode_number" => 1,
+                "text" => "玉井 詩織（たまい しおり、1995年6月4日 - ）は、ももいろクローバーZのメンバー、女優である。グループでのイメージカラーは黄色で、ボーカル・ギター・ピアノ担当。",
+                "status" => "1",
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('episodes')->insert(
+            [
+                "novel_id" => 3,
+                "episode_number" => 1,
+                "text" => "デカルトはとにかく下書きをする",
+                "status" => "0",
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('episodes')->insert(
+            [
+                "novel_id" => 4,
+                "episode_number" => 1,
+                "text" => "玉井 詩織はとにかく下書きをする",
+                "status" => "0",
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
 
-                App\Episode::create([
-					"novel_id" => $faker->randomDigit(),
-					"episode_number" => $faker->randomDigit(),
-					"episode_title" => $faker->randomDigit(),
-					"text" => $faker->randomDigit(),
-					"status" => $faker->randomDigit(),
-					"created_at" => $faker->dateTime("now"),
-					"updated_at" => $faker->dateTime("now")
-                ]);
-            }
+
+					
+
+
         }
     }

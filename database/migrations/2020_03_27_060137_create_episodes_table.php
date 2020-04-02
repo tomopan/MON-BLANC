@@ -14,11 +14,10 @@
                 {
                     Schema::create("episodes", function (Blueprint $table) {
 						$table->increments('id');
-						$table->integer('novel_id')->nullable();
-						$table->integer('episode_number')->nullable();
-						$table->text('episode_title')->nullable();
-						$table->text('text')->nullable();
-						$table->integer('status')->nullable();
+						$table->integer('novel_id');
+						$table->integer('episode_number');
+						$table->text('text');
+						$table->integer('status');
 						$table->timestamps();
 						$table->softDeletes();
 

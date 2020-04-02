@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 use Auth;
 use Validate;
 use DB;
+
 use App\Heroe;
+use App\User;
     
     //=======================================================================
     class HeroesController extends Controller
@@ -68,10 +72,21 @@ use App\Heroe;
          *
          * @return \Illuminate\View\View
          */
-        public function show($id)
+        public function show()
         {
-            $heroe = Heroe::findOrFail($id);
-            return view("heroe.show", compact("heroe"));
+            $heroes = Heroe::all();
+            return response()->json($heroes);
+        }
+
+        public function fetch($id)
+        {
+            $userId = Auth::id();
+            $hero = Heroe::where('id','=',$id)
+                            ->get();
+
+            // $hero->user_id = 1;
+
+            return response()->json($hero);
         }
     
         /**

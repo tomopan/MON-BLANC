@@ -15,9 +15,9 @@
                     Schema::create("novels", function (Blueprint $table) {
 						$table->increments('id');
 						$table->integer('hero_id')->nullable();
-						$table->integer('writer_id')->nullable();
+						$table->integer('user_id')->nullable();
 						$table->text('title')->nullable();
-						$table->integer('episode_id')->nullable();
+						$table->text('first_sentence')->nullable();
 						$table->integer('viewer_count')->nullable();
 						$table->integer('status')->nullable();
 						$table->timestamps();

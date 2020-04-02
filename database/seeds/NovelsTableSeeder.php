@@ -13,19 +13,51 @@ use Illuminate\Database\Seeder;
             //Cmd: php artisan db:seed --class="NovelsTableSeeder"
             
             $faker = Faker\Factory::create("ja_JP");
-            
-            for( $i=0; $i<10; $i++ ){
 
-                App\Novel::create([
-					"hero_id" => $faker->randomDigit(),
-					"writer_id" => $faker->randomDigit(),
-					"title" => $faker->randomDigit(),
-					"episode_id" => $faker->randomDigit(),
-					"viewer_count" => $faker->randomDigit(),
-					"status" => $faker->randomDigit(),
-					"created_at" => $faker->dateTime("now"),
-					"updated_at" => $faker->dateTime("now")
-                ]);
-            }
+            DB::table('novels')->insert(
+            [
+                "hero_id" => 1,
+                "user_id" => 2,
+                "title" => "デカルトの冒険",
+                "first_sentence" => "デカルトの一文目です。",
+                "status" => 1,
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('novels')->insert(
+            [
+                "hero_id" => 2,
+                "user_id" => 1,
+                "title" => "玉井の冒険",
+                "first_sentence" => "玉井の一文目です。",
+                "status" => 1,
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('novels')->insert(
+            [
+                "hero_id" => 1,
+                "user_id" => 2,
+                "title" => "下書きデカルトの冒険",
+                "first_sentence" => "下書きデカルトの一文目です。",
+                "status" => 0,
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('novels')->insert(
+            [
+                "hero_id" => 2,
+                "user_id" => 1,
+                "title" => "下書き玉井の冒険",
+                "first_sentence" => "下書き玉井の一文目です。",
+                "status" => 0,
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
+
         }
     }

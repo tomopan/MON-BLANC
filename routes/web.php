@@ -13,16 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-//　ログインのに表示されるホーム画面のルート
+//ログイン後に表示されるホーム画面のルート
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
         return view('index');
     });
 });
+
+// Route::get('/', function() {
+//   return view('index');
+// })->middleware('auth');
+
 
 Auth::routes();
 
