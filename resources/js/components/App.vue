@@ -2,7 +2,7 @@
     <v-app>
         <header-component />
         <main>
-            <div class="container">
+            <div>
                 <RouterView />
             </div>
         </main>

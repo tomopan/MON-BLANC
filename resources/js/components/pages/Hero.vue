@@ -1,68 +1,55 @@
 <template>
-    <div>
-        <h1>主人公ページ</h1>
-        <v-container
-            class="d-flex flex-row mb-6"
-            color="grey lighten-2"
-            flat
-            tile
-        >
-            <div>
-                <!-- 主人公の画像 -->
-                <v-img :src="hero.img_url" height="400px" width="400px">
-                    <v-card-title class="title white--text">
-                        <v-row
-                            class="fill-height flex-column"
-                            justify="space-between"
-                        >
-                            <p
-                                class="mt-4 subheading text-left"
-                                style="color:black"
-                            >
-                                {{ hero.hero_name }}
-                                <br />
-                                Born in {{ hero.hero_birth }}
-                            </p>
-                        </v-row>
-                    </v-card-title>
-                </v-img>
-
-                <!-- 読むボタン -->
-                <router-link
-                    :to="{
-                        name: 'ReadFirst',
-                        params: { hero_id: $route.params.hero_id }
-                    }"
-                >
-                    <v-btn class="ma-2" tile outlined color="">
-                        <v-icon left>mdi-book-open-page-variant</v-icon>読む
-                    </v-btn>
-                </router-link>
-
-                <!-- 書くボタン -->
-                <router-link
-                    :to="{
-                        name: 'WriteFirstSentence',
-                        params: { hero_id: $route.params.hero_id }
-                    }"
-                >
-                    <v-btn class="ma-2" tile outlined color="">
-                        <v-icon left>mdi-pencil</v-icon>書く
-                    </v-btn>
-                </router-link>
+    <div id="container">
+        <!-- 主人公の画像 -->
+        <div class="hero_img">
+            <v-img height="700px" :src="hero.img_url">
+                <!-- <v-card-title>
+                    <v-row justify="space-between"> </v-row>
+                </v-card-title> -->
+            </v-img>
+        </div>
+        <!-- ロゴ -->
+        <div class="logo_img">
+            <img width="900px" src="img/monblan_logo.png" />
+        </div>
+        <!-- 主人公のテキスト -->
+        <div class="hero_text">
+            <div style="color:black;font-size:20px;">
+                <p>
+                    Name　：
+                    {{ hero.hero_name }}
+                </p>
+                <br />
+                <br />
+                <p>Born in {{ hero.hero_birth }}</p>
             </div>
-            <!-- 書かれている小説を表示 -->
-            <!-- <div class="pa-md-4 mx-lg-auto">
-        <ul>
-          <li v-for="(novel,i) in novels" :key="i">
+        </div>
+        <!-- ボタン -->
+        <div class="btns">
+            <!-- 読むボタン -->
             <router-link
-              :to="{name:'Read',params:{hero_id:$route.params.hero_id,novel_id:novel.id}}"
-            >{{novel.title}}</router-link>
-            by {{novel.name}}
-          </li>
-        </ul>
-      </div> -->
-        </v-container>
+                :to="{
+                    name: 'ReadFirst',
+                    params: { hero_id: $route.params.hero_id }
+                }"
+            >
+                <v-btn class="ma-2" tile outlined color="">
+                    <v-icon left>mdi-book-open-page-variant</v-icon>読む
+                </v-btn>
+            </router-link>
+
+            <!-- 書くボタン -->
+            <router-link
+                :to="{
+                    name: 'WriteFirstSentence',
+                    params: { hero_id: $route.params.hero_id }
+                }"
+            >
+                <v-btn class="ma-2" tile outlined color="">
+                    <v-icon left>mdi-pencil</v-icon>書く
+                </v-btn>
+            </router-link>
+        </div>
     </div>
 </template>
 
@@ -115,4 +102,30 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.hero_img {
+    grid-row: 1 / 5;
+    grid-column: 3 / 4;
+}
+.logo_img {
+    grid-row: 1 / 3;
+    grid-column: 1 / 3;
+}
+.hero_text {
+    grid-row: 3 / 4;
+    grid-column: 1 / 3;
+    text-align: right;
+    margin-right: 10%;
+}
+.btns {
+    grid-row: 4 / 5;
+    grid-column: 1 / 3;
+    text-align: right;
+    margin-right: 10%;
+}
+</style>
