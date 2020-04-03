@@ -17,15 +17,11 @@
                         >
                             <p
                                 class="mt-4 subheading text-left"
-                                style="color:white"
+                                style="color:black"
                             >
-                                主人公ID : {{ hero.id }}
-                            </p>
-                            <p
-                                class="mt-4 subheading text-left"
-                                style="color:white"
-                            >
-                                名前 : {{ hero.hero_description }}
+                                {{ hero.hero_name }}
+                                <br />
+                                Born in {{ hero.hero_birth }}
                             </p>
                         </v-row>
                     </v-card-title>
