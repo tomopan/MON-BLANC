@@ -1,7 +1,5 @@
 <template>
     <div>
-        <h1>公開中の小説</h1>
-        <!-- {{writedNovels}} -->
         <v-row>
             <v-col cols="12">
                 <v-row
@@ -32,13 +30,13 @@
                             <p class="paper_text">{{ writedNovel.title }}</p>
                         </router-link>
 
-                        <!-- <v-btn
-                class="ma-2"
-                tile
-                outlined
-                @click="closeNovel(i, writedNovel.novel_id)"
-                >非公開にする</v-btn
-            > -->
+                        <v-btn
+                            class="ma-2"
+                            tile
+                            outlined
+                            @click="closeNovel(i, writedNovel.novel_id)"
+                            >非公開にする</v-btn
+                        >
                     </v-card>
                 </v-row>
             </v-col>
@@ -119,5 +117,8 @@ export default {
 <style scoped>
 .novel_card {
     text-align: center;
+}
+.paper_text {
+    color: black;
 }
 </style>

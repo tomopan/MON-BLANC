@@ -160,7 +160,7 @@ export default {
     margin: auto;
 }
 .input-area {
-    margin: auto;
+    margin: 3%;
     text-align: center;
     padding-top: 50px;
     height: 600px;

@@ -1,35 +1,46 @@
 <template>
     <div>
-        <h1>非公開の小説</h1>
-        <!-- {{writedNovels}} -->
-        <v-card
-            v-for="(writedNovel, i) in writedNovels"
-            :key="i"
-            width="200px"
-            height="200px"
-            class="novel_card"
-        >
-            <router-link
-                :to="{
-                    name: 'Read',
-                    params: {
-                        hero_id: writedNovel.hero_id,
-                        novel_id: writedNovel.novel_id
-                    }
-                }"
-            >
-                <v-img :src="writedNovel.img_url" height="170px"></v-img>
-                <p class="paper_text">{{ writedNovel.title }}</p>
-            </router-link>
+        <v-row>
+            <v-col cols="12">
+                <v-row
+                    :align="alignment"
+                    :justify="justify"
+                    style="height: 300px;"
+                >
+                    <v-card
+                        v-for="(writedNovel, i) in writedNovels"
+                        :key="i"
+                        width="200px"
+                        height="200px"
+                        class="novel_card ma-4"
+                    >
+                        <router-link
+                            :to="{
+                                name: 'Read',
+                                params: {
+                                    hero_id: writedNovel.hero_id,
+                                    novel_id: writedNovel.novel_id
+                                }
+                            }"
+                        >
+                            <v-img
+                                :src="writedNovel.img_url"
+                                height="170px"
+                            ></v-img>
+                            <p class="paper_text">{{ writedNovel.title }}</p>
+                        </router-link>
 
-            <v-btn
-                class="ma-2"
-                tile
-                outlined
-                @click="openNovel(i, writedNovel.novel_id)"
-                >公開する</v-btn
-            >
-        </v-card>
+                        <v-btn
+                            class="ma-2"
+                            tile
+                            outlined
+                            @click="openNovel(i, writedNovel.novel_id)"
+                            >公開する</v-btn
+                        >
+                    </v-card>
+                </v-row>
+            </v-col>
+        </v-row>
     </div>
 </template>
 
@@ -42,7 +53,25 @@ export default {
     data() {
         return {
             writedEpisodes: [],
-            writedNovels: []
+            writedNovels: [],
+            // グリッド用
+            alignmentsAvailable: [
+                "start",
+                "center",
+                "end",
+                "baseline",
+                "stretch"
+            ],
+            alignment: "center",
+            dense: false,
+            justifyAvailable: [
+                "start",
+                "center",
+                "end",
+                "space-around",
+                "space-between"
+            ],
+            justify: "center"
         };
     },
 
@@ -88,5 +117,8 @@ export default {
 <style scoped>
 .novel_card {
     text-align: center;
+}
+.paper_text {
+    color: black;
 }
 </style>

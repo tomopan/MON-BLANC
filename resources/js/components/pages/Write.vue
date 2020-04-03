@@ -54,8 +54,6 @@
                     </p>
                 </div>
             </div>
-
-            <br />
             <!-- 一時保存ボタン -->
             <router-link
                 :to="{
@@ -63,9 +61,7 @@
                     param: { novel_id: episodePost.novel_id }
                 }"
             >
-                <v-btn id="save" dark @click="saveEpisode"
-                    >保存する</v-btn
-                >
+                <v-btn id="save" dark @click="saveEpisode">保存する</v-btn>
             </router-link>
         </v-form>
         <!-- 入力エリアここまで -->
@@ -199,7 +195,7 @@ export default {
     display: block;
     /* width: 10%; */
     margin: auto;
-    margin-top: 10%;
+    margin-top: 10px;
     /* padding: 40px; */
     -webkit-writing-mode: vertical-rl;
     -ms-writing-mode: tb-rl;
@@ -218,7 +214,7 @@ export default {
     margin: auto;
 }
 .input-area {
-    margin: auto;
+    margin: 3%;
     padding-top: 50px;
     height: 600px;
     display: grid;
