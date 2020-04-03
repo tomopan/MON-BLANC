@@ -3,7 +3,7 @@
         <!-- ユーザープロフィール/実装ではDBから取得してくる -->
         <v-row>
             <v-col>
-                <p>{{ userData.name }} さん</p>
+                <p>{{ userData.name }} さんでーす</p>
                 <!-- <p>フォロワー：{{userData.follower_count}}人/フォロー：{{userData.follow_count}}人</p> -->
             </v-col>
             <v-col>
