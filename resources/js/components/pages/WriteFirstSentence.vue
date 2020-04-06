@@ -10,13 +10,11 @@
                 contenteditable="true"
                 placeholder="最初の一文を書いてください"
                 id="first_sentence"
-            >
-                {{ text }}
-            </p>
+            >{{ text }}</p>
             <br />
             <!-- <router-link :to="{name:'Write',params:{hero_id:$route.params.hero_id,novel_id:postNovelId}}"> -->
             <v-btn
-                style="display:none"
+                style="display: none;"
                 color=""
                 id="save"
                 dark
@@ -41,7 +39,7 @@ export default {
             firstSentencePost: {},
             postNovelId: null,
             hero: {},
-            text: ""
+            text: "",
         };
     },
 
@@ -53,11 +51,11 @@ export default {
         this.openBtn();
     },
     methods: {
-        ToConsole: function() {
+        ToConsole: function () {
             console.log(this.text);
         },
         //小説のタイトルを保存
-        saveFirstSentence: function() {
+        saveFirstSentence: function () {
             //PostするオブジェクトにDOMの内容をぶちこむ
             this.firstSentencePost.first_sentence = document.getElementById(
                 "first_sentence"
@@ -67,30 +65,31 @@ export default {
                     "api/post/firstsentence/" + this.$route.params.hero_id,
                     this.firstSentencePost
                 )
-                .then(res => {
+                .then((res) => {
                     console.log(res.data);
                     // console.log(res.data.id);
                     this.$router.push({
                         name: "Write",
                         params: {
                             hero_id: this.$route.params.hero_id,
-                            novel_id: res.data.id
-                        }
+                            novel_id: res.data.id,
+                        },
                     });
+                    this.$store.state.editingPaperId = res.data.id;
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
         //API叩いてマッチした主人公データを取得
-        showHero: function() {
+        showHero: function () {
             axios
                 .get("api/get/hero/" + this.$route.params.hero_id)
-                .then(res => {
+                .then((res) => {
                     console.log(res.data);
                     this.hero = res.data[0];
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
@@ -98,7 +97,7 @@ export default {
             //句読点が押されたらボタンを出現させる処理
             const target = document.getElementById("first_sentence");
 
-            const observer = new MutationObserver(records => {
+            const observer = new MutationObserver((records) => {
                 // 変化が発生したときの処理を記述
                 let p = document.getElementById("first_sentence");
                 const text = p.textContent;
@@ -112,10 +111,10 @@ export default {
                 characterData: true,
                 attributes: true,
                 childList: true,
-                subtree: true
+                subtree: true,
             });
-        }
-    }
+        },
+    },
 };
 </script>
 

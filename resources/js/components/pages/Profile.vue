@@ -3,7 +3,7 @@
         <!-- ユーザープロフィール/実装ではDBから取得してくる -->
         <v-row>
             <v-col>
-                <p>{{ userData.name }} さんのマイページです</p>
+                <p>{{ loginUser.name }} さんのマイページです</p>
                 <!-- <p>フォロワー：{{userData.follower_count}}人/フォロー：{{userData.follow_count}}人</p> -->
             </v-col>
             <v-col>
@@ -14,12 +14,12 @@
         <v-tabs background-color="transparent" color="basil" grow>
             <router-link :to="{ name: 'Writedbooks' }">
                 <v-tab>
-                    <p style="color:black">公開中</p>
+                    <p style="color: black;">公開中</p>
                 </v-tab>
             </router-link>
             <router-link :to="{ name: 'Writingbooks' }">
                 <v-tab>
-                    <p style="color:black">非公開</p>
+                    <p style="color: black;">非公開</p>
                 </v-tab>
             </router-link>
         </v-tabs>
@@ -32,38 +32,26 @@
 <!-- 以下にscript/cssを記述 -->
 <script>
 // インポート
-
+import { mapActions, mapGetters } from "vuex";
 // Vueの処理
 export default {
     components: {},
     data() {
         return {
-            userData: [],
             openNovels: [],
-            closeNovels: []
+            closeNovels: [],
         };
     },
-
     created() {
-        this.showUser();
-        // this.showOpenNovel();
-        // this.showCloseNovel();
-        // this.showWritedNovel();
+        this.getLoginUserData();
+    },
+    computed: {
+        ...mapGetters(["loginUser"]),
     },
     methods: {
-        //userデータ取得
-        showUser: function() {
-            axios
-                .get("api/get/user")
-                .then(res => {
-                    this.userData = res.data;
-                    console.log(this.userData);
-                })
-                .catch(err => {
-                    console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
-                });
-        }
-    }
+        //ログインしているユーザーの情報
+        ...mapActions(["getLoginUserData"]),
+    },
 };
 </script>
 
