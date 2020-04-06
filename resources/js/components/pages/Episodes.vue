@@ -42,7 +42,7 @@ export default {
         user_id:"@kawabe",
         follower_count:77,
         follow_count:777,
-        novel_title:"風の歌を聴け",
+        novel_title:"",
         episode_title:"",
         episode_number:null,
     };

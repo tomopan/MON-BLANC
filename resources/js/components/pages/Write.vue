@@ -37,12 +37,6 @@
         <!-- 入力エリア -->
         <v-form>
             <div class="input-area">
-                <!-- <p
-                    class="paper"
-                    contenteditable="true"
-                    id="novel_title"
-                    placeholder="タイトルを入力してください"
-                ></p> -->
                 <!-- 小説入力 -->
                 <div id="episode_text">
                     <p
@@ -58,7 +52,7 @@
             <router-link
                 :to="{
                     name: 'PaperEdit',
-                    param: { novel_id: episodePost.novel_id }
+                    param: { novel_id: $store.state.editingPaperId },
                 }"
             >
                 <v-btn id="save" dark @click="saveEpisode">保存する</v-btn>
@@ -81,44 +75,44 @@ export default {
             //タイトルとテキストを格納
             episodePost: {},
             //モーダルのステータス
-            dialog: true
+            dialog: true,
         };
     },
 
     created() {
-        this.episodePost.novel_id = this.$route.params.novel_id;
+        this.episodePost.novel_id = this.$store.state.editingPaperId;
         this.showHero();
         this.showNovel();
     },
     methods: {
         //主人公を表示する
-        showHero: function() {
+        showHero: function () {
             axios
                 .get("api/get/hero/" + this.$route.params.hero_id)
-                .then(res => {
+                .then((res) => {
                     console.log(res.data);
                     this.hero = res.data[0];
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
 
         //小説の情報を取得する
-        showNovel: function() {
+        showNovel: function () {
             axios
-                .get("api/get/novel/" + this.$route.params.novel_id)
-                .then(res => {
+                .get("api/get/novel/" + this.$store.state.editingPaperId)
+                .then((res) => {
                     console.log(res);
                     this.novelData = res.data;
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
 
         //一時保存：エピソードタイトルとテキストをEpisodesテーブルに保存,statusを0
-        saveEpisode: function() {
+        saveEpisode: function () {
             //PostするオブジェクトにDOMの内容をぶちこむ
             //タイトル
             // this.episodePost.title = document.getElementById(
@@ -130,41 +124,43 @@ export default {
             ).textContent;
 
             //小説id
-            this.episodePost.novel_id = this.$route.params.novel_id;
+            this.episodePost.novel_id = this.$store.state.editingPaperId;
 
             //ステータスを0
             this.episodePost.status = 0;
 
             axios
                 .post("api/post/episode", this.episodePost)
-                .then(res => {})
-                .catch(err => {
+                .then((res) => {})
+                .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
 
             axios
-                .post("api/update/novel/close/" + this.$route.params.novel_id)
-                .then(res => {
+                .post(
+                    "api/update/novel/close/" + this.$store.state.editingPaperId
+                )
+                .then((res) => {
                     console.log(res);
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
 
         //公開：エピソードタイトルとテキストをEpisodesテーブルに保存,statusを1
-        openEpisode: function() {
+        openEpisode: function () {
             //ステータスを1
             this.episodePost.status = 1;
 
             axios
                 .post("api/post/episode", this.episodePost)
-                .then(res => {})
-                .catch(err => {
+                .then((res) => {})
+                .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
-        }
-    }
+        },
+    },
 };
 </script>
 
