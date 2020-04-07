@@ -80,7 +80,7 @@ export default {
     },
 
     created() {
-        this.episodePost.novel_id = this.$store.state.editingPaperId;
+        this.episodePost.novel_id = this.$route.params.user_paper_order;
         this.showHero();
         this.showNovel();
     },
@@ -101,7 +101,7 @@ export default {
         //小説の情報を取得する
         showNovel: function () {
             axios
-                .get("api/get/novel/" + this.$store.state.editingPaperId)
+                .get("api/get/novel/" + this.$route.params.user_paper_order)
                 .then((res) => {
                     console.log(res);
                     this.novelData = res.data;
@@ -114,19 +114,15 @@ export default {
         //一時保存：エピソードタイトルとテキストをEpisodesテーブルに保存,statusを0
         saveEpisode: function () {
             //PostするオブジェクトにDOMの内容をぶちこむ
-            //タイトル
-            // this.episodePost.title = document.getElementById(
-            //     "novel_title"
-            // ).textContent;
             //テキスト
             this.episodePost.text = document.getElementById(
                 "episode_text_input"
             ).textContent;
 
             //小説id
-            this.episodePost.novel_id = this.$store.state.editingPaperId;
+            this.episodePost.user_paper_order = this.$route.params.user_paper_order;
 
-            //ステータスを0
+            //ステータスを0(非公開)
             this.episodePost.status = 0;
 
             axios

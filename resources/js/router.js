@@ -25,58 +25,58 @@ const routes = [
     {
         path: "/",
         component: Top,
-        name: "Top"
+        name: "Top",
     },
     {
         path: "/hero/:hero_id",
         component: Hero,
-        name: "Hero"
+        name: "Hero",
     },
     {
         path: "/readfirst/:hero_id/",
         component: ReadFirstSentence,
-        name: "ReadFirst"
+        name: "ReadFirst",
     },
     {
         path: "/read/:hero_id/:novel_id",
         component: Read,
-        name: "Read"
+        name: "Read",
     },
 
     {
         path: "/noveltitle/:hero_id",
         component: NovelTitle,
-        name: "NovelTitle"
+        name: "NovelTitle",
     },
     {
         path: "/write/firstsentence/:hero_id",
         component: WriteFirstSentence,
-        name: "WriteFirstSentence"
+        name: "WriteFirstSentence",
     },
     {
-        path: "/write/paperedit/:novel_id",
+        path: "/write/paperedit/:user_paper_order",
         component: PaperEdit,
-        name: "PaperEdit"
+        name: "PaperEdit",
     },
     {
-        path: "/write/addpaper/:novel_id",
+        path: "/write/addpaper/:user_paper_order",
         component: AddPaper,
-        name: "AddPaper"
+        name: "AddPaper",
     },
     {
         path: "/write/title/:novel_id",
         component: WriteTitle,
-        name: "WriteTitle"
+        name: "WriteTitle",
     },
     {
-        path: "/write/:hero_id/",
+        path: "/write/:hero_id/:user_paper_order",
         component: Write,
-        name: "Write"
+        name: "Write",
     },
     {
         path: "/episodes",
         component: Episodes,
-        name: "Episodes"
+        name: "Episodes",
     },
     {
         path: "/profile",
@@ -87,25 +87,25 @@ const routes = [
             {
                 path: "/profile/bookshelf",
                 component: Bookshelf,
-                name: "Bookshelf"
+                name: "Bookshelf",
             },
             {
                 path: "/profile/bookmark",
                 component: Bookmark,
-                name: "Bookmark"
+                name: "Bookmark",
             },
             {
                 path: "/profile/writedbooks",
                 component: Writedbooks,
-                name: "Writedbooks"
+                name: "Writedbooks",
             },
             {
                 path: "/profile/writingbooks",
                 component: Writingbooks,
-                name: "Writingbooks"
-            }
-        ]
-    }
+                name: "Writingbooks",
+            },
+        ],
+    },
 ];
 
 // VueRouterインスタンスを作成する

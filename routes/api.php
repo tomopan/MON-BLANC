@@ -37,12 +37,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     //小説のエピソードを投稿
     Route::post('post/episode', 'Api\EpisodesController@save');
-    
-    //エピソードを取得
-    Route::get('get/episode/{novel_id}', 'Api\EpisodesController@show');
 
     //エピソードを取得
-    Route::get('get/papers/{novel_id}', 'Api\EpisodesController@showPapers');
+    Route::get('get/papers/{user_paper_order}', 'Api\EpisodesController@showPapers');
 
 
     // -----------Novelsテーブル----------- //

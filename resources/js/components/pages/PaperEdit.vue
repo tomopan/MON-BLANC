@@ -28,7 +28,7 @@
                     v-if="i == 0"
                     :to="{
                         name: 'WriteTitle',
-                        param: { novel_id: novelData.novel_id }
+                        param: { novel_id: novelData.novel_id },
                     }"
                 >
                     <p v-if="title_toggle" class="title_text">
@@ -44,7 +44,7 @@
         <router-link
             :to="{
                 name: 'AddPaper',
-                params: { novel_id: $route.params.novel_id }
+                params: { novel_id: $route.params.novel_id },
             }"
         >
             <v-btn class="mx-2">
@@ -54,7 +54,7 @@
         <!-- 公開ボタン -->
         <router-link
             :to="{
-                name: 'Profile'
+                name: 'Profile',
             }"
         >
             <v-btn
@@ -68,7 +68,7 @@
         <!-- 一時保存 -->
         <router-link
             :to="{
-                name: 'Profile'
+                name: 'Profile',
             }"
         >
             <v-btn
@@ -92,7 +92,7 @@ import VueGridLayout from "vue-grid-layout";
 export default {
     components: {
         GridLayout: VueGridLayout.GridLayout,
-        GridItem: VueGridLayout.GridItem
+        GridItem: VueGridLayout.GridItem,
     },
     data() {
         return {
@@ -105,7 +105,13 @@ export default {
             //titleの判定
             title_toggle: false,
             //UI用
-            justify: ["start", "center", "end", "space-around", "space-between"]
+            justify: [
+                "start",
+                "center",
+                "end",
+                "space-around",
+                "space-between",
+            ],
         };
     },
 
@@ -118,29 +124,30 @@ export default {
     },
     methods: {
         //小説の情報を取得
-        showNovel: function() {
+        showNovel: function () {
             axios
-                .get("api/get/novel/" + this.$route.params.novel_id)
-                .then(res => {
+                .get("api/get/novel/" + this.$route.params.user_paper_order)
+                .then((res) => {
                     console.log(res);
                     this.novelData = res.data;
 
                     if (this.novelData.title) this.title_toggle = true;
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
         //小説のペーパーを取得
-        showPapers: function() {
+        showPapers: function () {
             axios
-                .get("api/get/papers/" + this.$route.params.novel_id)
-                .then(res => {
+                .get("api/get/papers/" + this.$route.params.user_paper_order)
+                .then((res) => {
+                    console.log(res.data);
                     this.papers = res.data;
                     this.papers.unshift({
-                        text: this.novelData.title
+                        text: this.novelData.title,
                     });
-                    this.papers.forEach(function(e, i) {
+                    this.papers.forEach(function (e, i) {
                         if (i % 2 != 0) {
                             e.x = i - 1;
                             e.y = 6;
@@ -155,31 +162,31 @@ export default {
                     });
                     console.log(this.papers);
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
-        openNovel: function(novel_id) {
+        openNovel: function (novel_id) {
             axios
                 .post("api/update/novel/open/" + novel_id)
-                .then(res => {
+                .then((res) => {
                     console.log(this.writedNovels);
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
-        closeNovel: function(novel_id) {
+        closeNovel: function (novel_id) {
             axios
                 .post("api/update/novel/close/" + novel_id)
-                .then(res => {
+                .then((res) => {
                     console.log(this.writingNovels);
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
-        }
-    }
+        },
+    },
 };
 </script>
 

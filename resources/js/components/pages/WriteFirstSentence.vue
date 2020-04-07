@@ -42,7 +42,6 @@ export default {
             text: "",
         };
     },
-
     created() {
         this.showHero();
     },
@@ -60,6 +59,8 @@ export default {
             this.firstSentencePost.first_sentence = document.getElementById(
                 "first_sentence"
             ).textContent;
+
+            //PostのAPIを叩く
             axios
                 .post(
                     "api/post/firstsentence/" + this.$route.params.hero_id,
@@ -67,12 +68,12 @@ export default {
                 )
                 .then((res) => {
                     console.log(res.data);
-                    // console.log(res.data.id);
+                    //Write.vueへページ遷移させる
                     this.$router.push({
                         name: "Write",
                         params: {
                             hero_id: this.$route.params.hero_id,
-                            novel_id: res.data.id,
+                            user_paper_order: res.data.user_paper_order,
                         },
                     });
                     this.$store.state.editingPaperId = res.data.id;
@@ -81,6 +82,7 @@ export default {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
+
         //API叩いてマッチした主人公データを取得
         showHero: function () {
             axios
