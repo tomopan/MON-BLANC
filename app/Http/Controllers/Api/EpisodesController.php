@@ -21,16 +21,24 @@ use App\User;
             //エピソードを保存
             $episodes = new Episode;
             
-            //エピソード番号を取得
-            $writed_episode_number = Episode::where('novel_id','=',$request->novel_id)
+            //ペーパーidを取得
+            $novel_id = Novel::where('user_id','=',Auth::id())
+                        ->where('user_paper_order','=',$request->user_paper_order)
+                        ->select('id')
+                        ->first();
+            
+                        //エピソード番号を取得
+            $writed_episode_number = Episode::where('novel_id','=',$novel_id->id)
                                 ->max('episode_number');
                 //既に書かれていたら、numberに+1
                 if($writed_episode_number) $episode_number = $writed_episode_number + 1;
                 //はじめの1ページなら、1を代入
                 else $episode_number = 1;
 
+
+
             //小説情報を登録
-            $episodes->novel_id = $request->novel_id;
+            $episodes->novel_id = $novel_id->id;
             $episodes->text = $request->text;
             $episodes->episode_number = $episode_number;
             $episodes->status = $request->status;
@@ -39,23 +47,23 @@ use App\User;
             //Novelsテーブルを更新
             $novel =  Novel::where('id','=',$request->novel_id) 
                         ->update(['title' => $request->title]);
-            // return $novel;
-        }
 
-
-        public function show($novel_id)
-        {
-            $episode =  Episode::where('novel_id','=',$novel_id)
-                ->get();
-            return response()->json($episode);
         }
 
         // 小説idにマッチしたペーパーを取得
-        public function showPapers($novel_id)
+        public function showPapers($user_paper_order)
         {
-             $papers =  Episode::where('novel_id','=',$novel_id)
+            //ペーパーidを取得
+            $novel_id = Novel::where('user_id','=',Auth::id())
+                            ->where('user_paper_order','=',$user_paper_order)
+                            ->select('id')
+                            ->first();
+
+            //ペーパーを取得
+            $papers =  Episode::where('novel_id','=',$novel_id->id)
                                 ->orderBy('episode_number')
                                 ->get();
+
             return response()->json($papers);
         }
 

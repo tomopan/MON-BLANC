@@ -18,7 +18,7 @@ use Illuminate\Database\Seeder;
             [
                 "novel_id" => 1,
                 "episode_number" => 1,
-                "text" => "我思う故に我あり",
+                "text" => "テストデータですよ①",
                 "status" => "1",
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")
@@ -28,7 +28,7 @@ use Illuminate\Database\Seeder;
             [
                 "novel_id" => 2,
                 "episode_number" => 1,
-                "text" => "玉井 詩織（たまい しおり、1995年6月4日 - ）は、ももいろクローバーZのメンバー、女優である。グループでのイメージカラーは黄色で、ボーカル・ギター・ピアノ担当。",
+                "text" => "テストデータですよ②。",
                 "status" => "1",
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")
@@ -38,7 +38,7 @@ use Illuminate\Database\Seeder;
             [
                 "novel_id" => 3,
                 "episode_number" => 1,
-                "text" => "デカルトはとにかく下書きをする",
+                "text" => "テストデータですよ③",
                 "status" => "0",
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")
@@ -48,7 +48,7 @@ use Illuminate\Database\Seeder;
             [
                 "novel_id" => 4,
                 "episode_number" => 1,
-                "text" => "玉井 詩織はとにかく下書きをする",
+                "text" => "テストデータですよ④",
                 "status" => "0",
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")
