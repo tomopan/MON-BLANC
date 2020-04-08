@@ -28,13 +28,11 @@
 <!-- 以下にscript/cssを記述 -->
 <script>
 // インポート
-import FollowBtnComponent from "../items/FollowBtnComponent.vue";
 
 
 // Vueの処理
 export default {
   components: {
-      FollowBtnComponent
   },
   data() {
     return {

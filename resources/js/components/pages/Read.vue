@@ -16,11 +16,11 @@
 
 <!-- 以下にscript/cssを記述 -->
 <script>
-import FollowBtnComponent from "../items/FollowBtnComponent.vue";
+
 
 export default {
     components: {
-        FollowBtnComponent
+
     },
     data() {
         return {
