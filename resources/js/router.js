@@ -7,12 +7,9 @@ import Hero from "./components/pages/Hero.vue";
 import Read from "./components/pages/Read.vue";
 import Write from "./components/pages/Write.vue";
 import Profile from "./components/pages/Profile.vue";
-import Bookmark from "./components/pages/profiles/Bookmark.vue";
-import Bookshelf from "./components/pages/profiles/Bookshelf.vue";
 import Writedbooks from "./components/pages/profiles/Writedbooks.vue";
 import Writingbooks from "./components/pages/profiles/Writingbooks.vue";
 import Episodes from "./components/pages/Episodes.vue";
-import NovelTitle from "./components/pages/NovelTitle.vue";
 import ReadFirstSentence from "./components/pages/ReadFirstSentence.vue";
 import WriteFirstSentence from "./components/pages/WriteFirstSentence.vue";
 import PaperEdit from "./components/pages/PaperEdit.vue";
@@ -41,12 +38,6 @@ const routes = [
         path: "/read/:hero_id/:novel_id",
         component: Read,
         name: "Read",
-    },
-
-    {
-        path: "/noveltitle/:hero_id",
-        component: NovelTitle,
-        name: "NovelTitle",
     },
     {
         path: "/write/firstsentence/:hero_id",
@@ -85,16 +76,6 @@ const routes = [
         redirect: "/profile/writedbooks",
         children: [
             {
-                path: "/profile/bookshelf",
-                component: Bookshelf,
-                name: "Bookshelf",
-            },
-            {
-                path: "/profile/bookmark",
-                component: Bookmark,
-                name: "Bookmark",
-            },
-            {
                 path: "/profile/writedbooks",
                 component: Writedbooks,
                 name: "Writedbooks",
@@ -110,7 +91,7 @@ const routes = [
 
 // VueRouterインスタンスを作成する
 const router = new VueRouter({
-    routes
+    routes,
 });
 
 // app.jsでインポートするため
