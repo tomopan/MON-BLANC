@@ -41,10 +41,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('fetch/paper_novel/{user_paper_order}', 'Api\PaperNovelsController@fetch');
 
     //プロフィールで公開中の小説を取得
-    Route::get('get/paper_novel/writed', 'Api\PaperNovelsController@showWrited');
+    Route::get('get/open_paper_novels', 'Api\PaperNovelsController@showOpenPaperNovels');
 
     //プロフィールで非公開の小説を取得
-    Route::get('get/paper_novel/writing', 'Api\PaperNovelsController@showWriting');
+    Route::get('get/close_paper_novels', 'Api\PaperNovelsController@showClosePaperNovels');
 
     //hero_idにマッチした小説のデータを取得
     Route::get('get/paper_novels/{user_paper_order}', 'Api\PaperNovelsController@show');

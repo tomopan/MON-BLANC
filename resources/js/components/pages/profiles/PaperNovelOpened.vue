@@ -8,7 +8,7 @@
                     style="height: 300px;"
                 >
                     <v-card
-                        v-for="(writedNovel, i) in writedNovels"
+                        v-for="(openNovel, i) in OpenPaperNovels"
                         :key="i"
                         width="200px"
                         height="200px"
@@ -18,23 +18,22 @@
                             :to="{
                                 name: 'Read',
                                 params: {
-                                    hero_id: writedNovel.hero_id,
-                                    novel_id: writedNovel.novel_id
+                                    hero_id: openNovel.hero_id,
+                                    novel_id: openNovel.novel_id
                                 }
                             }"
                         >
                             <v-img
-                                :src="writedNovel.img_url"
+                                :src="openNovel.img_url"
                                 height="170px"
                             ></v-img>
-                            <p class="paper_text">{{ writedNovel.title }}</p>
+                            <p class="paper_text">{{ openNovel.title }}</p>
                         </router-link>
-
                         <v-btn
                             class="ma-2"
                             tile
                             outlined
-                            @click="closeNovel(i, writedNovel.novel_id)"
+                            @click="closeNovel(i, openNovel.user_paper_order)"
                             >非公開にする</v-btn
                         >
                     </v-card>
@@ -52,8 +51,8 @@ export default {
     },
     data() {
         return {
-            writedEpisodes: [],
-            writedNovels: [],
+            //公開中のペーパーノベルのデータを格納
+            OpenPaperNovels:[],
             // グリッド用
             alignmentsAvailable: [
                 "start",
@@ -74,23 +73,31 @@ export default {
             justify: "center"
         };
     },
-
+    watch: {
+    '$route' (to, from) {
+      // ルートの変更の検知
+      if (to.path !== from.path) {
+        this.showNovelsOpened();
+      }
+    },
+    },
     created() {
-        // this.showWritedEpisode();
-        this.showWritedNovel();
+        this.showNovelsOpened();
     },
     methods: {
-        showWritedNovel: function() {
+        //ペーパーノベルを取得
+        showNovelsOpened: function() {
             axios
-                .get("api/get/novel/writed")
+                .get("api/get/open_paper_novels")
                 .then(res => {
                     console.log(res);
-                    this.writedNovels = res.data.map(data => {
+                    this.OpenPaperNovels = res.data.map(data => {
                         const obj = {};
                         obj["title"] = data.title;
                         obj["hero_id"] = data.hero_id;
                         obj["novel_id"] = data.id;
                         obj["img_url"] = data.img_url;
+                        obj["user_paper_order"] = data.user_paper_order;
                         return obj;
                     });
                 })
@@ -98,17 +105,19 @@ export default {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
-        closeNovel: function(i, novel_id) {
+        //非公開ボタン
+        closeNovel: function(i, user_paper_order) {
+            console.log(user_paper_order)
             axios
-                .post("api/update/novel/close/" + novel_id)
+                .post("api/update/paper_novel_close/" + user_paper_order)
                 .then(res => {
-                    console.log(this.writingNovels);
+                    console.log(res)
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
             // 配列からも削除してデータバインディング
-            this.writedNovels.splice(i, 1);
+            this.OpenPaperNovels.splice(i, 1);
         }
     }
 };

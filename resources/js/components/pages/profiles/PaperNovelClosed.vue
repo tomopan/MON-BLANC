@@ -8,7 +8,7 @@
                     style="height: 300px;"
                 >
                     <v-card
-                        v-for="(writedNovel, i) in writedNovels"
+                        v-for="(closeNovel, i) in closePaperNovels"
                         :key="i"
                         width="200px"
                         height="200px"
@@ -18,23 +18,23 @@
                             :to="{
                                 name: 'Read',
                                 params: {
-                                    hero_id: writedNovel.hero_id,
-                                    novel_id: writedNovel.novel_id
+                                    hero_id: closeNovel.hero_id,
+                                    novel_id: closeNovel.novel_id
                                 }
                             }"
                         >
                             <v-img
-                                :src="writedNovel.img_url"
+                                :src="closeNovel.img_url"
                                 height="170px"
                             ></v-img>
-                            <p class="paper_text">{{ writedNovel.title }}</p>
+                            <p class="paper_text">{{ closeNovel.title }}</p>
                         </router-link>
 
                         <v-btn
                             class="ma-2"
                             tile
                             outlined
-                            @click="openNovel(i, writedNovel.novel_id)"
+                            @click="openNovel(i, closeNovel.user_paper_order)"
                             >公開する</v-btn
                         >
                     </v-card>
@@ -52,8 +52,8 @@ export default {
     },
     data() {
         return {
-            writedEpisodes: [],
-            writedNovels: [],
+            //非公開のペーパーノベルのデータを格納
+            closePaperNovels:[],
             // グリッド用
             alignmentsAvailable: [
                 "start",
@@ -74,23 +74,31 @@ export default {
             justify: "center"
         };
     },
-
+    watch: {
+    '$route' (to, from) {
+      // ルートの変更の検知
+      if (to.path !== from.path) {
+        this.showNovelsClosed();
+      }
+    }
+    },
     created() {
         // this.showWritedEpisode();
-        this.showWritedNovel();
+        this.showNovelsClosed();
     },
     methods: {
-        showWritedNovel: function() {
+        showNovelsClosed: function() {
             axios
-                .get("api/get/novel/writing")
+                .get("api/get/close_paper_novels")
                 .then(res => {
                     console.log(res);
-                    this.writedNovels = res.data.map(data => {
+                    this.closePaperNovels = res.data.map(data => {
                         const obj = {};
                         obj["title"] = data.title;
                         obj["hero_id"] = data.hero_id;
                         obj["novel_id"] = data.id;
                         obj["img_url"] = data.img_url;
+                        obj["user_paper_order"] = data.user_paper_order;
                         return obj;
                     });
                 })
@@ -98,17 +106,16 @@ export default {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
-        openNovel: function(i, novel_id) {
+        openNovel: function(i, user_paper_order) {
             axios
-                .post("api/update/novel/open/" + novel_id)
+                .post("api/update/paper_novel_open/" + user_paper_order)
                 .then(res => {
-                    console.log(this.writedNovels);
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
             // 配列からも削除してデータバインディング
-            this.writedNovels.splice(i, 1);
+            this.closePaperNovels.splice(i, 1);
         }
     }
 };
