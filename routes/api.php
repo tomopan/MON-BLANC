@@ -23,57 +23,53 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 //ここから追記//
-//　API定義
-//　認証後であれば下記ルート定義が有効になる
+// API定義
+// 認証後であれば下記ルート定義が有効になる
 Route::group(['middleware' => 'auth'], function () {
+
+    // -----------Usersテーブル----------- //
+    Route::get('get/user', 'Api\UsersController@show');
 
 
     // -----------Heroesテーブル----------- //
     Route::get('get/hero', 'Api\HeroesController@show');
-    Route::get('get/hero/{id}', 'Api\HeroesController@fetch');
+    Route::get('get/hero_fetch/{hero_id}', 'Api\HeroesController@fetch');
 
 
-    // -----------Episodeテーブル----------- //
-
-    //小説のエピソードを投稿
-    Route::post('post/episode', 'Api\EpisodesController@save');
-
-    //エピソードを取得
-    Route::get('get/papers/{user_paper_order}', 'Api\EpisodesController@showPapers');
-
-
-    // -----------Novelsテーブル----------- //
+    // -----------PaperNovelsテーブル----------- //
+    //paper_novel_idにマッチしたデータをひとつだけ取得
+    Route::get('fetch/paper_novel/{user_paper_order}', 'Api\PaperNovelsController@fetch');
 
     //プロフィールで公開中の小説を取得
-    Route::get('get/novel/writed', 'Api\NovelsController@showWrited');
+    Route::get('get/paper_novel/writed', 'Api\PaperNovelsController@showWrited');
 
     //プロフィールで非公開の小説を取得
-    Route::get('get/novel/writing', 'Api\NovelsController@showWriting');
+    Route::get('get/paper_novel/writing', 'Api\PaperNovelsController@showWriting');
 
     //hero_idにマッチした小説のデータを取得
-    Route::get('get/novels/{id}', 'Api\NovelsController@show');
-
-    //novel_idにマッチしたデータをひとつだけ取得
-    Route::get('get/novel/{novel_id}', 'Api\NovelsController@fetch');
+    Route::get('get/paper_novels/{user_paper_order}', 'Api\PaperNovelsController@show');
 
     //小説の一行目を保存
-    Route::post('post/firstsentence/{id}', 'Api\NovelsController@saveFirst');
+    Route::post('post/firstsentence/{id}', 'Api\PaperNovelsController@saveFirst');
 
     //小説のステータスを変更(公開→非公開)
-    Route::post('update/novel/close/{novel_id}', 'Api\NovelsController@closeNovelStatus');
+    Route::post('update/paper_novel_close/{user_paper_order}', 'Api\PaperNovelsController@closePaperNovelStatus');
 
     //小説のステータスを変更(公開→非公開)
-    Route::post('update/novel/open/{novel_id}', 'Api\NovelsController@openNovelStatus');
+    Route::post('update/paper_novel_open/{user_paper_order}', 'Api\PaperNovelsController@openPaperNovelStatus');
 
     //小説のタイトルを変更
-    Route::post('update/novel/title/{novel_id}', 'Api\NovelsController@postTitle');
+    Route::post('update/paper_title/{user_paper_order}', 'Api\PaperNovelsController@postTitle');
+
+    // -----------StoryPapersテーブル----------- //
+
+    //ストーリーペーパーのデータを取得
+    Route::get('get/story_papers/{user_paper_order}', 'Api\StoryPapersController@showPapers');
+
+    //ストーリーペーパーを投稿
+    Route::post('post/story_paper', 'Api\StoryPapersController@save');
 
 
-
-
-
-    // -----------Usersテーブル----------- //
-    Route::get('get/user', 'Api\UsersController@show');
 
 
 

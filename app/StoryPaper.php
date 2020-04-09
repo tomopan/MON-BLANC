@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Episode extends Model
+class StoryPaper extends Model
 {
     //
 	protected $guarded = ["id"];

@@ -14,40 +14,40 @@ use Illuminate\Database\Seeder;
             
             $faker = Faker\Factory::create("ja_JP");
             
-            DB::table('episodes')->insert(
+            DB::table('story_papers')->insert(
             [
-                "novel_id" => 1,
-                "episode_number" => 1,
+                "paper_novel_id" => 1,
+                "story_number" => 1,
                 "text" => "テストデータですよ①",
                 "status" => "1",
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")
             ]
             );
-            DB::table('episodes')->insert(
+            DB::table('story_papers')->insert(
             [
-                "novel_id" => 2,
-                "episode_number" => 1,
+                "paper_novel_id" => 2,
+                "story_number" => 1,
                 "text" => "テストデータですよ②。",
                 "status" => "1",
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")
             ]
             );
-            DB::table('episodes')->insert(
+            DB::table('story_papers')->insert(
             [
-                "novel_id" => 3,
-                "episode_number" => 1,
+                "paper_novel_id" => 3,
+                "story_number" => 1,
                 "text" => "テストデータですよ③",
                 "status" => "0",
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")
             ]
             );
-            DB::table('episodes')->insert(
+            DB::table('story_papers')->insert(
             [
-                "novel_id" => 4,
-                "episode_number" => 1,
+                "paper_novel_id" => 4,
+                "story_number" => 1,
                 "text" => "テストデータですよ④",
                 "status" => "0",
                 "created_at" => $faker->dateTime("now"),

@@ -3,7 +3,7 @@
             use Illuminate\Database\Schema\Blueprint;
             use Illuminate\Database\Migrations\Migration;
             
-            class CreateNovelsTable extends Migration
+            class CreatePaperNovelsTable extends Migration
             {
                 /**
                  * Run the migrations.
@@ -12,7 +12,7 @@
                  */
                 public function up()
                 {
-                    Schema::create("novels", function (Blueprint $table) {
+                    Schema::create("paper_novels", function (Blueprint $table) {
 						$table->increments('id');
 						$table->integer('hero_id');
                         $table->integer('user_id');
@@ -23,7 +23,6 @@
 						$table->integer('status');
 						$table->timestamps();
 						$table->softDeletes();
-
                     });
                 }
     
@@ -34,7 +33,7 @@
                  */
                 public function down()
                 {
-                    Schema::dropIfExists("novels");
+                    Schema::dropIfExists("paper_novels");
                 }
             }
         

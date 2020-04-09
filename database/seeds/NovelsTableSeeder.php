@@ -14,7 +14,7 @@ use Illuminate\Database\Seeder;
             
             $faker = Faker\Factory::create("ja_JP");
 
-            DB::table('novels')->insert(
+            DB::table('paper_novels')->insert(
             [
                 "hero_id" => 1,
                 "user_id" => 2,
@@ -26,7 +26,7 @@ use Illuminate\Database\Seeder;
                 "updated_at" => $faker->dateTime("now")
             ]
             );
-            DB::table('novels')->insert(
+            DB::table('paper_novels')->insert(
             [
                 "hero_id" => 2,
                 "user_id" => 1,
@@ -38,7 +38,7 @@ use Illuminate\Database\Seeder;
                 "updated_at" => $faker->dateTime("now")
             ]
             );
-            DB::table('novels')->insert(
+            DB::table('paper_novels')->insert(
             [
                 "hero_id" => 1,
                 "user_id" => 2,
@@ -50,7 +50,7 @@ use Illuminate\Database\Seeder;
                 "updated_at" => $faker->dateTime("now")
             ]
             );
-            DB::table('novels')->insert(
+            DB::table('paper_novels')->insert(
             [
                 "hero_id" => 2,
                 "user_id" => 1,

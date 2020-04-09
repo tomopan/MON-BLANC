@@ -5,16 +5,14 @@ import VueRouter from "vue-router";
 import Top from "./components/pages/Top.vue";
 import Hero from "./components/pages/Hero.vue";
 import Read from "./components/pages/Read.vue";
-import Write from "./components/pages/Write.vue";
+import WriteStoryPaper from "./components/pages/WriteStoryPaper.vue";
 import Profile from "./components/pages/Profile.vue";
 import Writedbooks from "./components/pages/profiles/Writedbooks.vue";
 import Writingbooks from "./components/pages/profiles/Writingbooks.vue";
-import Episodes from "./components/pages/Episodes.vue";
 import ReadFirstSentence from "./components/pages/ReadFirstSentence.vue";
 import WriteFirstSentence from "./components/pages/WriteFirstSentence.vue";
-import PaperEdit from "./components/pages/PaperEdit.vue";
-import AddPaper from "./components/pages/AddPaper.vue";
-import WriteTitle from "./components/pages/WriteTitle.vue";
+import EditPaperNovel from "./components/pages/EditPaperNovel.vue";
+import WriteTitlePaper from "./components/pages/WriteTitlePaper.vue";
 
 Vue.use(VueRouter);
 
@@ -40,34 +38,24 @@ const routes = [
         name: "Read",
     },
     {
-        path: "/write/firstsentence/:hero_id",
+        path: "/write-first-sentence/:hero_id",
         component: WriteFirstSentence,
         name: "WriteFirstSentence",
     },
     {
-        path: "/write/paperedit/:user_paper_order",
-        component: PaperEdit,
-        name: "PaperEdit",
+        path: "/write-story-paper/:hero_id/:user_paper_order",
+        component: WriteStoryPaper,
+        name: "WriteStoryPaper",
     },
     {
-        path: "/write/addpaper/:user_paper_order",
-        component: AddPaper,
-        name: "AddPaper",
+        path: "/edit-paper-novel/:user_paper_order",
+        component: EditPaperNovel,
+        name: "EditPaperNovel",
     },
     {
-        path: "/write/title/:novel_id",
-        component: WriteTitle,
-        name: "WriteTitle",
-    },
-    {
-        path: "/write/:hero_id/:user_paper_order",
-        component: Write,
-        name: "Write",
-    },
-    {
-        path: "/episodes",
-        component: Episodes,
-        name: "Episodes",
+        path: "/write/title/:user_paper_order",
+        component: WriteTitlePaper,
+        name: "WriteTitlePaper",
     },
     {
         path: "/profile",
