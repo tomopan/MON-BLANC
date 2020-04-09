@@ -37,8 +37,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     // -----------PaperNovelsテーブル----------- //
-    //paper_novel_idにマッチしたデータをひとつだけ取得
+    //user_paper_orderにマッチしたデータをひとつだけ取得
     Route::get('fetch/paper_novel/{user_paper_order}', 'Api\PaperNovelsController@fetch');
+
+    //paper_novel_idにマッチしたデータのタイトルをひとつだけ取得
+    Route::get('fetch/paper_novel_titile/{paper_novel_id}', 'Api\PaperNovelsController@fetchTitle');
 
     //プロフィールで公開中の小説を取得
     Route::get('get/open_paper_novels', 'Api\PaperNovelsController@showOpenPaperNovels');
@@ -46,8 +49,8 @@ Route::group(['middleware' => 'auth'], function () {
     //プロフィールで非公開の小説を取得
     Route::get('get/close_paper_novels', 'Api\PaperNovelsController@showClosePaperNovels');
 
-    //hero_idにマッチした小説のデータを取得
-    Route::get('get/paper_novels/{user_paper_order}', 'Api\PaperNovelsController@show');
+    //hero_idにマッチしたペーパーノベルのデータを全て取得
+    Route::get('get/paper_novels/{hero_id}', 'Api\PaperNovelsController@show');
 
     //小説の一行目を保存
     Route::post('post/firstsentence/{id}', 'Api\PaperNovelsController@saveFirst');
@@ -64,7 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
     // -----------StoryPapersテーブル----------- //
 
     //ストーリーペーパーのデータを取得
-    Route::get('get/story_papers/{user_paper_order}', 'Api\StoryPapersController@showPapers');
+    Route::get('get/story_papers/{paper_novel_id}', 'Api\StoryPapersController@showPapers');
 
     //ストーリーペーパーを投稿
     Route::post('post/story_paper', 'Api\StoryPapersController@save');

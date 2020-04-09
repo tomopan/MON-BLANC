@@ -4,7 +4,7 @@ import VueRouter from "vue-router";
 // ページコンポーネントをインポート
 import Top from "./components/pages/Top.vue";
 import Hero from "./components/pages/Hero.vue";
-import Read from "./components/pages/Read.vue";
+import ReadPaper from "./components/pages/ReadPaper.vue";
 import WriteStoryPaper from "./components/pages/WriteStoryPaper.vue";
 import Profile from "./components/pages/Profile.vue";
 import PaperNovelOpened from "./components/pages/profiles/PaperNovelOpened.vue";
@@ -28,14 +28,14 @@ const routes = [
         name: "Hero",
     },
     {
-        path: "/readfirst/:hero_id/",
+        path: "/write-first-sentence/:hero_id/",
         component: ReadFirstSentence,
         name: "ReadFirst",
     },
     {
-        path: "/read/:hero_id/:novel_id",
-        component: Read,
-        name: "Read",
+        path: "/read-paper/:hero_id/:paper_novel_id",
+        component: ReadPaper,
+        name: "ReadPaper",
     },
     {
         path: "/write-first-sentence/:hero_id",

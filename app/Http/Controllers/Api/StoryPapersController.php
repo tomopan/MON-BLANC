@@ -46,42 +46,17 @@ use App\User;
             //PaperNovelsテーブルを更新
             $novel =  PaperNovel::where('id','=',$request->paper_novel_id) 
                         ->update(['title' => $request->title]);
-
         }
 
         // ペーパーノベルidにマッチしたペーパーを取得:api/get/story_papers/
-        public function showPapers($user_paper_order)
+        public function showPapers($paper_novel_id)
         {
-            //ペーパーノベルidを取得
-            $paper_novel_id = PaperNovel::where('user_id','=',Auth::id())
-                            ->where('user_paper_order','=',$user_paper_order)
-                            ->select('id')
-                            ->first();
-
             //ペーパーを取得
-            $story_papers =  StoryPaper::where('paper_novel_id','=',$paper_novel_id->id)
+            $story_papers =  StoryPaper::where('paper_novel_id','=',$paper_novel_id)
                                 ->orderBy('story_number')
                                 ->get();
 
             return response()->json($story_papers);
-        }
-
-        // 執筆中ページを取得
-        public function showWriting()
-        {
-            $episode =  StoryPaper::where('status',0)
-                                ->orderBy('created_at')
-                                ->get();
-            return response()->json($episode);
-        }
-
-        // 執筆済ページを取得
-        public function showWrited()
-        {
-            $episode =  StoryPaper::where('status',1)
-                                ->orderBy('created_at')
-                                ->get();
-            return response()->json($episode);
         }
     
     }
