@@ -12,12 +12,12 @@
         </v-row>
         <!-- 公開/非公開のコンポーネント切り替え -->
         <v-tabs background-color="transparent" color="basil" grow>
-            <router-link :to="{ name: 'Writedbooks' }">
+            <router-link :to="{ name: 'PaperNovelOpened' }">
                 <v-tab>
                     <p style="color: black;">公開中</p>
                 </v-tab>
             </router-link>
-            <router-link :to="{ name: 'Writingbooks' }">
+            <router-link :to="{ name: 'PaperNovelClosed' }">
                 <v-tab>
                     <p style="color: black;">非公開</p>
                 </v-tab>

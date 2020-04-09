@@ -7,8 +7,8 @@ import Hero from "./components/pages/Hero.vue";
 import Read from "./components/pages/Read.vue";
 import WriteStoryPaper from "./components/pages/WriteStoryPaper.vue";
 import Profile from "./components/pages/Profile.vue";
-import Writedbooks from "./components/pages/profiles/Writedbooks.vue";
-import Writingbooks from "./components/pages/profiles/Writingbooks.vue";
+import PaperNovelOpened from "./components/pages/profiles/PaperNovelOpened.vue";
+import PaperNovelClosed from "./components/pages/profiles/PaperNovelClosed.vue";
 import ReadFirstSentence from "./components/pages/ReadFirstSentence.vue";
 import WriteFirstSentence from "./components/pages/WriteFirstSentence.vue";
 import EditPaperNovel from "./components/pages/EditPaperNovel.vue";
@@ -61,17 +61,17 @@ const routes = [
         path: "/profile",
         component: Profile,
         name: "Profile",
-        redirect: "/profile/writedbooks",
+        redirect: "/profile/PaperNovelOpened",
         children: [
             {
-                path: "/profile/writedbooks",
-                component: Writedbooks,
-                name: "Writedbooks",
+                path: "/profile/PaperNovelOpened",
+                component: PaperNovelOpened,
+                name: "PaperNovelOpened",
             },
             {
-                path: "/profile/writingbooks",
-                component: Writingbooks,
-                name: "Writingbooks",
+                path: "/profile/PaperNovelClosed",
+                component: PaperNovelClosed,
+                name: "PaperNovelClosed",
             },
         ],
     },

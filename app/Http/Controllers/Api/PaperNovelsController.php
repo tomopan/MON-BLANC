@@ -26,7 +26,6 @@ use App\StoryPaper;
         {
             //ユーザー情報取得
             $userId = Auth::id();
-            // $userId = 100;
 
             //登録する情報を格納
             $paper_novel = new PaperNovel;
@@ -86,26 +85,27 @@ use App\StoryPaper;
         }
 
         //プロフィールページで公開中の小説のデータ取得
-        public function showWrited()
+        public function showOpenPaperNovels()
         {
-            $novels =DB::table('novels as n')
+            $paper_novels =DB::table('paper_novels as n')
                         ->join('heroes as h','h.id','=','n.hero_id')
                         ->where('n.user_id','=', Auth::id())
                         ->where('n.status',1)
-                        ->select('n.id','n.title','n.user_id','n.status','n.hero_id','h.img_url')
-                        ->orderBy('n.created_at')
+                        ->select('n.id','n.title','n.user_id','n.status','n.hero_id','h.img_url','n.user_paper_order')
+                        ->orderBy('n.user_paper_order')
                         ->get();
-            return response()->json($novels);
+
+            return response()->json($paper_novels);
         }
     
         //プロフィールページで非公開の小説のデータ取得
-        public function showWriting()
+        public function showClosePaperNovels()
         {
-            $novels =DB::table('novels as n')
+            $novels =DB::table('paper_novels as n')
                         ->join('heroes as h','h.id','=','n.hero_id')
                         ->where('n.user_id','=', Auth::id())
                         ->where('n.status',0)
-                        ->select('n.id','n.title','n.user_id','n.status','n.hero_id','h.img_url')
+                        ->select('n.id','n.title','n.user_id','n.status','n.hero_id','h.img_url','n.user_paper_order')
                         ->orderBy('n.created_at')
                         ->get();
             return response()->json($novels);
