@@ -3,7 +3,7 @@
             use Illuminate\Database\Schema\Blueprint;
             use Illuminate\Database\Migrations\Migration;
             
-            class CreateEpisodesTable extends Migration
+            class CreateStoryPapersTable extends Migration
             {
                 /**
                  * Run the migrations.
@@ -12,15 +12,14 @@
                  */
                 public function up()
                 {
-                    Schema::create("episodes", function (Blueprint $table) {
+                    Schema::create("story_papers", function (Blueprint $table) {
 						$table->increments('id');
-						$table->integer('novel_id');
-						$table->integer('episode_number');
+						$table->integer('paper_novel_id');
+						$table->integer('story_number');
 						$table->text('text');
 						$table->integer('status');
 						$table->timestamps();
 						$table->softDeletes();
-
                     });
                 }
     
@@ -31,7 +30,7 @@
                  */
                 public function down()
                 {
-                    Schema::dropIfExists("episodes");
+                    Schema::dropIfExists("story_papers");
                 }
             }
         

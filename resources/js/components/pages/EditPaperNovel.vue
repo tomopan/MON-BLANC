@@ -27,8 +27,8 @@
                 <router-link
                     v-if="i == 0"
                     :to="{
-                        name: 'WriteTitle',
-                        param: { novel_id: novelData.novel_id },
+                        name: 'WriteTitlePaper',
+                        param: { user_paper_order: $route.params.user_paper_order },
                     }"
                 >
                     <p v-if="title_toggle" class="title_text">
@@ -43,8 +43,11 @@
         <!-- ペーパー追加ボタン -->
         <router-link
             :to="{
-                name: 'AddPaper',
-                params: { novel_id: $route.params.novel_id },
+                name: 'WriteStoryPaper',
+                params: {
+                    hero_id: PaperNovelData.hero_id,
+                    user_paper_order: this.$route.params.user_paper_order,
+                },
             }"
         >
             <v-btn class="mx-2">
@@ -61,7 +64,7 @@
                 class="ma-2"
                 tile
                 outlined
-                @click="openNovel($route.params.novel_id)"
+                @click="openNovel()"
                 >公開する</v-btn
             >
         </router-link>
@@ -75,7 +78,7 @@
                 class="ma-2"
                 tile
                 outlined
-                @click="closeNovel($route.params.novel_id)"
+                @click="closeNovel()"
                 >一時保存</v-btn
             >
         </router-link>
@@ -96,15 +99,8 @@ export default {
     },
     data() {
         return {
-            //テスト
+            //GridLayout用
             layout: [],
-            //showNovel()のデータ格納
-            novelData: "",
-            //showPapers()のデータ格納
-            papers: [],
-            //titleの判定
-            title_toggle: false,
-            //UI用
             justify: [
                 "start",
                 "center",
@@ -112,40 +108,41 @@ export default {
                 "space-around",
                 "space-between",
             ],
+            //showNovel()のデータ格納
+            PaperNovelData: "",
+            //showPapers()のデータ格納
+            papers: [],
+            //titleの判定
+            title_toggle: false,
         };
     },
 
     created() {
         this.showNovel();
         this.showPapers();
-        //タイトルの情報をpapersに格納
-
-        console.log(this.papers);
     },
     methods: {
-        //小説の情報を取得
+        //ペーパーノベルの情報を取得
         showNovel: function () {
             axios
-                .get("api/get/novel/" + this.$route.params.user_paper_order)
+                .get("api/fetch/paper_novel/" + this.$route.params.user_paper_order)
                 .then((res) => {
-                    console.log(res);
-                    this.novelData = res.data;
-
-                    if (this.novelData.title) this.title_toggle = true;
+                    this.PaperNovelData = res.data;
+                    if (this.PaperNovelData.title) this.title_toggle = true;
                 })
                 .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
-        //小説のペーパーを取得
+        //ストーリーペーパーを取得
         showPapers: function () {
             axios
-                .get("api/get/papers/" + this.$route.params.user_paper_order)
+                .get("api/get/story_papers/" + this.$route.params.user_paper_order)
                 .then((res) => {
                     console.log(res.data);
                     this.papers = res.data;
                     this.papers.unshift({
-                        text: this.novelData.title,
+                        text: this.PaperNovelData.title,
                     });
                     this.papers.forEach(function (e, i) {
                         if (i % 2 != 0) {
@@ -166,9 +163,9 @@ export default {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
-        openNovel: function (novel_id) {
+        openNovel: function () {
             axios
-                .post("api/update/novel/open/" + novel_id)
+                .post("api/update/paper_novel_open/" + this.$route.params.user_paper_order)
                 .then((res) => {
                     console.log(this.writedNovels);
                 })
@@ -176,9 +173,9 @@ export default {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
-        closeNovel: function (novel_id) {
+        closeNovel: function () {
             axios
-                .post("api/update/novel/close/" + novel_id)
+                .post("update/paper_novel_close/" + this.$route.params.user_paper_order)
                 .then((res) => {
                     console.log(this.writingNovels);
                 })

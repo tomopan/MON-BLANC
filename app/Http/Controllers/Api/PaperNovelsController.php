@@ -6,19 +6,19 @@ namespace App\Http\Controllers\Api;
 //追記
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Auth;
+
 use Auth;
 use Validate;
 use DB;
 
 use App\User;
-use App\Novel;
-use App\Heroe;
+use App\Hero;
 
-
-
+use App\PaperNovel;
+use App\StoryPaper;
+    
     //=======================================================================
-    class NovelsController extends Controller
+    class PaperNovelsController extends Controller
     {
 
         //小説の一文目を保存
@@ -29,27 +29,27 @@ use App\Heroe;
             // $userId = 100;
 
             //登録する情報を格納
-            $novel = new Novel;
+            $paper_novel = new PaperNovel;
             //ユーザー情報を登録
-            $novel->user_id = $userId;
+            $paper_novel->user_id = $userId;
             //ペーパー情報を登録
-            $novel->hero_id = $hero_id;//主人公id
-            $novel->first_sentence = $request->first_sentence;//ファーストセンテンス
+            $paper_novel->hero_id = $hero_id;//主人公id
+            $paper_novel->first_sentence = $request->first_sentence;//ファーストセンテンス
 
             //ペーパーの順序を登録
                 //ペーパーの順序を取得
-                $user_paper_order = Novel::where('user_id','=',$userId)
+                $user_paper_order = PaperNovel::where('user_id','=',$userId)
                                     ->max('user_paper_order');
                     //既に書かれていたら、numberに+1
                     if($user_paper_order) $user_paper_order += 1;
                     //はじめてのペーパーなら、1を代入
                     else $user_paper_order = 1;
 
-            $novel->user_paper_order = $user_paper_order;//ペーパーオーダー
+            $paper_novel->user_paper_order = $user_paper_order;//ペーパーオーダー
 
-            $novel->status = 0;//ステータスを0(非公開)
-            $novel->save();
-            return $novel;
+            $paper_novel->status = 0;//ステータスを0(非公開)
+            $paper_novel->save();
+            return $paper_novel;
         }
 
         //hero_idにマッチした、公開されている小説のデータを取得
@@ -61,21 +61,28 @@ use App\Heroe;
                     ->where('n.status', '=', 1)
                     ->select('u.name','n.id','n.hero_id','n.title','n.user_id','n.status','n.first_sentence')
                     ->get();
-            // $novels =  Novel::where('hero_id','=',$hero_id)
-            //                 ->get();
 
             return response()->json($novels);
         }
 
-        //novel_idにマッチした小説のデータをひとつだけ取得
+        //$user_paper_orderにマッチした小説のデータをひとつだけ取得:api/fetch/paper_novel/
         public function fetch($user_paper_order)
         {
-            $novel = DB::table('novels as n')
-                    ->join('users as u','u.id','=','n.user_id')
-                    ->where('n.user_paper_order', '=', $user_paper_order)
-                    ->select('u.name','u.id','n.id','n.title','n.user_id','n.status','n.first_sentence')
-                    ->first();
-            return response()->json($novel);
+            $paper_novel = PaperNovel::where('user_id','=',Auth::id())
+                                        ->where('user_paper_order','=',$user_paper_order)
+                                        ->first();
+
+            //ストーリーペーパーが何枚目か取得
+             //エピソード番号を取得
+            $story_number = StoryPaper::where('paper_novel_id','=',$paper_novel->id)
+                                ->max('story_number');
+            
+            //初めてなら0を代入
+            if(!$story_number) $story_number = 0;
+
+            $paper_novel->story_number = $story_number;
+
+            return response()->json($paper_novel);
         }
 
         //プロフィールページで公開中の小説のデータ取得
@@ -105,30 +112,33 @@ use App\Heroe;
         }
 
         //小説のステータスを変更（公開→非公開）
-        public function closeNovelStatus($novel_id)
+        public function closePaperNovelStatus($user_paper_order)
         {
-            $novel =  Novel::where('id','=',$novel_id) 
+            $paper_novel =  PaperNovel::where('user_id','=',Auth::id()) 
+                        ->where('user_paper_order','=',$user_paper_order)
                         ->update(['status' => 0]);
-            return $novel;
-            // return response()->json($novels);
+            return $paper_novel;
         }
 
         //小説のステータスを変更（非公開→公開）
-        public function openNovelStatus($novel_id)
+        public function openPaperNovelStatus($user_paper_order)
         {
-            $novel =  Novel::where('id','=',$novel_id) 
+            $paper_novel =  PaperNovel::where('user_id','=',Auth::id()) 
+                        ->where('user_paper_order','=',$user_paper_order)
                         ->update(['status' => 1]);
-            return $novel_id;
-            // return response()->json($novels);
+            return $paper_novel;
         }
 
         //小説のタイトルを変更
-        public function postTitle(Request $request,$novel_id)
+        public function postTitle(Request $request,$user_paper_order)
         {
-            $title =  Novel::where('id','=',$novel_id) 
-                        ->update(['title' => $request->title]);
+            $title = PaperNovel::where('user_id','=',Auth::id()) 
+                                ->where('user_paper_order','=',$user_paper_order)
+                                ->update(['title' => $request->title]);
             return $title;
             // return response()->json($novels);
         }
     }
+    //=======================================================================
+    
     

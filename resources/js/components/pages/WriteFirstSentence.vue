@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 主人公の名前を表示 -->
-        <p>{{ hero.hero_description }}</p>
+        <p>{{ HeroData.hero_name }}</p>
 
         <!-- タイトル入力 -->
         <v-form>
@@ -28,8 +28,10 @@
 </template>
 
 <!-- 以下にscript/cssを記述 -->
-
 <script>
+// インポート
+import { mapActions, mapGetters } from "vuex";
+
 // Vueの処理
 export default {
     components: {},
@@ -37,22 +39,23 @@ export default {
         return {
             //タイトルとテキストを格納
             firstSentencePost: {},
-            postNovelId: null,
-            hero: {},
             text: "",
         };
     },
     created() {
-        this.showHero();
+        this.fetchHeroData(this.$route.params.hero_id);
     },
     mounted() {
         console.log(document.getElementById("first_sentence").textContent);
         this.openBtn();
     },
+    computed: {
+        ...mapGetters(["HeroData"]),
+    },
     methods: {
-        ToConsole: function () {
-            console.log(this.text);
-        },
+        //API叩いてマッチした主人公データを取得
+        ...mapActions(["fetchHeroData"]),
+
         //小説のタイトルを保存
         saveFirstSentence: function () {
             //PostするオブジェクトにDOMの内容をぶちこむ
@@ -70,33 +73,20 @@ export default {
                     console.log(res.data);
                     //Write.vueへページ遷移させる
                     this.$router.push({
-                        name: "Write",
+                        name: "WriteStoryPaper",
                         params: {
                             hero_id: this.$route.params.hero_id,
                             user_paper_order: res.data.user_paper_order,
                         },
                     });
-                    this.$store.state.editingPaperId = res.data.id;
                 })
                 .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
 
-        //API叩いてマッチした主人公データを取得
-        showHero: function () {
-            axios
-                .get("api/get/hero/" + this.$route.params.hero_id)
-                .then((res) => {
-                    console.log(res.data);
-                    this.hero = res.data[0];
-                })
-                .catch((err) => {
-                    console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
-                });
-        },
+        //句読点が押されたらボタンを出現させる関数
         openBtn() {
-            //句読点が押されたらボタンを出現させる処理
             const target = document.getElementById("first_sentence");
 
             const observer = new MutationObserver((records) => {

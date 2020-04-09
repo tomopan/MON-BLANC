@@ -24,8 +24,8 @@
             <!-- 保存ボタン -->
             <router-link
                 :to="{
-                    name: 'PaperEdit',
-                    param: { novel_id: titlePost.novel_id }
+                    name: 'EditPaperNovel',
+                    param: { user_paper_order: $route.params.user_paper_order }
                 }"
             >
                 <v-btn id="save" dark @click="saveTitle">保存する</v-btn>
@@ -54,39 +54,25 @@ export default {
     },
 
     created() {
-        this.titlePost.novel_id = this.$route.params.novel_id;
-        // this.showHero();
         this.showNovel();
     },
     methods: {
-        //主人公を表示する
-        // showHero: function() {
-        //     axios
-        //         .get("api/get/hero/" + this.$route.params.hero_id)
-        //         .then(res => {
-        //             console.log(res);
-        //             this.hero = res.data[0];
-        //         })
-        //         .catch(err => {
-        //             console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
-        //         });
-        // },
-
-        //小説の情報を取得する
-        showNovel: function() {
+       //ペーパーノベルの情報を取得
+        showNovel: function () {
             axios
-                .get("api/get/novel/" + this.$route.params.novel_id)
-                .then(res => {
+                .get("api/get/paper_novel/" + this.$route.params.user_paper_order)
+                .then((res) => {
                     console.log(res);
                     this.novelData = res.data;
+
                     if (this.novelData.title) this.title_toggle = true;
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
 
-        //保存：タイトルをNovelsテーブルに保存,statusを0
+        //タイトルペーパーをPaperNovelsテーブルに保存
         saveTitle: function() {
             //PostするオブジェクトにDOMの内容をぶちこむ
             //タイトル
@@ -94,27 +80,13 @@ export default {
                 "novel_title"
             ).textContent;
 
-            //小説id
-            this.titlePost.novel_id = this.$route.params.novel_id;
-
-            //ステータスを0
-            this.titlePost.status = 0;
-
+            // Post
             axios
                 .post(
-                    "api/update/novel/title/" + this.$route.params.novel_id,
+                    "api/update/paper_title/" + this.$route.params.user_paper_order,
                     this.titlePost
                 )
                 .then(res => {})
-                .catch(err => {
-                    console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
-                });
-
-            axios
-                .post("api/update/novel/close/" + this.$route.params.novel_id)
-                .then(res => {
-                    console.log(res);
-                })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
