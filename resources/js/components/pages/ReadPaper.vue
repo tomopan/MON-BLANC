@@ -1,12 +1,12 @@
 <template>
     <v-container>
-        <h1>『{{ novelData.title }}』</h1>
+        <h1>『{{Title}}』</h1>
 
-        <v-col v-for="(episode, i) in episodes" :key="i">
+        <v-col v-for="(story, i) in StoryPapersData" :key="i">
             <div class="paper">
                 <div id="episode_text">
                     <p class="episode_text">
-                        {{ episode.text }}
+                        {{ story.text }}
                     </p>
                 </div>
             </div>
@@ -24,37 +24,34 @@ export default {
     },
     data() {
         return {
-            novelData: [],
-            episodes: []
+            StoryPapersData: [],
+            Title:"",
         };
     },
 
     created() {
-        this.showNovel();
-        this.showEpisode();
+        this.showTitle();
+        this.showStoryPapers();
     },
     methods: {
-        showNovel: function() {
-            //Novelテーブルから情報を取得
+        showStoryPapers: function() {
+            //StoryPapersテーブルから情報を取得
             axios
-                .get("api/get/novel/" + this.$route.params.novel_id)
+                .get("api/get/story_papers/" + this.$route.params.paper_novel_id)
                 .then(res => {
-                    this.novelData = res.data;
-                    console.log(res);
-
-                    // console.log(res.data[0].title);
+                    this.StoryPapersData = res.data;
+                    console.log(res.data);
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
                 });
         },
-        showEpisode: function() {
-            //Episodesテーブルから情報を取得
+        showTitle: function() {
+            //PaperNovelsテーブルからタイトルを取得
             axios
-                .get("api/get/episode/" + this.$route.params.novel_id)
+                .get("api/fetch/paper_novel_titile/" + this.$route.params.paper_novel_id)
                 .then(res => {
-                    this.episodes = res.data;
-                    console.log(this.episodes);
+                    this.Title = res.data.title;
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜

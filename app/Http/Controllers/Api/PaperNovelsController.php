@@ -54,7 +54,7 @@ use App\StoryPaper;
         //hero_idにマッチした、公開されている小説のデータを取得
         public function show($hero_id)
         {
-            $novels = DB::table('novels as n')
+            $novels = DB::table('paper_novels as n')
                     ->join('users as u','u.id','=','n.user_id')
                     ->where('n.hero_id', '=', $hero_id)
                     ->where('n.status', '=', 1)
@@ -82,6 +82,16 @@ use App\StoryPaper;
             $paper_novel->story_number = $story_number;
 
             return response()->json($paper_novel);
+        }
+
+        //$user_paper_orderにマッチした小説のデータをひとつだけ取得:api/fetch/paper_novel_title/
+        public function fetchTitle($paper_novel_id)
+        {
+            $paper_novel_title = PaperNovel::where('id','=',$paper_novel_id)
+                                        ->select('title')
+                                        ->first();
+
+            return response()->json($paper_novel_title);
         }
 
         //プロフィールページで公開中の小説のデータ取得

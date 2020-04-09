@@ -12,7 +12,7 @@
                     <v-card>
                         <div id="modal">
                             <v-img
-                                :src="hero.img_url"
+                                :src="HeroData.img_url"
                                 id="modal_img"
                                 width="300px"
                                 height="400px"
@@ -39,7 +39,7 @@
                 show-arrows-on-hover
                 hide-delimiters
             >
-                <v-carousel-item v-for="(novel, i) in novels" :key="i">
+                <v-carousel-item v-for="(novel, i) in Novels" :key="i">
                     <v-sheet height="100%" color="white">
                         <v-row
                             class="fill-height"
@@ -49,10 +49,10 @@
                             <div class="display-3">
                                 <router-link
                                     :to="{
-                                        name: 'Read',
+                                        name: 'ReadPaper',
                                         params: {
                                             hero_id: $route.params.hero_id,
-                                            novel_id: novel.id
+                                            paper_novel_id: novel.id
                                         }
                                     }"
                                 >
@@ -71,45 +71,38 @@
 
 <!-- 以下にscript/cssを記述 -->
 <script>
+//インポート
+import { mapActions, mapGetters } from "vuex";
+
+
 export default {
     components: {},
 
     data() {
         return {
-            hero: {},
-            novels: [],
+            //取得したペーパーノベルのデータを格納
+            Novels: [],
+            //モーダルの開閉
             dialog: true
         };
     },
-    watch: {
-        // ルートが変更されたらこのメソッドを再び呼び出します
-        $route: "showHero"
-    },
     created() {
-        //hero_idに遷移した主人公idを代入
-        this.showHero();
+        //主人公データを取得
+        this.fetchHeroData(this.$route.params.hero_id);
         this.showNovels();
+    },
+    computed: {
+        ...mapGetters(["HeroData"]),
     },
     methods: {
         //API叩いてマッチした主人公データを取得
-        showHero: function() {
-            axios
-                .get("api/get/hero/" + this.$route.params.hero_id)
-                .then(res => {
-                    console.log(res.data);
-                    this.hero = res.data[0];
-                })
-                .catch(err => {
-                    console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
-                });
-        },
+        ...mapActions(["fetchHeroData"]),
         //主人公に書かれている小説のタイトルを表示
         showNovels: function() {
             axios
-                .get("api/get/novels/" + this.$route.params.hero_id)
+                .get("api/get/paper_novels/" + this.$route.params.hero_id)
                 .then(res => {
-                    console.log(res.data);
-                    this.novels = res.data;
+                    this.Novels = res.data;
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
