@@ -60,7 +60,7 @@ export default {
        //ペーパーノベルの情報を取得
         showNovel: function () {
             axios
-                .get("api/get/paper_novel/" + this.$route.params.user_paper_order)
+                .get("api/fetch/paper_novel/" + this.$route.params.user_paper_order)
                 .then((res) => {
                     console.log(res);
                     this.novelData = res.data;

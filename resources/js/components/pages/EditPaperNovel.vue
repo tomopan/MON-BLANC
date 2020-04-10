@@ -137,7 +137,7 @@ export default {
         //ストーリーペーパーを取得
         showPapers: function () {
             axios
-                .get("api/get/story_papers/" + this.$route.params.user_paper_order)
+                .get("api/get/story_papers_edit/" + this.$route.params.user_paper_order)
                 .then((res) => {
                     console.log(res.data);
                     this.papers = res.data;
