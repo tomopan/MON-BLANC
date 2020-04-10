@@ -1,57 +1,18 @@
 <template>
     <div>
-        <!-- モーダル -->
-        <div class="text-center">
-            <v-dialog v-model="dialog" fullscreen>
-                <v-card>
-                    <div id="modal_text">
-                        <div id="modal_text_inline">
-                            <br />
-                            <p>第一文が完成しました。</p>
-                            <br />
-                            <p>次はあなたが選んだ主人公や、</p>
-                            <br />
-                            <p>今あなたが思い描く風景、</p>
-                            <br />
-                            <p>目の前の形式などを、描写してみましょう。</p>
-                            <br />
-                            <p>そうして、あなたの言葉を連ねていきましょう。</p>
-                            <br />
-                            <p>
-                                まずは十六行。 これは手紙一枚分ほどの長さです。
-                            </p>
-                            <br />
-                            <p>思いやアイディアをフィクションとして、</p>
-                            <br />
-                            <p>想像力を使って形にしてみましょう。</p>
-                        </div>
-                        <v-btn icon id="modal_btn" @click="dialog = false">
-                            <v-icon>mdi-pencil</v-icon>
-                        </v-btn>
-                    </div>
-                </v-card>
-            </v-dialog>
-        </div>
-        <!-- モーダルここまで -->
-
+<p>ペーパー編集</p>
         <!-- 入力エリア -->
         <v-form>
             <div class="input-area">
                 <!-- 小説入力 -->
                 <div id="paper_text">
-                    <p  v-if="isFristStoryPaper"
+                    <p
                         class="paper"
                         contenteditable="true"
                         id="story_text_input"
                     >
                         {{ PaperNovelData.text }}
                     </p>
-                    <p  v-else
-                        class="paper"
-                        contenteditable="true"
-                        id="story_text_input"
-                        placeholder="新しいペーパー"
-                    ></p>
                 </div>
             </div>
             <!-- 一時保存ボタン -->
@@ -63,7 +24,7 @@
                     }
                 }"
             >
-                <v-btn id="save" dark @click="savePaper">保存する</v-btn>
+                <v-btn id="save" dark @click="editPaper">更新する</v-btn>
             </router-link>
         </v-form>
         <!-- 入力エリアここまで -->
@@ -109,44 +70,37 @@ export default {
         //API叩いてマッチした主人公データを取得
         ...mapActions(["fetchHeroData"]),
 
-        //ペーパーノベルの情報を取得する
+        //ストーリーペーパーの情報を取得
         showNovel: function () {
             axios
                 .get("api/fetch/story_paper/" + this.$route.params.user_paper_order+ "/" + this.$route.params.story_number)
                 .then((res) => {
                     this.PaperNovelData = res.data;
-                    //最初のストーリーペーパーだったら、モーダルとファーストセンテンスを挿入する処理
-                    if(this.PaperNovelData.story_number == 1){
-                        this.isFristStoryPaper = true;
-                        this.dialog = true
-                    }
+                    console.log(res.data)
                 })
                 .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
-
-
-        //一時保存：テキストをstory_papersテーブルに保存,statusを0
-        savePaper: function () {
+        //textを更新する
+        editPaper: function () {
             //PostするオブジェクトにDOMの内容をぶちこむ
             //テキスト
             this.PaperNovelPost.text = document.getElementById(
                 "story_text_input"
             ).textContent;
 
-            //小説id
+            //user_paper_order
             this.PaperNovelPost.user_paper_order = this.$route.params.user_paper_order;
-
-            //ステータスを0(非公開)
-            this.PaperNovelPost.status = 0;
 
             // story_numberを格納
             this.PaperNovelPost.story_number = this.$route.params.story_number;
-            // ストーリーペーパーの内容をPost
+            // ストーリーペーパーの内容を更新
             axios
-                .post("api/post/story_paper", this.PaperNovelPost)
-                .then((res) => {})
+                .post("api/edit/story_paper", this.PaperNovelPost)
+                .then((res) => {
+                    console.log(res.data)
+                })
                 .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });

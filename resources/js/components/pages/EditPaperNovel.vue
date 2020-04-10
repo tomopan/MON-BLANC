@@ -28,7 +28,7 @@
                     v-if="i == 0"
                     :to="{
                         name: 'WriteTitlePaper',
-                        param: { user_paper_order: $route.params.user_paper_order },
+                        params: { user_paper_order: $route.params.user_paper_order },
                     }"
                 >
                     <p v-if="title_toggle" class="title_text">
@@ -36,7 +36,18 @@
                     </p>
                     <p v-else class="title_text">タイトルを編集</p>
                 </router-link>
-                <p v-if="i != 0" class="paper_text">{{ paper.text }}</p>
+                <router-link
+                    v-if="i != 0"
+                    :to="{
+                        name: 'EditStoryPaper',
+                        params: { 
+                            user_paper_order:$route.params.user_paper_order,
+                            story_number:paper.story_number
+                        },
+                    }"
+                >
+                <p  class="paper_text">{{ paper.text }}</p>
+                </router-link>
             </grid-item>
         </grid-layout>
 
@@ -139,7 +150,6 @@ export default {
             axios
                 .get("api/get/story_papers_edit/" + this.$route.params.user_paper_order)
                 .then((res) => {
-                    console.log(res.data);
                     this.papers = res.data;
                     this.papers.unshift({
                         text: this.PaperNovelData.title,

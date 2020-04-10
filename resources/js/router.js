@@ -13,6 +13,7 @@ import ReadFirstSentence from "./components/pages/ReadFirstSentence.vue";
 import WriteFirstSentence from "./components/pages/WriteFirstSentence.vue";
 import EditPaperNovel from "./components/pages/EditPaperNovel.vue";
 import WriteTitlePaper from "./components/pages/WriteTitlePaper.vue";
+import EditStoryPaper from "./components/pages/EditStoryPaper.vue";
 
 Vue.use(VueRouter);
 
@@ -28,7 +29,7 @@ const routes = [
         name: "Hero",
     },
     {
-        path: "/write-first-sentence/:hero_id/",
+        path: "/read-first-sentence/:hero_id/",
         component: ReadFirstSentence,
         name: "ReadFirst",
     },
@@ -43,7 +44,7 @@ const routes = [
         name: "WriteFirstSentence",
     },
     {
-        path: "/write-story-paper/:hero_id/:user_paper_order",
+        path: "/write-story-paper/:user_paper_order/:story_number",
         component: WriteStoryPaper,
         name: "WriteStoryPaper",
     },
@@ -53,9 +54,14 @@ const routes = [
         name: "EditPaperNovel",
     },
     {
-        path: "/write/title/:user_paper_order",
+        path: "/write-title/:user_paper_order",
         component: WriteTitlePaper,
         name: "WriteTitlePaper",
+    },
+    {
+        path: "/edit-story-paper/:user_paper_order/:story_number",
+        component: EditStoryPaper,
+        name: "EditStoryPaper",
     },
     {
         path: "/profile",

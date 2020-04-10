@@ -37,8 +37,10 @@ export default {
     components: {},
     data() {
         return {
-            //タイトルとテキストを格納
+            //paper_novelsテーブルにPostするデータを格納
             firstSentencePost: {},
+            //story_papersテーブルにPostするデータを格納
+            storyPaperPost:{},
             text: "",
         };
     },
@@ -63,7 +65,7 @@ export default {
                 "first_sentence"
             ).textContent;
 
-            //PostのAPIを叩く
+            //paper_novelsテーブルにPost
             axios
                 .post(
                     "api/post/firstsentence/" + this.$route.params.hero_id,
@@ -75,14 +77,15 @@ export default {
                     this.$router.push({
                         name: "WriteStoryPaper",
                         params: {
-                            hero_id: this.$route.params.hero_id,
                             user_paper_order: res.data.user_paper_order,
+                            story_number:1
                         },
                     });
                 })
                 .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
+
         },
 
         //句読点が押されたらボタンを出現させる関数
