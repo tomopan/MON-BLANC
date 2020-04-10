@@ -16,6 +16,27 @@
                     <v-icon>mdi-home</v-icon>
                 </v-btn>
             </router-link>
+                <v-btn icon>
+                    <v-icon @click="logout">mdi-logout</v-icon>
+                </v-btn>
         </v-app-bar>
     </div>
 </template>
+<script>
+export default {
+    data() {
+        return {
+        };
+    },
+    methods: {
+        logout: function() {
+            axios
+            .post("logout")
+            .then(res => {
+            location.href = "/";
+            })
+            .catch(err => console.log(err));
+        },
+        }
+    }
+    </script>
