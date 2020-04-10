@@ -66,8 +66,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     // -----------StoryPapersテーブル----------- //
 
-    //ストーリーペーパーのデータを取得
+    //paper_novel_idからストーリーペーパーのデータを取得
     Route::get('get/story_papers/{paper_novel_id}', 'Api\StoryPapersController@showPapers');
+
+    //user_paper_orderからストーリーペーパーのデータを取得
+    Route::get('get/story_papers_edit/{user_paper_order}', 'Api\StoryPapersController@showEditPapers');
 
     //ストーリーペーパーを投稿
     Route::post('post/story_paper', 'Api\StoryPapersController@save');

@@ -58,6 +58,9 @@
             <router-link
                 :to="{
                     name: 'EditPaperNovel',
+                    params: {
+                        user_paper_order:$route.params.user_paper_order
+                    }
                 }"
             >
                 <v-btn id="save" dark @click="savePaper">保存する</v-btn>

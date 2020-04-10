@@ -16,10 +16,10 @@
                     >
                         <router-link
                             :to="{
-                                name: 'Read',
+                                name: 'ReadPaper',
                                 params: {
-                                    hero_id: closeNovel.hero_id,
-                                    novel_id: closeNovel.novel_id
+                                    hero_id:closeNovel.hero_id,
+                                    paper_novel_id: closeNovel.id
                                 }
                             }"
                         >
@@ -29,7 +29,7 @@
                             ></v-img>
                             <p class="paper_text">{{ closeNovel.title }}</p>
                         </router-link>
-
+                        <v-row>
                         <v-btn
                             class="ma-2"
                             tile
@@ -37,6 +37,22 @@
                             @click="openNovel(i, closeNovel.user_paper_order)"
                             >公開する</v-btn
                         >
+                        <router-link
+                            :to="{
+                                    name: 'EditPaperNovel',
+                                    params: {
+                                        user_paper_order: closeNovel.user_paper_order
+                                    }
+                                    }"
+                                >
+                        <v-btn
+                            class="ma-2"
+                            tile
+                            outlined
+                            >編集</v-btn
+                        >
+                        </router-link>
+                        </v-row>
                     </v-card>
                 </v-row>
             </v-col>
@@ -94,6 +110,7 @@ export default {
                     console.log(res);
                     this.closePaperNovels = res.data.map(data => {
                         const obj = {};
+                        obj["id"] = data.id;
                         obj["title"] = data.title;
                         obj["hero_id"] = data.hero_id;
                         obj["novel_id"] = data.id;

@@ -16,19 +16,20 @@
                     >
                         <router-link
                             :to="{
-                                name: 'Read',
-                                params: {
-                                    hero_id: openNovel.hero_id,
-                                    novel_id: openNovel.novel_id
-                                }
-                            }"
-                        >
+                                    name: 'ReadPaper',
+                                    params: {
+                                        hero_id:openNovel.hero_id,
+                                        paper_novel_id: openNovel.id
+                                    }
+                                    }"
+                                >
                             <v-img
                                 :src="openNovel.img_url"
                                 height="170px"
                             ></v-img>
                             <p class="paper_text">{{ openNovel.title }}</p>
                         </router-link>
+                        <v-row>
                         <v-btn
                             class="ma-2"
                             tile
@@ -36,6 +37,22 @@
                             @click="closeNovel(i, openNovel.user_paper_order)"
                             >非公開にする</v-btn
                         >
+                        <router-link
+                            :to="{
+                                    name: 'EditPaperNovel',
+                                    params: {
+                                        user_paper_order: openNovel.user_paper_order
+                                    }
+                                    }"
+                                >
+                        <v-btn
+                            class="ma-2"
+                            tile
+                            outlined
+                            >編集</v-btn
+                        >
+                        </router-link>
+                        </v-row>
                     </v-card>
                 </v-row>
             </v-col>
@@ -93,6 +110,7 @@ export default {
                     console.log(res);
                     this.OpenPaperNovels = res.data.map(data => {
                         const obj = {};
+                        obj["id"] = data.id;
                         obj["title"] = data.title;
                         obj["hero_id"] = data.hero_id;
                         obj["novel_id"] = data.id;
