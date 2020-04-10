@@ -48,6 +48,20 @@ use App\StoryPaper;
 
             $paper_novel->status = 0;//ステータスを0(非公開)
             $paper_novel->save();
+
+            //story_papersにも保存
+                $paper_novel_id = PaperNovel::where('user_id','=',$userId)
+                                            ->where('user_paper_order','=',$user_paper_order)
+                                            ->select('id')
+                                            ->first();
+
+                $story_paper = new StoryPaper;
+                $story_paper->paper_novel_id = $paper_novel_id->id;
+                $story_paper->story_number = 1;
+                $story_paper->status = 0;
+                $story_paper->text = $request->first_sentence;
+                $story_paper->save();
+
             return $paper_novel;
         }
 
@@ -72,12 +86,10 @@ use App\StoryPaper;
                                         ->first();
 
             //ストーリーペーパーが何枚目か取得
-             //エピソード番号を取得
             $story_number = StoryPaper::where('paper_novel_id','=',$paper_novel->id)
                                 ->max('story_number');
             
-            //初めてなら0を代入
-            if(!$story_number) $story_number = 0;
+            
 
             $paper_novel->story_number = $story_number;
 

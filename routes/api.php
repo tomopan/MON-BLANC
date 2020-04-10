@@ -21,7 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 
-
 //ここから追記//
 // API定義
 // 認証後であれば下記ルート定義が有効になる
@@ -72,8 +71,15 @@ Route::group(['middleware' => 'auth'], function () {
     //user_paper_orderからストーリーペーパーのデータを取得
     Route::get('get/story_papers_edit/{user_paper_order}', 'Api\StoryPapersController@showEditPapers');
 
+    //user_paper_orderとstory_numberからストーリーペーパーのデータを取得(WriteStory)
+    Route::get('fetch/story_paper/{user_paper_order}/{story_number}', 'Api\StoryPapersController@fetchEditPaper');
+
     //ストーリーペーパーを投稿
     Route::post('post/story_paper', 'Api\StoryPapersController@save');
+
+    //編集ページからストーリーペーパーを更新
+    Route::post('edit/story_paper', 'Api\StoryPapersController@edit');
+
 
 
 

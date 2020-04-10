@@ -41,13 +41,25 @@ use App\User;
             $story_paper->text = $request->text;
             $story_paper->story_number = $story_number;
             $story_paper->status = $request->status;
-            $story_paper->save();
 
-            //PaperNovelsテーブルを更新
-            $novel =  PaperNovel::where('id','=',$request->paper_novel_id) 
-                        ->update(['title' => $request->title]);
+            $story_paper->save();
         }
 
+        //ストーリーペーパーを更新:api/edit/story_paper
+        public function edit(Request $request)
+        {
+            //ペーパーノベルidを取得
+            $paper_novel_id = PaperNovel::where('user_id','=',Auth::id())
+                        ->where('user_paper_order','=',$request->user_paper_order)
+                        ->select('id')
+                        ->first();
+
+            // Postするデータを格納
+            $story_paper = StoryPaper::where('paper_novel_id','=',$paper_novel_id->id)
+                            ->where('story_number','=',$request->story_number)
+                            ->update(['text' => $request->text]);
+            return $story_paper;
+        }
 
 
         // 編集ページに表示するペーパーを取得:api/get/story_papers_edit/
@@ -64,6 +76,22 @@ use App\User;
                                 ->get();
 
             return response()->json($story_papers);
+        }
+
+        // 編集ページに表示するペーパーを取得:api/get/story_papers_edit/
+        public function fetchEditPaper($user_paper_order,$story_number)
+        {
+            //ペーパーノベルidを取得
+            $paper_novel_id = PaperNovel::where('user_id','=',Auth::id())
+                        ->where('user_paper_order','=',$user_paper_order)
+                        ->select('id')
+                        ->first();
+            //ペーパーを取得
+            $story_paper =  StoryPaper::where('paper_novel_id','=',$paper_novel_id->id)
+                                ->where('story_number','=',$story_number)
+                                ->first();
+
+            return response()->json($story_paper);
         }
 
         // ペーパーノベルidにマッチしたペーパーを取得:api/get/story_papers/
