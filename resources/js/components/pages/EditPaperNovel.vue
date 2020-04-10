@@ -56,8 +56,8 @@
             :to="{
                 name: 'WriteStoryPaper',
                 params: {
-                    hero_id: PaperNovelData.hero_id,
                     user_paper_order: this.$route.params.user_paper_order,
+                    story_number:story_number
                 },
             }"
         >
@@ -125,6 +125,7 @@ export default {
             papers: [],
             //titleの判定
             title_toggle: false,
+            story_number:""
         };
     },
 
@@ -167,7 +168,7 @@ export default {
                             e.h = 5;
                         }
                     });
-                    console.log(this.papers);
+                    this.story_number = this.papers.length + 1
                 })
                 .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
