@@ -18,3 +18,9 @@ export default {
     }
 };
 </script>
+
+<style>
+main{
+    color:hotpink;
+}
+</style>

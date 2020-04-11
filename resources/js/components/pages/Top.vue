@@ -22,7 +22,7 @@
                                             width="300px"
                                         >
                                             <v-card-title
-                                                class="title white--text"
+                                                class="title"
                                             >
                                                 <v-row
                                                     class="fill-height flex-column"
@@ -30,7 +30,6 @@
                                                 >
                                                     <p
                                                         class="mt-4 subheading text-left"
-                                                        style="color:black"
                                                     >
                                                         {{ hero.hero_name }}
                                                         <br />
