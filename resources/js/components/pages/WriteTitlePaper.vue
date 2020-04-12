@@ -111,6 +111,10 @@ export default {
     box-sizing: border-box;
 }
 
+*:focus {
+outline: none;
+}
+
 .paper {
     display: block;
     margin: auto;

@@ -18,12 +18,12 @@
                                 height="400px"
                             >
                             </v-img>
-                              <p id="modal_text">
-                                  好きな著者の第一文を選びましょう。
-                                  <br>
-                                  <br>
-                                  スワイプで、それぞれ別の著者が書いた第一文を見ることができます。
-                              </p>
+                            <p id="modal_text">
+                                好きな著者の第一文を選びましょう。
+                                <br>
+                                <br>
+                                スワイプで、それぞれ別の著者が書いた第一文を見ることができます。
+                            </p>
                             <v-btn icon id="modal_btn" @click="dialog = false">
                                 <v-icon x-large dark>mdi-transfer-down</v-icon>
                             </v-btn>
@@ -113,6 +113,10 @@ export default {
 </script>
 
 <style scoped>
+*:focus {
+outline: none;
+}
+
 /* モーダル */
 #modal {
     margin: auto;
@@ -130,7 +134,7 @@ export default {
   margin:0;
   padding:0;
   font-size: 20px;
-
+  color: #333;
   }
   #modal_img{
     margin: auto;
@@ -142,10 +146,18 @@ export default {
 }
 
 /* テキスト */
+*:focus {
+outline: none;
+}
+
 .paper_text {
     writing-mode: vertical-rl;
     margin: auto;
-    color: black;
+    color: #333;
     font-size: 20px;
+}
+
+a{
+    text-decoration: none;
 }
 </style>

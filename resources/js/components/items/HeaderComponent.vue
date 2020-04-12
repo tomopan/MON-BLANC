@@ -39,4 +39,15 @@ export default {
         },
         }
     }
-    </script>
+</script>
+<style scoped>
+*:focus {
+outline: none;
+}
+
+.v-btn{
+    text-decoration: none;
+}
+
+
+</style>
