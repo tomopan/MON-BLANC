@@ -11,7 +11,7 @@
         </div>
         <!-- 主人公のテキスト -->
         <div class="hero_text">
-            <div style="color: black; font-size: 20px;">
+            <div style="font-size: 20px;">
                 <p>
                     Name：
                     {{ HeroData.hero_name }}
@@ -82,11 +82,19 @@ export default {
 <style scoped>
 
 /* Gridレイアウトで要素を配置 */
+*:focus {
+outline: none;
+}
+
+a:hover{
+    text-decoration: none;
+}
 
 #container {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
+    color: #333;
 }
 .hero_img {
     grid-row: 1 / 5;
@@ -107,5 +115,8 @@ export default {
     grid-column: 1 / 3;
     text-align: right;
     margin-right: 10%;
+}
+.v-btn{
+    color: #333;
 }
 </style>

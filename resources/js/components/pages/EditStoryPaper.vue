@@ -132,6 +132,18 @@ export default {
     box-sizing: border-box;
 }
 
+*:focus {
+outline: none;
+}
+
+a{
+    color: #333;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
 .paper {
     display: block;
     /* width: 10%; */

@@ -142,10 +142,19 @@ export default {
 </script>
 
 <style scoped>
+*:focus {
+outline: none;
+}
+
 .novel_card {
     text-align: center;
 }
-.paper_text {
-    color: black;
+
+.v-btn{
+    color: #333;
+}
+
+p{
+    color: #333;
 }
 </style>

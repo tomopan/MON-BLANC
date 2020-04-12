@@ -85,8 +85,17 @@ export default {
 </script>
 
 <style scoped>
+*:focus {
+outline: none;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
 .v-card {
     transition: opacity 0.4s ease-in-out;
+    color: #333333;
 }
 
 .v-card:not(.on-hover) {

@@ -14,12 +14,12 @@
         <v-tabs background-color="transparent" color="basil" grow>
             <router-link :to="{ name: 'PaperNovelOpened' }">
                 <v-tab>
-                    <p style="color: black;">公開中</p>
+                    <p>公開中</p>
                 </v-tab>
             </router-link>
             <router-link :to="{ name: 'PaperNovelClosed' }">
                 <v-tab>
-                    <p style="color: black;">非公開</p>
+                    <p>非公開</p>
                 </v-tab>
             </router-link>
         </v-tabs>
@@ -55,4 +55,15 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+*:focus {
+outline: none;
+}
+
+p{
+    color: #333;
+}
+a:hover{
+    text-decoration: none;
+}
+</style>

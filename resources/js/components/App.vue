@@ -20,7 +20,8 @@ export default {
 </script>
 
 <style>
+
 main{
-    color:hotpink;
+    color:#333;
 }
 </style>

@@ -156,6 +156,10 @@ export default {
 </script>
 
 <style scoped>
+*:focus {
+outline: none;
+}
+
 /* モーダル */
 #modal_text {
     writing-mode: vertical-rl;

@@ -40,7 +40,7 @@
                     v-if="i != 0"
                     :to="{
                         name: 'EditStoryPaper',
-                        params: { 
+                        params: {
                             user_paper_order:$route.params.user_paper_order,
                             story_number:paper.story_number
                         },
@@ -199,6 +199,10 @@ export default {
 </script>
 
 <style scoped>
+*:focus {
+outline: none;
+}
+
 .paper_text {
     writing-mode: vertical-rl;
     margin: auto;
@@ -220,4 +224,13 @@ export default {
 .title_paper {
     border: 3px solid;
 }
+
+a,p{
+    color: #333;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
 </style>

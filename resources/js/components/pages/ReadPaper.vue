@@ -62,6 +62,10 @@ export default {
 </script>
 
 <style scoped>
+*:focus {
+outline: none;
+}
+
 .paper {
     margin: auto;
     padding-top: 50px;
