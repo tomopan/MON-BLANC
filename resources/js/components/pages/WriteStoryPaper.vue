@@ -36,6 +36,7 @@
 
         <!-- 入力エリア -->
         <v-form>
+                {{charaCount}}文字{{lineCount}}行
             <div class="input-area" >
                 <!-- 小説入力 -->
                 <div id="paper_text">
@@ -88,6 +89,8 @@ export default {
             PaperNovelPost: {},
             //最初か追加かを判定
             isFristStoryPaper:false,
+            charaCount:"",
+            lineCount:"",
             //モーダルの開閉
             dialog:false
         };
@@ -170,44 +173,46 @@ export default {
             const observer = new MutationObserver((records) => {
                 // 変化が発生したときの処理を記述
                 let p = document.getElementById("story_text_input");
+                //文字数をdataに格納
                 let text = p.textContent;
-                //32文字以上で改行処理をいれる
-                if (text.length == 5) {
-                    console.log("5文字！")
-                };
+                this.charaCount = text.length;
+
+                //行数をdataに格納
+                const tBox = document.getElementById("story_text_input");
+                this.lineCount = tBox.childElementCount;
             });
             observer.observe(target, {
                 // オプションを指定
                 characterData: true,
-                attributes: true,
                 childList: true,
                 subtree: true,
             });
-            /* contenteditableの文字列の長さを規定以上にすると背景を赤くする */
-            // setInterval(function() {
-            //     //入力された文字を配列に格納
-            //     this.PaperNovelPost.text = document.getElementById(
-            //         "story_text_input"
-            //     ).textContent;
-            //     console.log(this.PaperNovelPost.text);
-
-            //     //32文字以上かを判定
-            //     // this.PaperNovelPost.text.forEach(function (data, i) {
-            //     //     var val = $(data).text();//切り取り対象テキスト取得
-            //     //     var fullLength = $.mb_strlen(val);//文字全長を取得
-            //     //     //制限より文字数が多ければ背景を赤くする
-            //     //     if (fullLength > 5 && ! $(data).hasClass('max-length-over')) {
-            //     //         $(data).addClass('max-length-over');
-            //     //     }else if( fullLength <= 5 && $(data).hasClass('max-length-over') ){
-            //     //         $(data).removeClass('max-length-over');
-            //     //     }
-            //     // });
-            // }, 0);
+            document.onselectionchange = () => {
+                const range = window.getSelection().getRangeAt(0)
+                const clone = range.cloneRange()
+                const fixedPosition = range.endOffset
+                // 末尾の文字列を選択した時はダミーテキストを追加して選択範囲を拡大する
+                if (fixedPosition + 1 > range.endContainer.length) {
+                const dummy = document.createTextNode('&#8203;')
+                clone.insertNode(dummy)
+                clone.selectNode(dummy)
+                const rect = clone.getBoundingClientRect();
+                console.log(rect);
+                dummy.parentNode.removeChild(dummy)
+                } else {
+                clone.setStart(range.endContainer, fixedPosition);
+                clone.setEnd(range.endContainer, fixedPosition + 1);
+                const rect = clone.getBoundingClientRect();
+                console.log(rect);
+                }
+                clone.detach()
+                }
         },
 
         //17行で制限
         stopLine:function(){
             const tBox = document.getElementById("story_text_input");
+            this.lineCount = tBox.childElementCount;
             //エンターキーを無効にする
             document.addEventListener('keydown', function(e){
                 if (tBox.childElementCount == 17 && e.keyCode === 13) {
@@ -253,7 +258,7 @@ outline: none;
     display: block;
     /* width: 10%; */
     margin: auto;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     /* padding: 40px; */
     -webkit-writing-mode: vertical-rl;
     -ms-writing-mode: tb-rl;
@@ -274,7 +279,7 @@ outline: none;
 .input-area {
     margin: 3%;
     padding-top: 50px;
-    height: 600px;
+    height: 700px;
     display: grid;
     grid-template-columns: 150px 1fr;
     border: 1px solid #000000;
@@ -295,11 +300,13 @@ outline: none;
     /* grid-template-columns: 150px 1fr; */
 }
 #story_text_input > div::before {
-    content: counter(lineno);
+    /* content: counter(lineno); */
 }
 
 #story_text_input > div{
-    counter-increment: lineno;
+    /* counter-increment: lineno; */
+    height: 640px;
+    font-size: 20px;
 }
 
 #story_text_input {
