@@ -99,7 +99,6 @@ export default {
                 let btn = document.getElementById("save");
                 if (text.slice(-1) == "。") save.style.display = "";
                 else save.style.display = "none";
-                // console.log(text.slice(-1));
             });
             observer.observe(target, {
                 // オプションを指定

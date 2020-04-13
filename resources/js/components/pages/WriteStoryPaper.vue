@@ -36,22 +36,23 @@
 
         <!-- 入力エリア -->
         <v-form>
-            <div class="input-area">
+            <div class="input-area" >
                 <!-- 小説入力 -->
                 <div id="paper_text">
-                    <p  v-if="isFristStoryPaper"
+                    <div v-if="isFristStoryPaper"
                         class="paper"
                         contenteditable="true"
                         id="story_text_input"
                     >
-                        {{ PaperNovelData.text }}
-                    </p>
-                    <p  v-else
+                    <div>{{ PaperNovelData.text }}</div>
+                    </div>
+
+                    <div v-else
                         class="paper"
                         contenteditable="true"
                         id="story_text_input"
                         placeholder="新しいペーパー"
-                    ></p>
+                    ></div>
                 </div>
             </div>
             <!-- 一時保存ボタン -->
@@ -66,7 +67,8 @@
                 <v-btn id="save" dark @click="savePaper">保存する</v-btn>
             </router-link>
         </v-form>
-        <!-- 入力エリアここまで -->
+        <!-- 入力エリアここまで --> 
+        
     </div>
 </template>
 
@@ -100,6 +102,14 @@ export default {
 
         //ペーパーノベルのデータを取得
         this.showNovel();
+
+    },
+    beforeMount(){
+
+    },
+    mounted(){
+        this.changeLine();
+        this.stopLine();
     },
 
     computed: {
@@ -118,14 +128,13 @@ export default {
                     //最初のストーリーペーパーだったら、モーダルとファーストセンテンスを挿入する処理
                     if(this.PaperNovelData.story_number == 1){
                         this.isFristStoryPaper = true;
-                        this.dialog = true
+                        this.dialog = false
                     }
                 })
                 .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
-
 
         //一時保存：テキストをstory_papersテーブルに保存,statusを0
         savePaper: function () {
@@ -151,8 +160,66 @@ export default {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
+
+        //32文字以上入力したら改行処理
+        changeLine:function(){
+            //要素のIDを取得
+            const target = document.getElementById("story_text_input");
+
+            //DOMの変更を監視
+            const observer = new MutationObserver((records) => {
+                // 変化が発生したときの処理を記述
+                let p = document.getElementById("story_text_input");
+                let text = p.textContent;
+                //32文字以上で改行処理をいれる
+                if (text.length == 5) {
+                    console.log("5文字！")
+                };
+            });
+            observer.observe(target, {
+                // オプションを指定
+                characterData: true,
+                attributes: true,
+                childList: true,
+                subtree: true,
+            });
+            /* contenteditableの文字列の長さを規定以上にすると背景を赤くする */
+            // setInterval(function() {
+            //     //入力された文字を配列に格納
+            //     this.PaperNovelPost.text = document.getElementById(
+            //         "story_text_input"
+            //     ).textContent;
+            //     console.log(this.PaperNovelPost.text);
+
+            //     //32文字以上かを判定
+            //     // this.PaperNovelPost.text.forEach(function (data, i) {
+            //     //     var val = $(data).text();//切り取り対象テキスト取得
+            //     //     var fullLength = $.mb_strlen(val);//文字全長を取得
+            //     //     //制限より文字数が多ければ背景を赤くする
+            //     //     if (fullLength > 5 && ! $(data).hasClass('max-length-over')) {
+            //     //         $(data).addClass('max-length-over');
+            //     //     }else if( fullLength <= 5 && $(data).hasClass('max-length-over') ){
+            //     //         $(data).removeClass('max-length-over');
+            //     //     }
+            //     // });
+            // }, 0);
+        },
+
+        //17行で制限
+        stopLine:function(){
+            const tBox = document.getElementById("story_text_input");
+            //エンターキーを無効にする
+            document.addEventListener('keydown', function(e){
+                if (tBox.childElementCount == 17 && e.keyCode === 13) {
+                    e.preventDefault();
+                }else if(tBox.childElementCount == 17 && e.which === 13){
+                    e.preventDefault();
+                }
+            });
+        }
     },
 };
+
 </script>
 
 <style scoped>
@@ -227,6 +294,14 @@ outline: none;
     /* display: grid; */
     /* grid-template-columns: 150px 1fr; */
 }
+#story_text_input > div::before {
+    content: counter(lineno);
+}
+
+#story_text_input > div{
+    counter-increment: lineno;
+}
+
 #story_text_input {
     margin: 0 50px 0 auto;
     /* border: 1px solid #000000; */
