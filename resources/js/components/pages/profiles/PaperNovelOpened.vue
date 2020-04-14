@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="font">
         <v-row>
             <v-col cols="12">
                 <v-row
@@ -144,6 +144,10 @@ export default {
 <style scoped>
 *:focus {
 outline: none;
+}
+
+.font{
+    font-family: 'ヒラギノ明朝 ProN','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
 }
 
 .novel_card {

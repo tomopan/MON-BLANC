@@ -95,6 +95,8 @@ a:hover{
     grid-template-rows: 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     color: #333;
+    font-family: 'Lao MN','serif';
+
 }
 .hero_img {
     grid-row: 1 / 5;
@@ -118,5 +120,6 @@ a:hover{
 }
 .v-btn{
     color: #333;
+    font-family: 'ヒラギノ明朝 ProN','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
 }
 </style>

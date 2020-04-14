@@ -1,14 +1,14 @@
 <template>
     <div>
         <!-- 主人公の名前を表示 -->
-        <p>{{ HeroData.hero_name }}</p>
+        <p class="heroName">{{ HeroData.hero_name }}</p>
 
         <!-- タイトル入力 -->
         <v-form>
             <p
                 class="paper"
                 contenteditable="true"
-                placeholder="最初の一文を書いてください"
+                placeholder="最初の一文を書いてください。"
                 id="first_sentence"
             >{{ text }}</p>
             <br />
@@ -132,6 +132,13 @@ export default {
 outline: none;
 }
 
+.heroName{
+    font-family: 'Lao MN','serif';
+}
+
+form{
+    font-family: 'ヒラギノ明朝 ProN','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
+}
 
 .paper {
     display: block;
