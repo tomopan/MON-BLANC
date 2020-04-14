@@ -1,11 +1,13 @@
 <template>
     <v-container>
         <h1>『{{Title}}』</h1>
-
+        <p>選択中ストーリー番号：{{markedStoryId}}</p>
+        <p>選択中テキスト：{{markedText}}</p>
+        <v-btn id="save" dark @click="saveMarkText">マークする</v-btn>
         <v-col v-for="(story, i) in StoryPapersData" :key="i">
-            <div class="paper">
-                <div id="episode_text">
-                    <p class="episode_text">
+            <div class="paper"  @mouseup="getMarkText(story.id)">
+                <div class="story_area">
+                    <p class="story_text">
                         {{ story.text }}
                     </p>
                 </div>
@@ -18,6 +20,7 @@
 <script>
 
 
+
 export default {
     components: {
 
@@ -26,12 +29,19 @@ export default {
         return {
             StoryPapersData: [],
             Title:"",
+            //選択したテキストを格納
+            markedText:"",
+            markedStoryId:"",
+            postMarkedText:{},
         };
     },
 
     created() {
         this.showTitle();
         this.showStoryPapers();
+    },
+    mounted(){
+
     },
     methods: {
         showStoryPapers: function() {
@@ -56,9 +66,37 @@ export default {
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
                 });
+        },
+        //マーカー機能
+        getMarkText:function(story_paper_id){
+            //要素のIDを取得
+            const story_area = document.getElementsByClassName("story_area");
+                //テキストを代入
+                const selectedText = window.getSelection().toString();
+                this.markedText = selectedText;
+                //ストーリー番号を代入
+                this.markedStoryId = story_paper_id;
+        },
+        saveMarkText:function(){
+            //POSTするデータを格納
+                //小説id
+                this.postMarkedText.paper_novel_id = this.$route.params.paper_novel_id;
+                //ストーリーid
+                this.postMarkedText.story_paper_id = this.markedStoryId;
+                //テキスト
+                this.postMarkedText.text = this.markedText;
+
+            axios
+                .post("api/post/mark_text",this.postMarkedText)
+                .then(res => {
+                })
+                .catch(err => {
+                    console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
+                });
         }
     }
 };
+
 </script>
 
 <style scoped>
@@ -74,7 +112,7 @@ outline: none;
     border: 1px solid #000000;
 }
 
-.episode_text {
+.story_text {
     margin: 0 10px 0 auto;
     -webkit-writing-mode: vertical-rl;
     -ms-writing-mode: tb-rl;
