@@ -102,7 +102,13 @@ a:hover{
     opacity: 0.8;
 }
 
+p{
+    font-family: 'Lao MN','serif';
+}
+
 .show-btns {
     color: rgba(255, 255, 255, 1) !important;
 }
+
+
 </style>
