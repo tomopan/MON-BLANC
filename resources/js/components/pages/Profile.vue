@@ -22,6 +22,11 @@
                     <p>非公開</p>
                 </v-tab>
             </router-link>
+            <router-link :to="{ name: 'MarkedText' }">
+                <v-tab>
+                    <p>マーカー</p>
+                </v-tab>
+            </router-link>
         </v-tabs>
         <router-view></router-view>
 

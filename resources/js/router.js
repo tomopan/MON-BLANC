@@ -9,6 +9,7 @@ import WriteStoryPaper from "./components/pages/WriteStoryPaper.vue";
 import Profile from "./components/pages/Profile.vue";
 import PaperNovelOpened from "./components/pages/profiles/PaperNovelOpened.vue";
 import PaperNovelClosed from "./components/pages/profiles/PaperNovelClosed.vue";
+import MarkedText from "./components/pages/profiles/MarkedText.vue";
 import ReadFirstSentence from "./components/pages/ReadFirstSentence.vue";
 import WriteFirstSentence from "./components/pages/WriteFirstSentence.vue";
 import EditPaperNovel from "./components/pages/EditPaperNovel.vue";
@@ -78,6 +79,11 @@ const routes = [
                 path: "/profile/PaperNovelClosed",
                 component: PaperNovelClosed,
                 name: "PaperNovelClosed",
+            },
+            {
+                path: "/profile/marker",
+                component: MarkedText,
+                name: "MarkedText",
             },
         ],
     },
