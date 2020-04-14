@@ -114,7 +114,6 @@ export default {
         this.changeLine();
         this.stopLine();
     },
-
     computed: {
         ...mapGetters(["HeroData"]),
     },

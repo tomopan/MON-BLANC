@@ -82,7 +82,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
+    // -----------Markersテーブル----------- //
 
+    //マークしたテキストを保存する
+    Route::post('post/mark_text', 'Api\MarkersController@save');
+
+    //マークしたテキストを取得する
+    Route::get('get/mark_texts', 'Api\MarkersController@show');
 
 
 
