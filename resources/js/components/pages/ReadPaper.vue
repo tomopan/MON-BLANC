@@ -1,6 +1,7 @@
 <template>
     <v-container>
         <h1>『{{Title}}』</h1>
+        <p>マークされた数：{{MarkCount}}</p>
         <p>選択中ストーリー番号：{{markedStoryId}}</p>
         <p>選択中テキスト：{{markedText}}</p>
         <v-btn id="save" dark @click="saveMarkText">マークする</v-btn>
@@ -29,6 +30,7 @@ export default {
         return {
             StoryPapersData: [],
             Title:"",
+            MarkCount:"",
             //選択したテキストを格納
             markedText:"",
             markedStoryId:"",
@@ -39,6 +41,7 @@ export default {
     created() {
         this.showTitle();
         this.showStoryPapers();
+        this.showMarkCount();
     },
     mounted(){
 
@@ -89,6 +92,18 @@ export default {
             axios
                 .post("api/post/mark_text",this.postMarkedText)
                 .then(res => {
+                })
+                .catch(err => {
+                    console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
+                });
+        },
+        showMarkCount:function(){
+            //マークされている数を取得して格納
+            axios
+                .get("api/get/mark_count/" + this.$route.params.paper_novel_id)
+                .then(res => {
+                    console.log(res.data)
+                    this.MarkCount = res.data
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜

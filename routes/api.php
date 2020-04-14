@@ -90,6 +90,9 @@ Route::group(['middleware' => 'auth'], function () {
     //マークしたテキストを取得する
     Route::get('get/mark_texts', 'Api\MarkersController@show');
 
+    //マークされた数を取得する
+    Route::get('get/mark_count/{paper_novel_id}', 'Api\MarkersController@showCount');
+
 
 
 });
