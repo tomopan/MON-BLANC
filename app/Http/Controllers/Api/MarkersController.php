@@ -55,8 +55,15 @@ use App\StoryPaper;
                         ->where('m.user_id','=',Auth::id())
                         ->select('m.paper_novel_id','m.story_paper_id','m.text','p.hero_id')
                         ->get();
-
             return response()->json($mark_texts);
+        }
+
+        //マークされている数を取得:get/mark_count
+        public function showCount($paper_novel_id)
+        {
+            $mark_count = Marker::where('paper_novel_id','=',$paper_novel_id)
+                        ->count();
+            return response()->json($mark_count);
         }
     }
     //=======================================================================
