@@ -50,9 +50,11 @@ use App\StoryPaper;
         //マークしたテキストデータを取得:get/mark_texts
         public function show()
         {
-            $mark_texts = Marker::where('user_id','=',Auth::id())
-                    ->select('paper_novel_id','story_paper_id','text')
-                    ->get();
+            $mark_texts = DB::table('paper_novels as p')
+                        ->join('markers as m','p.id','=','m.paper_novel_id')
+                        ->where('m.user_id','=',Auth::id())
+                        ->select('m.paper_novel_id','m.story_paper_id','m.text','p.hero_id')
+                        ->get();
 
             return response()->json($mark_texts);
         }
