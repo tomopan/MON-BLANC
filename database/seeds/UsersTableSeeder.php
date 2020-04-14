@@ -17,6 +17,8 @@ class UsersTableSeeder extends Seeder
             [
             'name' => '佐藤智哉',
             'email' => 'user1@gmail.com',
+            'user_name' => 'tomopan',
+            'bio' => '将来の夢はムキムキな人です',
             'follow_count' => 33,
             'follower_count' => 66,
             'password' => Hash::make('11111111'),
@@ -29,6 +31,8 @@ class UsersTableSeeder extends Seeder
             [
             'name' => '青木遊',
             'email' => 'user2@gmail.com',
+            'user_name' => 'yoo',
+            'bio' => '将来の夢は小説家です',
             'follow_count' => 99,
             'follower_count' => 123,
             'password' => Hash::make('22222222'),
