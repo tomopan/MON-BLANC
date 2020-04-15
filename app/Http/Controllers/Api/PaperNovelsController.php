@@ -160,6 +160,18 @@ use App\StoryPaper;
             return $title;
             // return response()->json($novels);
         }
+
+        //小説の削除
+        public function destroy($paper_novel_id){
+            //paper_novelsテーブルから削除
+            $paper_novel = PaperNovel::where('id','=',$paper_novel_id)
+                            ->delete();
+
+            //story_papersテーブルから削除
+            $story_papers = StoryPaper::where('paper_novel_id','=',$paper_novel_id)
+                            ->delete();
+
+        }
     }
     //=======================================================================
     

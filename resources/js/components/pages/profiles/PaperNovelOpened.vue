@@ -52,11 +52,33 @@
                             >編集</v-btn
                         >
                         </router-link>
+                        <v-btn
+                            class="ma-2"
+                            tile
+                            outlined
+                            @click.native.stop="dialog = true"
+                            >削除</v-btn
+                        >
+                        <!-- 削除のモーダル -->
+                        <v-layout row justify-center>
+                            <v-dialog v-model="dialog" max-width="290">
+                            <v-card>
+                                <v-card-title class="headline">削除しますか?</v-card-title>
+                                <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn  @click.native="dialog = false">戻る</v-btn>
+                                <v-btn  @click="destroy(i,openNovel.id)">削除する</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                            </v-dialog>
+                        </v-layout>
+                        <!-- モーダルここまで -->
                         </v-row>
                     </v-card>
                 </v-row>
             </v-col>
         </v-row>
+
     </div>
 </template>
 
@@ -70,6 +92,7 @@ export default {
         return {
             //公開中のペーパーノベルのデータを格納
             OpenPaperNovels:[],
+            dialog:false,
             // グリッド用
             alignmentsAvailable: [
                 "start",
@@ -136,7 +159,19 @@ export default {
                 });
             // 配列からも削除してデータバインディング
             this.OpenPaperNovels.splice(i, 1);
-        }
+        },
+        //削除ボタン
+        destroy(i,paper_novel_id) {
+            axios
+                .post("api/destroy/paper_novel/" + paper_novel_id)
+                .then(res => {
+                })
+                .catch(err => {
+                    console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
+                });
+            // 配列からも削除してデータバインディング
+            this.OpenPaperNovels.splice(i, 1);
+        },
     }
 };
 </script>
