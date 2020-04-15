@@ -65,6 +65,11 @@ Route::group(['middleware' => 'auth'], function () {
     //小説のタイトルを変更
     Route::post('update/paper_title/{user_paper_order}', 'Api\PaperNovelsController@postTitle');
 
+    //小説を削除
+    Route::post('destroy/paper_novel/{paper_novel_id}', 'Api\PaperNovelsController@destroy');
+
+
+
     // -----------StoryPapersテーブル----------- //
 
     //paper_novel_idからストーリーペーパーのデータを取得
