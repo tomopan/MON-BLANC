@@ -65,23 +65,23 @@ const routes = [
         name: "EditStoryPaper",
     },
     {
-        path: "/profile",
+        path: "/profile/:user_name",
         component: Profile,
         name: "Profile",
-        redirect: "/profile/PaperNovelOpened",
+        redirect: "/profile/:user_name/PaperNovelOpened",
         children: [
             {
-                path: "/profile/PaperNovelOpened",
+                path: "/profile/:user_name/PaperNovelOpened",
                 component: PaperNovelOpened,
                 name: "PaperNovelOpened",
             },
             {
-                path: "/profile/PaperNovelClosed",
+                path: "/profile/:user_name/PaperNovelClosed",
                 component: PaperNovelClosed,
                 name: "PaperNovelClosed",
             },
             {
-                path: "/profile/marker",
+                path: "/profile/:user_name/marker",
                 component: MarkedText,
                 name: "MarkedText",
             },

@@ -27,7 +27,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'auth'], function () {
 
     // -----------Usersテーブル----------- //
+    //ログイン中のユーザーデータを取得
     Route::get('get/user', 'Api\UsersController@show');
+
+    //プロフィールを取得
+    Route::get('get/user_profile/{user_name}', 'Api\UsersController@showProfile');
 
     Route::post('edit/user', 'Api\UsersController@edit');
 
@@ -45,7 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('fetch/paper_novel_titile/{paper_novel_id}', 'Api\PaperNovelsController@fetchTitle');
 
     //プロフィールで公開中の小説を取得
-    Route::get('get/open_paper_novels', 'Api\PaperNovelsController@showOpenPaperNovels');
+    Route::get('get/open_paper_novels/{user_name}', 'Api\PaperNovelsController@showOpenPaperNovels');
 
     //プロフィールで非公開の小説を取得
     Route::get('get/close_paper_novels', 'Api\PaperNovelsController@showClosePaperNovels');

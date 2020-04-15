@@ -29,7 +29,7 @@
                             ></v-img>
                             <p class="paper_text">{{ openNovel.title }}</p>
                         </router-link>
-                        <v-row>
+                        <v-row v-if="loginUserName == $route.params.user_name">
                         <v-btn
                             class="ma-2"
                             tile
@@ -85,8 +85,11 @@
 <!-- 以下にscript/cssを記述 -->
 <script>
 export default {
-    components: {
-        //執筆中の小説のエピソード名を格納
+    props:{
+        //ログイン中のuser_nameをもらう
+        'loginUserName':{
+            type:String
+        }
     },
     data() {
         return {
@@ -114,12 +117,12 @@ export default {
         };
     },
     watch: {
-    '$route' (to, from) {
-      // ルートの変更の検知
-      if (to.path !== from.path) {
-        this.showNovelsOpened();
-      }
-    },
+      '$route' (to, from) {
+        // ルートの変更の検知
+            if (to.path !== from.path) {
+                this.showNovelsOpened();
+            }
+        },
     },
     created() {
         this.showNovelsOpened();
@@ -128,9 +131,8 @@ export default {
         //ペーパーノベルを取得
         showNovelsOpened: function() {
             axios
-                .get("api/get/open_paper_novels")
+                .get("api/get/open_paper_novels/" + this.$route.params.user_name)
                 .then(res => {
-                    console.log(res);
                     this.OpenPaperNovels = res.data.map(data => {
                         const obj = {};
                         obj["id"] = data.id;
