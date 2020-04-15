@@ -29,6 +29,8 @@ Route::group(['middleware' => 'auth'], function () {
     // -----------Usersテーブル----------- //
     Route::get('get/user', 'Api\UsersController@show');
 
+    Route::post('edit/user', 'Api\UsersController@edit');
+
 
     // -----------Heroesテーブル----------- //
     Route::get('get/hero', 'Api\HeroesController@show');

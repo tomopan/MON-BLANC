@@ -25,4 +25,16 @@ class UsersController extends Controller
         return response()->json($userData);
     }
 
+    //プロフィールを編集して更新
+    public function edit(Request $request)
+    {           
+        $user = User::find(Auth::id());
+        $user->name     = $request->name;
+        $user->user_name     = $request->user_name;
+        $user->bio     = $request->bio;
+
+        $user->save();
+
+    }
+
 }
