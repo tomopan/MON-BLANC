@@ -99,19 +99,26 @@ use App\StoryPaper;
         //$user_paper_orderにマッチした小説のデータをひとつだけ取得:api/fetch/paper_novel_title/
         public function fetchTitle($paper_novel_id)
         {
-            $paper_novel_title = PaperNovel::where('id','=',$paper_novel_id)
-                                        ->select('title')
-                                        ->first();
+            $paper_novel_title = DB::table('paper_novels as p')
+                                ->join('users as u','u.id','=','p.user_id')
+                                ->where('p.id','=',$paper_novel_id)
+                                ->select('p.title','u.user_name','u.name')
+                                ->first();
 
             return response()->json($paper_novel_title);
         }
 
         //プロフィールページで公開中の小説のデータ取得
-        public function showOpenPaperNovels()
+        public function showOpenPaperNovels($user_name)
         {
+            //ユーザーidを取得
+            $user_id = User::where('user_name','=',$user_name)
+                        ->select('id')
+                        ->first();
+
             $paper_novels =DB::table('paper_novels as n')
                         ->join('heroes as h','h.id','=','n.hero_id')
-                        ->where('n.user_id','=', Auth::id())
+                        ->where('n.user_id','=', $user_id->id)
                         ->where('n.status',1)
                         ->select('n.id','n.title','n.user_id','n.status','n.hero_id','h.img_url','n.user_paper_order')
                         ->orderBy('n.user_paper_order')

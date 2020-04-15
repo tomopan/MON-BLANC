@@ -1,6 +1,19 @@
 <template>
     <v-container>
-        <h1>『{{Title}}』</h1>
+        <v-row>
+            <h1>『{{Title}}』</h1>
+            <p>作者:</p>
+            <router-link
+                :to="{
+                        name: 'Profile',
+                        params: {
+                            user_name:WriterData.user_name
+                        }
+                        }"
+            >
+            {{WriterData.name}}
+            </router-link>
+        </v-row>
         <p>マークされた数：{{MarkCount}}</p>
         <p>選択中ストーリー番号：{{markedStoryId}}</p>
         <p>選択中テキスト：{{markedText}}</p>
@@ -28,8 +41,12 @@ export default {
     },
     data() {
         return {
+            //小説のデータ
             StoryPapersData: [],
+            //タイトル
             Title:"",
+            //作者のデータ
+            WriterData:{},
             MarkCount:"",
             //選択したテキストを格納
             markedText:"",
@@ -65,6 +82,10 @@ export default {
                 .get("api/fetch/paper_novel_titile/" + this.$route.params.paper_novel_id)
                 .then(res => {
                     this.Title = res.data.title;
+                    this.WriterData.name = res.data.name;
+                    this.WriterData.user_name = res.data.user_name;
+
+                    console.log(res.data)
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜

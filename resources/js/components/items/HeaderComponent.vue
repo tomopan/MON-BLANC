@@ -11,7 +11,7 @@
             <v-spacer></v-spacer>
 
             <!-- マイページ -->
-            <router-link :to="{ name: 'Profile' }">
+            <router-link :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }">
                 <v-btn icon>
                     <v-icon>mdi-home</v-icon>
                 </v-btn>
@@ -23,10 +23,21 @@
     </div>
 </template>
 <script>
+// インポート
+import { mapActions, mapGetters } from "vuex";
+
+
 export default {
+    
     data() {
         return {
         };
+    },
+    created(){
+        this.getLoginUserData();
+    },
+    computed: {
+    ...mapGetters(["loginUser"]),
     },
     methods: {
         logout: function() {
@@ -37,7 +48,9 @@ export default {
             })
             .catch(err => console.log(err));
         },
-        }
+        //ログインしているユーザーの情報
+        ...mapActions(["getLoginUserData"]),
+    }
     }
 </script>
 <style scoped>
