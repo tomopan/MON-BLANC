@@ -5,23 +5,26 @@
 
         <!-- タイトル入力 -->
         <v-form>
-            <p
-                class="paper"
-                contenteditable="true"
-                placeholder="最初の一文を書いてください。"
-                id="first_sentence"
-            >{{ text }}</p>
-            <br />
-            <!-- <router-link :to="{name:'Write',params:{hero_id:$route.params.hero_id,novel_id:postNovelId}}"> -->
-            <v-btn
-                style="display: none;"
-                color=""
-                id="save"
-                dark
-                @click="saveFirstSentence"
-                >完了</v-btn
-            >
-
+            <div class="input-area" >
+                <div id="paper_text">
+                    <div
+                        class="paper"
+                        contenteditable="true"
+                        placeholder="最初の一文を書いてください。"
+                        id="first_sentence"
+                    >{{ text }}</div>
+                    <br />
+                    <!-- <router-link :to="{name:'Write',params:{hero_id:$route.params.hero_id,novel_id:postNovelId}}"> -->
+                    <v-btn
+                        style="display: none;"
+                        color=""
+                        id="save"
+                        dark
+                        @click="saveFirstSentence"
+                        >完了</v-btn
+                    >
+                </div>
+            </div>
             <!-- </router-link> -->
         </v-form>
     </div>
@@ -42,6 +45,8 @@ export default {
             //story_papersテーブルにPostするデータを格納
             storyPaperPost:{},
             text: "",
+            charaCount:"",
+            lineCount:""
         };
     },
     created() {
@@ -108,6 +113,66 @@ export default {
                 subtree: true,
             });
         },
+
+                //32文字以上入力したら改行処理
+        changeLine:function(){
+            //要素のIDを取得
+            const target = document.getElementById("first_sentence");
+
+            //DOMの変更を監視
+            const observer = new MutationObserver((records) => {
+                // 変化が発生したときの処理を記述
+                let p = document.getElementById("first_sentence");
+                //文字数をdataに格納
+                let text = p.textContent;
+                this.charaCount = text.length;
+
+                //行数をdataに格納
+                const tBox = document.getElementById("first_sentence");
+                this.lineCount = tBox.childElementCount;
+            });
+            observer.observe(target, {
+                // オプションを指定
+                characterData: true,
+                childList: true,
+                subtree: true,
+            });
+            document.onselectionchange = () => {
+                const range = window.getSelection().getRangeAt(0)
+                const clone = range.cloneRange()
+                const fixedPosition = range.endOffset
+                // 末尾の文字列を選択した時はダミーテキストを追加して選択範囲を拡大する
+                if (fixedPosition + 1 > range.endContainer.length) {
+                const dummy = document.createTextNode('&#8203;')
+                clone.insertNode(dummy)
+                clone.selectNode(dummy)
+                const rect = clone.getBoundingClientRect();
+                console.log(rect);
+                dummy.parentNode.removeChild(dummy)
+                } else {
+                clone.setStart(range.endContainer, fixedPosition);
+                clone.setEnd(range.endContainer, fixedPosition + 1);
+                const rect = clone.getBoundingClientRect();
+                console.log(rect);
+                }
+                clone.detach()
+                }
+        },
+
+        //17行で制限
+        stopLine:function(){
+            const tBox = document.getElementById("first_sentence");
+            this.lineCount = tBox.childElementCount;
+            //エンターキーを無効にする
+            document.addEventListener('keydown', function(e){
+                if (tBox.childElementCount == 17 && e.keyCode === 13) {
+                    e.preventDefault();
+                }else if(tBox.childElementCount == 17 && e.which === 13){
+                    e.preventDefault();
+                }
+            });
+        }
+
     },
 };
 </script>
@@ -143,7 +208,7 @@ form{
     display: block;
     /* width: 10%; */
     margin: auto;
-    margin-top: 10%;
+    /* margin-top: 5%; */
     /* padding: 40px; */
     -webkit-writing-mode: vertical-rl;
     -ms-writing-mode: tb-rl;
@@ -161,4 +226,30 @@ form{
     display: block;
     margin: auto;
 }
+.input-area {
+    margin: 3%;
+    /* padding-top: 50px; */
+    height: 700px;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    /* border: 1px solid #000000; */
+}
+
+#paper_text {
+    grid-row: 1 / 10;
+    grid-column: 1 / 10;
+    /* border: 1px solid #000000; */
+
+    /* display: grid; */
+    /* grid-template-columns: 150px 1fr; */
+}
+
+#first_sentence {
+    margin: 0 auto 0;
+    height: 640px;
+    font-size: 20px;
+
+    /* border: 1px solid #000000; */
+}
+
 </style>
