@@ -45,6 +45,8 @@ export default {
             //story_papersテーブルにPostするデータを格納
             storyPaperPost:{},
             text: "",
+            charaCount:"",
+            lineCount:""
         };
     },
     created() {
@@ -115,18 +117,18 @@ export default {
                 //32文字以上入力したら改行処理
         changeLine:function(){
             //要素のIDを取得
-            const target = document.getElementById("story_text_input");
+            const target = document.getElementById("first_sentence");
 
             //DOMの変更を監視
             const observer = new MutationObserver((records) => {
                 // 変化が発生したときの処理を記述
-                let p = document.getElementById("story_text_input");
+                let p = document.getElementById("first_sentence");
                 //文字数をdataに格納
                 let text = p.textContent;
                 this.charaCount = text.length;
 
                 //行数をdataに格納
-                const tBox = document.getElementById("story_text_input");
+                const tBox = document.getElementById("first_sentence");
                 this.lineCount = tBox.childElementCount;
             });
             observer.observe(target, {
@@ -159,7 +161,7 @@ export default {
 
         //17行で制限
         stopLine:function(){
-            const tBox = document.getElementById("story_text_input");
+            const tBox = document.getElementById("first_sentence");
             this.lineCount = tBox.childElementCount;
             //エンターキーを無効にする
             document.addEventListener('keydown', function(e){

@@ -1,7 +1,6 @@
 <template>
-    <div>
         <v-container
-            class="d-flex flex-row mb-6"
+            class="d-flex flex-row mb-6 pt-8"
             color="grey lighten-2"
             flat
             tile
@@ -34,7 +33,7 @@
             <!-- カルーセルで表示 -->
             <v-carousel
                 cycle
-                height="400"
+                height="700"
                 hide-delimiter-background
                 show-arrows-on-hover
                 hide-delimiters
@@ -42,11 +41,12 @@
                 <v-carousel-item v-for="(novel, i) in Novels" :key="i">
                     <v-sheet height="100%" color="white">
                         <v-row
+                            height="100%"
                             class="fill-height"
                             align="center"
                             justify="center"
                         >
-                            <div class="display-3">
+                            <div class="display-3" height="100%">
                                 <router-link
                                     :to="{
                                         name: 'ReadPaper',
@@ -56,9 +56,9 @@
                                         }
                                     }"
                                 >
-                                    <p class="paper_text">
+                                    <div class="paper_text">
                                         {{ novel.first_sentence }}
-                                    </p>
+                                    </div>
                                 </router-link>
                             </div>
                         </v-row>
@@ -66,7 +66,6 @@
                 </v-carousel-item>
             </v-carousel>
         </v-container>
-    </div>
 </template>
 
 <!-- 以下にscript/cssを記述 -->
