@@ -21,9 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             //追記
             $table->string('user_name');
-            $table->text('bio');
-            $table->string('api_token');
-            $table->string('image')->nullable();;
+            $table->text('bio')->nullable();
+            $table->string('api_token')->nullable();
+            $table->string('image')->nullable();
             $table->integer('follow_count')->nullable();
             $table->integer('follower_count')->nullable();
             $table->rememberToken();
