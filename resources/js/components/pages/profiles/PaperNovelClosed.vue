@@ -14,7 +14,7 @@
                         height="200px"
                         class="novel_card ma-4"
                     >
-                        <router-link
+                        <!-- <router-link
                             :to="{
                                 name: 'ReadPaper',
                                 params: {
@@ -22,13 +22,13 @@
                                     paper_novel_id: closeNovel.id
                                 }
                             }"
-                        >
+                        > -->
                             <v-img
                                 :src="closeNovel.img_url"
                                 height="170px"
                             ></v-img>
                             <p class="paper_text">{{ closeNovel.title }}</p>
-                        </router-link>
+                        <!-- </router-link> -->
                         <v-row>
                         <v-btn
                             class="ma-2"

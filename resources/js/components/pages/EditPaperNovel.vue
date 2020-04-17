@@ -148,6 +148,7 @@ export default {
                 .get("api/fetch/paper_novel/" + this.$route.params.user_paper_order)
                 .then((res) => {
                     this.PaperNovelData = res.data;
+                    //タイトルの場合はtoggleをtrue
                     if (this.PaperNovelData.title) this.title_toggle = true;
                 })
                 .catch((err) => {
@@ -160,10 +161,15 @@ export default {
                 .get("api/get/story_papers_edit/" + this.$route.params.user_paper_order)
                 .then((res) => {
                     this.papers = res.data;
+                    //タイトルを挿入
                     this.papers.unshift({
                         text: this.PaperNovelData.title,
                     });
+
                     this.papers.forEach(function (e, i) {
+                        //50文字以上だったら省略
+                        if(e.text.length >=50) e.text = e.text.substr(0,50) + "・・・";
+                        //位置を挿入
                         if (i % 2 != 0) {
                             e.x = i - 1;
                             e.y = 6;
