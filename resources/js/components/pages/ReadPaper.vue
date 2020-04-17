@@ -70,6 +70,8 @@ export default {
                 .get("api/get/story_papers/" + this.$route.params.paper_novel_id)
                 .then(res => {
                     this.StoryPapersData = res.data;
+                    //ファーストセンテンスページは消す
+                    this.StoryPapersData.shift();
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
