@@ -167,8 +167,9 @@ export default {
                     });
 
                     this.papers.forEach(function (e, i) {
-                        //50文字以上だったら省略
-                        if(e.text.length >=50) e.text = e.text.substr(0,50) + "・・・";
+                        // if(e.text.length >=50) 
+                        if(e.text && e.text.length >=50)e.text = e.text.substr(0,50) + "・・・";
+
                         //位置を挿入
                         if (i % 2 != 0) {
                             e.x = i - 1;
@@ -182,6 +183,7 @@ export default {
                             e.h = 5;
                         }
                     });
+                    
                     this.story_number = this.papers.length + 1
                 })
                 .catch((err) => {
