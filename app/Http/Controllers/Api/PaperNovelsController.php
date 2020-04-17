@@ -99,11 +99,21 @@ use App\StoryPaper;
         //$user_paper_orderにマッチした小説のデータをひとつだけ取得:api/fetch/paper_novel_title/
         public function fetchTitle($paper_novel_id)
         {
-            $paper_novel_title = DB::table('paper_novels as p')
-                                ->join('users as u','u.id','=','p.user_id')
-                                ->where('p.id','=',$paper_novel_id)
-                                ->select('p.title','u.user_name','u.name')
-                                ->first();
+            // 非公開だったらtopへリダイレクト
+            // $status = PaperNovel::where('id','=',$paper_novel_id)
+            //         ->select('status')
+            //         ->first();
+
+            // if($status->status == 0)  return;
+
+            //公開だったらタイトルを取得
+            // else if($status->status == 1){
+                $paper_novel_title = DB::table('paper_novels as p')
+                ->join('users as u','u.id','=','p.user_id')
+                ->where('p.id','=',$paper_novel_id)
+                ->select('p.title','u.user_name','u.name','p.status')
+                ->first();
+            // }
 
             return response()->json($paper_novel_title);
         }

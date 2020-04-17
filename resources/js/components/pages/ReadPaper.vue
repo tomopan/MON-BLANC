@@ -70,7 +70,6 @@ export default {
                 .get("api/get/story_papers/" + this.$route.params.paper_novel_id)
                 .then(res => {
                     this.StoryPapersData = res.data;
-                    console.log(res.data);
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
@@ -81,11 +80,18 @@ export default {
             axios
                 .get("api/fetch/paper_novel_titile/" + this.$route.params.paper_novel_id)
                 .then(res => {
-                    this.Title = res.data.title;
-                    this.WriterData.name = res.data.name;
-                    this.WriterData.user_name = res.data.user_name;
+                    //非公開の場合はtopへリダイレクト
+                    if(res.data.status == 0){
+                        this.$router.push({
+                            name: "Top",
+                        });
+                    }
+                    else{
+                        this.Title = res.data.title;
+                        this.WriterData.name = res.data.name;
+                        this.WriterData.user_name = res.data.user_name;
+                    }
 
-                    console.log(res.data)
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
@@ -123,7 +129,6 @@ export default {
             axios
                 .get("api/get/mark_count/" + this.$route.params.paper_novel_id)
                 .then(res => {
-                    console.log(res.data)
                     this.MarkCount = res.data
                 })
                 .catch(err => {
