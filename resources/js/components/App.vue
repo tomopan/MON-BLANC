@@ -3,7 +3,7 @@
         <header-component />
         <main>
             <div>
-                <RouterView />
+                <router-view></router-view>
             </div>
         </main>
     </v-app>
