@@ -59,31 +59,71 @@
                 <v-avatar size="100"> </v-avatar>
             </v-col>
         </v-row>
-        <!-- 公開/非公開のコンポーネント切り替え -->
+
+
+        <!-- 公開/非公開/マーカーのコンポーネント切り替え -->
+
+        <!-- マイページ -->
+        <v-tabs v-if="profileData.user_name == loginUser.user_name" 
+                grow
+                v-model="active_tab">
+            <div v-for="tab of tabs" :key="tab.id">
+                <router-link v-if="tab.id==1" :to="{ name: 'PaperNovelOpened' }" >
+                    <v-tab >
+                    {{tab.name}}
+                    </v-tab>
+                </router-link>
+                <router-link v-else-if="tab.id==2" :to="{ name: 'PaperNovelClosed' }" >
+                    <v-tab>
+                    {{tab.name}}
+                    </v-tab>
+                </router-link>
+                <router-link v-else-if="tab.id==3" :to="{ name: 'MarkedText' }" >
+                    <v-tab>
+                    {{tab.name}}
+                    </v-tab>
+                </router-link>
+            </div>
+        </v-tabs>
+
+        <!-- 他者プロフィール -->
+        <!-- <v-tabs v-else-if="profileData.user_name != loginUser.user_name" grow >
+            <v-tab>
+                <router-link  :to="{ name: 'PaperNovelOpened' }" >
+                    <p>公開中</p>
+                </router-link>
+            </v-tab>
+        </v-tabs> -->
+
+<!-- 
         <v-tabs
-        background-color="transparent" color="basil" grow>
+            v-model="selectedTab"
+            >
             <router-link :to="{ name: 'PaperNovelOpened' }" >
-                <v-tab>
+                <v-tab key='first'>
                     <p>公開中</p>
                 </v-tab>
             </router-link>
             <router-link 
-            v-if="profileData.user_name == loginUser.user_name"
-            :to="{ name: 'PaperNovelClosed' }">
-                <v-tab>
+                v-if="profileData.user_name == loginUser.user_name"
+                :to="{ name: 'PaperNovelClosed' }"
+            >
+                <v-tab key='second'>
                     <p>非公開</p>
                 </v-tab>
             </router-link>
             <router-link 
-            v-if="profileData.user_name == loginUser.user_name"
-            :to="{ name: 'MarkedText' }">
-                <v-tab>
+                v-if="profileData.user_name == loginUser.user_name"
+                :to="{ name: 'MarkedText' }"
+            >
+                <v-tab key='third'>
                     <p>マーカー</p>
                 </v-tab>
             </router-link>
-        </v-tabs>
+        </v-tabs> -->
         <router-view :loginUserName="loginUser.user_name"></router-view>
         <!-- 書いた小説を表示 -->
+
     </v-container>
 </template>
 
@@ -100,7 +140,15 @@ export default {
             profileData:{},
             //編集する際にpostするデータ
             postUserData:{},
+            //モーダルの開閉
             dialog: false,
+            //タブ関係
+            active_tab:0,
+            tabs:[
+                { id: 1, name: '公開中' },
+                { id: 2, name: '非公開' },
+                { id: 3, name: 'マーカー' }
+            ],
         };
     }, 
     watch: {
@@ -116,6 +164,12 @@ export default {
         this.getLoginUserData();
         this.getProfileData(this.$route.params.user_name);
     },
+    mounted(){
+        //アクティブなタブをパスと同じにする
+        const route = this.$route.path.split('/')
+        if(route[3]== 'PaperNovelClosed') this.active_tab =1;
+        else if(route[3]== 'marker') this.active_tab =2;
+    },
     computed: {
         ...mapGetters(["loginUser"]),
     },
@@ -124,7 +178,6 @@ export default {
         ...mapActions(["getLoginUserData"]),
         //プロフィール情報の取得
         getProfileData:function(user_name){
-            console.log(user_name)
             axios
                 .get("api/get/user_profile/" + user_name)
                 .then(res => {
@@ -142,7 +195,6 @@ export default {
             axios
                 .post("api/edit/user",this.postUserData)
                 .then(res => {
-                    console.log(res)
                     this.$set(this.profileData, "name", res.data.name);
                     this.$set(this.profileData, "user_name",  res.data.user_name);
                     this.$set(this.profileData, "bio", res.data.bio);
