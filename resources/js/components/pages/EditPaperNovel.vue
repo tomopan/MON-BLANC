@@ -42,7 +42,7 @@
                 >
                     【最初の一文】
                     <br>
-                    {{ paper.text }}
+                    {{ PaperNovelData.first_sentence }}
                 </p>
                 <router-link
                     v-if="i >= 2"
@@ -136,7 +136,6 @@ export default {
             story_number:""
         };
     },
-
     created() {
         this.showNovel();
         this.showPapers();
@@ -167,7 +166,6 @@ export default {
                     });
 
                     this.papers.forEach(function (e, i) {
-                        // if(e.text.length >=50) 
                         if(e.text && e.text.length >=50)e.text = e.text.substr(0,50) + "・・・";
 
                         //位置を挿入

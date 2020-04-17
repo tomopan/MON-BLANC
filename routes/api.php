@@ -60,6 +60,9 @@ Route::group(['middleware' => 'auth'], function () {
     //小説の一行目を保存
     Route::post('post/firstsentence/{id}', 'Api\PaperNovelsController@saveFirst');
 
+    //小説の一行目を更新
+    Route::post('update/first_sentence/', 'Api\PaperNovelsController@updateFirst');
+
     //小説のステータスを変更(公開→非公開)
     Route::post('update/paper_novel_close/{user_paper_order}', 'Api\PaperNovelsController@closePaperNovelStatus');
 

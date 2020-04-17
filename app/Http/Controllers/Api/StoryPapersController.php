@@ -41,8 +41,8 @@ use App\User;
             $story_paper->text = $request->text;
             $story_paper->story_number = $story_number;
             $story_paper->status = $request->status;
-
             $story_paper->save();
+            
         }
 
         //ストーリーペーパーを更新:api/edit/story_paper
