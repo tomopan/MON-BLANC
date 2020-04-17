@@ -65,6 +65,16 @@ use App\StoryPaper;
             return $paper_novel;
         }
 
+        //最初の一文を更新
+        public function updateFirst(Request $request)
+        {
+            //ペーパーノベルidを取得
+            $paper_novel = PaperNovel::where('user_id','=',Auth::id())
+                            ->where('user_paper_order','=',$request->user_paper_order)
+                            ->update(['first_sentence' => $request->first_sentence]);
+        }
+
+
         //hero_idにマッチした、公開されている小説のデータを取得
         public function show($hero_id)
         {

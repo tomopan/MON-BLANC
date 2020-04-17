@@ -154,6 +154,7 @@ export default {
 
             // story_numberを格納
             this.PaperNovelPost.story_number = this.$route.params.story_number;
+
             // ストーリーペーパーの内容をPost
             axios
                 .post("api/post/story_paper", this.PaperNovelPost)
