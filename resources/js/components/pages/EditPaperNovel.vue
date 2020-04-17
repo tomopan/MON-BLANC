@@ -36,8 +36,16 @@
                     </p>
                     <p v-else class="title_text">タイトルを編集</p>
                 </router-link>
+
+                <p 
+                    v-if="i == 1" class="paper_text" 
+                >
+                    【最初の一文】
+                    <br>
+                    {{ paper.text }}
+                </p>
                 <router-link
-                    v-if="i != 0"
+                    v-if="i >= 2"
                     :to="{
                         name: 'EditStoryPaper',
                         params: {
