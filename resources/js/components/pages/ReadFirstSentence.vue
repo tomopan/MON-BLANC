@@ -31,6 +31,10 @@
                 </v-dialog>
             </div>
             <!-- カルーセルで表示 -->
+            <v-row v-touch="{
+                left: () => swipe('Left'),
+                right: () => swipe('Right')
+            }">
             <v-carousel
                 cycle
                 height="700"
@@ -65,6 +69,7 @@
                     </v-sheet>
                 </v-carousel-item>
             </v-carousel>
+            </v-row>
         </v-container>
 </template>
 
@@ -106,6 +111,9 @@ export default {
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
+        },
+        swipe (direction) {
+        this.swipeDirection = direction
         }
     }
 };
