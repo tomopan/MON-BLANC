@@ -42,7 +42,7 @@ class UsersController extends Controller
         $user->bio     = $request->bio;
 
         $user->save();
-
+        return $user;
     }
 
 }

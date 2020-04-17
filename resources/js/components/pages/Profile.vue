@@ -24,7 +24,7 @@
                 </v-card-text>
                 <v-card-actions>
                 <v-spacer></v-spacer>
-                    <v-btn  @click="getProfileData">戻る</v-btn>
+                    <v-btn  @click.native.stop="dialog = false">戻る</v-btn>
                     <v-btn  @click="editUserData">更新</v-btn>
                 </v-card-actions>
             </v-card>
@@ -131,9 +131,6 @@ export default {
                     this.$set(this.profileData, "name", res.data.name);
                     this.$set(this.profileData, "user_name",  res.data.user_name);
                     this.$set(this.profileData, "bio", res.data.bio);
-                    // // this.profileData.name = res.data.name;
-                    // this.profileData.user_name = res.data.user_name;
-                    // this.profileData.bio = res.data.bio;
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
@@ -145,19 +142,35 @@ export default {
             axios
                 .post("api/edit/user",this.postUserData)
                 .then(res => {
+                    console.log(res)
+                    this.$set(this.profileData, "name", res.data.name);
+                    this.$set(this.profileData, "user_name",  res.data.user_name);
+                    this.$set(this.profileData, "bio", res.data.bio);
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
+
+                //パスを編集後のデータに変更
+                this.$router.push({
+                    name: "Profile",
+                    params:{
+                        user_name:this.postUserData.user_name
+                    }
+                }).catch(err => {
+                    console.log(err.response)
+                });
+             //モーダルを閉じる   
             this.dialog =false;
-            this.getLoginUserData();
+            //表示を編集後のデータに変更
+
         },
         //プロフィール編集のモーダルを開く
         openEditModal:function(){
             this.dialog = true;
-            this.postUserData.name = this.loginUser.name;
-            this.postUserData.user_name = this.loginUser.user_name;
-            this.postUserData.bio = this.loginUser.bio;
+            this.postUserData.name = this.profileData.name;
+            this.postUserData.user_name = this.profileData.user_name;
+            this.postUserData.bio = this.profileData.bio;
         }
     },
 };
