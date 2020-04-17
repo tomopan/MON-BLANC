@@ -162,7 +162,7 @@ outline: none;
     margin: auto;
     color: #333;
     font-size: 20px;
-
+    height: 640px;
 }
 
 p{
