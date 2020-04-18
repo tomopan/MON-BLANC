@@ -1,7 +1,11 @@
 <template>
     <div>
-        <!-- 主人公の名前を表示 -->
-        <p class="heroName">{{ HeroData.hero_name }}</p>
+        <!-- 主人公の画像を表示 -->
+        <v-img
+            :src="HeroData.img_url"
+            width="200px"
+            >
+        </v-img>
 
         <!-- タイトル入力 -->
         <v-form>

@@ -39,8 +39,6 @@ class UsersTableSeeder extends Seeder
             'api_token' => Str::random(80),
             "created_at" => $faker->dateTime("now"),
             "updated_at" => $faker->dateTime("now")
-
-
         ]
         );
     }

@@ -1,48 +1,47 @@
 <template>
     <v-container class="pa-4 text-center">
         <v-row class="fill-height" align="center" justify="center">
+            <!-- choice your charactorここから -->
             <v-container class="pa-4 text-center">
+                <p style="font-size:30px">choice your charactor</p>
+                    <v-row class="fill-height" align="center" justify="center">
+                        <div v-for="(hero_img, id) in hero_imgs" :key="id">
+                            <router-link
+                                :to="{
+                                    name: 'WriteFirstSentence',
+                                    params: { hero_id: hero_img.id },
+                                }"
+                            >
+                                <v-img
+                                    :src="hero_img.url"
+                                    width="300px"
+                                >
+                                </v-img>
+                            </router-link>
+                        </div>
+                    </v-row>
+            </v-container>
+
+
+            <!-- read booksここから -->
+            <v-container class="pa-4 text-center">
+                <p style="font-size:30px">read books</p>
                 <v-row class="fill-height" align="center" justify="center">
                     <div v-for="(hero, id) in heroes" :key="id">
-                        <router-link
-                            :to="{
-                                name: 'Hero',
-                                params: { hero_id: hero.id, url: hero.img_url }
-                            }"
-                        >
-                            <v-col :key="id">
-                                <v-hover v-slot:default="{ hover }">
-                                    <v-card
-                                        :elevation="hover ? 12 : 2"
-                                        :class="{ 'on-hover': hover }"
-                                    >
-                                        <v-img
-                                            :src="hero.img_url"
-                                            height="300px"
-                                            width="300px"
-                                        >
-                                            <v-card-title
-                                                class="title"
-                                            >
-                                                <v-row
-                                                    class="fill-height flex-column"
-                                                    justify="space-between"
-                                                >
-                                                    <p
-                                                        class="mt-4 subheading text-left"
-                                                    >
-                                                        {{ hero.hero_name }}
-                                                        <br />
-                                                        Born in
-                                                        {{ hero.hero_birth }}
-                                                    </p>
-                                                </v-row>
-                                            </v-card-title>
-                                        </v-img>
-                                    </v-card>
-                                </v-hover>
-                            </v-col>
-                        </router-link>
+                        <v-col :key="id">
+                            <router-link
+                                :to="{
+                                    name: 'ReadFirst',
+                                    params: { hero_id:hero.id },
+                                }"
+                            >
+                                <v-img
+                                    :src="hero.img_url"
+                                    width="300px"
+                                >
+                                </v-img>
+                            </router-link>
+                        </v-col>
                     </div>
                 </v-row>
             </v-container>
@@ -50,14 +49,20 @@
     </v-container>
     <!-- </router-link> -->
 </template>
-
 <script>
 export default {
     components: {},
 
     data: () => ({
+        hero_imgs:[
+            {id:1,url:'img/charactors/akira.png'},
+            {id:2,url:'img/charactors/lisa.png'},
+            {id:3,url:'img/charactors/ami&karin.png'},
+            {id:4,url:'img/charactors/mari.png'},
+            {id:6,url:'img/charactors/rui.png'},
+        ],
         heroes: [],
-        test: "test"
+
     }),
 
     created() {
