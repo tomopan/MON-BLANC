@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-row>
-            <h1>『{{Title}}』</h1>
+            <div v-html="Title" style="white-space:pre-wrap; word-wrap:break-word;"></div>
             <p>作者:</p>
             <router-link
                 :to="{
@@ -20,11 +20,8 @@
         <v-btn id="save" dark @click="saveMarkText">マークする</v-btn>
         <v-col v-for="(story, i) in StoryPapersData" :key="i">
             <div class="paper"  @mouseup="getMarkText(story.id)">
-                <div class="story_area">
-                    <p class="story_text">
-                        {{ story.text }}
-                    </p>
-                </div>
+                    <div class="story_text" v-html="story.text">
+                    </div>
             </div>
         </v-col>
     </v-container>
@@ -72,6 +69,10 @@ export default {
                     this.StoryPapersData = res.data;
                     //ファーストセンテンスページは消す
                     this.StoryPapersData.shift();
+                    //改行コードを<br>に変換
+                    this.StoryPapersData.forEach(el => {
+                        el.text = el.text.replace(/\\n|\r\n|\r|\n/g, "<br>");
+                    });
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
@@ -153,8 +154,8 @@ outline: none;
 
 .paper {
     margin: auto;
-    padding-top: 50px;
-    height: 600px;
+    /* padding-top: 50px; */
+    height: 640px;
     right: 0;
     border: 1px solid #000000;
 }
@@ -168,5 +169,6 @@ outline: none;
     line-height: 2em;
     overflow-x: scroll;
     outline: none;
+    white-space: pre-wrap; 
 }
 </style>

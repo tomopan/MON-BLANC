@@ -18,10 +18,8 @@
                         id="first_sentence"
                     >{{ text }}</div>
                     <br />
-                    <!-- <router-link :to="{name:'Write',params:{hero_id:$route.params.hero_id,novel_id:postNovelId}}"> -->
                     <v-btn
                         style="display: none;"
-                        color=""
                         id="save"
                         dark
                         @click="saveFirstSentence"
@@ -29,7 +27,6 @@
                     >
                 </div>
             </div>
-            <!-- </router-link> -->
         </v-form>
     </div>
 </template>
