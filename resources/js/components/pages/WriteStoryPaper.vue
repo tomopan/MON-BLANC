@@ -44,6 +44,7 @@
                         class="paper"
                         contenteditable="true"
                         id="story_text_input"
+                        @input="sync"
                     >
                     <div>{{ PaperNovelData.text }}</div>
                     </div>
@@ -113,6 +114,7 @@ export default {
     mounted(){
         this.changeLine();
         this.stopLine();
+        this.innerContent = this.content;
     },
     computed: {
         ...mapGetters(["HeroData"]),
@@ -120,7 +122,10 @@ export default {
     methods: {
         //API叩いてマッチした主人公データを取得
         ...mapActions(["fetchHeroData"]),
-
+        //contenteditableのv-model化
+        sync (e) {
+            this.content = e.target.innerHTML
+        },
         //ペーパーノベルの情報を取得する
         showNovel: function () {
             axios
@@ -130,7 +135,7 @@ export default {
                     //最初のストーリーペーパーだったら、モーダルとファーストセンテンスを挿入する処理
                     if(this.PaperNovelData.story_number == 1){
                         this.isFristStoryPaper = true;
-                        this.dialog = false
+                        this.dialog = true
                     }
                 })
                 .catch((err) => {
@@ -141,10 +146,10 @@ export default {
         //一時保存：テキストをstory_papersテーブルに保存,statusを0
         savePaper: function () {
             //PostするオブジェクトにDOMの内容をぶちこむ
-            //テキスト
+            //テキスト(改行コードを挿入)
             this.PaperNovelPost.text = document.getElementById(
                 "story_text_input"
-            ).textContent;
+            ).innerHTML.replace(/(<(p|div))/ig, '\\n$1').replace(/(<([^>]+)>)/ig, ""); 
 
             //小説id
             this.PaperNovelPost.user_paper_order = this.$route.params.user_paper_order;
@@ -197,13 +202,11 @@ export default {
                 clone.insertNode(dummy)
                 clone.selectNode(dummy)
                 const rect = clone.getBoundingClientRect();
-                console.log(rect);
                 dummy.parentNode.removeChild(dummy)
                 } else {
                 clone.setStart(range.endContainer, fixedPosition);
                 clone.setEnd(range.endContainer, fixedPosition + 1);
                 const rect = clone.getBoundingClientRect();
-                console.log(rect);
                 }
                 clone.detach()
                 }

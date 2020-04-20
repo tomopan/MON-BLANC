@@ -31,7 +31,7 @@
                     <v-icon @click="logout" color="#000">mdi-logout</v-icon>
                 </v-btn>
 
-                <img :src="'/img/header/line.png'" width="100%" id="line">
+                <!-- <img :src="'/img/header/line.png'" width="100%" id="line"> -->
         </v-app-bar>
     </div>
 </template>

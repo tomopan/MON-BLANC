@@ -88,7 +88,7 @@ export default {
             //テキスト
             this.PaperNovelPost.text = document.getElementById(
                 "story_text_input"
-            ).textContent;
+            ).innerHTML.replace(/(<(p|div))/ig, '\\n$1').replace(/(<([^>]+)>)/ig, "");
 
             //user_paper_order
             this.PaperNovelPost.user_paper_order = this.$route.params.user_paper_order;
