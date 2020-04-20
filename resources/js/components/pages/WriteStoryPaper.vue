@@ -37,6 +37,30 @@
         <!-- 入力エリア -->
         <v-form>
                 {{charaCount}}文字{{lineCount}}行
+            <v-row>
+            <!-- アイコンたち -->
+            <v-img
+                class="icon"
+                src="img/write-page/continue.png"
+            >
+            </v-img>
+            <v-img
+                class="icon"
+                src="img/write-page/font.png"
+            >
+            </v-img>
+            <v-img
+                class="icon"
+                src="img/write-page/tutorial.png"
+            >
+            </v-img>
+            <v-img
+                class="icon"
+                src="img/write-page/write.png"
+            >
+            </v-img>
+            </v-row>
+            <!-- アイコンたちここまで   -->
             <div class="input-area" >
                 <!-- 小説入力 -->
                 <div id="paper_text">
@@ -66,7 +90,12 @@
                     }
                 }"
             >
-                <v-btn id="save" dark @click="savePaper">保存する</v-btn>
+                    <v-img
+                        class="icon"
+                        src="img/write-page/book.png"
+                        @click="savePaper"
+                    >
+                    </v-img>
             </router-link>
         </v-form>
         <!-- 入力エリアここまで --> 
@@ -280,34 +309,21 @@ outline: none;
     margin: auto;
 }
 .input-area {
-    margin: 3%;
+    margin: 0 auto;
     padding-top: 50px;
     height: 700px;
+    width: 700px;
     display: grid;
     grid-template-columns: 150px 1fr;
-    border: 1px solid #000000;
-}
-#novel_title {
-    margin: 0;
-    padding-top: 50px;
-    grid-row: 1 / 12;
-    grid-column: 10 / 12;
-    /* border: 1px solid #000000; */
+    border: 1px dotted #a9a9a9;
 }
 #paper_text {
     grid-row: 1 / 12;
     grid-column: 1 / 10;
-    /* border: 1px solid #000000; */
+}
 
-    /* display: grid; */
-    /* grid-template-columns: 150px 1fr; */
-}
-#story_text_input > div::before {
-    /* content: counter(lineno); */
-}
 
 #story_text_input > div{
-    /* counter-increment: lineno; */
     height: 640px;
     font-size: 20px;
 }
@@ -315,5 +331,9 @@ outline: none;
 #story_text_input {
     margin: 0 50px 0 auto;
     /* border: 1px solid #000000; */
+}
+
+.icon {
+    width: 100px;
 }
 </style>

@@ -54,7 +54,7 @@
                         },
                     }"
                 >
-                <p  class="paper_text" v-html="paper.text"></p>
+                <p  class="paper_text" v-html="paper.text.replace(/\\n|\r\n|\r|\n/g, '<br>')"></p>
                 </router-link>
             </grid-item>
         </grid-layout>
@@ -166,7 +166,7 @@ export default {
                     });
 
                     this.papers.forEach(function (e, i) {
-                        e.text = e.text.replace(/\\n|\r\n|\r|\n/g, "<br>");
+                        // e.text = e.text.replace(/\\n|\r\n|\r|\n/g, "<br>");
                         if(e.text && e.text.length >=50)e.text = e.text.substr(0,50) + "・・・";
 
                         //位置を挿入
