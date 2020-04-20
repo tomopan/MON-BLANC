@@ -15,6 +15,8 @@ import WriteFirstSentence from "./components/pages/WriteFirstSentence.vue";
 import EditPaperNovel from "./components/pages/EditPaperNovel.vue";
 import WriteTitlePaper from "./components/pages/WriteTitlePaper.vue";
 import EditStoryPaper from "./components/pages/EditStoryPaper.vue";
+import SelectWrite from "./components/pages/SelectWrite.vue";
+import WriteFirstTime from "./components/pages/WriteFirstTime.vue";
 
 Vue.use(VueRouter);
 
@@ -38,6 +40,16 @@ const routes = [
         path: "/read-paper/:hero_id/:paper_novel_id",
         component: ReadPaper,
         name: "ReadPaper",
+    },
+    {
+        path: "/select-write/:hero_id",
+        component: SelectWrite,
+        name: "SelectWrite",
+    },
+    {
+        path: "/write-first-time/:hero_id",
+        component: WriteFirstTime,
+        name: "WriteFirstTime",
     },
     {
         path: "/write-first-sentence/:hero_id",
