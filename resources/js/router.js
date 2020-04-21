@@ -17,6 +17,7 @@ import WriteTitlePaper from "./components/pages/WriteTitlePaper.vue";
 import EditStoryPaper from "./components/pages/EditStoryPaper.vue";
 import SelectWrite from "./components/pages/SelectWrite.vue";
 import WriteFirstTime from "./components/pages/WriteFirstTime.vue";
+import Complete from "./components/pages/Complete.vue";
 
 Vue.use(VueRouter);
 
@@ -75,6 +76,11 @@ const routes = [
         path: "/edit-story-paper/:user_paper_order/:story_number",
         component: EditStoryPaper,
         name: "EditStoryPaper",
+    },
+    {
+        path: "/complete/:user_paper_order",
+        component: Complete,
+        name: "Complete",
     },
     {
         path: "/profile/:user_name",

@@ -56,51 +56,34 @@
                 >
                 <p  class="paper_text" v-html="paper.text.replace(/\\n|\r\n|\r|\n/g, '<br>')"></p>
                 </router-link>
-            </grid-item>
-        </grid-layout>
-
-        <!-- ペーパー追加ボタン -->
-        <router-link
-            :to="{
-                name: 'WriteStoryPaper',
-                params: {
-                    user_paper_order: this.$route.params.user_paper_order,
+                <!-- ペーパー追加ボタン -->
+                <router-link
+                    v-if="i == papers.length -1"
+                    :to="{
+                    name: 'WriteStoryPaper',
+                    params: {
+                    user_paper_order: $route.params.user_paper_order,
                     story_number:story_number
                 },
             }"
         >
-            <v-btn class="mx-2">
-                <v-icon dark>mdi-plus</v-icon>
+            <v-btn class="add-btn" icon>
+                <v-icon >mdi-plus</v-icon>
             </v-btn>
-        </router-link>
-        <!-- 公開ボタン -->
-        <router-link
-            :to="{
-                name: 'Profile',
-            }"
-        >
-            <v-btn
-                class="ma-2"
-                tile
-                outlined
-                @click="openNovel()"
-                >公開する</v-btn
+            </router-link>
+
+            </grid-item>
+        </grid-layout>
+
+        <!-- ペーパー追加ボタン -->
+
+        <!-- 本完成ボタン -->
+            <v-img
+                class="icon"
+                src="img/write-page/book.png"
+                @click="openNovel"
             >
-        </router-link>
-        <!-- 一時保存 -->
-        <router-link
-            :to="{
-                name: 'Profile',
-            }"
-        >
-            <v-btn
-                class="ma-2"
-                tile
-                outlined
-                @click="closeNovel()"
-                >一時保存</v-btn
-            >
-        </router-link>
+            </v-img>
     </div>
 </template>
 
@@ -164,6 +147,10 @@ export default {
                     this.papers.unshift({
                         text: this.PaperNovelData.title,
                     });
+                    //追加ボタン用のインデックスを追加
+                    this.papers.push({
+                        text:"",
+                    })
 
                     this.papers.forEach(function (e, i) {
                         // e.text = e.text.replace(/\\n|\r\n|\r|\n/g, "<br>");
@@ -193,7 +180,12 @@ export default {
             axios
                 .post("api/update/paper_novel_open/" + this.$route.params.user_paper_order)
                 .then((res) => {
-                    console.log(this.writedNovels);
+                    this.$router.push({
+                            name: 'Complete',
+                            params:{
+                                user_paper_order: this.$route.params.user_paper_order,
+                            }
+                    });
                 })
                 .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
@@ -203,7 +195,6 @@ export default {
             axios
                 .post("update/paper_novel_close/" + this.$route.params.user_paper_order)
                 .then((res) => {
-                    console.log(this.writingNovels);
                 })
                 .catch((err) => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
@@ -234,6 +225,8 @@ outline: none;
 
 .text_paper {
     border: 1px solid;
+    position: relative;
+
 }
 
 .title_paper {
@@ -249,5 +242,18 @@ a,p{
 a:hover{
     text-decoration: none;
 }
+
+.icon {
+    width: 100px;
+    cursor: pointer;
+}
+
+.add-btn{
+    position:absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 
 </style>
