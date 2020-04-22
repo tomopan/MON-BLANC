@@ -1,39 +1,49 @@
 <template>
-    <div>
         <v-app-bar>
-            <router-link :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }">
+            <router-link :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }" id="pen">
                 <v-btn icon>
-                    <img :src="'/img/header/pen.png'" width="30" alt="logo">
+                    <v-avatar tile size="30">
+                        <img :src="'/img/header/pen2.png'" alt="pen">
+                    </v-avatar>
                 </v-btn>
             </router-link>
-            <router-link :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }">
+            <router-link :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }" id="books">
                 <v-btn icon>
-                    <img :src="'/img/header/books.png'" width="30" alt="logo">
+                    <v-avatar tile size="30">
+                        <img :src="'/img/header/books.png'" alt="books">
+                    </v-avatar>
                 </v-btn>
             </router-link>
+            <v-spacer class="nav"></v-spacer>
+            <v-spacer class="nav"></v-spacer>
+            <v-spacer class="nav"></v-spacer>
 
             <v-spacer></v-spacer>
-            <router-link :to="{ name: 'Top' }" style="text-decoration: none">
+
+            <router-link :to="{ name: 'Top' }" style="text-decoration: none" id="logo">
                 <v-toolbar-title floating="true">
-                    <img :src="'/img/header/logo.png'" width="300" class="logo" alt="logo">
+                    <img :src="'/img/header/logo.png'" width="100%" class="logo" alt="logo">
                 </v-toolbar-title>
             </router-link>
 
             <v-spacer></v-spacer>
 
+            <div class="nav">
+                <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+            </div>
+
             <!-- マイページ -->
-            <router-link :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }">
+            <router-link :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }" id="mypage">
                 <v-btn icon>
-                    <img :src="'/img/header/mypage.png'" width="30" alt="logo">
+                    <v-avatar tile size="30">
+                        <img :src="'/img/header/mypage.png'" alt="mypage">
+                    </v-avatar>
                 </v-btn>
             </router-link>
-                <v-btn icon>
-                    <v-icon @click="logout" color="#000">mdi-logout</v-icon>
-                </v-btn>
+                    <!-- <v-icon @click="logout" color="#000">mdi-logout</v-icon> -->
 
-                <!-- <img :src="'/img/header/line.png'" width="100%" id="line"> -->
+                <img :src="'/img/header/line.png'" id="line">
         </v-app-bar>
-    </div>
 </template>
 <script>
 // インポート
@@ -42,10 +52,9 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
     
-    data() {
-        return {
-        };
-    },
+    data: () => ({
+      drawer: false,
+    }),
     created(){
         this.getLoginUserData();
     },
@@ -75,14 +84,22 @@ outline: none;
     background-color: #fff;
     position:relative;
     height: 140px!important;
-    padding-top: 20px;
+    padding-top: 1em;
+
 }
 
 #line{
     position: absolute;
-    top: 1px;
-    bottom: 0;
+    width: 100%;
+    top: 1em;
+    z-index: -1;
     left: 0;
+}
+
+.logo{
+    max-width: 400px;
+    margin: auto;
+    height: auto;
 }
 
 .v-toolbar{
@@ -93,5 +110,32 @@ outline: none;
     text-decoration: none;
 }
 
+.nav,.space{
+    display: none;
+}
+
+@media screen and (max-width:415px){
+/*画面幅が415pxまでの時*/
+.logo{
+    width: 200px;
+}
+
+#line{
+    padding-top: 1em;
+    top: 3em;
+}
+
+#pen,#mypage,#books{
+    display: none;
+}
+
+.nav{
+    display:inline;
+}
+
+.theme--light.v-app-bar.v-toolbar.v-sheet{
+    padding-top: 0;
+}
+}
 
 </style>
