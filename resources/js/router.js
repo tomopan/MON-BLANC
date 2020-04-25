@@ -18,6 +18,8 @@ import EditStoryPaper from "./components/pages/EditStoryPaper.vue";
 import SelectWrite from "./components/pages/SelectWrite.vue";
 import WriteFirstTime from "./components/pages/WriteFirstTime.vue";
 import Complete from "./components/pages/Complete.vue";
+import MeetStory from "./components/pages/MeetStory.vue";
+import FindStory from "./components/pages/FindStory.vue";
 
 Vue.use(VueRouter);
 
@@ -26,6 +28,16 @@ const routes = [
         path: "/",
         component: Top,
         name: "Top",
+    },
+    {
+        path: "/meet-story",
+        component: MeetStory,
+        name: "MeetStory",
+    },
+    {
+        path: "/find-story",
+        component: FindStory,
+        name: "FindStory",
     },
     {
         path: "/hero/:hero_id",

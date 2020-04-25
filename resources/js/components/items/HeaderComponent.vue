@@ -1,19 +1,32 @@
 <template>
         <v-app-bar>
-            <router-link :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }" id="pen">
+
+            <router-link :to="{ name: 'Top' }" style="text-decoration: none">
+
                 <v-btn icon>
                     <v-avatar tile size="30">
                         <img :src="'/img/header/pen2.png'" alt="pen">
                     </v-avatar>
                 </v-btn>
             </router-link>
-            <router-link :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }" id="books">
+
+            <!-- Find Storyへのリンク -->
+            <router-link :to="{ name: 'FindStory'}">
+
                 <v-btn icon>
                     <v-avatar tile size="30">
                         <img :src="'/img/header/books.png'" alt="books">
                     </v-avatar>
                 </v-btn>
             </router-link>
+
+            <!-- Meet Storyへのリンク -->
+            <router-link :to="{ name: 'MeetStory' }">
+                <v-btn icon>
+                    <v-icon color="#000">mdi-head-lightbulb-outline</v-icon>
+                </v-btn>
+            </router-link>
+
             <v-spacer class="nav"></v-spacer>
             <v-spacer class="nav"></v-spacer>
             <v-spacer class="nav"></v-spacer>
