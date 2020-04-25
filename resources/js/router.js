@@ -10,6 +10,7 @@ import Profile from "./components/pages/Profile.vue";
 import PaperNovelOpened from "./components/pages/profiles/PaperNovelOpened.vue";
 import PaperNovelClosed from "./components/pages/profiles/PaperNovelClosed.vue";
 import MarkedText from "./components/pages/profiles/MarkedText.vue";
+import Bookmarks from "./components/pages/profiles/Bookmarks.vue";
 import ReadFirstSentence from "./components/pages/ReadFirstSentence.vue";
 import WriteFirstSentence from "./components/pages/WriteFirstSentence.vue";
 import EditPaperNovel from "./components/pages/EditPaperNovel.vue";
@@ -114,6 +115,11 @@ const routes = [
                 path: "/profile/:user_name/marker",
                 component: MarkedText,
                 name: "MarkedText",
+            },
+            {
+                path: "/profile/:user_name/bookmark",
+                component: Bookmarks,
+                name: "Bookmarks",
             },
         ],
     },

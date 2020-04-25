@@ -110,6 +110,16 @@ Route::group(['middleware' => 'auth'], function () {
     //マークされた数を取得する
     Route::get('get/mark_count/{paper_novel_id}', 'Api\MarkersController@showCount');
 
+    // -----------Bookmarksテーブル----------- //
+
+    //ブックマークを保存する
+    Route::post('post/bookmark/{paper_novel_id}', 'Api\BookmarksController@save');
+
+    //ブックマークを削除する
+    Route::post('destroy/bookmark/{paper_novel_id}', 'Api\BookmarksController@destroy');
+
+    //ブックマークを取得する
+    Route::get('get/bookmarks', 'Api\BookmarksController@show');
 
 
 });
