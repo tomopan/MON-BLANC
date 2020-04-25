@@ -54,17 +54,23 @@
                 </v-btn>
             </router-link>
                     <!-- <v-icon @click="logout" color="#000">mdi-logout</v-icon> -->
+            
+            <!-- ログインボタン -->
+            <LoginModal ></LoginModal>
 
-                <img :src="'/img/header/line.png'" id="line">
+            <!-- ライン -->
+            <img :src="'/img/header/line.png'" id="line">
         </v-app-bar>
 </template>
 <script>
 // インポート
 import { mapActions, mapGetters } from "vuex";
-
+import LoginModal from "./LoginModal"
 
 export default {
-    
+    components:{ 
+        LoginModal
+    },
     data: () => ({
       drawer: false,
     }),
