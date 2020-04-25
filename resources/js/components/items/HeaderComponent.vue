@@ -1,14 +1,21 @@
 <template>
     <div>
         <v-app-bar>
-            <router-link :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }">
+            <router-link :to="{ name: 'Top' }" style="text-decoration: none">
                 <v-btn icon>
                     <img :src="'/img/header/pen.png'" width="30" alt="logo">
                 </v-btn>
             </router-link>
-            <router-link :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }">
+            <!-- Find Storyへのリンク -->
+            <router-link :to="{ name: 'FindStory'}">
                 <v-btn icon>
                     <img :src="'/img/header/books.png'" width="30" alt="logo">
+                </v-btn>
+            </router-link>
+            <!-- Meet Storyへのリンク -->
+            <router-link :to="{ name: 'MeetStory' }">
+                <v-btn icon>
+                    <v-icon color="#000">mdi-head-lightbulb-outline</v-icon>
                 </v-btn>
             </router-link>
 
