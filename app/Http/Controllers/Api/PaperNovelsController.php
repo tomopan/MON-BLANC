@@ -197,7 +197,16 @@ use App\StoryPaper;
             //story_papersテーブルから削除
             $story_papers = StoryPaper::where('paper_novel_id','=',$paper_novel_id)
                             ->delete();
+        }
 
+        //小説タイトルで検索
+        public function find($paper_novel_title){
+            if (!empty($paper_novel_title)) {
+                return PaperNovel::select('id', 'title','hero_id')
+                        ->where('title', 'LIKE', "%$paper_novel_title%")
+                        ->limit(20)->get();
+            }
+            return [];
         }
     }
     //=======================================================================

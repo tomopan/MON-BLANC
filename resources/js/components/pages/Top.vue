@@ -84,7 +84,6 @@ export default {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         }
-        //テスト
     }
 };
 </script>

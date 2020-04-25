@@ -75,6 +75,9 @@ Route::group(['middleware' => 'auth'], function () {
     //小説を削除
     Route::post('destroy/paper_novel/{paper_novel_id}', 'Api\PaperNovelsController@destroy');
 
+    //小説タイトルを検索
+    Route::get('find/paper_novel/{paper_novel_title}', 'Api\PaperNovelsController@find');
+
 
 
     // -----------StoryPapersテーブル----------- //
