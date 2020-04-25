@@ -41,10 +41,10 @@
 
             <v-spacer></v-spacer>
 
-            <div class="nav">
+            <!-- <div class="nav">
                 <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
             </div>
-
+ -->
             <!-- マイページ -->
             <router-link :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }" id="mypage">
                 <v-btn icon>
