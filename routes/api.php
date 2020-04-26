@@ -24,7 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //ここから追記//
 // API定義
 // 認証後であれば下記ルート定義が有効になる
-Route::group(['middleware' => 'auth'], function () {
+// Route::group(['middleware' => 'auth'], function () {
 
     // -----------Usersテーブル----------- //
     //ログイン中のユーザーデータを取得
@@ -122,4 +122,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('get/bookmarks', 'Api\BookmarksController@show');
 
 
-});
+// });

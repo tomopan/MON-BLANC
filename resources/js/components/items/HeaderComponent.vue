@@ -53,10 +53,12 @@
                     </v-avatar>
                 </v-btn>
             </router-link>
-                    <!-- <v-icon @click="logout" color="#000">mdi-logout</v-icon> -->
             
             <!-- ログインボタン -->
             <LoginModal ></LoginModal>
+
+            <!-- ログアウトボタン -->
+            <v-icon @click="logout" color="#000">mdi-logout</v-icon>
 
             <!-- ライン -->
             <img :src="'/img/header/line.png'" id="line">
