@@ -32,7 +32,8 @@ use App\PaperNovel;
             //ユーザー情報取得
             $userId = Auth::id();
             //登録する情報を格納
-            $bookmark_novels = DB::table('bookmarks as b','b.user_id','=',$userId)
+            $bookmark_novels = DB::table('bookmarks as b')
+                                ->where('b.user_id','=',$userId)
                                 ->join('paper_novels as p','p.id','=','b.paper_novel_id')
                                 ->join('heroes as h','h.id','=','p.hero_id')
                                 ->select('b.id','p.title','paper_novel_id','h.img_url')

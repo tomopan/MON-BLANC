@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 //ログイン後に表示されるホーム画面のルート
-Route::group(['middleware' => 'auth'], function () {
+// Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
         return view('index');
     });
-});
+// });
 
 // Route::get('/', function() {
 //   return view('index');
