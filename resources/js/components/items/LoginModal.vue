@@ -1,11 +1,16 @@
 <template>
   <v-layout row justify-center>
-    <!-- アイコン -->
-    <v-icon @click="openLoginModal" color="#000">mdi-login</v-icon>
-
     <!-- ▼▼▼ログイン画面モーダル▼▼▼ -->
-    <v-dialog v-model="loginDialog" max-width="500px">
+    <v-dialog v-model="$store.state.drawerLoginModal" max-width="500px" persistent>
       <v-card>
+        <v-btn
+          icon
+          color="#000"
+          @click="$store.state.drawerLoginModal=false;$router.push({ name: 'Top' })"
+        >
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+
         <v-card-title>
           <div>
             <img :src="'/img/lp/welcome.png'" class="img welcome" alt="welcom" />
@@ -56,8 +61,11 @@
     <!-- ▲▲▲ログイン画面モーダルここまで▲▲▲ -->
 
     <!-- ▼▼▼新規登録モーダル▼▼▼ -->
-    <v-dialog v-model="resisterDialog" max-width="500px">
+    <v-dialog v-model="resisterDialog" max-width="500px" persistent>
       <v-card>
+        <v-btn icon color="#000" @click="$store.state.drawerLoginModal=false;resisterDialog=false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
         <v-card-title>
           <div>
             <img :src="'/img/lp/welcome.png'" class="img welcome" alt="welcom" />
@@ -91,7 +99,7 @@
               </v-col>
 
               <button class="button btn01 signin" cols="9" @click="postRegister">
-                <a href="#" class="btnlink" >会員登録</a>
+                <a href="#" class="btnlink">会員登録</a>
               </button>
               <p class="sentence">または</p>
               <button class="button btn02" cols="9">
@@ -123,7 +131,6 @@
 <script>
 export default {
   data: () => ({
-    loginDialog: false,
     resisterDialog: false,
     email: "",
     password: "",
@@ -139,14 +146,14 @@ export default {
   methods: {
     openLoginModal: function() {
       this.resisterDialog = false;
-      this.loginDialog = true;
+      this.$store.state.loginDialog = true;
     },
     closeLoginModal: function() {
       this.loginDialog = false;
     },
     openResisterModal: function() {
       this.resisterDialog = true;
-      this.loginDialog = false;
+      this.$store.state.loginDialog = false;
     },
     closeResisterModal: function() {
       this.resisterDialog = false;
@@ -165,10 +172,6 @@ export default {
         });
     },
     postRegister() {
-      console.log(this.newEmail);
-      console.log(this.newPassword);
-      console.log(this.newName);
-      console.log(this.newUserId);
       axios
         .post(window.location.origin + `/register`, {
           email: this.newEmail,

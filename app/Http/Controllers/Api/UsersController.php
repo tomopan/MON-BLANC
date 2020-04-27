@@ -17,12 +17,10 @@ class UsersController extends Controller
     //ログイン中のユーザー情報を取得
     public function show()
     {
-        $userData = Auth::user();              
-
-        // $userData = User::where('id', '=', $user_id)
-        //             ->get();
-
-        return response()->json($userData);
+        if(Auth::user()){
+            $userData = Auth::user();              
+            return response()->json($userData);
+        }
     }
 
     //ログイン中のユーザー情報を取得
