@@ -24,9 +24,11 @@
             <v-row>
               <v-col cols="9">
                 <v-text-field label="メールアドレス" required v-model="email"></v-text-field>
+                <div class="alert alert-danger" v-if="errors.email">必須項目です</div>
               </v-col>
               <v-col cols="9">
                 <v-text-field label="パスワード" type="password" required v-model="password"></v-text-field>
+                <div class="alert alert-danger" v-if="errors.password">必須項目です</div>
               </v-col>
               <v-col cols="9">
                 <p class="link">
@@ -79,15 +81,19 @@
             <v-row>
               <v-col cols="9">
                 <v-text-field label="メールアドレス" required v-model="newEmail"></v-text-field>
+                <div class="alert alert-danger" v-if="regiErrors.email">必須項目です</div>
               </v-col>
               <v-col cols="9">
                 <v-text-field label="名前" type="text" required v-model="newName"></v-text-field>
+                <div class="alert alert-danger" v-if="regiErrors.name">必須項目です</div>
               </v-col>
               <v-col cols="9">
                 <v-text-field label="ユーザーID" type="text" required v-model="newUserId"></v-text-field>
+                <div class="alert alert-danger" v-if="regiErrors.user_name">必須項目です</div>
               </v-col>
               <v-col cols="9">
                 <v-text-field label="パスワード" type="password" required v-model="newPassword"></v-text-field>
+                <div class="alert alert-danger" v-if="regiErrors.password">必須項目です</div>
               </v-col>
               <v-col cols="9">
                 <v-text-field
@@ -96,6 +102,7 @@
                   required
                   v-model="newPasswordConfirmation"
                 ></v-text-field>
+                <div class="alert alert-danger" v-if="regiErrors.password">正しくありません</div>
               </v-col>
 
               <button class="button btn01 signin" cols="9" @click="postRegister">
@@ -138,7 +145,9 @@ export default {
     newPassword: "",
     newName: "",
     newUserId: "",
-    newPasswordConfirmation: ""
+    newPasswordConfirmation: "",
+    errors: {},
+    regiErrors:{},
   }),
 
   created() {},
@@ -168,7 +177,8 @@ export default {
           window.location.href = window.location.origin + `/`;
         })
         .catch(error => {
-          console.log(error);
+          this.errors = error.response.data.errors;
+          console.log(this.errors);
         });
     },
     postRegister() {
@@ -184,7 +194,8 @@ export default {
           window.location.href = window.location.origin + `/`;
         })
         .catch(error => {
-          console.log(error.response.data);
+          this.regiErrors = error.response.data.errors;
+          console.log(this.regiErrors);
         });
     }
   }
