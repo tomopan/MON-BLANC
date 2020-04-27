@@ -8,7 +8,7 @@
                         <div v-for="(hero_img, id) in hero_imgs" :key="id">
                             <router-link
                                 :to="{
-                                    name: 'SelectWrite',
+                                    name: 'WriteFirstSentence',
                                     params: { hero_id: hero_img.id },
                                 }"
                             >
