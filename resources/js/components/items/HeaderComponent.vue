@@ -1,162 +1,164 @@
 <template>
-        <v-app-bar>
+  <v-app-bar>
+    <router-link :to="{ name: 'Top' }" style="text-decoration: none">
+      <v-btn icon>
+        <v-avatar tile size="30">
+          <img :src="'/img/header/pen2.png'" alt="pen" />
+        </v-avatar>
+      </v-btn>
+    </router-link>
 
-            <router-link :to="{ name: 'Top' }" style="text-decoration: none">
+    <!-- Find Storyへのリンク -->
+    <router-link :to="{ name: 'FindStory'}">
+      <v-btn icon>
+        <v-avatar tile size="30">
+          <img :src="'/img/header/books.png'" alt="books" />
+        </v-avatar>
+      </v-btn>
+    </router-link>
 
-                <v-btn icon>
-                    <v-avatar tile size="30">
-                        <img :src="'/img/header/pen2.png'" alt="pen">
-                    </v-avatar>
-                </v-btn>
-            </router-link>
+    <!-- Meet Storyへのリンク -->
+    <router-link :to="{ name: 'MeetStory' }">
+      <v-btn icon>
+        <v-icon color="#000">mdi-head-lightbulb-outline</v-icon>
+      </v-btn>
+    </router-link>
 
-            <!-- Find Storyへのリンク -->
-            <router-link :to="{ name: 'FindStory'}">
+    <v-spacer class="nav"></v-spacer>
+    <v-spacer class="nav"></v-spacer>
+    <v-spacer class="nav"></v-spacer>
 
-                <v-btn icon>
-                    <v-avatar tile size="30">
-                        <img :src="'/img/header/books.png'" alt="books">
-                    </v-avatar>
-                </v-btn>
-            </router-link>
+    <v-spacer></v-spacer>
 
-            <!-- Meet Storyへのリンク -->
-            <router-link :to="{ name: 'MeetStory' }">
-                <v-btn icon>
-                    <v-icon color="#000">mdi-head-lightbulb-outline</v-icon>
-                </v-btn>
-            </router-link>
+    <router-link :to="{ name: 'Top' }" style="text-decoration: none" id="logo">
+      <v-toolbar-title floating="true">
+        <img :src="'/img/header/logo.png'" width="100%" class="logo" alt="logo" />
+      </v-toolbar-title>
+    </router-link>
 
-            <v-spacer class="nav"></v-spacer>
-            <v-spacer class="nav"></v-spacer>
-            <v-spacer class="nav"></v-spacer>
+    <v-spacer></v-spacer>
 
-            <v-spacer></v-spacer>
+    <!-- マイページ -->
+    <router-link
+      v-if="$store.state.login"
+      :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }"
+      id="mypage"
+    >
+      <v-btn icon>
+        <v-avatar tile size="30">
+          <img :src="'/img/header/mypage.png'" alt="mypage" />
+        </v-avatar>
+      </v-btn>
+    </router-link>
 
-            <router-link :to="{ name: 'Top' }" style="text-decoration: none" id="logo">
-                <v-toolbar-title floating="true">
-                    <img :src="'/img/header/logo.png'" width="100%" class="logo" alt="logo">
-                </v-toolbar-title>
-            </router-link>
+    <!-- ログインボタン -->
+    <v-icon @click="toggleLoginModal" color="#000">mdi-login</v-icon>
+    <LoginModal/>
 
-            <v-spacer></v-spacer>
+    <!-- ログアウトボタン -->
+    <v-icon @click="logout" color="#000">mdi-logout</v-icon>
 
-            <!-- <div class="nav">
-                <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-            </div>
- -->
-            <!-- マイページ -->
-            <router-link :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }" id="mypage">
-                <v-btn icon>
-                    <v-avatar tile size="30">
-                        <img :src="'/img/header/mypage.png'" alt="mypage">
-                    </v-avatar>
-                </v-btn>
-            </router-link>
-            
-            <!-- ログインボタン -->
-            <LoginModal ></LoginModal>
-
-            <!-- ログアウトボタン -->
-            <v-icon @click="logout" color="#000">mdi-logout</v-icon>
-
-            <!-- ライン -->
-            <img :src="'/img/header/line.png'" id="line">
-        </v-app-bar>
+    <!-- ライン -->
+    <img :src="'/img/header/line.png'" id="line" />
+  </v-app-bar>
 </template>
 <script>
 // インポート
 import { mapActions, mapGetters } from "vuex";
-import LoginModal from "./LoginModal"
+import LoginModal from "./LoginModal";
 
 export default {
-    components:{ 
-        LoginModal
+  components: {
+    LoginModal
+  },
+  data: () => ({
+    drawer: false,
+    loginDialog: false
+  }),
+  created() {
+    this.getLoginUserData();
+  },
+  computed: {
+    ...mapGetters(["loginUser"])
+  },
+  methods: {
+    logout: function() {
+      axios
+        .post("logout")
+        .then(res => {
+          location.href = "/";
+        })
+        .catch(err => console.log(err));
     },
-    data: () => ({
-      drawer: false,
-    }),
-    created(){
-        this.getLoginUserData();
-    },
-    computed: {
-    ...mapGetters(["loginUser"]),
-    },
-    methods: {
-        logout: function() {
-            axios
-            .post("logout")
-            .then(res => {
-            location.href = "/";
-            })
-            .catch(err => console.log(err));
-        },
-        //ログインしているユーザーの情報
-        ...mapActions(["getLoginUserData"]),
-    }
-    }
+    //ログインしているユーザーの情報
+    ...mapActions(["getLoginUserData"]),
+    // loginモーダルの開閉
+    ...mapActions(["toggleLoginModal"])
+  }
+};
 </script>
 <style scoped>
 *:focus {
-outline: none;
+  outline: none;
 }
 
-.theme--light.v-app-bar.v-toolbar.v-sheet{
-    background-color: #fff;
-    position:relative;
-    height: 140px!important;
-    padding-top: 1em;
-
+.theme--light.v-app-bar.v-toolbar.v-sheet {
+  background-color: #fff;
+  position: relative;
+  height: 140px !important;
+  padding-top: 1em;
 }
 
-#line{
-    position: absolute;
-    width: 100%;
-    top: 1em;
-    z-index: -1;
-    left: 0;
+#line {
+  position: absolute;
+  width: 100%;
+  top: 1em;
+  z-index: -1;
+  left: 0;
 }
 
-.logo{
-    max-width: 400px;
-    margin: auto;
-    height: auto;
+.logo {
+  max-width: 400px;
+  margin: auto;
+  height: auto;
 }
 
-.v-toolbar{
-    box-shadow: none;
+.v-toolbar {
+  box-shadow: none;
 }
 
-.v-btn{
-    text-decoration: none;
+.v-btn {
+  text-decoration: none;
 }
 
-.nav,.space{
-    display: none;
+.nav,
+.space {
+  display: none;
 }
 
-@media screen and (max-width:415px){
-/*画面幅が415pxまでの時*/
-.logo{
+@media screen and (max-width: 415px) {
+  /*画面幅が415pxまでの時*/
+  .logo {
     width: 200px;
-}
+  }
 
-#line{
+  #line {
     padding-top: 1em;
     top: 3em;
-}
+  }
 
-#pen,#mypage,#books{
+  #pen,
+  #mypage,
+  #books {
     display: none;
-}
+  }
 
-.nav{
-    display:inline;
-}
+  .nav {
+    display: inline;
+  }
 
-.theme--light.v-app-bar.v-toolbar.v-sheet{
+  .theme--light.v-app-bar.v-toolbar.v-sheet {
     padding-top: 0;
+  }
 }
-}
-
 </style>
