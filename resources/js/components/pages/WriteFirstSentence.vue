@@ -6,7 +6,7 @@
             width="200px"
             >
         </v-img>
-
+        <Hint/>
         <!-- タイトル入力 -->
         <v-form>
             <div class="input-area" >
@@ -35,10 +35,13 @@
 <script>
 // インポート
 import { mapActions, mapGetters } from "vuex";
+import Hint from '../items/Hint.vue';
 
 // Vueの処理
 export default {
-    components: {},
+    components: {
+        Hint
+    },
     data() {
         return {
             //paper_novelsテーブルにPostするデータを格納
@@ -52,6 +55,8 @@ export default {
     },
     created() {
         this.fetchHeroData(this.$route.params.hero_id);
+        //ログインしてなかったらモーダル表示
+        // if (!this.$store.state.login) this.$store.state.drawerLoginModal = true;
     },
     mounted() {
         console.log(document.getElementById("first_sentence").textContent);
