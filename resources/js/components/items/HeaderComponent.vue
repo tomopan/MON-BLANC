@@ -1,7 +1,7 @@
 <template>
   <v-app-bar>
     <router-link :to="{ name: 'Top' }" style="text-decoration: none">
-      <v-btn icon>
+      <v-btn id="pen" icon>
         <v-avatar tile size="30">
           <img :src="'/img/header/pen2.png'" alt="pen" />
         </v-avatar>
@@ -10,7 +10,7 @@
 
     <!-- Find Storyへのリンク -->
     <router-link :to="{ name: 'FindStory'}">
-      <v-btn icon>
+      <v-btn id="books" icon>
         <v-avatar tile size="30">
           <img :src="'/img/header/books.png'" alt="books" />
         </v-avatar>
@@ -19,7 +19,7 @@
 
     <!-- Meet Storyへのリンク -->
     <router-link :to="{ name: 'MeetStory' }">
-      <v-btn icon>
+      <v-btn id="meet" icon>
         <v-icon color="#000">mdi-head-lightbulb-outline</v-icon>
       </v-btn>
     </router-link>
@@ -44,7 +44,7 @@
       :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }"
       id="mypage"
     >
-      <v-btn icon>
+      <v-btn id="mypage" icon>
         <v-avatar tile size="30">
           <img :src="'/img/header/mypage.png'" alt="mypage" />
         </v-avatar>
@@ -52,12 +52,15 @@
     </router-link>
 
     <!-- ログインボタン -->
-    <v-icon @click="toggleLoginModal" color="#000">mdi-login</v-icon>
+    <v-avatar tile size="30">
+        <v-icon @click="toggleLoginModal" color="red">mdi-login</v-icon>
+    </v-avatar>
     <LoginModal/>
 
     <!-- ログアウトボタン -->
+    <v-avatar tile size="30">
     <v-icon @click="logout" color="#000">mdi-logout</v-icon>
-
+    </v-avatar>
     <!-- ライン -->
     <img :src="'/img/header/line.png'" id="line" />
   </v-app-bar>
@@ -149,7 +152,8 @@ export default {
 
   #pen,
   #mypage,
-  #books {
+  #books,
+  #meet {
     display: none;
   }
 
@@ -161,4 +165,6 @@ export default {
     padding-top: 0;
   }
 }
+
+
 </style>
