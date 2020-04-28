@@ -3,7 +3,7 @@
         <!-- 主人公から探す -->
         <div class="hero-find">
             <vue-typer
-                repeat="0"
+                :repeat="0"
                 text="Find for Hero"
                 style="font-size:30px"
             ></vue-typer>

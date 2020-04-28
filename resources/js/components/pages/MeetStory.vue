@@ -1,22 +1,50 @@
 <template>
     <v-container class="text-center">
         <vue-typer
-            repeat
+            :repeat="0"
             text="Meet Storeis"
             style="font-size:30px"
         ></vue-typer>
         <br />
-        <v-icon @click="getRandom">
+        <br />
+        <v-icon large @click="getRandom">
             mdi-reload
         </v-icon>
-        <v-row class="fill-height" align="center" justify="center">
-            <div v-for="(novel, i) in randomNovels" :key="i">
-                <v-col>
-                    <v-img :src="flameImgUrl[i]" width="350px">
-                        <span class="text">{{ novel.first_sentence }}</span>
-                    </v-img>
-                </v-col>
-            </div>
+        <!-- カルーセルで表示 -->
+        <v-row
+            v-touch="{
+                left: () => swipe('Left'),
+                right: () => swipe('Right')
+            }"
+        >
+            <v-carousel cycle height="700" show-arrows-on-hover hide-delimiters>
+                <v-carousel-item v-for="(novel, i) in randomNovels" :key="i">
+                    <v-sheet height="100%" color="white">
+                        <v-row
+                            height="100%"
+                            class="fill-height"
+                            align="center"
+                            justify="center"
+                        >
+                            <router-link
+                                :to="{
+                                    name: 'ReadPaper',
+                                    params: {
+                                        hero_id: novel.hero_id,
+                                        paper_novel_id: novel.id
+                                    }
+                                }"
+                            >
+                                <v-img :src="flameImgUrl[i]" width="350px">
+                                    <span class="text">{{
+                                        novel.first_sentence
+                                    }}</span>
+                                </v-img>
+                            </router-link>
+                        </v-row>
+                    </v-sheet>
+                </v-carousel-item>
+            </v-carousel>
         </v-row>
     </v-container>
 </template>

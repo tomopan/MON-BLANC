@@ -213,7 +213,7 @@ use App\StoryPaper;
         public function random(){
             $novels = PaperNovel::inRandomOrder()
                     ->take(4)
-                    ->select('id','first_sentence')
+                    ->select('id','first_sentence','hero_id')
                     ->get();
             return response()->json($novels);
         }

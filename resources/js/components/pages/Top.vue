@@ -4,7 +4,7 @@
             <!-- choice your charactorここから -->
             <v-container class="pa-4 text-center">
                 <vue-typer
-                    repeat="0"
+                    :repeat="0"
                     text="choice your charactor"
                     style="font-size:30px"
                 ></vue-typer>
