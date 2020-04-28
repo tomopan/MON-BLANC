@@ -2,7 +2,7 @@
   <v-app-bar>
     <router-link :to="{ name: 'Top' }" style="text-decoration: none">
       <v-btn id="pen" icon>
-        <v-avatar tile size="30">
+        <v-avatar  size="30">
           <img :src="'/img/header/pen2.png'" alt="pen" />
         </v-avatar>
       </v-btn>
@@ -128,6 +128,7 @@ export default {
 
 .v-toolbar {
   box-shadow: none;
+  flex:none;
 }
 
 .v-btn {
@@ -165,6 +166,7 @@ export default {
     padding-top: 0;
   }
 }
+
 
 
 </style>
