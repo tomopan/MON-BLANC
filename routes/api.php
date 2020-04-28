@@ -78,6 +78,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     //小説タイトルを検索
     Route::get('find/paper_novel/{paper_novel_title}', 'Api\PaperNovelsController@find');
 
+    //小説をランダムで4つ取得
+    Route::get('get/paper_novel/random', 'Api\PaperNovelsController@random');
+
 
 
     // -----------StoryPapersテーブル----------- //

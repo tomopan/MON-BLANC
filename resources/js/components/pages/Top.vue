@@ -3,6 +3,11 @@
         <v-row class="fill-height" align="center" justify="center">
             <!-- choice your charactorここから -->
             <v-container class="pa-4 text-center">
+                <vue-typer
+                    :repeat="0"
+                    text="choice your charactor"
+                    style="font-size:30px"
+                ></vue-typer>
                 <p style="font-size:30px">choice your charactor</p>
                         <TopBase />
                     <!-- <v-row class="fill-height" align="center" justify="center">
@@ -23,7 +28,6 @@
                     </v-row> -->
             </v-container>
 
-
             <!-- read booksここから -->
             <v-container class="pa-4 text-center">
                 <p style="font-size:30px">read books</p>
@@ -33,13 +37,10 @@
                             <router-link
                                 :to="{
                                     name: 'ReadFirst',
-                                    params: { hero_id:hero.id },
+                                    params: { hero_id: hero.id }
                                 }"
                             >
-                                <v-img
-                                    :src="hero.img_url"
-                                    width="300px"
-                                >
+                                <v-img :src="hero.img_url" width="300px">
                                 </v-img>
                             </router-link>
                         </v-col>
@@ -60,15 +61,14 @@ export default {
     },
 
     data: () => ({
-        hero_imgs:[
-            {id:1,url:'img/charactors/akira.png'},
-            {id:2,url:'img/charactors/lisa.png'},
-            {id:3,url:'img/charactors/ami&karin.png'},
-            {id:4,url:'img/charactors/mari.png'},
-            {id:6,url:'img/charactors/rui.png'},
+        hero_imgs: [
+            { id: 1, url: "img/charactors/akira.png" },
+            { id: 2, url: "img/charactors/lisa.png" },
+            { id: 3, url: "img/charactors/ami&karin.png" },
+            { id: 4, url: "img/charactors/mari.png" },
+            { id: 6, url: "img/charactors/rui.png" }
         ],
-        heroes: [],
-
+        heroes: []
     }),
 
     created() {
@@ -96,10 +96,10 @@ export default {
 
 <style scoped>
 *:focus {
-outline: none;
+    outline: none;
 }
 
-a:hover{
+a:hover {
     text-decoration: none;
 }
 
@@ -112,13 +112,14 @@ a:hover{
     opacity: 0.8;
 }
 
-p{
-    font-family: 'Lao MN','serif';
+p {
+    font-family: "Lao MN", "serif";
 }
 
 .show-btns {
     color: rgba(255, 255, 255, 1) !important;
 }
+
 
 .stage{
     width: 100%;
