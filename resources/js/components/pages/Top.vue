@@ -8,7 +8,6 @@
                     text="choice your charactor"
                     style="font-size:30px"
                 ></vue-typer>
-                <p style="font-size:30px">choice your charactor</p>
                         <TopBase />
                     <!-- <v-row class="fill-height" align="center" justify="center">
                         <div v-for="(hero_img, id) in hero_imgs" :key="id">
