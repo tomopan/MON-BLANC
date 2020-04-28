@@ -13,6 +13,10 @@ window.$ = window.jQuery = require("jquery");
 // turn.js
 require("./turn");
 
+// typer
+import Typer from "vue-typer/dist/vue-typer";
+Vue.use(Typer);
+
 // ルートコンポーネントをインポートする
 import App from "./components/App.vue";
 
@@ -21,6 +25,7 @@ const app = new Vue({
     router,
     vuetify,
     store,
+    Typer,
     components: {
         App
     },

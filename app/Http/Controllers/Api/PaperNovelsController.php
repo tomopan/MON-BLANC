@@ -208,6 +208,15 @@ use App\StoryPaper;
             }
             return [];
         }
+
+        //ランダムで4つ取得
+        public function random(){
+            $novels = PaperNovel::inRandomOrder()
+                    ->take(4)
+                    ->select('id','first_sentence')
+                    ->get();
+            return response()->json($novels);
+        }
     }
     //=======================================================================
     
