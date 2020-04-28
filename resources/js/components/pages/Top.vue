@@ -4,7 +4,8 @@
             <!-- choice your charactorここから -->
             <v-container class="pa-4 text-center">
                 <p style="font-size:30px">choice your charactor</p>
-                    <v-row class="fill-height" align="center" justify="center">
+                        <TopBase />
+                    <!-- <v-row class="fill-height" align="center" justify="center">
                         <div v-for="(hero_img, id) in hero_imgs" :key="id">
                             <router-link
                                 :to="{
@@ -19,7 +20,7 @@
                                 </v-img>
                             </router-link>
                         </div>
-                    </v-row>
+                    </v-row> -->
             </v-container>
 
 
@@ -50,8 +51,13 @@
     <!-- </router-link> -->
 </template>
 <script>
+import TopBase from "./TopBase.vue";
+
 export default {
-    components: {},
+
+    components: {
+        TopBase
+    },
 
     data: () => ({
         hero_imgs:[
@@ -112,6 +118,11 @@ p{
 
 .show-btns {
     color: rgba(255, 255, 255, 1) !important;
+}
+
+.stage{
+    width: 100%;
+    height: 400px;
 }
 
 
