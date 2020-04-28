@@ -1,5 +1,21 @@
-<template>
-<svg id="people" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="people" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="1920px" height="1080px" viewBox="0 0 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#6AC0F7;}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:#FFD2E0;}
+	.st3{fill:#FFB7AC;}
+	.st4{fill:#D5E8B8;}
+	.st5{fill:#FFE8AE;}
+	.st6{fill:#B5BDD9;}
+	.st7{fill:#E3E2DE;}
+	.st8{fill:#C9EFF5;}
+	.st9{fill:#A3F0D9;}
+	.st10{fill:#FFD0FF;}
+	.st11{fill:#1A1A1A;}
+</style>
 <g id="circle">
 	<path class="st0" d="M421.9,653.3c-1.2,0-2.3-1-2.3-2.2c-0.1-1.2,1.1-2.4,2.3-2.4c1.2,0,2.4,1.2,2.3,2.4
 		C424.1,652.2,423,653.2,421.9,653.3z M435.6,494.8c-1.1,0-2.3-1-2.4-2.1c-0.1-1.2,1-2.4,2.2-2.5c1.1,0,2.3,1,2.4,2.1
@@ -4821,81 +4837,3 @@
 	</g>
 </g>
 </svg>
-
-</template>
-
-<script>
-</script>
-
-<style scoped>
-	.st0{fill:#6AC0F7;}
-	.st1{fill:#FFFFFF;}
-	.st2{fill:#FFD2E0;}
-	.st3{fill:#FFB7AC;}
-	.st4{fill:#D5E8B8;}
-	.st5{fill:#FFE8AE;}
-	.st6{fill:#B5BDD9;}
-	.st7{fill:#E3E2DE;}
-	.st8{fill:#C9EFF5;}
-	.st9{fill:#A3F0D9;}
-	.st10{fill:#FFD0FF;}
-	.st11{fill:#1A1A1A;}
-
-#keita_x5F_talk,#jun_x5F_talk,
-#nana_x5F_talk,#akira_x5F_talk,
-#daiki_x5F_talk,#sumire_x5F_talk,
-#mari_x5F_talk,#yuri_x5F_talk{
-    display: none;
-}
-
-#SUMIRE:hover ~ #sumire_x5F_talk,
-#sumire_x5F_talk:hover{
-    display: block;
-}
-#KEITA:hover ~ #keita_x5F_talk,
-#keita_x5F_talk:hover{
-    display: block;
-}
-#JUN:hover ~ #jun_x5F_talk,
-#jun_x5F_talk:hover{
-    display: block;
-}
-#NANA:hover ~ #nana_x5F_talk,
-#nana_x5F_talk:hover{
-    display: block;
-}
-#DAIKI:hover ~ #daiki_x5F_talk,
-#daiki_x5F_talk:hover{
-    display: block;
-}
-#MARI:hover ~ #mari_x5F_talk,
-#mari_x5F_talk:hover{
-    display: block;
-}
-#YURI:hover ~ #yuri_x5F_talk,
-#yuri_x5F_talk:hover{
-    display: block;
-}
-#AKIRA:hover ~ #akira_x5F_talk,
-#akira_x5F_talk:hover{
-    display: block;
-}
-
-#Button01{
-
-}
-#Button02{
-
-}
-#Button03{
-
-}
-#Button04{
-
-}
-#Button05,#Button06,
-#Button07,#Button08{
-
-}
-
-</style>
