@@ -25,7 +25,8 @@
                                         @click="
                                             openNovel(
                                                 i,
-                                                closeNovel.user_paper_order
+                                                closeNovel.user_paper_order,
+                                                closeNovel.title
                                             )
                                         "
                                         >公開する</v-btn
@@ -55,6 +56,29 @@
                 </v-row>
             </v-col>
         </v-row>
+        <!-- タイトル未入力の時のモーダル -->
+        <v-row justify="center">
+            <v-dialog v-model="dialog" persistent max-width="300">
+                <v-card>
+                    <v-card-title class="headline"
+                        >物語のタイトルを書きましょう</v-card-title
+                    >
+                    <v-card-text
+                        >ヒントから考えるのも、良いかもしれません</v-card-text
+                    >
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            color="green darken-1"
+                            text
+                            @click="dialog = false"
+                            >閉じる</v-btn
+                        >
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-row>
+        <!-- モーダルここまで -->
     </div>
 </template>
 
@@ -85,7 +109,8 @@ export default {
                 "space-around",
                 "space-between"
             ],
-            justify: "center"
+            justify: "center",
+            dialog: false
         };
     },
     watch: {
@@ -121,7 +146,12 @@ export default {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
         },
-        openNovel: function(i, user_paper_order) {
+        openNovel: function(i, user_paper_order,title) {
+            // タイトルのバリデーション
+            if (title == null) {
+                this.dialog = true;
+                return;
+            }
             axios
                 .post("api/update/paper_novel_open/" + user_paper_order)
                 .then(res => {})

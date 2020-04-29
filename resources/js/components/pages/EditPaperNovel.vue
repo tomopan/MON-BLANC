@@ -79,6 +79,7 @@
             </grid-item>
         </grid-layout>
 
+    <!-- ボタンたち -->
         <!-- 本完成ボタン -->
         <div>
             <v-img
@@ -133,6 +134,7 @@
                 </v-card>
             </v-dialog>
         </v-row>
+        <!-- モーダルここまで -->
     </div>
 </template>
 
@@ -228,7 +230,6 @@ export default {
                 });
         },
         showPapers: function(tab) {
-            console.log(tab);
             let active_tab = tab;
             // 表示用の配列
             this.active_page_novels = this.papers.slice(
