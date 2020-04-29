@@ -18,6 +18,13 @@ use Illuminate\Support\Facades\Route;
     Route::get('/', function () {
         return view('index');
     });
+    Route::get('/lp', function () {
+        return view('lp');
+    });
+    Route::get('/lpScroll', function () {
+        return view('lpScroll');
+    });
+
 // });
 
 // Route::get('/', function() {
