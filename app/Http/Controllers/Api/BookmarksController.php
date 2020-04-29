@@ -27,6 +27,23 @@ use App\PaperNovel;
 
         }
 
+        public function check($paper_novel_id)
+        { 
+            //ユーザー情報取得
+            $userId = Auth::id();
+            //登録する情報を格納
+            $bookmark = Bookmark::where('user_id','=',$userId)
+                                ->where('paper_novel_id','=',$paper_novel_id)
+                                ->exists();
+            if($bookmark) {
+                $bookmark  = Bookmark::where('user_id','=',$userId)
+                        ->where('paper_novel_id','=',$paper_novel_id)
+                        ->select('id')
+                        ->get();
+            }
+            return response()->json($bookmark);
+        }
+
         public function show()
         { 
             //ユーザー情報取得
@@ -36,7 +53,7 @@ use App\PaperNovel;
                                 ->where('b.user_id','=',$userId)
                                 ->join('paper_novels as p','p.id','=','b.paper_novel_id')
                                 ->join('heroes as h','h.id','=','p.hero_id')
-                                ->select('b.id','p.title','paper_novel_id','h.img_url')
+                                ->select('b.id','p.title','paper_novel_id','h.img_url','p.hero_id')
                                 ->get();
             return response()->json($bookmark_novels);
         }
