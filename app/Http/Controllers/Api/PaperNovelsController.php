@@ -82,6 +82,8 @@ use App\StoryPaper;
                     ->join('users as u','u.id','=','n.user_id')
                     ->where('n.hero_id', '=', $hero_id)
                     ->where('n.status', '=', 1)
+                    ->orderBy('n.created_at')
+                    ->take(20)
                     ->select('u.name','n.id','n.hero_id','n.title','n.user_id','n.status','n.first_sentence')
                     ->get();
 

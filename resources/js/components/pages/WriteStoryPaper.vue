@@ -164,7 +164,7 @@ export default {
                     //最初のストーリーペーパーだったら、モーダルとファーストセンテンスを挿入する処理
                     if(this.PaperNovelData.story_number == 1){
                         this.isFristStoryPaper = true;
-                        this.dialog = true
+                        // this.dialog = true
                     }
                 })
                 .catch((err) => {

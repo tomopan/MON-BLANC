@@ -86,7 +86,7 @@ export default {
                     console.log(res.data);
                     //Write.vueへページ遷移させる
                     this.$router.push({
-                        name: "WriteStoryPaper",
+                        name: "EditStoryPaper",
                         params: {
                             user_paper_order: res.data.user_paper_order,
                             story_number:1
