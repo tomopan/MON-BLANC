@@ -80,6 +80,7 @@
             letter-spacing:1em;
             text-align:center;
             text-indent:1em;
+            cursor: pointer;
         }
     </style>
 
@@ -133,7 +134,7 @@
                     <img src="{{asset('img/lp/find.png')}}" alt="">
                 </div>
             </div>
-            <button>はじめる</button>
+            <button onclick="location.href='{{url('/')}}'">はじめる</button>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

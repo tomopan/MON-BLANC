@@ -15,59 +15,75 @@ use Illuminate\Database\Seeder;
 
             DB::table('heroes')->insert(
             [
-            'img_url' => 'img/books/hero1.png',
+            'img_url' => 'img/books/AKIRA.png',
             'hero_name' => 'AKIRA',
-            'hero_birth' => '1992',
+            'hero_birth' => '28',
             "created_at" => $faker->dateTime("now"),
             "updated_at" => $faker->dateTime("now")
             ]
             );
             DB::table('heroes')->insert(
             [
-            'img_url' => 'img/books/hero2.png',
-            'hero_name' => 'LISA',
-            'hero_birth' => '1996',
+            'img_url' => 'img/books/SUMIRE.png',
+            'hero_name' => 'SUMIRE',
+            'hero_birth' => '28',
             "created_at" => $faker->dateTime("now"),
             "updated_at" => $faker->dateTime("now")
             ]
             );
             DB::table('heroes')->insert(
             [
-            'img_url' => 'img/books/hero3.png',
-            'hero_name' => 'AMI',
-            'hero_birth' => '1863',
+            'img_url' => 'img/books/JUN.png',
+            'hero_name' => 'JUN',
+            'hero_birth' => '24',
             "created_at" => $faker->dateTime("now"),
             "updated_at" => $faker->dateTime("now")
             ]
             );
             DB::table('heroes')->insert(
             [
-            'img_url' => 'img/books/hero4.png',
+            'img_url' => 'img/books/MARI.png',
             'hero_name' => 'MARI',
-            'hero_birth' => '1995',
+            'hero_birth' => '35',
             "created_at" => $faker->dateTime("now"),
             "updated_at" => $faker->dateTime("now")
             ]
             );
             DB::table('heroes')->insert(
             [
-            'img_url' => 'img/books/hero5.png',
-            'hero_name' => 'KARIN',
-            'hero_birth' => '2016',
+            'img_url' => 'img/books/YURI.png',
+            'hero_name' => 'YURI',
+            'hero_birth' => '27',
             "created_at" => $faker->dateTime("now"),
             "updated_at" => $faker->dateTime("now")
             ]
             );
             DB::table('heroes')->insert(
             [
-            'img_url' => 'img/books/hero6.png',
-            'hero_name' => 'RUI',
-            'hero_birth' => '1986',
+            'img_url' => 'img/books/NANA.png',
+            'hero_name' => 'NANA',
+            'hero_birth' => '25',
             "created_at" => $faker->dateTime("now"),
             "updated_at" => $faker->dateTime("now")
             ]
             );
-
-
+            DB::table('heroes')->insert(
+            [
+            'img_url' => 'img/books/KEITA.png',
+            'hero_name' => 'KEITA',
+            'hero_birth' => '32',
+            "created_at" => $faker->dateTime("now"),
+            "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('heroes')->insert(
+            [
+            'img_url' => 'img/books/DAIKI.png',
+            'hero_name' => 'DAIKI',
+            'hero_birth' => '30',
+            "created_at" => $faker->dateTime("now"),
+            "updated_at" => $faker->dateTime("now")
+            ]
+            );
         }
     }
