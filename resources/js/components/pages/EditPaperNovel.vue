@@ -1,13 +1,11 @@
 <template>
     <div>
         <div class="text-xs-center">
-            <!-- <v-card> -->
             <v-tabs v-model="tab" centered center-active @change="showPapers">
                 <v-tab v-for="n in page_length" :key="n">
                     {{ n }}
                 </v-tab>
             </v-tabs>
-            <!-- </v-card> -->
         </div>
         <grid-layout
             :layout.sync="layout"
@@ -81,8 +79,6 @@
             </grid-item>
         </grid-layout>
 
-        <!-- ペーパー追加ボタン -->
-
         <!-- 本完成ボタン -->
         <div>
             <v-img
@@ -111,6 +107,28 @@
             <br />
             <v-img class="icon" src="img/write-page/tutorial.png"> </v-img>
         </div>
+        <!-- タイトル未入力の時のモーダル -->
+        <v-row justify="center">
+            <v-dialog v-model="dialog" persistent max-width="300">
+                <v-card>
+                    <v-card-title class="headline"
+                        >物語のタイトルを書きましょう</v-card-title
+                    >
+                    <v-card-text
+                        >ヒントから考えるのも、良いかもしれません</v-card-text
+                    >
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            color="green darken-1"
+                            text
+                            @click="dialog = false"
+                            >閉じる</v-btn
+                        >
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-row>
     </div>
 </template>
 
@@ -147,7 +165,9 @@ export default {
             // ページネイション
             page_length: [1],
             tab: null,
-            active_page_novels: ""
+            active_page_novels: "",
+            // モーダル
+            dialog: false
         };
     },
     created() {
@@ -231,6 +251,11 @@ export default {
             });
         },
         openNovel: function() {
+            // タイトルのバリデーション
+            if (this.PaperNovelData.title == null) {
+                this.dialog = true;
+                return;
+            }
             axios
                 .post(
                     "api/update/paper_novel_open/" +
