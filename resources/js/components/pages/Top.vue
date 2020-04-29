@@ -26,26 +26,6 @@
                         </div>
                     </v-row> -->
             </v-container>
-
-            <!-- read booksここから -->
-            <v-container class="pa-4 text-center">
-                <p style="font-size:30px">read books</p>
-                <v-row class="fill-height" align="center" justify="center">
-                    <div v-for="(hero, id) in heroes" :key="id">
-                        <v-col :key="id">
-                            <router-link
-                                :to="{
-                                    name: 'ReadFirst',
-                                    params: { hero_id: hero.id }
-                                }"
-                            >
-                                <v-img :src="hero.img_url" width="300px">
-                                </v-img>
-                            </router-link>
-                        </v-col>
-                    </div>
-                </v-row>
-            </v-container>
         </v-row>
     </v-container>
     <!-- </router-link> -->
@@ -60,13 +40,6 @@ export default {
     },
 
     data: () => ({
-        hero_imgs: [
-            { id: 1, url: "img/charactors/akira.png" },
-            { id: 2, url: "img/charactors/lisa.png" },
-            { id: 3, url: "img/charactors/ami&karin.png" },
-            { id: 4, url: "img/charactors/mari.png" },
-            { id: 6, url: "img/charactors/rui.png" }
-        ],
         heroes: []
     }),
 
@@ -81,9 +54,7 @@ export default {
             axios
                 .get("api/get/hero")
                 .then(res => {
-                    console.log(res.data);
                     this.heroes = res.data;
-                    console.log(this.heroes);
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
