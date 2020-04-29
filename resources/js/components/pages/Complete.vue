@@ -11,6 +11,21 @@
         >
             <v-img class="icon" src="img/write-page/continue.png"> </v-img>
         </router-link>
+
+        <v-row align="center" justify="center">
+            <router-link
+                :to="{
+                    name: 'ReadPaper',
+                    params: {
+                        hero_id: PaperNovelData.hero_id,
+                        paper_novel_id: PaperNovelData.id
+                    }
+                }"
+            >
+                <v-img :src="HeroData.img_url" max-width="300px"></v-img>
+            </router-link>
+        </v-row>
+        <p>{{ PaperNovelData.title }}</p>
     </div>
 </template>
 
@@ -24,15 +39,13 @@ export default {
     components: {},
     data() {
         return {
-            PaperNovelData:"",
+            PaperNovelData: ""
         };
     },
 
     created() {
         // 小説のデータを取得
         this.showNovel();
-        //主人公データを取得
-        this.fetchHeroData(this.PaperNovelData.hero_id);
     },
     beforeMount() {},
     mounted() {},
@@ -51,8 +64,9 @@ export default {
                 )
                 .then(res => {
                     this.PaperNovelData = res.data;
-                    //タイトルの場合はtoggleをtrue
-                    if (this.PaperNovelData.title) this.title_toggle = true;
+                    console.log(this.PaperNovelData);
+                    //主人公データを取得
+                    this.fetchHeroData(this.PaperNovelData.hero_id);
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
@@ -67,7 +81,13 @@ export default {
     margin: 0 auto;
     text-align: center;
 }
+.content {
+    margin: 0 auto;
+    text-align: center;
+}
 .icon {
     width: 100px;
+    cursor: pointer;
+    position: fixed;
 }
 </style>
