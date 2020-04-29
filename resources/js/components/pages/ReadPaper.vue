@@ -1,30 +1,91 @@
 <template>
     <v-container>
-        <p>作者:</p>
-        <router-link
-            :to="{
-                name: 'Profile',
-                params: {
-                    user_name: WriterData.user_name
-                }
-            }"
-            >{{ WriterData.name }}</router-link
-        >
-        <p>マークされた数：{{ MarkCount }}</p>
+        <!-- <p>マークされた数：{{ MarkCount }}</p>
         <p>選択中ストーリー番号：{{ markedStoryId }}</p>
-        <p>選択中テキスト：{{ markedText }}</p>
-        <v-btn id="save" @click="saveMarkText">マークする</v-btn>
-        <v-btn @click="saveBookmark">ブックマークする</v-btn>
-
-
-<!-- マークアップありの実装を取っておく -->
-        <!-- <v-col v-for="(story, i) in StoryPapersData" :key="i">
-            <div class="paper" @mouseup="getMarkText(story.id)">
-                <div class="story_text" v-html="story.text"></div>
+        <p>選択中テキスト：{{ markedText }}</p> -->
+        <v-row align="center" justify="center">
+            <!-- ボタンエリア -->
+            <div class="btns">
+                <v-icon color="#000" @click="dialog = true" large
+                    >mdi-script-text-outline</v-icon
+                >
+                <v-icon
+                    v-if="!bookmarkToggle"
+                    color="#000"
+                    @click="saveBookmark"
+                    large
+                    >mdi-bookmark-outline</v-icon
+                >
+                <v-icon
+                    v-else-if="bookmarkToggle"
+                    color="#000"
+                    @click="deleteBookmark"
+                    large
+                    >mdi-bookmark</v-icon
+                >
+                <!-- タイトル未入力の時のモーダル -->
+                <v-row justify="center">
+                    <v-dialog v-model="dialog" persistent max-width="300">
+                        <v-card v-if="markedText">
+                            <v-card-title class="headline"
+                                >文章をマーク</v-card-title
+                            >
+                            <v-card-text>{{ markedText }}</v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn
+                                    color="green darken-1"
+                                    text
+                                    @click="saveMarkText"
+                                    >保存</v-btn
+                                >
+                            <!-- <div v-else-if="!markedText">
+                                <v-card-title class="headline"
+                                >文章を選択して</v-card-title
+                            >
+                            </div> -->
+                                <v-btn
+                                    color="green darken-1"
+                                    text
+                                    @click="dialog = false"
+                                    >閉じる</v-btn
+                                >
+                            </v-card-actions>
+                        </v-card>
+                        <v-card v-if="!markedText">
+                            <v-card-title class="headline"
+                                >文章を選択してください</v-card-title
+                            >
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn
+                                    color="green darken-1"
+                                    text
+                                    @click="dialog = false"
+                                    >閉じる</v-btn
+                                >
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-row>
+                <!-- モーダルここまで -->
             </div>
-        </v-col> -->
-
-        <div id="magazine" class="paper"></div>
+            <!-- 本エリア -->
+            <div id="book" class="paper" @mouseup="getMarkText()">
+                <div class="story_text">
+                    <span class="title_text">{{ this.Title }}</span>
+                    <router-link
+                        :to="{
+                            name: 'Profile',
+                            params: {
+                                user_name: WriterData.user_name
+                            }
+                        }"
+                        >{{ WriterData.name }}</router-link
+                    >
+                </div>
+            </div>
+        </v-row>
     </v-container>
 </template>
 
@@ -45,24 +106,21 @@ export default {
             markedText: "",
             markedStoryId: "",
             postMarkedText: {},
-            // テスト
-            items: [1, 2, 3, 4]
+            // ブックマークしてるか
+            bookmarkToggle: "",
+            dialog: false
         };
     },
 
     created() {
         this.showTitle();
         this.showStoryPapers();
+        this.checkBookmark();
         this.showMarkCount();
     },
     mounted() {
         this.$nextTick(function() {
-            const test = document.getElementById("magazine");
-            // const test2 = document.getElementById("magazine2");
-            console.log(test);
-            // console.log(test2);
-            // $("#magazine2").turn();
-            // $("#magazine").turn();
+            const test = document.getElementById("book");
         });
     },
     methods: {
@@ -78,13 +136,13 @@ export default {
                     this.StoryPapersData.forEach(el => {
                         el.text = el.text.replace(/\\n|\r\n|\r|\n/g, "<br>");
                         // DOMを追加（ここからじゃないとTurn.js使えない）
-                        $("#magazine").append(
-                            "<div class='story_text' style='writing-mode: vertical-rl; background-color:#fffcfc'><br/><br/><span style='margin:50px'>" +
+                        $("#book").append(
+                            "<div class='story_text' style='writing-mode: vertical-rl; background-color:#fff'><br/><br/><span style='padding:50px'>" +
                                 el.text +
                                 "</span></div>"
                         );
                     });
-                    $("#magazine").turn({ direction: "rtl" });
+                    this.turnPage();
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
@@ -108,26 +166,20 @@ export default {
                         this.WriterData.name = res.data.name;
                         this.WriterData.user_name = res.data.user_name;
                     }
-                    // DOMを追加（ここからじゃないとTurn.js使えない）
-                    $("#magazine").append(
-                        "<div class='story_text' style='writing-mode: vertical-rl; background-color:#fffcfc'><br/><br/><span style='margin:10%'>『" +
-                            this.Title +
-                            "』</span></div>"
-                    );
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
                 });
         },
         //マーカー機能
-        getMarkText: function(story_paper_id) {
+        getMarkText: function() {
             //要素のIDを取得
             const story_area = document.getElementsByClassName("story_area");
             //テキストを代入
             const selectedText = window.getSelection().toString();
             this.markedText = selectedText;
             //ストーリー番号を代入
-            this.markedStoryId = story_paper_id;
+            this.markedStoryId = 1;
         },
         saveMarkText: function() {
             //POSTするデータを格納
@@ -137,7 +189,6 @@ export default {
             this.postMarkedText.story_paper_id = this.markedStoryId;
             //テキスト
             this.postMarkedText.text = this.markedText;
-
             axios
                 .post("api/post/mark_text", this.postMarkedText)
                 .then(res => {})
@@ -156,16 +207,50 @@ export default {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
                 });
         },
-        // ブックマーク
+        // ブックマークする
         saveBookmark: function() {
             axios
                 .post("api/post/bookmark/" + this.$route.params.paper_novel_id)
                 .then(res => {
-                    console.log(res.data);
+                    this.checkBookmark();
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
                 });
+        },
+        // ブックマークを外す
+        deleteBookmark: function() {
+            axios
+                .post("api/destroy/bookmark/" + this.bookmarkToggle)
+                .then(res => {
+                    this.checkBookmark();
+                })
+                .catch(err => {
+                    console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
+                });
+        },
+        // ブックマークしてるか確かめる
+        checkBookmark: function() {
+            axios
+                .get("api/check/bookmark/" + this.$route.params.paper_novel_id)
+                .then(res => {
+                    console.log(res.data);
+                    if (!res.data) this.bookmarkToggle = false;
+                    else this.bookmarkToggle = res.data[0].id;
+                    console.log(this.bookmarkToggle);
+                })
+                .catch(err => {
+                    console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
+                });
+        },
+        // turn.jsの処理
+        turnPage: function() {
+            // DOMを追加（ここからじゃないとTurn.js使えない）
+            $("#book").turn({
+                direction: "rtl",
+                width: 1076,
+                height: 700
+            });
         }
     }
 };
@@ -179,6 +264,7 @@ export default {
 .container {
     font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
         "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
+    background-color: #fffcfc;
 }
 
 .paper {
@@ -199,5 +285,11 @@ export default {
     overflow-x: scroll;
     outline: none;
     white-space: pre-wrap;
+    background-color: white;
+    text-align: center;
+    justify-content: center;
+}
+.title_text {
+    margin: 10% 20%;
 }
 </style>

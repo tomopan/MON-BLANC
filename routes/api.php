@@ -124,5 +124,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     //ブックマークを取得する
     Route::get('get/bookmarks', 'Api\BookmarksController@show');
 
+    //ブックマークを判定する
+    Route::get('check/bookmark/{paper_novel_id}', 'Api\BookmarksController@check');
+
 
 // });
