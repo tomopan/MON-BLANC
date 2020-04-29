@@ -14,45 +14,43 @@
                         height="200px"
                         class="novel_card ma-4"
                     >
-                        <!-- <router-link
-                            :to="{
-                                name: 'ReadPaper',
-                                params: {
-                                    hero_id:closeNovel.hero_id,
-                                    paper_novel_id: closeNovel.id
-                                }
-                            }"
-                        > -->
-                            <v-img
-                                :src="closeNovel.img_url"
-                                height="170px"
-                            ></v-img>
-                            <p class="paper_text">{{ closeNovel.title }}</p>
-                        <!-- </router-link> -->
-                        <v-row>
-                        <v-btn
-                            class="ma-2"
-                            tile
-                            outlined
-                            @click="openNovel(i, closeNovel.user_paper_order)"
-                            >公開する</v-btn
-                        >
-                        <router-link
-                            :to="{
-                                    name: 'EditPaperNovel',
-                                    params: {
-                                        user_paper_order: closeNovel.user_paper_order
-                                    }
-                                    }"
+                        <v-hover v-slot:default="{ hover }" open-delay="100">
+                            <div>
+                                <v-img :src="closeNovel.img_url" height="170px">
+                                    <v-btn
+                                        :class="{ 'show-btns': hover }"
+                                        color="transparent"
+                                        tile
+                                        outlined
+                                        @click="
+                                            openNovel(
+                                                i,
+                                                closeNovel.user_paper_order
+                                            )
+                                        "
+                                        >公開する</v-btn
+                                    >
+                                    <router-link
+                                        :to="{
+                                            name: 'EditPaperNovel',
+                                            params: {
+                                                user_paper_order:
+                                                    closeNovel.user_paper_order
+                                            }
+                                        }"
+                                    >
+                                        <v-btn
+                                            :class="{ 'show-btns': hover }"
+                                            color="transparent"
+                                            tile
+                                            outlined
+                                            >編集</v-btn
+                                        >
+                                    </router-link></v-img
                                 >
-                        <v-btn
-                            class="ma-2"
-                            tile
-                            outlined
-                            >編集</v-btn
-                        >
-                        </router-link>
-                        </v-row>
+                                <p class="paper_text">{{ closeNovel.title }}</p>
+                            </div>
+                        </v-hover>
                     </v-card>
                 </v-row>
             </v-col>
@@ -69,7 +67,7 @@ export default {
     data() {
         return {
             //非公開のペーパーノベルのデータを格納
-            closePaperNovels:[],
+            closePaperNovels: [],
             // グリッド用
             alignmentsAvailable: [
                 "start",
@@ -91,12 +89,12 @@ export default {
         };
     },
     watch: {
-    '$route' (to, from) {
-      // ルートの変更の検知
-      if (to.path !== from.path) {
-        this.showNovelsClosed();
-      }
-    }
+        $route(to, from) {
+            // ルートの変更の検知
+            if (to.path !== from.path) {
+                this.showNovelsClosed();
+            }
+        }
     },
     created() {
         // this.showWritedEpisode();
@@ -126,8 +124,7 @@ export default {
         openNovel: function(i, user_paper_order) {
             axios
                 .post("api/update/paper_novel_open/" + user_paper_order)
-                .then(res => {
-                })
+                .then(res => {})
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
@@ -140,22 +137,26 @@ export default {
 
 <style scoped>
 *:focus {
-outline: none;
+    outline: none;
 }
 
-.font{
-    font-family: 'ヒラギノ明朝 ProN','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
+.font {
+    font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
+        "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
 }
 
 .novel_card {
     text-align: center;
 }
 
-.v-btn{
+.v-btn {
     color: #333;
 }
-p{
+p {
     color: #333;
 }
-
+/* ホバー時に出すボタン */
+.show-btns {
+    color: rgba(0, 0, 1) !important;
+}
 </style>

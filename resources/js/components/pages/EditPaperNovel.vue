@@ -106,6 +106,10 @@
             <br />
             <br />
             <v-img class="icon" src="img/write-page/tutorial.png"> </v-img>
+            <br />
+            <br />
+            <br />
+            <v-img class="icon" src="img/write-page/continue.png" @click="$router.go(-1)"> </v-img>
         </div>
         <!-- タイトル未入力の時のモーダル -->
         <v-row justify="center">
