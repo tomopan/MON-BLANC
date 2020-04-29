@@ -19,8 +19,8 @@ use Illuminate\Database\Seeder;
                 "hero_id" => 1,
                 "user_id" => 2,
                 "user_paper_order" => 1,
-                "title" => "テストタイトル",
-                "first_sentence" => "テストです。",
+                "title" => "あきらのタイトル",
+                "first_sentence" => "「テスト」と言っても、学生時代と今とでは、随分と意味が違ったように聞こえる。",
                 "status" => 1,
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")
@@ -31,8 +31,8 @@ use Illuminate\Database\Seeder;
                 "hero_id" => 2,
                 "user_id" => 1,
                 "user_paper_order" => 1,
-                "title" => "テストタイトル",
-                "first_sentence" => "テストです。",
+                "title" => "すみれのタイトル",
+                "first_sentence" => "私はパンケーキなど食べたくない、と言えたら幸せだった。",
                 "status" => 1,
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")
@@ -43,8 +43,8 @@ use Illuminate\Database\Seeder;
                 "hero_id" => 1,
                 "user_id" => 2,
                 "user_paper_order" => 2,
-                "title" => "テストタイトル",
-                "first_sentence" => "テストです。",
+                "title" => "あきらの仮タイトル",
+                "first_sentence" => "彼が後にお盆を股間にあてがう芸人になろうとは、誰も予想できなかった。",
                 "status" => 0,
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")
@@ -55,8 +55,8 @@ use Illuminate\Database\Seeder;
                 "hero_id" => 2,
                 "user_id" => 1,
                 "user_paper_order" => 2,
-                "title" => "テストタイトル",
-                "first_sentence" => "テストです。",
+                "title" => "すみれの仮タイトル",
+                "first_sentence" => "ラーメンみたいな名前をつけられて、呼ばれるたびに私はお腹が空く。",
                 "status" => 0,
                 "created_at" => $faker->dateTime("now"),
                 "updated_at" => $faker->dateTime("now")

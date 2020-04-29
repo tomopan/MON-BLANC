@@ -74,8 +74,6 @@ export default {
                 )
                 .then(res => {
                     this.StoryPapersData = res.data;
-                    //ファーストセンテンスページは消す
-                    this.StoryPapersData.shift();
                     //改行コードを<br>に変換
                     this.StoryPapersData.forEach(el => {
                         el.text = el.text.replace(/\\n|\r\n|\r|\n/g, "<br>");

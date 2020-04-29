@@ -211,7 +211,8 @@ use App\StoryPaper;
 
         //ランダムで4つ取得
         public function random(){
-            $novels = PaperNovel::inRandomOrder()
+            $novels = PaperNovel::where('status','=','1')
+                    ->inRandomOrder()
                     ->take(4)
                     ->select('id','first_sentence','hero_id')
                     ->get();
