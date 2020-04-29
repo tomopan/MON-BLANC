@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="4;URL=/lpScroll">.
+    <meta http-equiv="refresh" content="4;URL=/lpScroll">
     <title>MON BLANC</title>
     <style>
         *:focus {
@@ -42,7 +42,16 @@
             left: 0;
             position: absolute;
         }
+        .color{
+            opacity:0;
+        }
 
+        @media screen and (max-width: 415px) {
+        p{
+            font-size:40px;
+            text-align:center;
+        }
+        }
     </style>
 
 </head>
@@ -52,7 +61,7 @@
         <div><img class="logo" src="{{asset('img/lp/logo.png')}}" alt="logo"></div>
             <div id="images">
                     <img class="library" src="{{asset('img/lp/library.png')}}" alt="library">
-                    <img class="library" src="{{asset('img/lp/libraryColor.png')}}" alt="libraryColor">
+                    <img class="library color" src="{{asset('img/lp/libraryColor.png')}}" alt="libraryColor">
             </div>
         <div><p class="stayHome">Stay home, stay safe with story.</p></div>
     </div>
@@ -61,7 +70,7 @@
             $(function(){
                 var setImg = '#images';
                 var fadeSpeed = 1400;
-                var switchDelay = 2000;
+                var switchDelay = 2500;
 
                 $(setImg).children('img').css({opacity:'0'});
                 $(setImg + ' img:first').stop().animate({opacity:'1',zIndex:'20'},fadeSpeed);

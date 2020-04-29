@@ -6,14 +6,21 @@
     <title>MON BLANC</title>
     <style>
         *:focus {
-        outline: none;
+            outline: none;
         }
+        body{
+            background-color:#F7E9D1;
+            margin : 0;
+            padding : 0;
+            overflow-x: hidden;
+        }
+
         .blank{
             height:400px;
             display:block;
         }
 
-        .wrap{
+        p{
             font-family: "Futura","游ゴシック体", "YuGothic";
             color:#4B4949;
             opacity:85%;
@@ -24,6 +31,7 @@
             flex-direction: column;
             justify-content: center;
             align-items:  center;
+            background-color:#fff;
         }
 
         .pre{
@@ -33,7 +41,6 @@
         }
 
         .orange{
-            background-color:#F7E9D1;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -57,6 +64,10 @@
             font-weight:bold;
             font-size:2em;
         }
+        /* .white{
+            overflow-x: hidden;
+
+        } */
         img{
             height:300px;
             margin: 0 30px;
@@ -82,6 +93,47 @@
             text-indent:1em;
             cursor: pointer;
         }
+        button:hover{
+            background-color:#4f3f26;
+        }
+
+        @media screen and (max-width: 415px) {
+        .pre{
+            font-size:18px;
+            text-align:center;
+            margin-bottom:0;
+        }
+        .blank{
+            height:560px;
+            display:block;
+        }
+        .card{
+            flex-direction: column;
+            justify-content: center;
+            width:250px;
+            height:500px;
+            margin:3em 2em 4em 2em;
+        }
+        img{
+            height:200px;
+        }
+        button{
+            border-radius:40px;
+        }
+        .title{
+            font-size:18px;
+            text-align:center;
+            margin:0 auto;
+        }
+        .sentences{
+            font-size:12px;
+            text-align:center;
+        }
+        .meet{
+            order:1;
+        }
+        }
+
     </style>
 
 </head>
@@ -110,7 +162,7 @@
             </div>
             <div class="second">
                 <div class="card">
-                    <img src="{{asset('img/lp/meet.png')}}" alt="">
+                    <img class="meet" src="{{asset('img/lp/meet.png')}}" alt="">
                     <div class="right">
                         <p class="title">心に留まる第一文と出会おう</p>
                         <div class="sentences">
