@@ -4,6 +4,7 @@
         <div class="hero-find">
             <vue-typer
                 :repeat="0"
+                :type-delay="100"
                 text="Find for Hero"
                 style="font-size:30px"
             ></vue-typer>
@@ -24,12 +25,12 @@
         </div>
 
         <!-- タイトルから探す -->
-        <div class="title-find">
+        <!-- <div class="title-find">
             <p style="font-size:30px">タイトルから探す</p>
             <input type="text" placeholder="タイトル" v-model="title" />
-            <v-btn small @click="findTitle(title)">検索</v-btn>
-            <!-- 検索結果を表示 -->
-            <ul>
+            <v-btn small @click="findTitle(title)">検索</v-btn> -->
+        <!-- 検索結果を表示 -->
+        <!-- <ul>
                 <li v-for="novel in findNovels">
                     <router-link
                         :to="{
@@ -44,7 +45,7 @@
                     </router-link>
                 </li>
             </ul>
-        </div>
+        </div> -->
     </v-container>
 </template>
 <script>
