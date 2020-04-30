@@ -1,9 +1,10 @@
 <template>
   <v-app-bar>
+    <v-col cols="3" class="spn">
     <router-link :to="{ name: 'Top' }" style="text-decoration: none">
       <v-btn id="pen" icon>
         <v-avatar  size="30">
-          <img :src="'/img/header/pen2.png'" alt="pen" />
+          <img :src="'/img/header/writing.png'" alt="pen" />
         </v-avatar>
       </v-btn>
     </router-link>
@@ -12,7 +13,7 @@
     <router-link :to="{ name: 'FindStory'}">
       <v-btn id="books" icon>
         <v-avatar tile size="30">
-          <img :src="'/img/header/books.png'" alt="books" />
+          <img :src="'/img/header/frame.png'" alt="frame" />
         </v-avatar>
       </v-btn>
     </router-link>
@@ -20,49 +21,52 @@
     <!-- Meet Storyへのリンク -->
     <router-link :to="{ name: 'MeetStory' }">
       <v-btn id="meet" icon>
-        <v-icon color="#000">mdi-head-lightbulb-outline</v-icon>
+          <v-avatar tile size="30">
+            <img :src="'/img/header/reading.png'" alt="read" />
+          </v-avatar>
       </v-btn>
     </router-link>
+    </v-col>
+      <v-spacer class="nav"></v-spacer>
+      <v-spacer class="nav"></v-spacer>
+      <v-spacer class="nav"></v-spacer>
 
-    <v-spacer class="nav"></v-spacer>
-    <v-spacer class="nav"></v-spacer>
-    <v-spacer class="nav"></v-spacer>
 
-    <v-spacer></v-spacer>
+    <v-col class="d-flex justify-space-around center">
+      <router-link :to="{ name: 'Top' }" style="text-decoration: none" id="logo">
+        <v-toolbar-title floating="true">
+          <img :src="'/img/header/logo.png'" width="100%" class="logo" alt="logo" />
+        </v-toolbar-title>
+      </router-link>
+    </v-col>
 
-    <router-link :to="{ name: 'Top' }" style="text-decoration: none" id="logo">
-      <v-toolbar-title floating="true">
-        <img :src="'/img/header/logo.png'" width="100%" class="logo" alt="logo" />
-      </v-toolbar-title>
-    </router-link>
-
-    <v-spacer></v-spacer>
 
     <!-- マイページ -->
-    <router-link
-      v-if="$store.state.login"
-      :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }"
-      id="mypage"
-    >
-      <v-btn id="mypage" icon>
-        <v-avatar tile size="30">
-          <img :src="'/img/header/mypage.png'" alt="mypage" />
-        </v-avatar>
-      </v-btn>
-    </router-link>
+    <v-col cols="3" class="right spn">
+      <router-link
+        v-if="$store.state.login"
+        :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }"
+        id="mypage"
+      >
+        <v-btn id="mypage" icon v-if="$store.state.login">
+          <v-avatar tile size="30" v-if="$store.state.login">
+            <img :src="'/img/header/mypage.png'" alt="mypage" v-if="$store.state.login" >
+          </v-avatar>
+        </v-btn>
+      </router-link>
 
-    <!-- ログインボタン -->
-    <v-avatar tile size="30">
-        <v-icon @click="toggleLoginModal" color="red">mdi-login</v-icon>
-    </v-avatar>
-    <LoginModal/>
-
+      <!-- ログインボタン -->
+      <v-avatar tile size="30">
+          <v-icon @click="toggleLoginModal" color="#000">mdi-login</v-icon>
+      </v-avatar>
+      <LoginModal/>
+    </v-col>
     <!-- ログアウトボタン -->
-    <v-avatar tile size="30">
+    <!-- <v-avatar tile size="30">
     <v-icon @click="logout" color="#000">mdi-logout</v-icon>
-    </v-avatar>
+    </v-avatar> -->
     <!-- ライン -->
-    <img :src="'/img/header/line.png'" id="line" />
+    <!-- <img :src="'/img/header/line.png'" id="line" /> -->
   </v-app-bar>
 </template>
 <script>
@@ -108,7 +112,7 @@ export default {
 .theme--light.v-app-bar.v-toolbar.v-sheet {
   background-color: #fff;
   position: relative;
-  height: 140px !important;
+  height: 120px !important;
   padding-top: 1em;
 }
 
@@ -127,7 +131,8 @@ export default {
 }
 
 .v-toolbar {
-  box-shadow: none;
+  /* box-shadow: none; */
+  /* background-color: #ffe5cc; */
   flex:none;
 }
 
@@ -138,6 +143,11 @@ export default {
 .nav,
 .space {
   display: none;
+}
+
+.right{
+  display:flex;
+  flex-direction: row-reverse;
 }
 
 @media screen and (max-width: 415px) {
@@ -154,8 +164,10 @@ export default {
   #pen,
   #mypage,
   #books,
-  #meet {
-    display: none;
+  #meet,
+  .spn,
+  .right{
+    display: none!important;
   }
 
   .nav {
@@ -167,6 +179,12 @@ export default {
   }
 }
 
+</style>
+<style>
+@media screen and (max-width: 415px) {
 
-
+.v-toolbar__content{
+  display: block!important;
+}
+}
 </style>

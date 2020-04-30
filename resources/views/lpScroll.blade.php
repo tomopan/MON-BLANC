@@ -154,7 +154,8 @@
                         <p class="title">物語の主人公を選ぼう</p>
                         <div class="sentences">
                             <p class="sentence">あなたの気になる主人公が見つかれば、</p>
-                            <p class="sentence">その気になった理由こそが、物語のアイディアです。</p>
+                            <p class="sentence">その気になった理由こそが、</p>
+                            <p class="sentence">物語のアイディアです。</p>
                         </div>
                     </div>
                     <img src="{{asset('img/lp/characters_home.png')}}" alt="">
@@ -167,7 +168,7 @@
                         <p class="title">心に留まる第一文と出会おう</p>
                         <div class="sentences">
                             <p class="sentence">このフレームに映る一文は、</p>
-                            <p class="sentence">MON BLANCに集まった</p>
+                            <p class="sentence">MON BLANCに集まった、</p>
                             <p class="sentence">それぞれの物語の「第一文」です。</p>
                         </div>
                     </div>
@@ -178,8 +179,9 @@
                     <div>
                         <p class="title">物語の主人公を選ぼう</p>
                         <div class="sentences">
-                            <p class="sentence">1人の主人公に対して、様々な視点での物語が</p>
-                            <p class="sentence">綴られています。視点や側面の「違い」を</p>
+                            <p class="sentence">1人の主人公に対して、</p>
+                            <p class="sentence">様々な視点での物語が綴られています。</p>
+                            <p class="sentence">視点や側面の「違い」を、</p>
                             <p class="sentence">ぜひ楽しんでください。</p>
                         </div>
                     </div>
@@ -190,7 +192,14 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script type="text/javascript">
+    <script type="text/javascript">
+
+        $('head').append(
+        '<style>body{display:none;}'
+        );
+        $(window).on("load", function() {
+        $('body').delay(600).fadeIn(1000);
+        });
     </script>
 
 </body>

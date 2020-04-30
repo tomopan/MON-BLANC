@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="4;URL=/lpScroll">
     <title>MON BLANC</title>
     <style>
         *:focus {
@@ -42,7 +41,7 @@
             left: 0;
             position: absolute;
         }
-        .color{
+        .color,.stayHome{
             opacity:0;
         }
 
@@ -65,12 +64,13 @@
             </div>
         <div><p class="stayHome">Stay home, stay safe with story.</p></div>
     </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript">
             $(function(){
                 var setImg = '#images';
                 var fadeSpeed = 1400;
-                var switchDelay = 2500;
+                var switchDelay = 1500;
 
                 $(setImg).children('img').css({opacity:'0'});
                 $(setImg + ' img:first').stop().animate({opacity:'1',zIndex:'20'},fadeSpeed);
@@ -79,6 +79,14 @@
                     $(setImg + ' :first-child').animate({opacity:'0'},fadeSpeed).next('img').animate({opacity:'1'},fadeSpeed).end().appendTo(setImg);
                 },switchDelay);
             });
+
+                setTimeout(function(){
+                    $(".stayHome").stop().animate({opacity:'1'},1000);
+                },1000);
+
+                setTimeout(function(){
+                    window.location.href = '/lpScroll';
+                }, 3*1000);
     </script>
 
 </body>

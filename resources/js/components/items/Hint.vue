@@ -3,15 +3,24 @@
     <v-img class="icon" src="img/write-page/tutorial.png" @click="dialog = !dialog"></v-img>
     <div id="overlay" v-show="dialog">
       <div id="content">
+                <div class="write">
+
         <v-btn icon color="#000" @click="dialog=false">
           <v-icon>mdi-close</v-icon>
         </v-btn>
-        <p>はじめて小説を書くあなたにヒントをあげます</p>
-        <p>○主人公を選んだ理由は？</p>
-        <textarea name id cols="30" rows="5"></textarea>
-        <p>○どんなシーンを想像した？</p>
-        <textarea name id cols="30" rows="5"></textarea>
-        <button>保存</button>
+          <p class="title">物語を生み出すためのヒント</p>
+          <p>あなたはなぜこの主人公を選んだの？</p>
+          <textarea name id cols="30" rows="2"></textarea>
+          <p>この主人公の最後はハッピーエンド？バッドエンド？</p>
+          <textarea name id cols="30" rows="2"></textarea>
+          <p>その主人公は今、どういう心情？もしくは状況？</p>
+          <textarea name id cols="30" rows="2"></textarea>
+          <p>主人公は今どこにいる？どんな風景が見えている？</p>
+          <textarea name id cols="30" rows="2"></textarea>
+          <p>この小説がもし手紙だとしたら、誰に向けて書く？</p>
+          <textarea name id cols="30" rows="2"></textarea>
+          <p><button>保存</button></p>
+        </div>
       </div>
     </div>
   </div>
@@ -31,6 +40,10 @@ export default {
 </script>
 
 <style scoped>
+*:focus {
+    outline: none;
+}
+
 .icon {
   width: 100px;
 }
@@ -56,9 +69,33 @@ export default {
   z-index: 2;
   width: 50%;
   padding: 1em;
-  background: #fff;
+  background-color: #fff;
+  border: 1px dashed #000;
 }
-</style>
 
-<style>
+
+.write{
+  font-family: "Futura","游ゴシック体", "YuGothic";
+  font-weight: bold;
+  background-color:#FFCE97;
+  text-align: center;
+  margin: 1em;
+}
+textarea{
+  border: 3px solid;
+  background-color: #fff;
+
+}
+p{
+  margin-block-end: 0.5em;
+}
+button{
+  margin: 0.5em;
+}
+.title{
+  font-family: "Futura","游ゴシック体", "YuGothic";
+  font-weight: bold;
+  font-size: 1em;
+  margin-bottom: 0.8em;
+}
 </style>
