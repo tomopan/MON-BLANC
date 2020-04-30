@@ -64,10 +64,6 @@
             font-weight:bold;
             font-size:2em;
         }
-        /* .white{
-            overflow-x: hidden;
-
-        } */
         img{
             height:300px;
             margin: 0 30px;
@@ -112,6 +108,7 @@
             justify-content: center;
             width:250px;
             height:500px;
+            padding:1em 2.5em;
             margin:3em 2em 4em 2em;
         }
         img{
