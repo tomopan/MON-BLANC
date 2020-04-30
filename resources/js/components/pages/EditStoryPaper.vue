@@ -19,7 +19,8 @@
                     >
                     </v-img>
                 </router-link>
-                <v-img class="icon" src="img/write-page/tutorial.png"> </v-img>
+                <Hint />
+
                 <v-img
                     class="icon"
                     src="img/write-page/continue.png"
@@ -49,10 +50,13 @@
 <script>
 // インポート
 import { mapActions, mapGetters } from "vuex";
+import Hint from '../items/Hint.vue';
 
 // Vueの処理
 export default {
-    components: {},
+    components: {
+        Hint
+    },
     data() {
         return {
             //ペーパーノベルの情報を格納

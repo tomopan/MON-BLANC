@@ -5,7 +5,7 @@
         <p>選択中テキスト：{{ markedText }}</p> -->
         <v-row align="center" justify="center">
             <!-- ボタンエリア -->
-            <div class="btns">
+            <div v-if="$store.state.login" class="btns">
                 <v-icon color="#000" @click="dialog = true" large
                     >mdi-script-text-outline</v-icon
                 >

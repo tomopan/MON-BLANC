@@ -128,4 +128,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::get('check/bookmark/{paper_novel_id}', 'Api\BookmarksController@check');
 
 
+    // -----------Bookmarksテーブル----------- //
+    //ヒントを保存する
+    Route::post('post/hints/', 'Api\HintsController@save');
+    //ヒントを編集する
+    Route::post('edit/hints/', 'Api\HintsController@edit');
+    //ヒントを取得する
+    Route::get('get/hints/{user_paper_order}', 'Api\HintsController@show');
+
 // });
