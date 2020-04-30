@@ -56,7 +56,7 @@ export default {
     created() {
         this.fetchHeroData(this.$route.params.hero_id);
         //ログインしてなかったらモーダル表示
-        // if (!this.$store.state.login) this.$store.state.drawerLoginModal = true;
+        if (!this.$store.state.login) this.$store.state.drawerLoginModal = true;
     },
     mounted() {
         console.log(document.getElementById("first_sentence").textContent);

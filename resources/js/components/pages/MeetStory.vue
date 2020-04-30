@@ -2,6 +2,7 @@
     <v-container class="text-center">
         <vue-typer
             :repeat="0"
+            :type-delay="100"
             text="Meet Storeis"
             style="font-size:30px"
         ></vue-typer>
@@ -35,10 +36,16 @@
                                     }
                                 }"
                             >
-                                <v-img :src="flameImgUrl[i]" width="350px">
-                                    <span class="text">{{
-                                        novel.first_sentence
-                                    }}</span>
+                                <v-img
+                                    :src="flameImgUrl[i]"
+                                    width="350px"
+                                    height="500px"
+                                >
+                                    <div class="text_area">
+                                        <span class="text">{{
+                                            novel.first_sentence
+                                        }}</span>
+                                    </div>
                                 </v-img>
                             </router-link>
                         </v-row>
@@ -85,12 +92,14 @@ export default {
 <style scoped>
 .text {
     writing-mode: vertical-rl;
+    text-align: left;
     margin: auto;
     color: #333;
     font-size: 20px;
-    height: 500px;
+    height: 250px;
+    word-break: normal;
 }
-.flame_img {
-    /* width: 300px; */
+.text_area {
+    margin-top: 110px;
 }
 </style>

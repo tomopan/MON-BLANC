@@ -5,9 +5,11 @@
             <v-container class="pa-4 text-center">
                 <vue-typer
                     :repeat="0"
+                    :type-delay="100"
                     text="choice your charactor"
                     style="font-size:30px"
                 ></vue-typer>
+
                 <div class="wrap">
                         <TopBase />
                 </div>
@@ -36,7 +38,6 @@
 import TopBase from "./TopBase.vue";
 
 export default {
-
     components: {
         TopBase
     },
@@ -92,8 +93,7 @@ p {
     color: rgba(255, 255, 255, 1) !important;
 }
 
-
-.stage{
+.stage {
     width: 100%;
     height: 400px;
 }

@@ -30,6 +30,8 @@
                 </v-card>
             </v-dialog>
         </div>
+        <!-- モーダルここまで -->
+
         <v-row>
             <v-img :src="HeroData.img_url" width="100px" height="400px">
             </v-img>
