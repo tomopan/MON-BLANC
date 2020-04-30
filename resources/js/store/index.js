@@ -13,12 +13,12 @@ export default new Vuex.Store({
         loginUser: "",
         login: false,
         HeroData: "",
-        drawerLoginModal:false,
+        drawerLoginModal: false
     },
     mutations: {
         setLoginUser(state, loginUser) {
             state.loginUser = loginUser;
-            if(loginUser)state.login = true;
+            if (loginUser) state.login = true;
         },
         setHero(state, HeroData) {
             state.HeroData = HeroData;

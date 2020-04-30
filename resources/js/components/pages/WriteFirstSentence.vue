@@ -1,15 +1,11 @@
 <template>
     <div>
         <!-- 主人公の画像を表示 -->
-        <v-img
-            :src="HeroData.img_url"
-            width="200px"
-            >
-        </v-img>
-        <Hint/>
+        <v-img :src="img_url" id="hero_img"></v-img>
+        <Hint />
         <!-- タイトル入力 -->
         <v-form>
-            <div class="input-area" >
+            <div class="input-area">
                 <div id="paper_text">
                     <div
                         class="paper"
@@ -35,7 +31,7 @@
 <script>
 // インポート
 import { mapActions, mapGetters } from "vuex";
-import Hint from '../items/Hint.vue';
+import Hint from "../items/Hint.vue";
 
 // Vueの処理
 export default {
@@ -47,30 +43,41 @@ export default {
             //paper_novelsテーブルにPostするデータを格納
             firstSentencePost: {},
             //story_papersテーブルにPostするデータを格納
-            storyPaperPost:{},
+            storyPaperPost: {},
             text: "",
-            charaCount:"",
-            lineCount:""
+            charaCount: "",
+            lineCount: "",
+            img_url: ""
         };
     },
     created() {
-        this.fetchHeroData(this.$route.params.hero_id);
+        // this.fetchHeroData(this.$route.params.hero_id);
+        this.showHero();
         //ログインしてなかったらモーダル表示
         if (!this.$store.state.login) this.$store.state.drawerLoginModal = true;
+        // this.img_url = "img/charactors/" + this.$store.state.HeroData.img_url;
     },
     mounted() {
-        console.log(document.getElementById("first_sentence").textContent);
+        // console.log(document.getElementById("first_sentence").textContent);
         this.openBtn();
     },
     computed: {
-        ...mapGetters(["HeroData"]),
+        ...mapGetters(["HeroData"])
     },
     methods: {
         //API叩いてマッチした主人公データを取得
         ...mapActions(["fetchHeroData"]),
-
+        //主人公データを取得
+        showHero: function() {
+            axios
+                .get("api/get/hero_fetch/" + this.$route.params.hero_id)
+                .then(res => {
+                    this.img_url = "img/charactors/" + res.data.img_url;
+                    console.log(res.data);
+                });
+        },
         //小説のタイトルを保存
-        saveFirstSentence: function () {
+        saveFirstSentence: function() {
             //PostするオブジェクトにDOMの内容をぶちこむ
             this.firstSentencePost.first_sentence = document.getElementById(
                 "first_sentence"
@@ -82,28 +89,26 @@ export default {
                     "api/post/firstsentence/" + this.$route.params.hero_id,
                     this.firstSentencePost
                 )
-                .then((res) => {
-                    console.log(res.data);
+                .then(res => {
                     //Write.vueへページ遷移させる
                     this.$router.push({
                         name: "EditStoryPaper",
                         params: {
                             user_paper_order: res.data.user_paper_order,
-                            story_number:1
-                        },
+                            story_number: 1
+                        }
                     });
                 })
-                .catch((err) => {
+                .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
                 });
-
         },
 
         //句読点が押されたらボタンを出現させる関数
         openBtn() {
             const target = document.getElementById("first_sentence");
 
-            const observer = new MutationObserver((records) => {
+            const observer = new MutationObserver(records => {
                 // 変化が発生したときの処理を記述
                 let p = document.getElementById("first_sentence");
                 const text = p.textContent;
@@ -116,17 +121,17 @@ export default {
                 characterData: true,
                 attributes: true,
                 childList: true,
-                subtree: true,
+                subtree: true
             });
         },
 
-                //32文字以上入力したら改行処理
-        changeLine:function(){
+        //32文字以上入力したら改行処理
+        changeLine: function() {
             //要素のIDを取得
             const target = document.getElementById("first_sentence");
 
             //DOMの変更を監視
-            const observer = new MutationObserver((records) => {
+            const observer = new MutationObserver(records => {
                 // 変化が発生したときの処理を記述
                 let p = document.getElementById("first_sentence");
                 //文字数をdataに格納
@@ -141,45 +146,44 @@ export default {
                 // オプションを指定
                 characterData: true,
                 childList: true,
-                subtree: true,
+                subtree: true
             });
             document.onselectionchange = () => {
-                const range = window.getSelection().getRangeAt(0)
-                const clone = range.cloneRange()
-                const fixedPosition = range.endOffset
+                const range = window.getSelection().getRangeAt(0);
+                const clone = range.cloneRange();
+                const fixedPosition = range.endOffset;
                 // 末尾の文字列を選択した時はダミーテキストを追加して選択範囲を拡大する
                 if (fixedPosition + 1 > range.endContainer.length) {
-                const dummy = document.createTextNode('&#8203;')
-                clone.insertNode(dummy)
-                clone.selectNode(dummy)
-                const rect = clone.getBoundingClientRect();
-                console.log(rect);
-                dummy.parentNode.removeChild(dummy)
+                    const dummy = document.createTextNode("&#8203;");
+                    clone.insertNode(dummy);
+                    clone.selectNode(dummy);
+                    const rect = clone.getBoundingClientRect();
+                    console.log(rect);
+                    dummy.parentNode.removeChild(dummy);
                 } else {
-                clone.setStart(range.endContainer, fixedPosition);
-                clone.setEnd(range.endContainer, fixedPosition + 1);
-                const rect = clone.getBoundingClientRect();
-                console.log(rect);
+                    clone.setStart(range.endContainer, fixedPosition);
+                    clone.setEnd(range.endContainer, fixedPosition + 1);
+                    const rect = clone.getBoundingClientRect();
+                    console.log(rect);
                 }
-                clone.detach()
-                }
+                clone.detach();
+            };
         },
 
         //17行で制限
-        stopLine:function(){
+        stopLine: function() {
             const tBox = document.getElementById("first_sentence");
             this.lineCount = tBox.childElementCount;
             //エンターキーを無効にする
-            document.addEventListener('keydown', function(e){
+            document.addEventListener("keydown", function(e) {
                 if (tBox.childElementCount == 17 && e.keyCode === 13) {
                     e.preventDefault();
-                }else if(tBox.childElementCount == 17 && e.which === 13){
+                } else if (tBox.childElementCount == 17 && e.which === 13) {
                     e.preventDefault();
                 }
             });
         }
-
-    },
+    }
 };
 </script>
 
@@ -195,19 +199,19 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
 }
 
 *:focus {
-outline: none;
+    outline: none;
 }
 
-.heroName{
-    font-family: 'Lao MN','serif';
+.heroName {
+    font-family: "Lao MN", "serif";
 }
 
-form{
-    font-family: 'ヒラギノ明朝 ProN','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
+form {
+    font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
+        "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
 }
 
 .paper {
@@ -258,4 +262,9 @@ form{
     /* border: 1px solid #000000; */
 }
 
+#hero_img {
+    margin-top: 5%;
+    height: 100%;
+    width: 200px;
+}
 </style>

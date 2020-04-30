@@ -52,7 +52,10 @@
                         rows="2"
                         v-model="answers.q_5"
                     ></textarea>
-                    <p><button @click="saveAnswers">保存</button></p>
+                    <button style="border:solid 2px #000" @click="saveAnswers">
+                        &nbsp;保存&nbsp;
+                    </button>
+                    <p id="save_text">保存しました！</p>
                 </div>
             </div>
         </div>
@@ -85,6 +88,8 @@ export default {
                 .post("api/post/hints/", this.answers)
                 .then(res => {
                     console.log(res.data);
+                    $('#save_text').fadeIn(1500);
+                    $('#save_text').fadeOut(1500);
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
@@ -96,7 +101,7 @@ export default {
                 .get("api/get/hints/" + this.$route.params.user_paper_order)
                 .then(res => {
                     console.log(res.data);
-                    this.answers = res.data
+                    this.answers = res.data;
                 })
                 .catch(err => {
                     console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
@@ -164,9 +169,9 @@ button {
     margin-bottom: 0.8em;
 }
 .icon {
-    width: 100px;
     cursor: pointer;
-    position: fixed;
 }
-
+#save_text {
+    display: none;
+}
 </style>

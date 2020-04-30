@@ -15,7 +15,7 @@ use Illuminate\Database\Seeder;
 
             DB::table('heroes')->insert(
             [
-            'img_url' => 'img/books/AKIRA.png',
+            'img_url' => 'AKIRA.png',
             'hero_name' => 'AKIRA',
             'hero_birth' => '28',
             "created_at" => $faker->dateTime("now"),
@@ -24,7 +24,7 @@ use Illuminate\Database\Seeder;
             );
             DB::table('heroes')->insert(
             [
-            'img_url' => 'img/books/SUMIRE.png',
+            'img_url' => 'SUMIRE.png',
             'hero_name' => 'SUMIRE',
             'hero_birth' => '28',
             "created_at" => $faker->dateTime("now"),
@@ -33,7 +33,7 @@ use Illuminate\Database\Seeder;
             );
             DB::table('heroes')->insert(
             [
-            'img_url' => 'img/books/JUN.png',
+            'img_url' => 'JUN.png',
             'hero_name' => 'JUN',
             'hero_birth' => '24',
             "created_at" => $faker->dateTime("now"),
@@ -42,7 +42,7 @@ use Illuminate\Database\Seeder;
             );
             DB::table('heroes')->insert(
             [
-            'img_url' => 'img/books/MARI.png',
+            'img_url' => 'MARI.png',
             'hero_name' => 'MARI',
             'hero_birth' => '35',
             "created_at" => $faker->dateTime("now"),
@@ -51,7 +51,7 @@ use Illuminate\Database\Seeder;
             );
             DB::table('heroes')->insert(
             [
-            'img_url' => 'img/books/YURI.png',
+            'img_url' => 'YURI.png',
             'hero_name' => 'YURI',
             'hero_birth' => '27',
             "created_at" => $faker->dateTime("now"),
@@ -60,7 +60,7 @@ use Illuminate\Database\Seeder;
             );
             DB::table('heroes')->insert(
             [
-            'img_url' => 'img/books/NANA.png',
+            'img_url' => 'NANA.png',
             'hero_name' => 'NANA',
             'hero_birth' => '25',
             "created_at" => $faker->dateTime("now"),
@@ -69,7 +69,7 @@ use Illuminate\Database\Seeder;
             );
             DB::table('heroes')->insert(
             [
-            'img_url' => 'img/books/KEITA.png',
+            'img_url' => 'KEITA.png',
             'hero_name' => 'KEITA',
             'hero_birth' => '32',
             "created_at" => $faker->dateTime("now"),
@@ -78,7 +78,7 @@ use Illuminate\Database\Seeder;
             );
             DB::table('heroes')->insert(
             [
-            'img_url' => 'img/books/DAIKI.png',
+            'img_url' => 'DAIKI.png',
             'hero_name' => 'DAIKI',
             'hero_birth' => '30',
             "created_at" => $faker->dateTime("now"),
