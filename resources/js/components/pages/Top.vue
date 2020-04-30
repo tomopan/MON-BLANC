@@ -9,8 +9,11 @@
                     text="choice your charactor"
                     style="font-size:30px"
                 ></vue-typer>
-                <TopBase />
-                <!-- <v-row class="fill-height" align="center" justify="center">
+
+                <div class="wrap">
+                        <TopBase />
+                </div>
+                    <!-- <v-row class="fill-height" align="center" justify="center">
                         <div v-for="(hero_img, id) in hero_imgs" :key="id">
                             <router-link
                                 :to="{
@@ -94,4 +97,5 @@ p {
     width: 100%;
     height: 400px;
 }
+
 </style>
