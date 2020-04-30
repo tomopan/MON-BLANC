@@ -282,11 +282,14 @@ export default {
                     password: this.password
                 })
                 .then(response => {
-                    window.location.href = window.location.origin + `/`;
+                    window.location.href = window.location.origin + '#'+ this.$route.path;
+                    this.$store.state.drawerLoginModal = false;
+                    this.$store.state.login =true;
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;
                     console.log(this.errors);
+                    console.log(error)
                 });
         },
         postRegister() {

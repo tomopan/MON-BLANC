@@ -38,6 +38,12 @@
             </v-avatar>
             </router-link>
         </v-btn>
+        <v-btn value="mypage" @click="$store.state.drawerLoginModal=true"
+            v-else>
+            <v-avatar tile size="30">
+                <img :src="'/img/header/mypage.png'" alt="mypage" />
+            </v-avatar>
+        </v-btn>
     </v-bottom-navigation>
 </template>
 <script>
