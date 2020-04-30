@@ -17,7 +17,10 @@
                                 params: { hero_id: hero.id }
                             }"
                         >
-                            <v-img :src="hero.img_url" width="300px"></v-img>
+                            <v-img
+                                :src="'img/books/' + hero.img_url"
+                                width="300px"
+                            ></v-img>
                         </router-link>
                     </v-col>
                 </div>
@@ -53,13 +56,6 @@ export default {
     components: {},
 
     data: () => ({
-        hero_imgs: [
-            { id: 1, url: "img/charactors/akira.png" },
-            { id: 2, url: "img/charactors/lisa.png" },
-            { id: 3, url: "img/charactors/ami&karin.png" },
-            { id: 4, url: "img/charactors/mari.png" },
-            { id: 6, url: "img/charactors/rui.png" }
-        ],
         heroes: [],
         title: "",
         findNovels: {}
