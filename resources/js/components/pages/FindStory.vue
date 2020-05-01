@@ -19,7 +19,7 @@
                         >
                             <v-img
                                 :src="'img/books/' + hero.img_url"
-                                width="300px"
+                                width="200px"
                             ></v-img>
                         </router-link>
                     </v-col>
