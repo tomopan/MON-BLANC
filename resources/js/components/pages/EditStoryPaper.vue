@@ -1,8 +1,15 @@
 <template>
-    <div>
-        <v-row>
+    <div class="wrap">
             <!-- ボタンたち -->
-            <div>
+            <div class="buttons">
+                <v-img
+                    class="icon"
+                    height="60px"
+                    src="img/write-page/continue.png"
+                    @click="$router.go(-1)"
+                >
+                </v-img>
+
                 <!-- 一時保存ボタン -->
                 <router-link
                     :to="{
@@ -14,35 +21,39 @@
                 >
                     <v-img
                         class="icon"
+                        height="60px"
                         src="img/write-page/book.png"
                         @click="editPaper"
                     >
                     </v-img>
                 </router-link>
-                <Hint />
 
-                <v-img
-                    class="icon"
-                    src="img/write-page/continue.png"
-                    @click="$router.go(-1)"
-                >
-                </v-img>
             </div>
-            <!-- 小説入力 -->
-            <div class="input-area">
+
+            <v-row>
+
                 <!-- 小説入力 -->
-                <div id="paper_text">
-                    <p
-                        class="paper"
-                        contenteditable="true"
-                        id="story_text_input"
-                    >
-                        {{ PaperNovelData.text }}
-                    </p>
+                <div class="input-area">
+                    <!-- 小説入力 -->
+                    <div id="paper_text">
+                        <p
+                            class="paper"
+                            contenteditable="true"
+                            id="story_text_input"
+                        >
+                            {{ PaperNovelData.text }}
+                        </p>
+                    </div>
                 </div>
-            </div>
-        </v-row>
+            </v-row>
         <!-- 入力エリアここまで -->
+            <div class="icons">
+                <img :src="'/img/write-page/write.png'"  class="icon" alt="write"/>
+                <img :src="'/img/write-page/font.png'"  class="icon" alt="read" />
+                <img :src="'/img/write-page/font-size.png'" class="icon" alt="read" />
+                <Hint />
+            </div>
+
     </div>
 </template>
 
@@ -187,7 +198,7 @@ export default {
     -webkit-writing-mode: vertical-rl;
     -ms-writing-mode: tb-rl;
     writing-mode: vertical-rl;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 2em;
     overflow-x: scroll;
     outline: none;
@@ -202,9 +213,10 @@ export default {
 }
 .input-area {
     margin: 0 auto;
-    padding-top: 50px;
-    height: 700px;
+    padding-top: 25px;
+    height: 600px;
     width: 800px;
+    margin-top: 2em;
     display: grid;
     grid-template-columns: 150px 1fr;
     border: 1px dotted #a9a9a9;
@@ -215,8 +227,8 @@ export default {
 }
 
 #story_text_input > div {
-    height: 640px;
-    font-size: 20px;
+    height: 582px;
+    font-size: 18px;
 }
 
 #story_text_input {
@@ -224,7 +236,36 @@ export default {
     /* border: 1px solid #000000; */
 }
 
-.icon {
-    width: 100px;
+.icons{
+    display: flex;
+    flex-direction: column;
+    margin:2em 2em;
+
 }
+
+.buttons{
+    display: flex;
+    flex-direction : column-reverse;
+    height: 120px;
+    margin-left:3em;
+    margin-top:500px;
+}
+
+.icon,
+.v-responsive__sizer,
+#app > div > main > div > div > div.buttons > div > div.v-responsive__content,
+.v-image__image,
+.v-image__image--cover,
+#app > div > main > div > div > div.buttons > div > div.v-image__image.v-image__image--cover{
+    width: 60px;
+    height: 60px!important;
+}
+
+.wrap{
+    display: flex;
+}
+
+</style>
+<style>
+
 </style>

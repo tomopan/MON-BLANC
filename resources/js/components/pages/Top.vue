@@ -99,3 +99,8 @@ p {
 }
 
 </style>
+<style>
+#app > div > header{
+    display: block;
+}
+</style>
