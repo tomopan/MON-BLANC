@@ -16,7 +16,7 @@
                     >
                         <v-hover v-slot:default="{ hover }" open-delay="100">
                             <div>
-                                <v-img :src="closeNovel.img_url" height="170px">
+                                <v-img :src="'img/books/' + closeNovel.img_url" height="170px">
                                     <v-btn
                                         :class="{ 'show-btns': hover }"
                                         color="transparent"

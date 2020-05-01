@@ -48,10 +48,18 @@
         <v-row>
             <v-col>
                 <v-row>
-                    <v-col>
-                        <p>{{ profileData.name }} さんのプロフィールです</p>
-                        <p>@{{ profileData.user_name }}</p>
-                    </v-col>
+                    <div class="icon">
+                        <v-img src="img/profile-icons/duck.png"></v-img>
+                    </div>
+                    <div class="text">
+                        <p>
+                            {{ profileData.name }} @{{ profileData.user_name }}
+                        </p>
+                        <p v-if="loginUser.bio" class="bio_text">
+                            {{ profileData.bio }}
+                        </p>
+                        <p v-else class="bio_text">紹介文を書いてみましょう</p>
+                    </div>
                     <v-btn
                         v-if="profileData.user_name == loginUser.user_name"
                         icon
@@ -59,22 +67,14 @@
                     >
                         <v-icon>mdi-pencil</v-icon>
                     </v-btn>
-                    <v-icon id="logout_btn" @click="logout" color="#000"
-                        >mdi-logout</v-icon
-                    >
                 </v-row>
-                <!-- 紹介文 -->
-                <v-divider></v-divider>
-                <p v-if="loginUser.bio" class="bio_text">
-                    {{ profileData.bio }}
-                </p>
-                <p v-else class="bio_text">紹介文を書いてみましょう</p>
+
                 <v-divider></v-divider>
                 <!-- 紹介文ここまで -->
             </v-col>
-            <v-col>
-                <v-avatar size="100"></v-avatar>
-            </v-col>
+            <v-icon id="logout_btn" @click="logout" color="#000"
+                >mdi-logout</v-icon
+            >
         </v-row>
 
         <!-- 公開/非公開/マーカーのコンポーネント切り替え -->
@@ -289,5 +289,12 @@ a:hover {
 }
 #logout_btn {
     right: 0;
+}
+.icon {
+    width: 300px;
+}
+.text {
+    margin-top: 100px;
+    width: 500px;
 }
 </style>
