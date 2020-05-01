@@ -60,21 +60,20 @@
                         </p>
                         <p v-else class="bio_text">紹介文を書いてみましょう</p>
                     </div>
+                    <div  v-if="profileData.user_name == loginUser.user_name">
                     <v-btn
-                        v-if="profileData.user_name == loginUser.user_name"
                         icon
                         @click="openEditModal"
                     >
                         <v-icon>mdi-pencil</v-icon>
                     </v-btn>
+                    <v-icon id="logout_btn" @click="logout" color="#000"
+                        >mdi-logout</v-icon
+                    >
+                    </div>
                 </v-row>
-
-                <v-divider></v-divider>
                 <!-- 紹介文ここまで -->
             </v-col>
-            <v-icon id="logout_btn" @click="logout" color="#000"
-                >mdi-logout</v-icon
-            >
         </v-row>
 
         <!-- 公開/非公開/マーカーのコンポーネント切り替え -->
@@ -112,6 +111,7 @@
                 </router-link>
             </div>
         </v-tabs>
+        <v-divider></v-divider>
 
         <!-- 他者プロフィール -->
         <!-- <v-tabs v-else-if="profileData.user_name != loginUser.user_name" grow >
@@ -148,6 +148,7 @@
                 </v-tab>
             </router-link>
     </v-tabs>-->
+
         <router-view :loginUserName="loginUser.user_name"></router-view>
         <!-- 書いた小説を表示 -->
     </v-container>
@@ -288,7 +289,7 @@ a:hover {
     text-decoration: none;
 }
 #logout_btn {
-    right: 0;
+    /* right: 0; */
 }
 .icon {
     width: 300px;

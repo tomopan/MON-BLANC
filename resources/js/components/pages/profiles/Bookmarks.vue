@@ -24,7 +24,7 @@
                             }"
                         >
                             <v-img
-                                :src="bookmarkNovel.img_url"
+                                :src="'img/books/' +bookmarkNovel.img_url"
                                 height="170px"
                             ></v-img>
                             <p class="paper_text">{{ bookmarkNovel.title }}</p>

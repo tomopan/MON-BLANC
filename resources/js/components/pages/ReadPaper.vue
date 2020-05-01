@@ -1,14 +1,37 @@
 <template>
-    <v-container>
+    <div>
         <!-- <p>マークされた数：{{ MarkCount }}</p>
         <p>選択中ストーリー番号：{{ markedStoryId }}</p>
         <p>選択中テキスト：{{ markedText }}</p> -->
-        <v-row align="center" justify="center">
+        <v-row justify="center">
+            <!-- 本エリア -->
+            <div class="book-caver">
+                <div id="book" class="paper" @mouseup="getMarkText()">
+                    <div class="story_text">
+                        <div class="title_area">
+                            <span class="title_text">
+                                {{ this.Title }}
+                            </span>
+                            <br />
+                            <br />
+                            <span class="title_writer">
+                                作者：
+                                <router-link
+                                    :to="{
+                                        name: 'Profile',
+                                        params: {
+                                            user_name: WriterData.user_name
+                                        }
+                                    }"
+                                    >{{ WriterData.name }}</router-link
+                                >
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- ボタンエリア -->
             <div v-if="$store.state.login" class="btns">
-                <v-icon color="#000" @click="dialog = true" large
-                    >mdi-script-text-outline</v-icon
-                >
                 <v-icon
                     v-if="!bookmarkToggle"
                     color="#000"
@@ -23,70 +46,56 @@
                     large
                     >mdi-bookmark</v-icon
                 >
-                <!-- タイトル未入力の時のモーダル -->
-                <v-row justify="center">
-                    <v-dialog v-model="dialog" persistent max-width="300">
-                        <v-card v-if="markedText">
-                            <v-card-title class="headline"
-                                >文章をマーク</v-card-title
-                            >
-                            <v-card-text>{{ markedText }}</v-card-text>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                    color="green darken-1"
-                                    text
-                                    @click="saveMarkText"
-                                    >保存</v-btn
-                                >
-                            <!-- <div v-else-if="!markedText">
+                <br />
+
+                <v-icon color="#000" @click="dialog = true" large
+                    >mdi-script-text-outline</v-icon
+                >
+
+                <!-- モーダルここまで -->
+            </div>
+        </v-row>
+        <!-- タイトル未入力の時のモーダル -->
+        <v-row justify="center">
+            <v-dialog v-model="dialog" persistent max-width="300">
+                <v-card v-if="markedText">
+                    <v-card-title class="headline">文章をマーク</v-card-title>
+                    <v-card-text>{{ markedText }}</v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="green darken-1" text @click="saveMarkText"
+                            >保存</v-btn
+                        >
+                        <!-- <div v-else-if="!markedText">
                                 <v-card-title class="headline"
                                 >文章を選択して</v-card-title
                             >
                             </div> -->
-                                <v-btn
-                                    color="green darken-1"
-                                    text
-                                    @click="dialog = false"
-                                    >閉じる</v-btn
-                                >
-                            </v-card-actions>
-                        </v-card>
-                        <v-card v-if="!markedText">
-                            <v-card-title class="headline"
-                                >文章を選択してください</v-card-title
-                            >
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                    color="green darken-1"
-                                    text
-                                    @click="dialog = false"
-                                    >閉じる</v-btn
-                                >
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
-                </v-row>
-                <!-- モーダルここまで -->
-            </div>
-            <!-- 本エリア -->
-            <div id="book" class="paper" @mouseup="getMarkText()">
-                <div class="story_text">
-                    <span class="title_text">{{ this.Title }}</span>
-                    <router-link
-                        :to="{
-                            name: 'Profile',
-                            params: {
-                                user_name: WriterData.user_name
-                            }
-                        }"
-                        >{{ WriterData.name }}</router-link
+                        <v-btn
+                            color="green darken-1"
+                            text
+                            @click="dialog = false"
+                            >閉じる</v-btn
+                        >
+                    </v-card-actions>
+                </v-card>
+                <v-card v-if="!markedText">
+                    <v-card-title class="headline"
+                        >文章を選択してください</v-card-title
                     >
-                </div>
-            </div>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            color="green darken-1"
+                            text
+                            @click="dialog = false"
+                            >閉じる</v-btn
+                        >
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
         </v-row>
-    </v-container>
+    </div>
 </template>
 
 <!-- 以下にscript/cssを記述 -->
@@ -264,9 +273,16 @@ export default {
 .container {
     font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
         "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
-    background-color: #fffcfc;
 }
-
+.book-caver {
+    background-color: #fffcfc;
+    margin-top: 10px;
+    /* background: linear-gradient(rgb(189, 183, 183),#FFF); */
+}
+.book {
+    margin: 100px;
+    /* background-image: url('img/book-caver.png'); */
+}
 .paper {
     margin: auto;
     /* padding-top: 50px; */
@@ -284,12 +300,25 @@ export default {
     line-height: 2em;
     overflow-x: scroll;
     outline: none;
-    white-space: pre-wrap;
+    /* white-space: pre-wrap; */
     background-color: white;
-    text-align: center;
-    justify-content: center;
+    /* text-align: center; */
+    /* justify-content: center; */
 }
 .title_text {
-    margin: 10% 20%;
+    font-size: 30px;
+    /* left: 0; */
+    /* writing-mode: vertical-rl; */
+    /* margin: 50% 50%; */
+    /* position: absolute; */
+    /* right: 50%; */
+}
+.title_area {
+    margin-right: 30%;
+    text-align: center;
+    justify-content: baseline;
+}
+.title_writer {
+    margin-top: 50%;
 }
 </style>
