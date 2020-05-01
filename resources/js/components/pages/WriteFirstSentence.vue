@@ -98,7 +98,7 @@ export default {
         // this.fetchHeroData(this.$route.params.hero_id);
         this.showHero();
         //ログインしてなかったらモーダル表示
-        // if (!this.$store.state.login) this.$store.state.drawerLoginModal = true;
+        if (!this.$store.state.login) this.$store.state.drawerLoginModal = true;
         // this.img_url = "img/charactors/" + this.$store.state.HeroData.img_url;
     },
     mounted() {
