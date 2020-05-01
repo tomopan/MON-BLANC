@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar>
+    <v-app-bar hide-on-scroll>
         <v-col cols="3" class="spn">
             <router-link :to="{ name: 'Top' }" style="text-decoration: none">
                 <v-btn id="pen" icon>

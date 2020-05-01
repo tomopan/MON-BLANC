@@ -1,29 +1,68 @@
 <template>
-    <div>
-        <!-- 主人公の画像を表示 -->
-        <v-img :src="img_url" id="hero_img"></v-img>
-        <Hint />
+    <div class="wrap">
+            <v-content>
+
+        <v-navigation-drawer
+            class="nav accent-4"
+            permanent
+        >
+        <v-list>
+            <v-img :src="img_url" id="hero_img"></v-img>
+
+            <v-list-item
+                v-for="item in items"
+                :key="item.title"
+                link
+            >
+
+            <v-list-item-icon>
+                <!-- 主人公の画像を表示 -->
+                <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+        </v-list-item>
+        </v-list>
+
+    </v-navigation-drawer>
+    </v-content>
+
         <!-- タイトル入力 -->
-        <v-form>
-            <div class="input-area">
-                <div id="paper_text">
-                    <div
-                        class="paper"
-                        contenteditable="true"
-                        placeholder="最初の一文を書いてください。"
-                        id="first_sentence"
-                    >{{ text }}</div>
-                    <br />
-                    <v-btn
-                        style="display: none;"
-                        id="save"
-                        dark
-                        @click="saveFirstSentence"
-                        >完了</v-btn
-                    >
-                </div>
+    <v-content>
+        <v-container fluid>
+    <v-form>
+        <div class="input-area">
+            <div id="paper_text">
+                <div
+                    class="paper"
+                    contenteditable="true"
+                    placeholder="第一文を書いて、句読点（。）を打ちましょう。"
+                    id="first_sentence"
+                >{{ text }}</div>
+                <br />
+                <v-btn
+                    style="display: none;"
+                    id="save"
+                    dark
+                    @click="saveFirstSentence"
+                    >1ページ目を書く</v-btn
+                >
             </div>
-        </v-form>
+        </div>
+    </v-form>
+        </v-container>
+    </v-content>
+    <div class="icons">
+        <img :src="'/img/write-page/write.png'"  class="icon" alt="write"/>
+        <img :src="'/img/write-page/font.png'"  class="icon" alt="read" />
+        <img :src="'/img/write-page/font-size.png'" class="icon" alt="read" />
+        <Hint />
+        <a href="/" alt="daiki">
+            <img :src="'/img/write-page/continue.png'" class="icon" alt="read" />
+        </a>
+    </div>
     </div>
 </template>
 
@@ -47,14 +86,19 @@ export default {
             text: "",
             charaCount: "",
             lineCount: "",
-            img_url: ""
+            img_url: "",
+            // items: [
+            //     { title: 'Dashboard' },
+            //     { title: 'Account' },
+            //     { title: 'Admin' },
+            // ],
         };
     },
     created() {
         // this.fetchHeroData(this.$route.params.hero_id);
         this.showHero();
         //ログインしてなかったらモーダル表示
-        if (!this.$store.state.login) this.$store.state.drawerLoginModal = true;
+        // if (!this.$store.state.login) this.$store.state.drawerLoginModal = true;
         // this.img_url = "img/charactors/" + this.$store.state.HeroData.img_url;
     },
     mounted() {
@@ -248,6 +292,7 @@ form {
 #paper_text {
     grid-row: 1 / 10;
     grid-column: 1 / 10;
+    margin-top: 1em;
     /* border: 1px solid #000000; */
 
     /* display: grid; */
@@ -256,15 +301,56 @@ form {
 
 #first_sentence {
     margin: 0 auto 0;
-    height: 640px;
-    font-size: 20px;
+    height: 582px;
+    font-size: 18px;
 
     /* border: 1px solid #000000; */
 }
 
 #hero_img {
-    margin-top: 5%;
-    height: 100%;
-    width: 200px;
+    margin: 10% auto;
+    height: 200px;
+    width: 150px;
+    object-fit: cover;
+    object-position: 100% 0%
 }
+
+.nav{
+    background-color: #F7E9D1;
+}
+
+.wrap{
+    display: flex;
+}
+
+v-navigation-drawer{
+    height: 100vh;
+}
+
+.icons{
+    display: flex;
+    flex-direction: column;
+    margin:1em 4em;
+
+}
+
+.icon{
+    width: 60px;
+    height: auto;
+}
+#app > div > header{
+    display: none!important;
+}
+
+
+</style>
+<style>
+#app > div > main > div > div > main:nth-child(2) > div{
+    margin-right: 0;
+    flex: 0 0 auto!important;
+    flex-grow: 0!important;
+    flex-shrink: 0!important;
+    flex-basis: auto!important;
+}
+
 </style>

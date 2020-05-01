@@ -51,7 +51,7 @@
                         cols="30"
                         rows="2"
                         v-model="answers.q_5"
-                    ></textarea>
+                    ></textarea><p></p>
                     <button style="border:solid 2px #000" @click="saveAnswers">
                         &nbsp;保存&nbsp;
                     </button>
@@ -117,7 +117,7 @@ export default {
 }
 
 .icon {
-    width: 100px;
+    width: 60px;
 }
 #overlay {
     /*　要素を重ねた時の順番　*/

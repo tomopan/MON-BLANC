@@ -28,4 +28,5 @@ main{
     font-family: 'ヒラギノ明朝 ProN','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
 
 }
+
 </style>
