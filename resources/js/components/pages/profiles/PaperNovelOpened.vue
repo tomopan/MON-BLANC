@@ -11,7 +11,7 @@
                 >
                     <v-hover v-slot:default="{ hover }" open-delay="100">
                         <div>
-                            <v-img :src="openNovel.img_url" height="200px">
+                            <v-img :src="'img/books/' + openNovel.img_url" height="200px">
                                 <div
                                     v-if="
                                         loginUserName == $route.params.user_name
