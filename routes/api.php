@@ -81,6 +81,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     //小説をランダムで4つ取得
     Route::get('get/paper_novel/random', 'Api\PaperNovelsController@random');
 
+    //user_paper_orderを取得
+    Route::get('get/user_paper_order', 'Api\PaperNovelsController@user_paper_order');
+
 
 
     // -----------StoryPapersテーブル----------- //

@@ -97,7 +97,7 @@
                 >
                     <v-tab>{{ tab.name }}</v-tab>
                 </router-link>
-                <router-link
+                <!-- <router-link
                     v-else-if="tab.id == 3"
                     :to="{ name: 'MarkedText' }"
                 >
@@ -108,7 +108,7 @@
                     :to="{ name: 'Bookmarks' }"
                 >
                     <v-tab>{{ tab.name }}</v-tab>
-                </router-link>
+                </router-link> -->
             </div>
         </v-tabs>
         <v-divider></v-divider>
@@ -174,8 +174,8 @@ export default {
             tabs: [
                 { id: 1, name: "公開中" },
                 { id: 2, name: "非公開" },
-                { id: 3, name: "マーカー" },
-                { id: 4, name: "ブックマーク" }
+                // { id: 3, name: "マーカー" },
+                // { id: 4, name: "ブックマーク" }
             ]
         };
     },

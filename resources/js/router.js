@@ -17,11 +17,11 @@ import EditPaperNovel from "./components/pages/EditPaperNovel.vue";
 import WriteTitlePaper from "./components/pages/WriteTitlePaper.vue";
 import EditStoryPaper from "./components/pages/EditStoryPaper.vue";
 import SelectWrite from "./components/pages/SelectWrite.vue";
-import WriteFirstTime from "./components/pages/WriteFirstTime.vue";
 import Complete from "./components/pages/Complete.vue";
 import MeetStory from "./components/pages/MeetStory.vue";
 import FindStory from "./components/pages/FindStory.vue";
 import TopBase from "./components/pages/TopBase.vue";
+import Bookmark from "./components/pages/Bookmark.vue";
 
 Vue.use(VueRouter);
 
@@ -47,6 +47,11 @@ const routes = [
         name: "FindStory",
     },
     {
+        path: "/bookmark",
+        component: Bookmark,
+        name: "Bookmark",
+    },
+    {
         path: "/hero/:hero_id",
         component: Hero,
         name: "Hero",
@@ -66,11 +71,7 @@ const routes = [
         component: SelectWrite,
         name: "SelectWrite",
     },
-    {
-        path: "/write-first-time/:hero_id",
-        component: WriteFirstTime,
-        name: "WriteFirstTime",
-    },
+
     {
         path: "/write-first-sentence/:hero_id",
         component: WriteFirstSentence,
@@ -92,7 +93,7 @@ const routes = [
         name: "WriteTitlePaper",
     },
     {
-        path: "/edit-story-paper/:user_paper_order/:story_number",
+        path: "/edit-story-paper/:hero_id/:user_paper_order/:story_number",
         component: EditStoryPaper,
         name: "EditStoryPaper",
     },

@@ -2,12 +2,13 @@
     <v-container class="pa-4 text-center">
         <!-- 主人公から探す -->
         <div class="hero-find">
-            <vue-typer
+            <!-- <vue-typer
                 :repeat="0"
                 :type-delay="100"
                 text="Find for Hero"
                 style="font-size:30px"
-            ></vue-typer>
+            ></vue-typer> -->
+            <p>タイムライン</p>
             <v-row class="fill-height" align="center" justify="center">
                 <div v-for="(hero, id) in heroes" :key="id">
                     <v-col :key="id">
