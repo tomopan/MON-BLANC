@@ -13,13 +13,13 @@
             <router-link :to="{ name: 'FindStory' }">
                 <v-btn id="books" icon>
                     <v-avatar tile size="30">
-                        <img :src="'/img/header/frame.png'" alt="frame" />
+                        <img :src="'/img/header/glass.png'" alt="frame" />
                     </v-avatar>
                 </v-btn>
             </router-link>
 
             <!-- Meet Storyへのリンク -->
-            <router-link :to="{ name: 'MeetStory' }">
+            <router-link :to="{ name: 'Bookmark' }">
                 <v-btn id="meet" icon>
                     <v-avatar tile size="30">
                         <img :src="'/img/header/reading.png'" alt="read" />

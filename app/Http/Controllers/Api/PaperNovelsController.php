@@ -220,6 +220,18 @@ use App\StoryPaper;
                     ->get();
             return response()->json($novels);
         }
+
+        //user_paper_orderを取得
+        public function user_paper_order(){
+                //ペーパーの順序を取得
+                $user_paper_order = PaperNovel::where('user_id','=',Auth::id())
+                                    ->max('user_paper_order');
+                    //既に書かれていたら、numberに+1
+                    if($user_paper_order) $user_paper_order += 1;
+                    //はじめてのペーパーなら、1を代入
+                    else $user_paper_order = 1;
+            return response()->json($user_paper_order);
+        }
     }
     //=======================================================================
     
