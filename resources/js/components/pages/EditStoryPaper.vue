@@ -125,20 +125,20 @@ export default {
       this.PaperNovelPost.story_number = this.$route.params.story_number;
 
       //最初の一文が更新されていたら、paper_novelsテーブルも更新
-      if (this.$route.params.story_number == 2) {
-        const firstSentence = this.PaperNovelPost.text.split("。")[0] + "。";
-        this.PaperNovelPost.first_sentence = firstSentence;
-        console.log(this.PaperNovelPost);
-        // 更新
-        axios
-          .post("api/update/first_sentence", this.PaperNovelPost)
-          .then(res => {
-            console.log(res.data);
-          })
-          .catch(err => {
-            console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
-          });
-      }
+      // if (this.$route.params.story_number == 2) {
+      //   const firstSentence = this.PaperNovelPost.text.split("。")[0] + "。";
+      //   this.PaperNovelPost.first_sentence = firstSentence;
+      //   console.log(this.PaperNovelPost);
+      //   // 更新
+      //   axios
+      //     .post("api/update/first_sentence", this.PaperNovelPost)
+      //     .then(res => {
+      //       console.log(res.data);
+      //     })
+      //     .catch(err => {
+      //       console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
+      //     });
+      // }
 
       // ストーリーペーパーの内容を更新
       axios
@@ -146,7 +146,7 @@ export default {
         .then(res => {
           console.log(res.data);
           this.$router.push({
-            name: "EditPaperNovel",
+            name: "EditNovel",
             params: {
               user_paper_order: this.$route.params.user_paper_order
             }

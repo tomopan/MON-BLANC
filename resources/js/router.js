@@ -22,6 +22,7 @@ import MeetStory from "./components/pages/MeetStory.vue";
 import FindStory from "./components/pages/FindStory.vue";
 import TopBase from "./components/pages/TopBase.vue";
 import Bookmark from "./components/pages/Bookmark.vue";
+import EditNovel from "./components/pages/EditNovel.vue";
 
 Vue.use(VueRouter);
 
@@ -86,6 +87,11 @@ const routes = [
         path: "/edit-paper-novel/:user_paper_order",
         component: EditPaperNovel,
         name: "EditPaperNovel",
+    },
+    {
+        path: "/edit-novel/:user_paper_order",
+        component: EditNovel,
+        name: "EditNovel",
     },
     {
         path: "/write-title/:user_paper_order",
