@@ -97,58 +97,9 @@
                 >
                     <v-tab>{{ tab.name }}</v-tab>
                 </router-link>
-                <!-- <router-link
-                    v-else-if="tab.id == 3"
-                    :to="{ name: 'MarkedText' }"
-                >
-                    <v-tab>{{ tab.name }}</v-tab>
-                </router-link>
-                <router-link
-                    v-else-if="tab.id == 4"
-                    :to="{ name: 'Bookmarks' }"
-                >
-                    <v-tab>{{ tab.name }}</v-tab>
-                </router-link> -->
             </div>
         </v-tabs>
         <v-divider></v-divider>
-
-        <!-- 他者プロフィール -->
-        <!-- <v-tabs v-else-if="profileData.user_name != loginUser.user_name" grow >
-            <v-tab>
-                <router-link  :to="{ name: 'PaperNovelOpened' }" >
-                    <p>公開中</p>
-                </router-link>
-            </v-tab>
-    </v-tabs>-->
-
-        <!-- 
-        <v-tabs
-            v-model="selectedTab"
-            >
-            <router-link :to="{ name: 'PaperNovelOpened' }" >
-                <v-tab key='first'>
-                    <p>公開中</p>
-                </v-tab>
-            </router-link>
-            <router-link 
-                v-if="profileData.user_name == loginUser.user_name"
-                :to="{ name: 'PaperNovelClosed' }"
-            >
-                <v-tab key='second'>
-                    <p>非公開</p>
-                </v-tab>
-            </router-link>
-            <router-link 
-                v-if="profileData.user_name == loginUser.user_name"
-                :to="{ name: 'MarkedText' }"
-            >
-                <v-tab key='third'>
-                    <p>マーカー</p>
-                </v-tab>
-            </router-link>
-    </v-tabs>-->
-
         <router-view :loginUserName="loginUser.user_name"></router-view>
         <!-- 書いた小説を表示 -->
     </v-container>

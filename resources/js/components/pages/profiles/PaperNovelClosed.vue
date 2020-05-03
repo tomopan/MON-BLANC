@@ -33,7 +33,7 @@
                                     >
                                     <router-link
                                         :to="{
-                                            name: 'EditPaperNovel',
+                                            name: 'EditNovel',
                                             params: {
                                                 user_paper_order:
                                                     closeNovel.user_paper_order
