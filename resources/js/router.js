@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 // ページコンポーネントをインポート
-import Top from "./components/pages/Top.vue";
+import SelectHero from "./components/pages/SelectHero.vue";
 import Hero from "./components/pages/Hero.vue";
 import ReadPaper from "./components/pages/ReadPaper.vue";
 import WriteStoryPaper from "./components/pages/WriteStoryPaper.vue";
@@ -28,85 +28,85 @@ Vue.use(VueRouter);
 
 const routes = [
     {
-        path: "/",
-        component: Top,
-        name: "Top",
+        path: "/select-hero",
+        component: SelectHero,
+        name: "SelectHero"
     },
     {
         path: "/top-base",
         component: TopBase,
-        name: "TopBase",
+        name: "TopBase"
     },
     {
         path: "/meet-story",
         component: MeetStory,
-        name: "MeetStory",
+        name: "MeetStory"
     },
     {
-        path: "/find-story",
+        path: "/",
         component: FindStory,
-        name: "FindStory",
+        name: "FindStory"
     },
     {
         path: "/bookmark",
         component: Bookmark,
-        name: "Bookmark",
+        name: "Bookmark"
     },
     {
         path: "/hero/:hero_id",
         component: Hero,
-        name: "Hero",
+        name: "Hero"
     },
     {
         path: "/read-first-sentence/:hero_id/",
         component: ReadFirstSentence,
-        name: "ReadFirst",
+        name: "ReadFirst"
     },
     {
         path: "/read-paper/:hero_id/:paper_novel_id",
         component: ReadPaper,
-        name: "ReadPaper",
+        name: "ReadPaper"
     },
     {
         path: "/select-write/:hero_id",
         component: SelectWrite,
-        name: "SelectWrite",
+        name: "SelectWrite"
     },
 
     {
         path: "/write-first-sentence/:hero_id",
         component: WriteFirstSentence,
-        name: "WriteFirstSentence",
+        name: "WriteFirstSentence"
     },
     {
         path: "/write-story-paper/:user_paper_order/:story_number",
         component: WriteStoryPaper,
-        name: "WriteStoryPaper",
+        name: "WriteStoryPaper"
     },
     {
         path: "/edit-paper-novel/:user_paper_order",
         component: EditPaperNovel,
-        name: "EditPaperNovel",
+        name: "EditPaperNovel"
     },
     {
         path: "/edit-novel/:user_paper_order",
         component: EditNovel,
-        name: "EditNovel",
+        name: "EditNovel"
     },
     {
         path: "/write-title/:user_paper_order",
         component: WriteTitlePaper,
-        name: "WriteTitlePaper",
+        name: "WriteTitlePaper"
     },
     {
         path: "/edit-story-paper/:hero_id/:user_paper_order/:story_number",
         component: EditStoryPaper,
-        name: "EditStoryPaper",
+        name: "EditStoryPaper"
     },
     {
         path: "/complete/:user_paper_order",
         component: Complete,
-        name: "Complete",
+        name: "Complete"
     },
     {
         path: "/profile/:user_name",
@@ -117,30 +117,30 @@ const routes = [
             {
                 path: "/profile/:user_name/PaperNovelOpened",
                 component: PaperNovelOpened,
-                name: "PaperNovelOpened",
+                name: "PaperNovelOpened"
             },
             {
                 path: "/profile/:user_name/PaperNovelClosed",
                 component: PaperNovelClosed,
-                name: "PaperNovelClosed",
+                name: "PaperNovelClosed"
             },
             {
                 path: "/profile/:user_name/marker",
                 component: MarkedText,
-                name: "MarkedText",
+                name: "MarkedText"
             },
             {
                 path: "/profile/:user_name/bookmark",
                 component: Bookmarks,
-                name: "Bookmarks",
-            },
-        ],
-    },
+                name: "Bookmarks"
+            }
+        ]
+    }
 ];
 
 // VueRouterインスタンスを作成する
 const router = new VueRouter({
-    routes,
+    routes
 });
 
 // app.jsでインポートするため
