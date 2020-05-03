@@ -1,19 +1,21 @@
 <template>
     <v-app-bar hide-on-scroll>
         <v-col cols="3" class="spn">
-            <router-link :to="{ name: 'Top' }" style="text-decoration: none">
+            <router-link :to="{ name: 'FindStory' }" style="text-decoration: none">
                 <v-btn id="pen" icon>
                     <v-avatar size="30">
-                        <img :src="'/img/header/writing.png'" alt="pen" />
+                        読む
+                        <!-- <img :src="'/img/header/writing.png'" alt="pen" /> -->
                     </v-avatar>
                 </v-btn>
             </router-link>
 
             <!-- Find Storyへのリンク -->
-            <router-link :to="{ name: 'FindStory' }">
+            <router-link :to="{ name: 'SelectHero' }">
                 <v-btn id="books" icon>
                     <v-avatar tile size="30">
-                        <img :src="'/img/header/glass.png'" alt="frame" />
+                        書く
+                        <!-- <img :src="'/img/header/glass.png'" alt="frame" /> -->
                     </v-avatar>
                 </v-btn>
             </router-link>
@@ -22,7 +24,8 @@
             <router-link :to="{ name: 'Bookmark' }">
                 <v-btn id="meet" icon>
                     <v-avatar tile size="30">
-                        <img :src="'/img/header/reading.png'" alt="read" />
+                        本棚
+                        <!-- <img :src="'/img/header/reading.png'" alt="read" /> -->
                     </v-avatar>
                 </v-btn>
             </router-link>
@@ -33,7 +36,7 @@
 
         <v-col class="d-flex justify-space-around center">
             <router-link
-                :to="{ name: 'Top' }"
+                :to="{ name: 'FindStory' }"
                 style="text-decoration: none"
                 id="logo"
             >
