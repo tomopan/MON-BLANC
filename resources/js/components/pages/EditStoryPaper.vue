@@ -1,20 +1,21 @@
 <template>
   <div class="wrap">
+    <!-- テキスト未入力の時のモーダル -->
+    <v-dialog id="overlay" v-model="dialog" width="50%">
+      <div id="content">
+        <div class="write">
+          <p>テキストを入力してください</p>
+          <button style="border:solid 2px #000" @click="dialog = false">&nbsp;閉じる&nbsp;</button>
+        </div>
+      </div>
+    </v-dialog>
+    <!-- モーダルここまで -->
     <!-- ボタンたち -->
     <div class="buttons">
+      <!-- 戻るボタン -->
       <v-img class="icon" height="60px" src="img/write-page/continue.png" @click="$router.go(-1)"></v-img>
-
       <!-- 一時保存ボタン -->
-      <router-link
-        :to="{
-                        name: 'EditPaperNovel',
-                        params: {
-                            user_paper_order: $route.params.user_paper_order
-                        }
-                    }"
-      >
-        <v-img class="icon" height="60px" src="img/write-page/book.png" @click="editPaper"></v-img>
-      </router-link>
+      <v-img class="icon" height="60px" src="img/write-page/book.png" @click="editPaper"></v-img>
     </div>
 
     <v-row>
@@ -22,7 +23,12 @@
       <div class="input-area">
         <!-- 小説入力 -->
         <div id="paper_text">
-          <div v-if="PaperNovelData.text" class="paper" contenteditable="true" id="story_text_input">
+          <div
+            v-if="PaperNovelData.text"
+            class="paper"
+            contenteditable="true"
+            id="story_text_input"
+          >
             <div>{{ PaperNovelData.text }}</div>
           </div>
           <div v-else class="paper" contenteditable="true" id="story_text_input" placeholder="テキスト"></div>
@@ -31,9 +37,6 @@
     </v-row>
     <!-- 入力エリアここまで -->
     <div class="icons">
-      <img :src="'/img/write-page/write.png'" class="icon" alt="write" />
-      <img :src="'/img/write-page/font.png'" class="icon" alt="read" />
-      <img :src="'/img/write-page/font-size.png'" class="icon" alt="read" />
       <Hint />
     </div>
   </div>
@@ -109,6 +112,12 @@ export default {
         .innerHTML.replace(/(<(p|div))/gi, "\\n$1")
         .replace(/(<([^>]+)>)/gi, "");
 
+      // テキストのバリデーション
+      if (this.PaperNovelPost.text.length == 0) {
+        this.dialog = !this.dialog;
+        return;
+      }
+
       //user_paper_order
       this.PaperNovelPost.user_paper_order = this.$route.params.user_paper_order;
 
@@ -136,6 +145,12 @@ export default {
         .post("api/edit/story_paper", this.PaperNovelPost)
         .then(res => {
           console.log(res.data);
+          this.$router.push({
+            name: "EditPaperNovel",
+            params: {
+              user_paper_order: this.$route.params.user_paper_order
+            }
+          });
         })
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
@@ -253,6 +268,33 @@ export default {
 .wrap {
   display: flex;
 }
-</style>
-<style>
+
+#content {
+  z-index: 2;
+  width: 100%;
+  padding: 1em;
+  background-color: #fff;
+  border: 1px dashed #000;
+}
+
+.write {
+  font-family: "Futura", "游ゴシック体", "YuGothic";
+  font-weight: bold;
+  background-color: #ffce97;
+  text-align: center;
+  margin: 1em;
+}
+
+p {
+  margin-block-end: 0.5em;
+}
+button {
+  margin: 0.5em;
+}
+.title {
+  font-family: "Futura", "游ゴシック体", "YuGothic";
+  font-weight: bold;
+  font-size: 1em;
+  margin-bottom: 0.8em;
+}
 </style>
