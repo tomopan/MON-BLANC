@@ -10,6 +10,7 @@
           </v-avatar>
         </v-btn>
       </router-link>
+
       <!-- タイムラインへのリンク -->
       <router-link :to="{ name: 'FindStory' }" style="text-decoration: none">
         <v-btn id="pen" icon>
