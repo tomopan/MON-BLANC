@@ -3,13 +3,15 @@
     <v-row class="fill-height" align="center" justify="center">
       <!-- choice your charactorここから -->
       <v-container class="pa-4 text-center">
-        <!-- <vue-typer
-                    :repeat="0"
-                    :type-delay="100"
-                    text="choice your charactor"
-                    style="font-size:30px"
-        ></vue-typer>-->
-        <p>主人公を選んで書くページ</p>
+        <vue-typer
+          :repeat="0"
+          :type-delay="100"
+          text="Choice your character, and Write your story.|"
+          style="font-size:30px"
+        ></vue-typer>
+        <p>あなたの物語の主人公を選んで、物語を書いてみよう。</p>
+        <br />
+        <p>投稿された本はタイムラインに表示されます</p>
         <div class="wrap">
           <TopBase />
         </div>

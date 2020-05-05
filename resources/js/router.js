@@ -28,7 +28,7 @@ Vue.use(VueRouter);
 
 const routes = [
     {
-        path: "/select-hero",
+        path: "/",
         component: SelectHero,
         name: "SelectHero"
     },
@@ -43,7 +43,7 @@ const routes = [
         name: "MeetStory"
     },
     {
-        path: "/",
+        path: "/find-story",
         component: FindStory,
         name: "FindStory"
     },

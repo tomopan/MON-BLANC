@@ -1,16 +1,7 @@
 <template>
-  <v-app-bar>
+  <v-app-bar hide-on-scroll>
     <v-col cols="3" class="spn">
-      <router-link :to="{ name: 'FindStory' }" style="text-decoration: none">
-        <v-btn id="pen" icon>
-          <v-avatar size="30">
-            読む
-            <!-- <img :src="'/img/header/writing.png'" alt="pen" /> -->
-          </v-avatar>
-        </v-btn>
-      </router-link>
-
-      <!-- Find Storyへのリンク -->
+      <!-- 主人公選択へのリンク -->
       <router-link :to="{ name: 'SelectHero' }">
         <v-btn id="books" icon>
           <v-avatar tile size="30">
@@ -20,7 +11,17 @@
         </v-btn>
       </router-link>
 
-      <!-- Meet Storyへのリンク -->
+      <!-- タイムラインへのリンク -->
+      <router-link :to="{ name: 'FindStory' }" style="text-decoration: none">
+        <v-btn id="pen" icon>
+          <v-avatar size="30">
+            読む
+            <!-- <img :src="'/img/header/writing.png'" alt="pen" /> -->
+          </v-avatar>
+        </v-btn>
+      </router-link>
+
+      <!-- 本棚へのリンク -->
       <router-link :to="{ name: 'Bookmark' }">
         <v-btn id="meet" icon>
           <v-avatar tile size="30">
