@@ -12,10 +12,14 @@
     <!-- モーダルここまで -->
     <!-- ボタンたち -->
     <div class="buttons">
+      <!-- 文字数 -->
+      {{charaCount}}/5000文字
       <!-- 戻るボタン -->
-      <v-img class="icon" height="60px" src="img/write-page/continue.png" @click="$router.go(-1)"></v-img>
+      <!-- <v-img class="icon" height="60px" src="img/write-page/continue.png" @click="$router.go(-1)"></v-img> -->
+      <v-btn @click="$router.go(-1)">戻る</v-btn>
       <!-- 一時保存ボタン -->
-      <v-img class="icon" height="60px" src="img/write-page/book.png" @click="editPaper"></v-img>
+      <!-- <v-img class="icon" height="60px" src="img/write-page/book.png" @click="editPaper"></v-img> -->
+      <v-btn @click="editPaper">保存する</v-btn>
     </div>
 
     <v-row>
@@ -62,7 +66,9 @@ export default {
       //最初か追加かを判定
       isFristStoryPaper: false,
       //モーダルの開閉
-      dialog: false
+      dialog: false,
+      //文字数カウント
+      charaCount: ""
     };
   },
 
@@ -78,7 +84,9 @@ export default {
     //ペーパーノベルのデータを取得
     this.showNovel();
   },
-
+  mounted() {
+    this.stopText();
+  },
   computed: {
     ...mapGetters(["HeroData"])
   },
@@ -105,13 +113,16 @@ export default {
     },
     //textを更新する
     editPaper: function() {
+      //5000字以上だったらアラート表示
+      if (document.getElementById("story_text_input").innerHTML.length > 5000)
+        alert("5000字以内で入力してください");
       //PostするオブジェクトにDOMの内容をぶちこむ
       //テキスト
       this.PaperNovelPost.text = document
         .getElementById("story_text_input")
         .innerHTML.replace(/(<(p|div))/gi, "\\n$1")
         .replace(/(<([^>]+)>)/gi, "");
-
+      //5000字で制限
       // テキストのバリデーション
       if (this.PaperNovelPost.text.length == 0) {
         this.dialog = !this.dialog;
@@ -155,6 +166,26 @@ export default {
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
         });
+    },
+    // 5000字で制御
+    stopText: function() {
+      //要素のIDを取得
+      const target = document.getElementById("story_text_input");
+
+      //DOMの変更を監視
+      const observer = new MutationObserver(records => {
+        // 変化が発生したときの処理を記述
+        let p = document.getElementById("story_text_input");
+        //文字数をdataに格納
+        let text = p.textContent;
+        this.charaCount = text.length;
+      });
+      observer.observe(target, {
+        // オプションを指定
+        characterData: true,
+        childList: true,
+        subtree: true
+      });
     }
   }
 };
@@ -196,6 +227,8 @@ export default {
   -webkit-writing-mode: vertical-rl;
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
+      word-wrap: break-word;
+    white-space: pre-wrap;
   font-size: 18px;
   line-height: 2em;
   overflow-x: scroll;
@@ -218,10 +251,11 @@ export default {
   display: grid;
   grid-template-columns: 150px 1fr;
   border: 1px dotted #a9a9a9;
+  background-color: white;
 }
 #paper_text {
-  grid-row: 1 / 12;
-  grid-column: 1 / 10;
+  width: 800px;
+  height: 500px;
 }
 
 #story_text_input > div {
@@ -264,9 +298,14 @@ export default {
   width: 60px;
   height: 60px !important;
 }
-
+.v-application {
+  background-color: #ffe8ae;
+}
 .wrap {
+  height: 100%;
   display: flex;
+  background-color: #ffe8ae;
+  /* cursor: url('/img/header/pen2.png'), auto; */
 }
 
 #content {
