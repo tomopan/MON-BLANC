@@ -232,6 +232,34 @@ use App\StoryPaper;
                     else $user_paper_order = 1;
             return response()->json($user_paper_order);
         }
+
+        // 新着順で全小説を取得
+        public function showNovels()
+        {
+            //公開中の小説を取得
+            $novels =DB::table('paper_novels as n')
+            ->join('heroes as h','h.id','=','n.hero_id')
+            ->where('n.status',1)
+            ->select('n.id','n.title','n.user_id','n.status','n.hero_id','h.img_url','n.user_paper_order')
+            ->orderBy('n.updated_at')
+            ->get();
+
+            return response()->json($novels);
+        }
+        //新着順で主人公ごとに小説を取得
+        public function showHeroNovels($hero_id)
+        {
+            //公開中の小説を取得
+            $novels =DB::table('paper_novels as n')
+            ->where('n.hero_id','=',$hero_id)
+            ->join('heroes as h','h.id','=','n.hero_id')
+            ->where('n.status',1)
+            ->select('n.id','n.title','n.user_id','n.status','n.hero_id','h.img_url','n.user_paper_order')
+            ->orderBy('n.updated_at')
+            ->get();
+
+            return response()->json($novels);
+        }
     }
     //=======================================================================
     

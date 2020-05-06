@@ -84,7 +84,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     //user_paper_orderを取得
     Route::get('get/user_paper_order', 'Api\PaperNovelsController@user_paper_order');
 
+    //新着で小説を取得
+    Route::get('get/novels', 'Api\PaperNovelsController@showNovels');
 
+    //新着で主人公ごとに小説を取得
+    Route::get('get/hero_novels/{hero_id}', 'Api\PaperNovelsController@showHeroNovels');
 
     // -----------StoryPapersテーブル----------- //
 
@@ -102,6 +106,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     //編集ページからストーリーペーパーを更新
     Route::post('edit/story_paper', 'Api\StoryPapersController@edit');
+
+
 
 
 
