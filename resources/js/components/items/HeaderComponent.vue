@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar  hide-on-scroll>
+  <v-app-bar>
 
       <router-link :to="{ name: 'FindStory' }" style="text-decoration: none" id="logo">
         <v-toolbar-title floating="true">
@@ -121,6 +121,9 @@ div{
   font-size: 0.9em;
 }
 
+a{
+  text-decoration: none;
+}
 
 .theme--light.v-app-bar.v-toolbar.v-sheet {
   background-color: #fff;
@@ -136,6 +139,10 @@ div{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.menuButton:hover{
+  opacity: 60%;
 }
 
 .write,.read,.books{

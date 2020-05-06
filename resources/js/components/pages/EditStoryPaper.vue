@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+<div class="cont">
     <!-- テキスト未入力の時のモーダル -->
     <v-dialog id="overlay" v-model="dialog" width="50%">
       <div id="content">
@@ -215,8 +215,13 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  border: 0;
   box-sizing: border-box;
 }
+
+html,
+body { margin: 0px; padding: 0px; border: 0; height:100%;}
+
 
 .paper {
   display: block;
@@ -243,15 +248,17 @@ export default {
   margin: auto;
 }
 .input-area {
-  margin: 0 auto;
-  padding-top: 25px;
+  margin: auto;
+  padding-top: 1em;
   height: 600px;
   width: 800px;
   margin-top: 2em;
   display: grid;
   grid-template-columns: 150px 1fr;
-  border: 1px dotted #a9a9a9;
+  border: 1px solid #a9a9a9;
   background-color: white;
+  cursor: url('/img/write-page/cursor.png'), auto;
+
 }
 #paper_text {
   width: 800px;
@@ -301,11 +308,10 @@ export default {
 .v-application {
   background-color: #ffe8ae;
 }
-.wrap {
-  height: 100%;
+.cont {
+    height: 100%;
   display: flex;
   background-color: #ffe8ae;
-  /* cursor: url('/img/header/pen2.png'), auto; */
 }
 
 #content {
@@ -330,10 +336,11 @@ p {
 button {
   margin: 0.5em;
 }
-.title {
-  font-family: "Futura", "游ゴシック体", "YuGothic";
-  font-weight: bold;
-  font-size: 1em;
-  margin-bottom: 0.8em;
+</style>
+<style>
+#app > div > main{
+  margin: 0px;
+  height:100%;
 }
+
 </style>

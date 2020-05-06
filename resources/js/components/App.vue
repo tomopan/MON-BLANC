@@ -2,9 +2,7 @@
     <v-app>
         <header-component />
         <main>
-            <div>
                 <router-view></router-view>
-            </div>
         </main>
         <footer-component />
     </v-app>
