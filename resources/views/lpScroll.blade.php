@@ -9,7 +9,7 @@
             outline: none;
         }
         body{
-            background-color:#F7E9D1;
+            background-color:#FFE8AF;
             margin : 0;
             padding : 0;
             overflow-x: hidden;
@@ -21,7 +21,7 @@
         }
 
         p{
-            font-family: "Futura","游ゴシック体", "YuGothic";
+            font-family: "Apple SD Gothic Neo","游ゴシック体", "YuGothic";
             color:#4B4949;
             opacity:85%;
         }
@@ -31,13 +31,27 @@
             flex-direction: column;
             justify-content: center;
             align-items:  center;
-            background-color:#fff;
+            letter-spacing:0.5em;
+            background-image:url({{asset('img/write-page/background.jpg')}});
+            background-size: cover;
+            height:700px;
         }
 
         .pre{
-            font-weight:bold;
+            font-size:1.8em;
+            text-align:center;
+            margin-block-start: 0!important;
+            margin-block-end: 0!important;
+        }
+
+        .mainMessage{
             font-size:3em;
             text-align:center;
+            letter-spacing:0.2em;
+        }
+
+        span{
+            font-family: "Futura","游ゴシック体", "YuGothic";
         }
 
         .orange{
@@ -54,7 +68,7 @@
             justify-content: space-between;
             align-items:  center;
             padding:2em 2.5em;
-            margin:5em 2em 4em 2em;
+            margin:2em 2em 4em 2em;
             width:800px;
             height:400px;
             box-shadow:8px 8px 8px rgba(0,0,0,0.16);
@@ -62,8 +76,14 @@
 
         .title{
             font-weight:bold;
-            font-size:2em;
+            font-size:1.9em;
+            letter-spacing:0.15em;
+            margin-block-start: 0.1em;
+            margin-block-end: 0.1em;
+
         }
+
+        
         img{
             height:300px;
             margin: 0 30px;
@@ -73,6 +93,14 @@
         }
         .sentences{
             margin:4em 0;
+            letter-spacing:0.2em;
+        }
+
+        .sentence{
+            margin-block-start: 0.2em;
+            margin-block-end: 0.2em;
+            font-size:1em;
+            line-height:24px;
         }
 
         button{
@@ -91,6 +119,14 @@
         }
         button:hover{
             background-color:#4f3f26;
+        }
+
+        .mainTitle{
+            text-align:center;
+            margin-top:3em;
+            margin-bottom:0;
+            font-size:2.5em;
+            letter-spacing:0.2em;
         }
 
         @media screen and (max-width: 415px) {
@@ -140,15 +176,15 @@
             <div>
                 <p class="pre">一言で表現できない物事に直面したとき、</p>
                 <p class="pre">物語は初めてその意義を発揮する。</p>
-                <div class="blank"></div> <!--仮置き-->
+                <p class="mainMessage">小説は、「読む」から「書く」へ。</p>
             </div>
         </div>
         <div class="orange">
             <div class="first">
-                <p class="pre">MON BLANCでの過ごし方</p>
+                <p class="mainTitle title"><span>MON BLANC</span> での過ごし方</p>
                 <div class="card">
                     <div>
-                        <p class="title">物語の主人公を選ぼう</p>
+                        <p class="title">物語の主人公を選ぼう。</p>
                         <div class="sentences">
                             <p class="sentence">あなたの気になる主人公が見つかれば、</p>
                             <p class="sentence">その気になった理由こそが、</p>
@@ -162,11 +198,13 @@
                 <div class="card">
                     <img class="meet" src="{{asset('img/lp/meet.png')}}" alt="">
                     <div class="right">
-                        <p class="title">心に留まる第一文と出会おう</p>
+                        <p class="title">思いついたままに</p>
+                        <p class="title">描写してみよう！</p>
                         <div class="sentences">
-                            <p class="sentence">このフレームに映る一文は、</p>
-                            <p class="sentence">MON BLANCに集まった、</p>
-                            <p class="sentence">それぞれの物語の「第一文」です。</p>
+                            <p class="sentence">テキストエディタの横にあるヒントボタンを押して、</p>
+                            <p class="sentence">質問に答えながら描写をイメージしてみましょう。</p>
+                            <p class="sentence">小説は自由です。</p>
+                            <p class="sentence">イメージしたままに、言葉にしてみてください。</p>
                         </div>
                     </div>
                 </div>
@@ -174,7 +212,8 @@
             <div class="third">
                 <div class="card">
                     <div>
-                        <p class="title">物語の主人公を選ぼう</p>
+                        <p class="title">主人公を起点に</p>
+                        <p class="title">読みたい物語を選ぼう。</p>
                         <div class="sentences">
                             <p class="sentence">1人の主人公に対して、</p>
                             <p class="sentence">様々な視点での物語が綴られています。</p>
