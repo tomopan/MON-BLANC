@@ -1,10 +1,8 @@
 <template>
     <div>
-        <v-img
-            class="icon"
-            src="img/write-page/tutorial.png"
+        <v-btn
             @click="dialog = !dialog"
-        ></v-img>
+        >ヒント</v-btn>
         <div id="overlay" v-show="dialog">
             <div id="content">
                 <div class="write">

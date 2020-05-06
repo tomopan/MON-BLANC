@@ -1,5 +1,5 @@
 <template>
-<div class="cont">
+  <div class="cont">
     <!-- テキスト未入力の時のモーダル -->
     <v-dialog id="overlay" v-model="dialog" width="50%">
       <div id="content">
@@ -20,6 +20,8 @@
       <!-- 一時保存ボタン -->
       <!-- <v-img class="icon" height="60px" src="img/write-page/book.png" @click="editPaper"></v-img> -->
       <v-btn @click="editPaper">保存する</v-btn>
+      <!-- ヒント -->
+      <hint />
     </div>
 
     <v-row>
@@ -40,9 +42,7 @@
       </div>
     </v-row>
     <!-- 入力エリアここまで -->
-    <div class="icons">
-      <Hint />
-    </div>
+    <p class="episode_num">第{{$route.params.story_number}}話</p>
   </div>
 </template>
 
@@ -155,7 +155,6 @@ export default {
       axios
         .post("api/edit/story_paper", this.PaperNovelPost)
         .then(res => {
-          console.log(res.data);
           this.$router.push({
             name: "EditNovel",
             params: {
@@ -220,8 +219,12 @@ export default {
 }
 
 html,
-body { margin: 0px; padding: 0px; border: 0; height:100%;}
-
+body {
+  margin: 0px;
+  padding: 0px;
+  border: 0;
+  height: 100%;
+}
 
 .paper {
   display: block;
@@ -232,12 +235,17 @@ body { margin: 0px; padding: 0px; border: 0; height:100%;}
   -webkit-writing-mode: vertical-rl;
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
-      word-wrap: break-word;
-    white-space: pre-wrap;
+  word-wrap: break-word;
+  white-space: pre-wrap;
   font-size: 18px;
   line-height: 2em;
   overflow-x: scroll;
   outline: none;
+}
+.episode_num {
+  -webkit-writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+  writing-mode: vertical-rl;
 }
 
 .paper span {
@@ -257,8 +265,7 @@ body { margin: 0px; padding: 0px; border: 0; height:100%;}
   grid-template-columns: 150px 1fr;
   border: 1px solid #a9a9a9;
   background-color: white;
-  cursor: url('/img/write-page/cursor.png'), auto;
-
+  cursor: url("/img/write-page/cursor.png"), auto;
 }
 #paper_text {
   width: 800px;
@@ -309,7 +316,7 @@ body { margin: 0px; padding: 0px; border: 0; height:100%;}
   background-color: #ffe8ae;
 }
 .cont {
-    height: 100%;
+  height: 100%;
   display: flex;
   background-color: #ffe8ae;
 }
@@ -338,9 +345,8 @@ button {
 }
 </style>
 <style>
-#app > div > main{
+#app > div > main {
   margin: 0px;
-  height:100%;
+  height: 100%;
 }
-
 </style>
