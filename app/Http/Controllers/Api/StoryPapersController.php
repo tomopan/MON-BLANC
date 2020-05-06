@@ -55,10 +55,12 @@ use App\User;
                         ->where('user_paper_order','=',$request->user_paper_order)
                         ->select('id')
                         ->first();
-            // ストーリーがあるか確認
-            $paper_novel_toggle = StoryPaper::where('paper_novel_id','=',$paper_novel_id)
-                                            ->where('story_number','=',$request->story_number)
-                                            ->exists();
+            if($paper_novel_id){
+                // ストーリーがあるか確認
+                $paper_novel_toggle = StoryPaper::where('paper_novel_id','=',$paper_novel_id->id)
+                                                ->where('story_number','=',$request->story_number)
+                                                ->exists();
+            }
 
             //更新の場合
             if($paper_novel_id && $paper_novel_toggle){

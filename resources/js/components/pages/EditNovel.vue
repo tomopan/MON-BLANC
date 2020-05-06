@@ -2,19 +2,21 @@
   <div>
     <div class="content">
       <div v-for="(paper, i) in active_page_novels" :key="i">
-        <router-link
-          v-if="paper.titleToggle"
-          :to="{
+        <div v-if="paper.titleToggle">
+          <p v-if="title_toggle" class="title_text">{{ paper.text }}</p>
+          <p v-else class="title_text">タイトルを編集</p>
+          <router-link
+            :to="{
                         name: 'WriteTitlePaper',
                         params: {
                             user_paper_order: $route.params.user_paper_order
                         }
                     }"
-        >
-          <p v-if="title_toggle" class="title_text">{{ paper.text }}</p>
-          <p v-else class="title_text">タイトルを編集</p>
-        </router-link>
-    <div v-if="!paper.titleToggle">
+          >
+            <button>編集</button>
+          </router-link>
+        </div>
+        <div v-if="!paper.titleToggle">
           <p class="episode_text">第{{paper.story_number}}話</p>
           <p class="paper_text" v-html="paper.text.replace(/\\n|\r\n|\r|\n/g, '<br>')"></p>
           <button>プレビュー</button>
@@ -34,7 +36,6 @@
           <button>削除</button>
           <v-divider></v-divider>
         </div>
-
       </div>
 
       <!-- ボタンたち -->
@@ -52,7 +53,7 @@
         <v-btn class="add-btn">エピソードを追加</v-btn>
       </router-link>
       <!-- 本完成ボタン -->
-        <v-btn @click="openNovel">公開する</v-btn>
+      <v-btn @click="openNovel">公開する</v-btn>
 
       <!-- <div>
       

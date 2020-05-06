@@ -35,7 +35,9 @@
             contenteditable="true"
             id="story_text_input"
           >
-            <div>{{ PaperNovelData.text }}</div>
+            <div>
+              <!-- {{ PaperNovelData.text }} -->
+            </div>
           </div>
           <div v-else class="paper" contenteditable="true" id="story_text_input" placeholder="テキスト"></div>
         </div>
@@ -104,8 +106,16 @@ export default {
             this.$route.params.story_number
         )
         .then(res => {
-          console.log(res.data);
           this.PaperNovelData = res.data;
+          //改行コードを<br>に変換
+          this.PaperNovelData.text = this.PaperNovelData.text.replace(
+            /\\n|\r\n|\r|\n/g,
+            "<br/>"
+          );
+          $("#story_text_input").append(
+            this.PaperNovelData.text
+          );
+
         })
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
@@ -266,6 +276,7 @@ body {
   border: 1px solid #a9a9a9;
   background-color: white;
   cursor: url("/img/write-page/cursor.png"), auto;
+  overflow-x: scroll;
 }
 #paper_text {
   width: 800px;
