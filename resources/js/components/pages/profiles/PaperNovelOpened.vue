@@ -121,7 +121,7 @@ export default {
         "space-around",
         "space-between"
       ],
-      justify: "center"
+      justify: "center",
     };
   },
   watch: {
