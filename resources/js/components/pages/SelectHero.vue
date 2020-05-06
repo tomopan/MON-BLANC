@@ -8,10 +8,10 @@
           :type-delay="100"
           text="Choice your character, and Write your story.|"
           style="font-size:30px"
+          class="typer"
         ></vue-typer>
-        <p>あなたの物語の主人公を選んで、物語を書いてみよう。</p>
-        <br />
-        <p>投稿された本はタイムラインに表示されます</p>
+        <p class="first">あなたの物語の主人公を選んで、物語を書いてみよう。</p>
+        <p>投稿された物語は、タイムラインに表示されます</p>
         <div class="wrap">
           <TopBase />
         </div>
@@ -88,7 +88,11 @@ a:hover {
 }
 
 p {
-  font-family: "Lao MN", "serif";
+  font-family: "Apple SD Gothic Neo", "serif";
+}
+
+.typer{
+  font-family: "Kaiti SC", "serif";
 }
 
 .show-btns {
@@ -99,9 +103,22 @@ p {
   width: 100%;
   height: 400px;
 }
+
+.v-application .first{
+  margin-bottom: 0;
+}
+
 </style>
 <style>
 #app > div > header {
   display: block;
+}
+
+.v-application--wrap{
+
+  background-image: url(/img/write-page/background.jpg)!important;
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 </style>

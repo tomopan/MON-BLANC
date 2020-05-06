@@ -1,50 +1,51 @@
 <template>
-  <v-app-bar hide-on-scroll>
-    <v-col cols="3" class="spn">
-      <!-- 主人公選択へのリンク -->
+  <v-app-bar  hide-on-scroll>
+
+      <router-link :to="{ name: 'FindStory' }" style="text-decoration: none" id="logo">
+        <v-toolbar-title floating="true">
+          <img :src="'/img/header/headerLogo.png'" class="logo" alt="logo" />
+        </v-toolbar-title>
+      </router-link>
+
+      <!-- 書くページ（主人公選択）へのリンク -->
       <router-link :to="{ name: 'SelectHero' }">
-        <v-btn id="books" icon>
-          <v-avatar tile size="30">
-            書く
-            <!-- <img :src="'/img/header/glass.png'" alt="frame" /> -->
-          </v-avatar>
-        </v-btn>
+        <div class="menuButton">
+          <div>
+              <img :src="'/img/header/write.png'" class="write" alt="write" />
+          </div>
+          <div>
+              かく
+          </div>
+        </div>
       </router-link>
 
       <!-- タイムラインへのリンク -->
       <router-link :to="{ name: 'FindStory' }" style="text-decoration: none">
-        <v-btn id="pen" icon>
-          <v-avatar size="30">
-            読む
-            <!-- <img :src="'/img/header/writing.png'" alt="pen" /> -->
-          </v-avatar>
-        </v-btn>
+        <div class="menuButton">
+          <div>
+              <img :src="'/img/header/read.png'" class="read" alt="read" />
+          </div>
+          <div>
+              よむ
+          </div>
+        </div>
       </router-link>
 
       <!-- 本棚へのリンク -->
       <router-link :to="{ name: 'Bookmark' }">
-        <v-btn id="meet" icon>
-          <v-avatar tile size="30">
-            本棚
-            <!-- <img :src="'/img/header/reading.png'" alt="read" /> -->
-          </v-avatar>
-        </v-btn>
+        <div class="menuButton">
+          <div>
+              <img :src="'/img/header/books.png'" class="books" alt="books" />
+          </div>
+          <div>
+              ほんだな
+          </div>
+        </div>
       </router-link>
-    </v-col>
-    <v-spacer class="nav"></v-spacer>
-    <v-spacer class="nav"></v-spacer>
-    <v-spacer class="nav"></v-spacer>
 
-    <v-col class="d-flex justify-space-around center">
-      <router-link :to="{ name: 'FindStory' }" style="text-decoration: none" id="logo">
-        <v-toolbar-title floating="true">
-          <img :src="'/img/header/logo.png'" width="100%" class="logo" alt="logo" />
-        </v-toolbar-title>
-      </router-link>
-    </v-col>
-
+    <v-spacer></v-spacer>
     <!-- マイページ -->
-    <v-col cols="3" class="right spn">
+    <div>
       <router-link
         v-if="$store.state.login"
         :to="{
@@ -59,13 +60,13 @@
           </v-avatar>
         </v-btn>
       </router-link>
+        <!-- ログインボタン -->
+        <v-avatar v-if="!$store.state.login" tile size="30">
+          <v-icon @click="toggleLoginModal" color="#000">mdi-login</v-icon>
+        </v-avatar>
+        <LoginModal />
+      </div>
 
-      <!-- ログインボタン -->
-      <v-avatar v-if="!$store.state.login" tile size="30">
-        <v-icon @click="toggleLoginModal" color="#000">mdi-login</v-icon>
-      </v-avatar>
-      <LoginModal />
-    </v-col>
     <!-- ログアウトボタン -->
     <!-- <v-avatar tile size="30">
     <v-icon @click="logout" color="#000">mdi-logout</v-icon>
@@ -114,35 +115,37 @@ export default {
   outline: none;
 }
 
-.theme--light.v-app-bar.v-toolbar.v-sheet {
-  background-color: #fff;
-  position: relative;
-  height: 120px !important;
-  padding-top: 1em;
+div{
+  font-family: "Apple SD Gothic Neo", "serif";
+  color: #000;
+  font-size: 0.9em;
 }
 
-#line {
-  position: absolute;
-  width: 100%;
-  top: 1em;
-  z-index: -1;
-  left: 0;
+
+.theme--light.v-app-bar.v-toolbar.v-sheet {
+  background-color: #fff;
 }
 
 .logo {
-  max-width: 400px;
-  margin: auto;
+  max-width: 180px;
+  margin: 0 4em 0 3em;
   height: auto;
 }
 
-.v-toolbar {
-  /* box-shadow: none; */
-  /* background-color: #ffe5cc; */
-  flex: none;
+.menuButton{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.v-btn {
-  text-decoration: none;
+.write,.read,.books{
+  height: 25px;
+  margin: 0 2em .2em;
+}
+
+.v-toolbar {
+  box-shadow: none;
+  flex: none;
 }
 
 .nav,
@@ -150,10 +153,6 @@ export default {
   display: none;
 }
 
-.right {
-  display: flex;
-  flex-direction: row-reverse;
-}
 
 @media screen and (max-width: 415px) {
   /*画面幅が415pxまでの時*/
