@@ -232,8 +232,8 @@ export default {
 .episode_text {
   font-size: 20px;
 }
-.text_paper {
-}
+/* .text_paper {
+} */
 
 .title_paper {
   border: 3px solid;
@@ -256,10 +256,10 @@ a:hover {
   /* position: fixed; */
 }
 
-.add-btn {
-  /* position: absolute; */
-  /* top: 50%;
+/* .add-btn {
+  position: absolute;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); */
-}
+  transform: translate(-50%, -50%);
+} */
 </style>
