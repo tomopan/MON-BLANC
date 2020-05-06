@@ -60,6 +60,35 @@
                         </p>
                         <p v-else class="bio_text">紹介文を書いてみましょう</p>
                     </div>
+                    <v-tabs centered
+                        v-if="profileData.user_name == loginUser.user_name"
+                        grow
+                        v-model="active_tab"
+                    >
+            <div v-for="tab of tabs" :key="tab.id">
+                <router-link
+                    v-if="tab.id == 1"
+                    :to="{ name: 'PaperNovelOpened' }"
+                >
+                    <v-tab>{{ tab.name }}</v-tab>
+                </router-link>
+                <router-link
+                    v-else-if="tab.id == 2"
+                    :to="{ name: 'PaperNovelClosed' }"
+                >
+                    <v-tab>{{ tab.name }}</v-tab>
+                </router-link>
+                <router-link
+                    v-else-if="tab.id == 3"
+                    :to="{ name:'openEditModal' }"
+
+                >
+                    <v-tab>{{ tab.name }}</v-tab>
+                </router-link>
+
+            </div>
+        </v-tabs>
+
                     <div  v-if="profileData.user_name == loginUser.user_name">
                     <v-btn
                         icon
@@ -79,7 +108,7 @@
         <!-- 公開/非公開/マーカーのコンポーネント切り替え -->
 
         <!-- マイページ -->
-        <v-tabs
+        <!-- <v-tabs
             v-if="profileData.user_name == loginUser.user_name"
             grow
             v-model="active_tab"
@@ -97,8 +126,16 @@
                 >
                     <v-tab>{{ tab.name }}</v-tab>
                 </router-link>
+                <router-link
+                    v-else-if="tab.id == 3"
+                    :to="{ name:'openEditModal' }"
+
+                >
+                    <v-tab>{{ tab.name }}</v-tab>
+                </router-link>
+
             </div>
-        </v-tabs>
+        </v-tabs> -->
         <v-divider></v-divider>
         <router-view :loginUserName="loginUser.user_name"></router-view>
         <!-- 書いた小説を表示 -->
@@ -123,8 +160,9 @@ export default {
             //タブ関係
             active_tab: 0,
             tabs: [
-                { id: 1, name: "公開中" },
-                { id: 2, name: "非公開" },
+                { id: 1, name: "投稿作品" },
+                { id: 2, name: "編集中" },
+                { id: 3, name: "設定"}
                 // { id: 3, name: "マーカー" },
                 // { id: 4, name: "ブックマーク" }
             ]
@@ -231,6 +269,13 @@ export default {
     outline: none;
 }
 
+#app > div > main > div{
+    background-image: url(/img/profile/backgroundWhite.png)!important;
+    background-repeat: no-repeat!important;
+    background-size: cover!important;
+    background-color: #fff!important;
+}
+
 p {
     color: #333;
     font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
@@ -246,7 +291,14 @@ a:hover {
     width: 300px;
 }
 .text {
-    margin-top: 100px;
+    margin: 100px auto 0 auto;
     width: 500px;
+}
+
+.v-divider {
+    width: 800px;
+    margin: 0 auto;
+    border-color: #B6BCD6!important;
+    border-width: 3px 0 0 0;
 }
 </style>

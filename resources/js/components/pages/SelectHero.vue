@@ -100,7 +100,7 @@ p {
 
 .v-application--wrap{
 
-  background-image: url(/img/write-page/background.jpg)!important;
+  background-image: url(/img/write-page/background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 
