@@ -96,7 +96,7 @@ use App\StoryPaper;
             $paper_novel = PaperNovel::where('user_id','=',Auth::id())
                                         ->where('user_paper_order','=',$user_paper_order)
                                         ->first();
-
+            if($paper_novel){
             //ストーリーペーパーが何枚目か取得
             $story_number = StoryPaper::where('paper_novel_id','=',$paper_novel->id)
                                 ->max('story_number');
@@ -106,6 +106,8 @@ use App\StoryPaper;
             $paper_novel->story_number = $story_number;
 
             return response()->json($paper_novel);
+            }
+
         }
 
         //$user_paper_orderにマッチした小説のデータをひとつだけ取得:api/fetch/paper_novel_title/
