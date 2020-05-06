@@ -3,10 +3,12 @@
     <!-- ボタンたち -->
     <div class="buttons">
       <!-- 戻るボタン -->
-      <v-btn @click="$router.go(-1)">戻る</v-btn>
+      <router-link to="$router.go(-1)">
+        <v-img :src="'/img/write-page/close.png'" class="close" alt="close" />
+      </router-link>
       <!-- あとでボタン -->
       <router-link
-        :to="{            
+        :to="{
             name: 'EditStoryPaper',
             param: {
               hero_id: this.$route.params.hero_id,
@@ -15,12 +17,14 @@
             }
             }"
       >
-        <v-btn id="save">あとで</v-btn>
+        <v-img :src="'/img/write-page/preview.png'" class="preview" alt="preview" />
       </router-link>
       <!-- 保存ボタン -->
-      <v-btn id="save" @click="saveTitle">保存する</v-btn>
+      <router-link to="saveTitle">
+        <v-img :src="'/img/write-page/save.png'" class="save" alt="save" />
+      </router-link>
       <!-- ヒント -->
-      <Hint/>
+      <Hint />
     </div>
     <!-- ボタンここまで -->
     <!-- 入力エリア -->
@@ -32,7 +36,7 @@
             class="paper"
             contenteditable="true"
             id="story_text_input"
-            placeholder="タイトルを入力してください"
+            placeholder="小説のタイトルを入力してください"
           >{{ novelData.title }}</div>
           <div
             v-else
@@ -43,7 +47,7 @@
           ></div>
         </div>
       </div>
-      <p class="paper">タイトル</p>
+      <p class="paper">小説のタイトル</p>
       <!-- 入力エリアここまで -->
     </div>
     <div></div>
@@ -146,6 +150,7 @@ export default {
   padding: 0;
   border: 0;
   box-sizing: border-box;
+
 }
 
 html,
@@ -209,7 +214,7 @@ body {
   flex-direction: column-reverse;
   height: 120px;
   margin-left: 3em;
-  margin-top: 500px;
+  margin-top: 450px;
 }
 
 .icon,
@@ -257,10 +262,17 @@ body {
 
 p {
   margin-block-end: 0.5em;
+  font-family: 'Apple SD Gothic Neo','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
+
 }
-button {
-  margin: 0.5em;
+a {
+  margin-top: 0.5em;
 }
+
+.hint > a{
+  margin-bottom: 1em;
+}
+
 </style>
 <style>
 #app > div > main {

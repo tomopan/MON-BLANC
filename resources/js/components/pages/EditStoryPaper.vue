@@ -16,10 +16,20 @@
       {{charaCount}}/5000文字
       <!-- 戻るボタン -->
       <!-- <v-img class="icon" height="60px" src="img/write-page/continue.png" @click="$router.go(-1)"></v-img> -->
-      <v-btn @click="$router.go(-1)">戻る</v-btn>
+      <router-link to="$router.go(-1)">
+        <v-img :src="'/img/write-page/close.png'" class="close" alt="close" />
+      </router-link>
+
+      <!-- プレビューボタン -->
+      <router-link to="＃">
+        <v-img :src="'/img/write-page/preview.png'" class="preview" alt="preview" />
+      </router-link>
+
       <!-- 一時保存ボタン -->
       <!-- <v-img class="icon" height="60px" src="img/write-page/book.png" @click="editPaper"></v-img> -->
-      <v-btn @click="editPaper">保存する</v-btn>
+      <router-link to="editPaper">
+        <v-img :src="'/img/write-page/save.png'" class="save" alt="save" />
+      </router-link>
       <!-- ヒント -->
       <hint />
     </div>
@@ -340,9 +350,16 @@ body {
 p {
   margin-block-end: 0.5em;
 }
-button {
-  margin: 0.5em;
+button,span,.v-btn, .v-btn--contained, .theme--light, .v-size--default,.v-btn__content {
+      writing-mode: initial;
+      transform: rotate(90deg);
+      transform-origin: top left;
+
+      width: 80px;
+      height: 30px;
+      margin-right: -80px;
 }
+
 </style>
 <style>
 #app > div > main {
