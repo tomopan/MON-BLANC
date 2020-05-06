@@ -1,8 +1,8 @@
 <template>
     <div>
-        <v-btn
-            @click="dialog = !dialog"
-        >ヒント</v-btn>
+        <router-link to="dialog = !dialog">
+            <v-img :src="'/img/write-page/hint.png'" class="hint" alt="hint" />
+        </router-link>
         <div id="overlay" v-show="dialog">
             <div id="content">
                 <div class="write">
