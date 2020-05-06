@@ -1,50 +1,46 @@
 <template>
-    <v-bottom-navigation
-        fixed hide-on-scroll
-    >
-        <v-btn value="write">
-            <router-link :to="{ name: 'Top' }" style="text-decoration: none">
-                <v-avatar tile size="30" value="write">
-                    <img :src="'/img/header/pen2.png'" alt="pen" />
-                </v-avatar>
-            </router-link>
-        </v-btn>
+  <v-bottom-navigation fixed hide-on-scroll>
+    <v-btn value="write">
+      <router-link :to="{ name: 'Top' }" style="text-decoration: none">
+        <v-avatar tile size="30" value="write">
+          <!-- <img :src="'/img/header/pen2.png'" alt="pen" /> -->
+        </v-avatar>
+      </router-link>
+    </v-btn>
 
-        <v-btn value="favorites">
-            <router-link :to="{ name: 'FindStory'}">
-                <v-avatar tile size="30">
-                    <img :src="'/img/header/books.png'" alt="books" />
-                </v-avatar>
-            </router-link>
-        </v-btn>
+    <v-btn value="favorites">
+      <router-link :to="{ name: 'FindStory'}">
+        <v-avatar tile size="30">
+          <img :src="'/img/header/books.png'" alt="books" />
+        </v-avatar>
+      </router-link>
+    </v-btn>
 
-        <v-btn value="nearby">
-            <router-link :to="{ name: 'MeetStory' }">
-                <v-avatar tile size="30">
-                    <v-icon color="#000">mdi-head-lightbulb-outline</v-icon>
-                </v-avatar>
-            </router-link>
-        </v-btn>
+    <v-btn value="nearby">
+      <router-link :to="{ name: 'MeetStory' }">
+        <v-avatar tile size="30">
+          <v-icon color="#000">mdi-head-lightbulb-outline</v-icon>
+        </v-avatar>
+      </router-link>
+    </v-btn>
 
-        <v-btn value="mypage"
-            v-if="$store.state.login">
-            <router-link
-                v-if="$store.state.login"
-                :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }"
-                id="mypage"
-            >
-            <v-avatar tile size="30">
-                <img :src="'/img/header/mypage.png'" alt="mypage" />
-            </v-avatar>
-            </router-link>
-        </v-btn>
-        <v-btn value="mypage" @click="$store.state.drawerLoginModal=true"
-            v-else>
-            <v-avatar tile size="30">
-                <img :src="'/img/header/mypage.png'" alt="mypage" />
-            </v-avatar>
-        </v-btn>
-    </v-bottom-navigation>
+    <v-btn value="mypage" v-if="$store.state.login">
+      <router-link
+        v-if="$store.state.login"
+        :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }"
+        id="mypage"
+      >
+        <v-avatar tile size="30">
+          <img :src="'/img/header/mypage.png'" alt="mypage" />
+        </v-avatar>
+      </router-link>
+    </v-btn>
+    <v-btn value="mypage" @click="$store.state.drawerLoginModal=true" v-else>
+      <v-avatar tile size="30">
+        <img :src="'/img/header/mypage.png'" alt="mypage" />
+      </v-avatar>
+    </v-btn>
+  </v-bottom-navigation>
 </template>
 <script>
 // インポート
@@ -82,26 +78,23 @@ export default {
 };
 </script>
 <style scoped>
-
-
-v-bottom-navigation{
-    display: none;
-    bottom: 0;
-    width: 100%;
+v-bottom-navigation {
+  display: none;
+  bottom: 0;
+  width: 100%;
 }
 
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
 
-.v-item-group.v-bottom-navigation{
-    display: none;
+.v-item-group.v-bottom-navigation {
+  display: none;
 }
-
 
 @media screen and (max-width: 415px) {
-.v-item-group.v-bottom-navigation{
+  .v-item-group.v-bottom-navigation {
     display: flex;
-}
+  }
 }
 </style>

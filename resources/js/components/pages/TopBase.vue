@@ -4958,7 +4958,7 @@
       <!-- <a href="#/edit-story-paper/1/1" alt="akira"> -->
       <router-link
         :to="{
-                                name: 'EditStoryPaper',
+                                name: 'WriteTitle',
                                 params: {
                                     hero_id: 1,
 									user_paper_order:user_paper_order,
@@ -5056,7 +5056,7 @@
       <!-- <a href="#/edit-story-paper/8/1" alt="daiki"> -->
       <router-link
         :to="{
-                                name: 'EditStoryPaper',
+                                name: 'WriteTitle',
                                 params: {
                                     hero_id: 8,
 									user_paper_order:user_paper_order,
@@ -5291,7 +5291,7 @@
       <!-- <a href="#/edit-story-paper/6/1" alt="nana"> -->
       <router-link
         :to="{
-                                name: 'EditStoryPaper',
+                                name: 'WriteTitle',
                                 params: {
                                     hero_id: 6,
 									user_paper_order:user_paper_order,
@@ -5446,7 +5446,7 @@
       <!-- <a href="#/edit-story-paper/3/1" alt="jun"> -->
       <router-link
         :to="{
-                                name: 'EditStoryPaper',
+                                name: 'WriteTitle',
                                 params: {
                                     hero_id: 3,
 									user_paper_order:user_paper_order,
@@ -5607,7 +5607,7 @@
       <!-- <a href="#/edit-story-paper/7/1" alt="keita"> -->
       <router-link
         :to="{
-                                name: 'EditStoryPaper',
+                                name: 'WriteTitle',
                                 params: {
                                     hero_id: 7,
 									user_paper_order:user_paper_order,
@@ -5762,7 +5762,7 @@
       <!-- <a href="#/edit-story-paper/4/1" alt="mari"> -->
       <router-link
         :to="{
-                                name: 'EditStoryPaper',
+                                name: 'WriteTitle',
                                 params: {
                                     hero_id: 4,
 									user_paper_order:user_paper_order,
@@ -5904,7 +5904,7 @@
       <!-- <a href="#/edit-story-paper/5/1" alt="yuri"> -->
       <router-link
         :to="{
-                                name: 'EditStoryPaper',
+                                name: 'WriteTitle',
                                 params: {
                                     hero_id: 5,
 									user_paper_order:user_paper_order,
@@ -6074,7 +6074,7 @@
       <!-- <a href="#/edit-story-paper/2/1" alt="sumire"> -->
       <router-link
         :to="{
-                                name: 'EditStoryPaper',
+                                name: 'WriteTitle',
                                 params: {
                                     hero_id: 2,
 									user_paper_order:user_paper_order,

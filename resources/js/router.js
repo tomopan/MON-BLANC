@@ -5,7 +5,6 @@ import VueRouter from "vue-router";
 import SelectHero from "./components/pages/SelectHero.vue";
 import Hero from "./components/pages/Hero.vue";
 import ReadPaper from "./components/pages/ReadPaper.vue";
-import WriteStoryPaper from "./components/pages/WriteStoryPaper.vue";
 import Profile from "./components/pages/Profile.vue";
 import PaperNovelOpened from "./components/pages/profiles/PaperNovelOpened.vue";
 import PaperNovelClosed from "./components/pages/profiles/PaperNovelClosed.vue";
@@ -23,6 +22,7 @@ import FindStory from "./components/pages/FindStory.vue";
 import TopBase from "./components/pages/TopBase.vue";
 import Bookmark from "./components/pages/Bookmark.vue";
 import EditNovel from "./components/pages/EditNovel.vue";
+import WriteTitle from "./components/pages/WriteTitle.vue";
 
 Vue.use(VueRouter);
 
@@ -79,24 +79,25 @@ const routes = [
         name: "WriteFirstSentence"
     },
     {
-        path: "/write-story-paper/:user_paper_order/:story_number",
-        component: WriteStoryPaper,
-        name: "WriteStoryPaper"
-    },
-    {
         path: "/edit-paper-novel/:user_paper_order",
         component: EditPaperNovel,
         name: "EditPaperNovel"
+    },
+
+    {
+        path: "/write-title/:user_paper_order",
+        component: WriteTitlePaper,
+        name: "WriteTitlePaper"
+    },
+    {
+        path: "/title/:hero_id/:user_paper_order/:story_number",
+        component: WriteTitle,
+        name: "WriteTitle"
     },
     {
         path: "/edit-novel/:user_paper_order",
         component: EditNovel,
         name: "EditNovel"
-    },
-    {
-        path: "/write-title/:user_paper_order",
-        component: WriteTitlePaper,
-        name: "WriteTitlePaper"
     },
     {
         path: "/edit-story-paper/:hero_id/:user_paper_order/:story_number",

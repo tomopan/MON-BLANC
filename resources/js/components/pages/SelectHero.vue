@@ -15,22 +15,6 @@
         <div class="wrap">
           <TopBase />
         </div>
-        <!-- <v-row class="fill-height" align="center" justify="center">
-                        <div v-for="(hero_img, id) in hero_imgs" :key="id">
-                            <router-link
-                                :to="{
-                                    name: 'WriteFirstSentence',
-                                    params: { hero_id: hero_img.id },
-                                }"
-                            >
-                                <v-img
-                                    :src="hero_img.url"
-                                    width="300px"
-                                >
-                                </v-img>
-                            </router-link>
-                        </div>
-        </v-row>-->
       </v-container>
     </v-row>
   </v-container>

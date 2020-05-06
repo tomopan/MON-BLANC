@@ -1,7 +1,7 @@
 <template>
   <v-app-bar>
 
-      <router-link :to="{ name: 'FindStory' }" style="text-decoration: none" id="logo">
+      <router-link :to="{ name: 'SelectHero' }" style="text-decoration: none" id="logo">
         <v-toolbar-title floating="true">
           <img :src="'/img/header/headerLogo.png'" class="logo" alt="logo" />
         </v-toolbar-title>
