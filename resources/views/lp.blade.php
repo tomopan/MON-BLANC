@@ -13,7 +13,8 @@
         }
         p{
             font-size:60px;
-            font-family:'Bradley Hand';
+            font-family:'Kaiti SC','YuMincho','Yu Mincho','游明朝体',sans-serif;
+            color:#2C2B2B;
         }
         .wrap{
             display: flex;
