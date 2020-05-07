@@ -15,23 +15,26 @@
       <!-- 文字数 -->
       {{charaCount}}/5000文字
       <!-- 戻るボタン -->
-      <!-- <v-img class="icon" height="60px" src="img/write-page/continue.png" @click="$router.go(-1)"></v-img> -->
-      <router-link to="$router.go(-1)">
-        <v-img :src="'/img/write-page/close.png'" class="close" alt="close" />
-      </router-link>
-
+      <div>
+        <v-img
+          :src="'/img/write-page/close.png'"
+          class="close"
+          alt="close"
+          @click="$router.go(-1)"
+        />
+      </div>
       <!-- プレビューボタン -->
-      <router-link to="＃">
-        <v-img :src="'/img/write-page/preview.png'" class="preview" alt="preview" />
-      </router-link>
-
+      <div>
+        <v-img :src="'/img/write-page/preview.png'" class="close" alt="preview" />
+      </div>
       <!-- 一時保存ボタン -->
-      <!-- <v-img class="icon" height="60px" src="img/write-page/book.png" @click="editPaper"></v-img> -->
-      <router-link to="editPaper">
-        <v-img :src="'/img/write-page/save.png'" class="save" alt="save" />
-      </router-link>
+      <div>
+        <v-img :src="'/img/write-page/save.png'" class="close" alt="save" @click="editPaper" />
+      </div>
       <!-- ヒント -->
-      <hint />
+      <div>
+        <hint />
+      </div>
     </div>
 
     <v-row>
@@ -54,7 +57,7 @@
       </div>
     </v-row>
     <!-- 入力エリアここまで -->
-    <p class="episode_num">第{{$route.params.story_number}}話</p>
+    <div class="episode_num">第{{$route.params.story_number}}話</div>
   </div>
 </template>
 
@@ -122,10 +125,7 @@ export default {
             /\\n|\r\n|\r|\n/g,
             "<br/>"
           );
-          $("#story_text_input").append(
-            this.PaperNovelData.text
-          );
-
+          $("#story_text_input").append(this.PaperNovelData.text);
         })
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
@@ -217,7 +217,7 @@ export default {
 
 /* モーダル */
 #modal_text {
-  writing-mode: vertical-rl;
+  /* writing-mode: vertical-rl; */
   margin: auto;
   padding-top: 10%;
 }
@@ -361,16 +361,20 @@ body {
 p {
   margin-block-end: 0.5em;
 }
-button,span,.v-btn, .v-btn--contained, .theme--light, .v-size--default,.v-btn__content {
-      writing-mode: initial;
-      transform: rotate(90deg);
-      transform-origin: top left;
+span,
+.v-btn,
+.v-btn--contained,
+.theme--light,
+.v-size--default,
+.v-btn__content {
+  writing-mode: initial;
+  transform: rotate(90deg);
+  transform-origin: top left;
 
-      width: 80px;
-      height: 30px;
-      margin-right: -80px;
+  width: 80px;
+  height: 30px;
+  margin-right: -80px;
 }
-
 </style>
 <style>
 #app > div > main {
