@@ -2,12 +2,6 @@
   <v-container class="pa-4 text-center">
     <!-- 主人公から探す -->
     <div class="hero-find">
-      <!-- <vue-typer
-                :repeat="0"
-                :type-delay="100"
-                text="Find for Hero"
-                style="font-size:30px"
-      ></vue-typer>-->
       <p>READ</p>
       <p>よむ</p>
       <!-- タブ -->
@@ -29,8 +23,12 @@
                                 params: { paper_novel_id: novel.id }
                             }"
             >
+              <!-- 主人公の画像 -->
               <v-img :src="'img/books/' + novel.img_url" width="200px"></v-img>
+              <!-- タイトル -->
               <p>{{novel.title}}</p>
+              <!-- 最初の50文字 -->
+              <p>{{novel.text}}</p>
             </router-link>
           </v-col>
         </div>
@@ -87,6 +85,12 @@ export default {
         .get("api/get/novels/")
         .then(res => {
           this.allNovels = res.data;
+          //50字で省略
+          this.allNovels.forEach(e => {
+            if (e.text && e.text.length >= 50)
+              e.text = e.text.substr(0, 50) + "・・・";
+          });
+
           this.page_length = Math.ceil(this.allNovels.length / this.parPage);
           this.Novels = this.allNovels.slice(0, this.parPage);
           console.log(res.data);
