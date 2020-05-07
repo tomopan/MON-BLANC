@@ -1,11 +1,19 @@
 <template>
   <div class="cont">
+    <!-- テキスト未入力の時のモーダル -->
+    <v-dialog id="overlay" v-model="dialog" width="50%">
+      <div id="content">
+        <div class="write">
+          <p>テキストを入力してください</p>
+          <button style="border:solid 2px #000;" @click="dialog = false">&nbsp;閉じる&nbsp;</button>
+        </div>
+      </div>
+    </v-dialog>
+    <!-- モーダルここまで -->
     <!-- ボタンたち -->
     <div class="buttons">
       <!-- 戻るボタン -->
-      <router-link to="$router.go(-1)">
-        <v-img :src="'/img/write-page/close.png'" class="close" alt="close" />
-      </router-link>
+      <v-img :src="'/img/write-page/close.png'" class="close" alt="close" @click="$router.go(-1)" />
       <!-- あとでボタン -->
       <router-link
         :to="{
@@ -20,9 +28,8 @@
         <v-img :src="'/img/write-page/preview.png'" class="preview" alt="preview" />
       </router-link>
       <!-- 保存ボタン -->
-      <router-link to="saveTitle">
-        <v-img :src="'/img/write-page/save.png'" class="save" alt="save" />
-      </router-link>
+      <v-img :src="'/img/write-page/save.png'" class="save" alt="save" @click="saveTitle" />
+
       <!-- ヒント -->
       <Hint />
     </div>
@@ -62,7 +69,6 @@ import Hint from "../items/Hint.vue";
 export default {
   components: {
     Hint
-
   },
   data() {
     return {
@@ -71,7 +77,9 @@ export default {
       //showNovel()のデータを格納
       novelData: "",
       //タイトルとテキストを格納
-      titlePost: {}
+      titlePost: {},
+      // モーダル
+      dialog: false
     };
   },
 
@@ -99,7 +107,11 @@ export default {
       //PostするオブジェクトにDOMの内容をぶちこむ
       //タイトル
       this.titlePost.title = document.getElementById("paper_text").textContent;
-
+      // タイトルのバリデーション
+      if (this.titlePost.title.length == 0) {
+        this.dialog = !this.dialog;
+        return;
+      }
       // Post
       axios
         .post(
@@ -131,7 +143,7 @@ export default {
 
 /* モーダル */
 #modal_text {
-  writing-mode: vertical-rl;
+  /* writing-mode: vertical-rl; */
   margin: auto;
   padding-top: 10%;
 }
@@ -150,7 +162,6 @@ export default {
   padding: 0;
   border: 0;
   box-sizing: border-box;
-
 }
 
 html,
@@ -262,17 +273,16 @@ body {
 
 p {
   margin-block-end: 0.5em;
-  font-family: 'Apple SD Gothic Neo','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
-
+  font-family: "Apple SD Gothic Neo", "Hiragino Mincho ProN", "Yu Mincho Light",
+    "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
 }
 a {
   margin-top: 0.5em;
 }
 
-.hint > a{
+.hint > a {
   margin-bottom: 1em;
 }
-
 </style>
 <style>
 #app > div > main {
