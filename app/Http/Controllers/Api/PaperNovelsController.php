@@ -241,8 +241,10 @@ use App\StoryPaper;
             //公開中の小説を取得
             $novels =DB::table('paper_novels as n')
             ->join('heroes as h','h.id','=','n.hero_id')
+            ->join('story_papers as s','s.paper_novel_id','=','n.id')
             ->where('n.status',1)
-            ->select('n.id','n.title','n.user_id','n.status','n.hero_id','h.img_url','n.user_paper_order')
+            ->where('s.story_number','=',1)
+            ->select('n.id','n.title','n.user_id','n.status','n.hero_id','h.img_url','n.user_paper_order','s.text')
             ->orderBy('n.updated_at')
             ->get();
 
@@ -255,8 +257,10 @@ use App\StoryPaper;
             $novels =DB::table('paper_novels as n')
             ->where('n.hero_id','=',$hero_id)
             ->join('heroes as h','h.id','=','n.hero_id')
+            ->join('story_papers as s','s.paper_novel_id','=','n.id')
             ->where('n.status',1)
-            ->select('n.id','n.title','n.user_id','n.status','n.hero_id','h.img_url','n.user_paper_order')
+            ->where('s.story_number','=',1)
+            ->select('n.id','n.title','n.user_id','n.status','n.hero_id','h.img_url','n.user_paper_order','s.text')
             ->orderBy('n.updated_at')
             ->get();
 

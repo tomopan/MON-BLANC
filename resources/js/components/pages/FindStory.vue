@@ -2,14 +2,9 @@
   <v-container class="pa-4 text-center">
     <!-- 主人公から探す -->
     <div class="hero-find">
-      <!-- <vue-typer
-                :repeat="0"
-                :type-delay="100"
-                text="Find for Hero"
-                style="font-size:30px"
-      ></vue-typer>-->
-      <p class="en"><span>READ</span></p>
-      <p class="rubi">よむ</p>
+
+      <p>READ</p>
+      <p>よむ</p>
       <!-- タブ -->
       <v-tabs grow v-model="active_tab" show-arrows>
         <div>
@@ -30,10 +25,15 @@
                   params: { paper_novel_id: novel.id }
               }"
             >
+
+             <!-- 主人公の画像 -->
             <figure class="relative">
               <v-img :src="'img/flamebooks/' + novel.img_url" width="200px"></v-img>
               <figcaption class="absolute"><p class="novelTitle">{{novel.title}}</p></figcaption>
+              <!-- 最初の50文字 -->
+              <figcaption class="absolute"><p class="novelTitle">{{novel.text}}</p></figcaption>
             </figure>
+
             </router-link>
           </v-col>
         </div>
@@ -94,6 +94,12 @@ export default {
         .get("api/get/novels/")
         .then(res => {
           this.allNovels = res.data;
+          //50字で省略
+          this.allNovels.forEach(e => {
+            if (e.text && e.text.length >= 50)
+              e.text = e.text.substr(0, 50) + "・・・";
+          });
+
           this.page_length = Math.ceil(this.allNovels.length / this.parPage);
           this.Novels = this.allNovels.slice(0, this.parPage);
           console.log(res.data);
