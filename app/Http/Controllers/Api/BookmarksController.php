@@ -9,7 +9,9 @@ use Auth;
 use Validate;
 use DB;
 use App\Bookmark;
+use App\Hero;
 use App\PaperNovel;
+use App\StoryPaper;
     
     //=======================================================================
     class BookmarksController extends Controller
@@ -50,10 +52,12 @@ use App\PaperNovel;
             $userId = Auth::id();
             //登録する情報を格納
             $bookmark_novels = DB::table('bookmarks as b')
-                                ->where('b.user_id','=',$userId)
                                 ->join('paper_novels as p','p.id','=','b.paper_novel_id')
+                                ->join('story_papers as s','s.paper_novel_id','=','p.id')
                                 ->join('heroes as h','h.id','=','p.hero_id')
-                                ->select('b.id','p.title','paper_novel_id','h.img_url','p.hero_id')
+                                ->where('b.user_id','=',$userId)
+                                ->where('s.story_number','=',1)
+                                ->select('b.id','p.title','b.paper_novel_id','h.img_url','p.hero_id','s.text')
                                 ->get();
             return response()->json($bookmark_novels);
         }

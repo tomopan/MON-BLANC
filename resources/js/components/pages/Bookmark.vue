@@ -3,7 +3,8 @@
     <div class="font">
       <v-row>
         <v-col cols="12">
-          <p>本棚</p>
+          <p>BOOKMARK</p>
+          <p>ブックマーク</p>
           <v-row :align="alignment" :justify="justify" style="height: 300px;">
             <v-card
               v-for="(bookmarkNovel, i) in BookmarkNovels"
@@ -44,6 +45,9 @@
                 </v-dialog>
               </v-layout>
               <!-- モーダルここまで -->
+
+              <!-- 最初の50文字 -->
+              {{bookmarkNovel.text}}
             </v-card>
           </v-row>
         </v-col>
@@ -96,6 +100,11 @@ export default {
         .then(res => {
           console.log(res.data);
           this.BookmarkNovels = res.data;
+          //50字で省略
+          this.BookmarkNovels.forEach(e => {
+            if (e.text && e.text.length >= 50)
+              e.text = e.text.substr(0, 50) + "・・・";
+          });
         })
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
