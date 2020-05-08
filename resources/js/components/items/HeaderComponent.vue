@@ -1,71 +1,81 @@
 <template>
   <v-app-bar>
-
       <router-link :to="{ name: 'SelectHero' }" style="text-decoration: none" id="logo">
         <v-toolbar-title floating="true">
           <img :src="'/img/header/headerLogo.png'" class="logo" alt="logo" />
         </v-toolbar-title>
       </router-link>
 
-      <!-- 書くページ（主人公選択）へのリンク -->
-      <router-link :to="{ name: 'SelectHero' }">
-        <div class="menuButton">
-          <div>
-              <img :src="'/img/header/write.png'" class="write" alt="write" />
-          </div>
-          <div>
-              かく
-          </div>
-        </div>
-      </router-link>
+      <span class="sp_none">
+          <!-- 書くページ（主人公選択）へのリンク -->
+          <router-link :to="{ name: 'SelectHero' }">
+            <div class="menuButton">
+              <div>
+                  <img :src="'/img/header/write.png'" class="write" alt="write" />
+              </div>
+              <div>
+                  かく
+              </div>
+            </div>
+          </router-link>
+      </span>
 
-      <!-- タイムラインへのリンク -->
-      <router-link :to="{ name: 'FindStory' }" style="text-decoration: none">
-        <div class="menuButton">
-          <div>
-              <img :src="'/img/header/read.png'" class="read" alt="read" />
-          </div>
-          <div>
-              よむ
-          </div>
-        </div>
-      </router-link>
+      <span class="sp_none">
+          <!-- タイムラインへのリンク -->
+          <router-link :to="{ name: 'FindStory' }" style="text-decoration: none">
+            <div class="menuButton">
+              <div>
+                  <img :src="'/img/header/read.png'" class="read" alt="read" />
+              </div>
+              <div>
+                  よむ
+              </div>
+            </div>
+          </router-link>
+      </span>
 
-      <!-- 本棚へのリンク -->
-      <router-link :to="{ name: 'Bookmark' }">
-        <div class="menuButton">
-          <div>
-              <img :src="'/img/header/books.png'" class="books" alt="books" />
-          </div>
-          <div>
-              ほんだな
-          </div>
-        </div>
-      </router-link>
+      <span class="sp_none">
+          <!-- 本棚へのリンク -->
+          <router-link :to="{ name: 'Bookmark' }">
+            <div class="menuButton">
+              <div>
+                  <img :src="'/img/header/books.png'" class="books" alt="books" />
+              </div>
+              <div>
+                  おきにいり
+              </div>
+            </div>
+          </router-link>
+      </span>
 
-    <v-spacer></v-spacer>
-    <!-- マイページ -->
-    <div>
-      <router-link
-        v-if="$store.state.login"
-        :to="{
-                    name: 'Profile',
-                    params: { user_name: loginUser.user_name }
-                }"
-        id="mypage"
-      >
-        <v-btn id="mypage" icon v-if="$store.state.login">
-          <v-avatar tile size="30" v-if="$store.state.login">
-            <img :src="'/img/header/mypage.png'" alt="mypage" v-if="$store.state.login" />
-          </v-avatar>
-        </v-btn>
-      </router-link>
-        <!-- ログインボタン -->
-        <v-avatar v-if="!$store.state.login" tile size="30">
-          <v-icon @click="toggleLoginModal" color="#000">mdi-login</v-icon>
-        </v-avatar>
-        <LoginModal />
-      </div>
+        <v-spacer></v-spacer>
+
+        <!-- マイページ -->
+      <span class="sp_none">
+        <div>
+          <router-link
+            v-if="$store.state.login"
+            :to="{
+                        name: 'Profile',
+                        params: { user_name: loginUser.user_name }
+                    }"
+            id="mypage"
+          >
+            <v-btn id="mypage" icon v-if="$store.state.login">
+              <v-avatar tile size="30" v-if="$store.state.login">
+                <img :src="'/img/header/mypage.png'" alt="mypage" v-if="$store.state.login" />
+              </v-avatar>
+            </v-btn>
+          </router-link>
+
+            <!-- ログインボタン -->
+            <v-avatar v-if="!$store.state.login" tile size="30">
+              <v-icon @click="toggleLoginModal" color="#000">mdi-login</v-icon>
+            </v-avatar>
+            <LoginModal />
+
+        </div>
+                        </span>
 
     <!-- ログアウトボタン -->
     <!-- <v-avatar tile size="30">
@@ -116,7 +126,6 @@ export default {
 }
 
 div{
-  font-family: "Apple SD Gothic Neo", "serif";
   color: #000;
   font-size: 0.9em;
 }
@@ -165,6 +174,8 @@ a{
   /*画面幅が415pxまでの時*/
   .logo {
     width: 200px;
+    margin:0.8em auto;
+    display: block;
   }
 
   #line {
@@ -188,12 +199,18 @@ a{
   .theme--light.v-app-bar.v-toolbar.v-sheet {
     padding-top: 0;
   }
+
+  .sp_none{
+    display:none;
+  }
 }
 </style>
 <style>
 @media screen and (max-width: 415px) {
   .v-toolbar__content {
     display: block !important;
+    border-bottom: 1px solid #000!important;
+
   }
 }
 </style>

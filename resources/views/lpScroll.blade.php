@@ -21,7 +21,7 @@
         }
 
         p{
-            font-family: "Apple SD Gothic Neo","游ゴシック体", "YuGothic";
+            font-family: YuGothic,'Yu Gothic','Yu Gothic UI','Hiragino Sans','ヒラギノ角ゴシック','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
             color:#4B4949;
             opacity:85%;
         }
@@ -35,6 +35,8 @@
             background-image:url({{asset('img/write-page/background.jpg')}});
             background-size: cover;
             height:700px;
+            background-color:rgba(255,255,255,0.7);
+            background-blend-mode:lighten;
         }
 
         .pre{
@@ -73,17 +75,22 @@
             height:400px;
             box-shadow:8px 8px 8px rgba(0,0,0,0.16);
         }
-
         .title{
             font-weight:bold;
-            font-size:1.9em;
+            font-size:1.8em;
             letter-spacing:0.15em;
             margin-block-start: 0.1em;
             margin-block-end: 0.1em;
-
+        }
+        .mainTitle{
+            text-align:center;
+            margin-top:3em;
+            margin-bottom:0;
+            font-size:2.5em;
+            letter-spacing:0.2em;
         }
 
-        
+
         img{
             height:300px;
             margin: 0 30px;
@@ -99,7 +106,7 @@
         .sentence{
             margin-block-start: 0.2em;
             margin-block-end: 0.2em;
-            font-size:1em;
+            font-size:0.9em;
             line-height:24px;
         }
 
@@ -121,12 +128,12 @@
             background-color:#4f3f26;
         }
 
-        .mainTitle{
-            text-align:center;
-            margin-top:3em;
-            margin-bottom:0;
-            font-size:2.5em;
-            letter-spacing:0.2em;
+
+        .sp_br{
+            display:none;
+        }
+        .pc_br{
+            display:block;
         }
 
         @media screen and (max-width: 415px) {
@@ -145,7 +152,7 @@
             width:250px;
             height:500px;
             padding:1em 2.5em;
-            margin:3em 2em 4em 2em;
+            margin:2em 2em 4em 2em;
         }
         img{
             height:200px;
@@ -153,18 +160,47 @@
         button{
             border-radius:40px;
         }
+        .sentence{
+            font-size:0.9em;
+        }
         .title{
             font-size:18px;
             text-align:center;
-            margin:0 auto;
+            margin:0em auto 0 auto;
         }
+        .mainTitle{
+            margin-top:3em;
+        }
+
         .sentences{
             font-size:12px;
             text-align:center;
         }
+        .mainMessage{
+            font-size:2em;
+            text-align:center;
+            letter-spacing:0.2em;
+            margin-top:1em;
+        }
+        .right{
+            text-align:center;
+        }
+
         .meet{
             order:1;
         }
+        button{
+            width:250px;
+            font-size:18px;
+
+        }
+        .sp_br{
+            display:block;
+        }
+        .pc_br{
+            display:none;
+        }
+
         }
 
     </style>
@@ -174,9 +210,8 @@
     <div class="wrap">
         <div class="white">
             <div>
-                <p class="pre">一言で表現できない物事に直面したとき、</p>
-                <p class="pre">物語は初めてその意義を発揮する。</p>
-                <p class="mainMessage">小説は、「読む」から「書く」へ。</p>
+                <p class="pre">一言で表現できない物事に<br class="sp_br">直面したとき<br class="pc_br">物語は<br class="sp_br">初めてその意義を発揮する。</p>
+                <p class="mainMessage">小説は、<br class="sp_br">「読む」から<br class="sp_br">「書く」へ。</p>
             </div>
         </div>
         <div class="orange">
@@ -201,10 +236,9 @@
                         <p class="title">思いついたままに</p>
                         <p class="title">描写してみよう！</p>
                         <div class="sentences">
-                            <p class="sentence">テキストエディタの横にあるヒントボタンを押して、</p>
-                            <p class="sentence">質問に答えながら描写をイメージしてみましょう。</p>
+                            <p class="sentence">質問に答えながら描写を<br class="sp_br">イメージしてみましょう。</p>
                             <p class="sentence">小説は自由です。</p>
-                            <p class="sentence">イメージしたままに、言葉にしてみてください。</p>
+                            <p class="sentence">イメージしたままに、<br class="sp_br">言葉にしてみてください。</p>
                         </div>
                     </div>
                 </div>

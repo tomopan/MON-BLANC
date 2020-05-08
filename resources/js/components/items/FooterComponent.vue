@@ -1,9 +1,9 @@
 <template>
-  <v-bottom-navigation fixed hide-on-scroll>
+  <v-bottom-navigation fixed absolute hide-on-scroll>
     <v-btn value="write">
-      <router-link :to="{ name: 'Top' }" style="text-decoration: none">
+      <router-link :to="{ name: 'SelectHero' }" style="text-decoration: none">
         <v-avatar tile size="30" value="write">
-          <!-- <img :src="'/img/header/pen2.png'" alt="pen" /> -->
+          <img :src="'/img/header/write.png'" alt="write" />
         </v-avatar>
       </router-link>
     </v-btn>
@@ -11,15 +11,15 @@
     <v-btn value="favorites">
       <router-link :to="{ name: 'FindStory'}">
         <v-avatar tile size="30">
-          <img :src="'/img/header/books.png'" alt="books" />
+          <img :src="'/img/header/read.png'" alt="read" />
         </v-avatar>
       </router-link>
     </v-btn>
 
     <v-btn value="nearby">
-      <router-link :to="{ name: 'MeetStory' }">
+      <router-link :to="{ name: 'Bookmark' }">
         <v-avatar tile size="30">
-          <v-icon color="#000">mdi-head-lightbulb-outline</v-icon>
+          <img :src="'/img/header/books.png'" alt="books" />
         </v-avatar>
       </router-link>
     </v-btn>
@@ -76,6 +76,16 @@ export default {
     ...mapActions(["toggleLoginModal"])
   }
 };
+  (function() {
+    // スクロールを禁止する関数
+    function noScroll(event) {
+      event.preventDefault();
+    }
+    // スクロール禁止(SP)
+    document.addEventListener('touchmove', noScroll, { passive: false });
+    // スクロール禁止(PC)
+    document.addEventListener('mousewheel', noScroll, { passive: false });
+  })();
 </script>
 <style scoped>
 v-bottom-navigation {
@@ -93,6 +103,7 @@ a {
 }
 
 @media screen and (max-width: 415px) {
+
   .v-item-group.v-bottom-navigation {
     display: flex;
   }

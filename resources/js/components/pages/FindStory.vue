@@ -3,8 +3,8 @@
     <!-- 主人公から探す -->
     <div class="hero-find">
 
-      <p>READ</p>
-      <p>よむ</p>
+      <p class="futura"><span class="line">READ</span></p>
+      <p class="rubi">よむ</p>
       <!-- タブ -->
       <v-tabs grow v-model="active_tab" show-arrows>
         <div>
@@ -26,7 +26,7 @@
               }"
             >
 
-             <!-- 主人公の画像 -->
+            <!-- 主人公の画像 -->
             <figure class="relative">
               <v-img :src="'img/flamebooks/' + novel.img_url" width="200px"></v-img>
               <figcaption class="absolute"><p class="novelTitle">{{novel.title}}</p></figcaption>
@@ -135,12 +135,12 @@ export default {
 </script>
 
 <style scoped>
-.en{
+.futura{
   font-family: "Futura", "游ゴシック体", "YuGothic";
   font-weight: bold;
   font-size: 2em;
 }
-#app > div > main > div > div > p.en{
+#app > div > main > div > div > p.futura{
   margin-bottom: 0.2em;
 }
 .rubi{
@@ -156,9 +156,9 @@ span{
 .relative {
     position: relative;
 }
-.relative:hover{
+/* .relative:hover{
   
-}
+} */
 
 .absolute {
     position: absolute;
@@ -195,4 +195,11 @@ span{
     .text:hover + .fukidashi {
       display: block;
     } */
+
+@media screen and (max-width: 415px) {
+.rubi{
+  font-size: 1em;
+}
+}
+
 </style>
