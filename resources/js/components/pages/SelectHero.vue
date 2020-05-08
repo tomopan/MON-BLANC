@@ -55,6 +55,18 @@ export default {
     }
   }
 };
+
+  (function() {
+    // スクロールを禁止する関数
+    function noScroll(event) {
+      event.preventDefault();
+    }
+    // スクロール禁止(SP)
+    document.addEventListener('touchmove', noScroll, { passive: false });
+    // スクロール禁止(PC)
+    // document.addEventListener('mousewheel', noScroll, { passive: false });
+  })();
+
 </script>
 
 <style scoped>
@@ -143,10 +155,8 @@ p{
 }
 
 .v-application--wrap{
-
   background-image: url(/img/write-page/background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-
 }
 </style>

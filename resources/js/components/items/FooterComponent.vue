@@ -76,16 +76,6 @@ export default {
     ...mapActions(["toggleLoginModal"])
   }
 };
-  (function() {
-    // スクロールを禁止する関数
-    function noScroll(event) {
-      event.preventDefault();
-    }
-    // スクロール禁止(SP)
-    document.addEventListener('touchmove', noScroll, { passive: false });
-    // スクロール禁止(PC)
-    document.addEventListener('mousewheel', noScroll, { passive: false });
-  })();
 </script>
 <style scoped>
 v-bottom-navigation {
