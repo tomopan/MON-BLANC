@@ -31,7 +31,7 @@
       <v-img :src="'/img/write-page/save.png'" class="close save" alt="save" @click="saveTitle" />
 
       <!-- ヒント -->
-      <!-- <Hint /> -->
+      <Hint />
     </div>
     <!-- ボタンここまで -->
     <!-- 入力エリア -->
@@ -232,7 +232,7 @@ export default {
   flex-direction: column-reverse;
   height: 100px;
   margin-left: 5em;
-  margin-top: 380px;
+  margin-top: 330px;
 }
 .close{
   opacity: 1;
