@@ -375,10 +375,16 @@ span,
   height: 30px;
   margin-right: -80px;
 }
+
 </style>
 <style>
 #app > div > main {
   margin: 0px;
   height: 100%;
 }
+
+.close{
+  opacity: 1;
+}
+
 </style>

@@ -3,8 +3,8 @@
     <div class="font">
       <v-row>
         <v-col cols="12">
-          <p>BOOKMARK</p>
-          <p>ブックマーク</p>
+          <p class="futura"><span class="line">BOOKMARK</span></p>
+          <p class="rubi">ブックマーク</p>
           <v-row :align="alignment" :justify="justify" style="height: 300px;">
             <v-card
               v-for="(bookmarkNovel, i) in BookmarkNovels"
@@ -131,10 +131,26 @@ export default {
   outline: none;
 }
 
-.font {
+.futura{
+  font-family: "Futura", "游ゴシック体", "YuGothic";
+  font-weight: bold;
+  font-size: 2em;
+}
+#app > div > main > div > div > p.futura{
+  margin-bottom: 0.2em;
+}
+.rubi{
+  font-size: 1.2em;
+}
+span.line{
+  border-bottom:2px solid #000;
+}
+
+
+/* .font {
   font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
     "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
-}
+} */
 
 .novel_card {
   text-align: center;
@@ -146,4 +162,11 @@ export default {
 p {
   color: #333;
 }
+
+@media screen and (max-width: 415px) {
+.rubi{
+  font-size: 1em;
+}
+}
+
 </style>

@@ -23,8 +23,7 @@ export default {
 <style>
 main{
     color:#333;
-    font-family: 'Apple SD Gothic Neo','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
-
+    font-family: YuGothic,'Yu Gothic','Yu Gothic UI','Hiragino Sans','ヒラギノ角ゴシック','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
 }
 
 </style>

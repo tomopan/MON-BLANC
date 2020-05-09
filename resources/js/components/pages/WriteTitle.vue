@@ -25,13 +25,13 @@
             }
             }"
       >
-        <v-img :src="'/img/write-page/preview.png'" class="preview" alt="preview" />
+        <v-img :src="'/img/write-page/atode.png'" class="close" alt="preview" />
       </router-link>
       <!-- 保存ボタン -->
-      <v-img :src="'/img/write-page/save.png'" class="save" alt="save" @click="saveTitle" />
+      <v-img :src="'/img/write-page/save.png'" class="close save" alt="save" @click="saveTitle" />
 
       <!-- ヒント -->
-      <Hint />
+      <!-- <Hint /> -->
     </div>
     <!-- ボタンここまで -->
     <!-- 入力エリア -->
@@ -50,7 +50,7 @@
             class="paper"
             contenteditable="true"
             id="story_text_input"
-            placeholder="タイトルを入力してください"
+            placeholder="小説のタイトルを入力してください"
           ></div>
         </div>
       </div>
@@ -221,11 +221,12 @@ body {
 }
 
 .buttons {
-  display: flex;
+  /* display: flex; */
+  justify-content: center;
   flex-direction: column-reverse;
-  height: 120px;
-  margin-left: 3em;
-  margin-top: 450px;
+  height: 100px;
+  /* margin-left: 3em; */
+  /* margin-top: 450px; */
 }
 
 .icon,
@@ -273,8 +274,6 @@ body {
 
 p {
   margin-block-end: 0.5em;
-  font-family: "Apple SD Gothic Neo", "Hiragino Mincho ProN", "Yu Mincho Light",
-    "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
 }
 a {
   margin-top: 0.5em;
@@ -283,6 +282,16 @@ a {
 .hint > a {
   margin-bottom: 1em;
 }
+
+.save{
+  margin-bottom: 0;
+}
+
+.close{
+  opacity: 1;
+  /* margin-bottom: 0.5em; */
+}
+
 </style>
 <style>
 #app > div > main {

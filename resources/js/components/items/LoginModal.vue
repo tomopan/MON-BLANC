@@ -434,7 +434,7 @@ hr {
     border-color: #fff;
     border-style: none;
 }
-#app
+/* #app
     > div.v-dialog__content.v-dialog__content--active
     > div
     > div
@@ -475,7 +475,7 @@ hr {
     > label {
     top: 10px;
     margin-left: 5px;
-}
+} */
 #app
     > div.v-dialog__content.v-dialog__content--active
     > div
@@ -514,7 +514,12 @@ hr {
     > div
     > div.v-input__slot
     > div
-    > label {
+    > label,
+    #app > div:nth-child(5) > div > div > div.v-card__actions > div > div > div:nth-child(4) > div > div > div.v-input__slot > div > label,
+    #app > div:nth-child(5) > div > div > div.v-card__actions > div > div > div:nth-child(5) > div > div > div.v-input__slot > div > label{
+    top: 10px;
+    margin-left: 5px;
+
     color: #707070 !important;
     caret-color: #707070 !important;
 }

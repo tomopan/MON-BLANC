@@ -12,8 +12,8 @@
             width:300px;
         }
         p{
-            font-size:60px;
-            font-family:'Kaiti SC','YuMincho','Yu Mincho','游明朝体',sans-serif;
+            font-size:40px;
+            font-family: 'ヒラギノ明朝 ProN','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
             color:#2C2B2B;
         }
         .wrap{
@@ -45,12 +45,29 @@
         .color,.stayHome{
             opacity:0;
         }
+        .sp_br{
+            display:none;
+        }
+
+        .welcome{
+            width:200px;
+            margin-bottom: 1em;
+        }
+
+        .wrap{
+            margin-top: 4em;
+        }
+
 
         @media screen and (max-width: 415px) {
         p{
-            font-size:40px;
+            font-size:30px;
             text-align:center;
         }
+        .sp_br{
+            display:block;
+        }
+
         }
     </style>
 
@@ -63,7 +80,7 @@
                     <img class="library" src="{{asset('img/lp/library.png')}}" alt="library">
                     <img class="library color" src="{{asset('img/lp/libraryColor.png')}}" alt="libraryColor">
             </div>
-        <div><p class="stayHome">Stay home, stay safe with story.</p></div>
+        <div><p class="stayHome">Stay home, stay safe <br class="sp_br">with story.</p></div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

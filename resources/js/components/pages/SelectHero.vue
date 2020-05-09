@@ -3,11 +3,15 @@
     <v-row class="fill-height" align="center" justify="center">
       <!-- choice your charactorここから -->
       <v-container class="pa-4 text-center">
+          <p class="futura"><span class="line">WRITE</span></p>
+          <p class="rubi">かく</p>
+
+        <!-- typerのtextのインデントこのままでお願いします -->
         <vue-typer
           :repeat="0"
           :type-delay="100"
           text="Choice your character, and Write your story.|"
-          style="font-size:30px"
+          style="white-space:pre-line; word-wrap:break-word;"
           class="typer"
         ></vue-typer>
         <p class="first">あなたの物語の主人公を選んで、物語を書いてみよう。</p>
@@ -51,6 +55,18 @@ export default {
     }
   }
 };
+
+  (function() {
+    // スクロールを禁止する関数
+    function noScroll(event) {
+      event.preventDefault();
+    }
+    // スクロール禁止(SP)
+    document.addEventListener('touchmove', noScroll, { passive: false });
+    // スクロール禁止(PC)
+    // document.addEventListener('mousewheel', noScroll, { passive: false });
+  })();
+
 </script>
 
 <style scoped>
@@ -62,6 +78,22 @@ a:hover {
   text-decoration: none;
 }
 
+.futura{
+  font-family: "Futura", "游ゴシック体", "YuGothic";
+  font-weight: bold;
+  font-size: 2em;
+}
+#app > div > main > div > div > div > p.futura{
+  margin-bottom: 0.2em;
+}
+.rubi{
+  font-size: 1.2em;
+}
+span.line{
+  border-bottom:2px solid #000;
+}
+
+
 .v-card {
   transition: opacity 0.4s ease-in-out;
   color: #333333;
@@ -71,12 +103,8 @@ a:hover {
   opacity: 0.8;
 }
 
-p {
-  font-family: "Apple SD Gothic Neo", "serif";
-}
-
 .typer{
-  font-family: "Kaiti SC", "serif";
+  font-family: 'ヒラギノ明朝 ProN','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
 }
 
 .show-btns {
@@ -92,6 +120,34 @@ p {
   margin-bottom: 0;
 }
 
+@media screen and (max-width: 415px) {
+  html, body {
+  overflow: hidden;
+  }
+
+.vue-typer, .typer{
+  font-size:14px;
+}
+p{
+  font-size:12px;
+}
+.first{
+  margin-top: 0.5em;
+}
+.rubi{
+  font-size: 1em;
+}
+
+#people{
+  width: 550px;
+  height: 300px;
+  object-fit: cover;
+  margin-left: -6.1em;
+}
+}
+
+
+
 </style>
 <style>
 #app > div > header {
@@ -99,10 +155,8 @@ p {
 }
 
 .v-application--wrap{
-
   background-image: url(/img/write-page/background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-
 }
 </style>
