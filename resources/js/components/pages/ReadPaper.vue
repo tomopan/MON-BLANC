@@ -7,63 +7,44 @@
       <!-- 本エリア -->
       <div class="book-caver">
         <div id="book" class="paper" @mouseup="getMarkText()">
+          <!-- 表紙 -->
           <div class="story_text hard">
-            <!-- <div class="title_area"> -->
-            <!-- <span class="title_text">{{ this.Title }}</span>
-              <br />
-              <br />
-              <span class="title_writer">
-                作者：
-                <router-link
-                  :to="{
+            <v-img :src="'img/books/' + coverImg" />
+          </div>
+          <!-- タイトル&作者 -->
+          <div class="story_text hard">
+            <span class="title_text">{{ this.Title }}</span>
+            <br />
+            <br />
+            <span class="title_writer">
+              作者：
+              <router-link
+                :to="{
                                         name: 'Profile',
                                         params: {
                                             user_name: WriterData.user_name
                                         }
                                     }"
-                >{{ WriterData.name }}</router-link>
-            </span>-->
-            <v-img :src="'img/books/' + coverImg" />
-            <!-- </div> -->
+              >{{ WriterData.name }}</router-link>
+            </span>
+          </div>
+          <div id="insert_area">
+            <!-- ここに文章が挿入される -->
+          </div>
+          <div class="hard">
+            <v-img height="640px" width="538px" :src="'img/book_cover/' + coverImg" />
           </div>
         </div>
       </div>
       <!-- ボタンエリア -->
       <div v-if="$store.state.login" class="btns">
+        <!-- ブックマークボタン（切り替え） -->
         <v-icon v-if="!bookmarkToggle" color="#000" @click="saveBookmark" large>mdi-bookmark-outline</v-icon>
         <v-icon v-else-if="bookmarkToggle" color="#000" @click="deleteBookmark" large>mdi-bookmark</v-icon>
-        <br />
-
-        <!-- <v-icon color="#000" @click="dialog = true" large>mdi-script-text-outline</v-icon> -->
+        <!-- ツイートボタン -->
         <img class="icon" src="/img/sns/Twitter_Logo_Blue.png" alt @click="openTweet" />
-        <!-- モーダルここまで -->
       </div>
-    </v-row>
-    <!-- タイトル未入力の時のモーダル -->
-    <v-row justify="center">
-      <v-dialog v-model="dialog" persistent max-width="300">
-        <v-card v-if="markedText">
-          <v-card-title class="headline">文章をマーク</v-card-title>
-          <v-card-text>{{ markedText }}</v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="green darken-1" text @click="saveMarkText">保存</v-btn>
-            <!-- <div v-else-if="!markedText">
-                                <v-card-title class="headline"
-                                >文章を選択して</v-card-title
-                            >
-            </div>-->
-            <v-btn color="green darken-1" text @click="dialog = false">閉じる</v-btn>
-          </v-card-actions>
-        </v-card>
-        <v-card v-if="!markedText">
-          <v-card-title class="headline">文章を選択してください</v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="green darken-1" text @click="dialog = false">閉じる</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+      <!-- ボタンエリアここまで -->
     </v-row>
   </div>
 </template>
@@ -116,15 +97,23 @@ export default {
           this.StoryPapersData.forEach(el => {
             el.text = el.text.replace(/\\n|\r\n|\r|\n/g, "<br>");
             // DOMを追加（ここからじゃないとTurn.js使えない）
-            $("#book").append(
-              "<div class='story_text' style='writing-mode: vertical-rl; background-color:#fff'><span style='padding:50px'>" +
+            $("#insert_area").append(
+              "<div class='story_text' style='writing-mode: vertical-rl; background-color:#fff'><span>" +
                 el.text +
                 "</span></div>"
             );
           });
-          $("#book").append(
-            '<div><img src="img/book_cover/' + this.coverImg + '"/></div>'
-          );
+          
+          //   奇数ページの時は最後に白紙を追加
+          if (this.StoryPapersData.length % 2 == 0) {
+            $("#insert_area").append(
+              "<div class='story_text' style='writing-mode: vertical-rl; background-color:#fff'></div>"
+            );
+          }
+
+          // 親要素のタグだけ削除
+          $(".story_text").unwrap("#insert_area");
+          // turn.jsを発動
           this.turnPage();
         })
         .catch(err => {
@@ -141,7 +130,7 @@ export default {
           //非公開の場合はtopへリダイレクト
           if (res.data.status == 0) {
             this.$router.push({
-              name: "Top"
+              name: "SelectHero"
             });
           } else {
             this.Title = res.data.title;
@@ -274,25 +263,31 @@ https://mon-blanc.com${this.$route.path}`;
   font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
     "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
 }
+
+/* ---------------------------
+            本の仕様
+--------------------------- */
+
+/* 全体 */
+
+
+/* 表紙 */
+
+/* 文章 */
+
+/* 裏表紙 */
+
 .book-caver {
-  background-color: #fffcfc;
   margin-top: 10px;
-  /* background: linear-gradient(rgb(189, 183, 183),#FFF); */
 }
 .book {
   margin: 100px;
-  /* background-image: url('img/book-caver.png'); */
 }
 .paper {
   margin: auto;
-  /* padding-top: 50px; */
   height: 640px;
-  /* right: 10px; */
-  /* border: 1px solid #000000; */
 }
-
 .story_text {
-  /* margin: 0 10px 0 auto; */
   -webkit-writing-mode: vertical-rl;
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
@@ -300,20 +295,15 @@ https://mon-blanc.com${this.$route.path}`;
   line-height: 2em;
   overflow-x: scroll;
   outline: none;
-  /* white-space: pre-wrap; */
   background-color: white;
-  /* text-align: center; */
-  /* justify-content: center; */
 }
 .title_text {
   font-size: 30px;
-  /* left: 0; */
-  /* writing-mode: vertical-rl; */
-  /* margin: 50% 50%; */
-  /* position: absolute; */
-  /* right: 50%; */
 }
 .title_area {
+  -webkit-writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+  writing-mode: vertical-rl;
   margin-right: 30%;
   text-align: center;
   justify-content: baseline;
@@ -322,6 +312,14 @@ https://mon-blanc.com${this.$route.path}`;
   margin-top: 50%;
 }
 
+/* 裏表紙 */
+.book_cover {
+  height: 640px;
+}
+
+/* ---------------------------
+            ボタン
+--------------------------- */
 .icon {
   width: 100px;
   cursor: pointer;
