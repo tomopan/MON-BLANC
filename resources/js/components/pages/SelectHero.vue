@@ -105,6 +105,7 @@ span.line{
 
 .typer{
   font-family: 'ヒラギノ明朝 ProN','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
+  font-size:30px;
 }
 
 .show-btns {
@@ -145,8 +146,6 @@ p{
   margin-left: -6.1em;
 }
 }
-
-
 
 </style>
 <style>
