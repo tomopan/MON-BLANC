@@ -1,40 +1,43 @@
 <template>
   <div class="cont">
     <!-- テキスト未入力の時のモーダル -->
-    <v-dialog id="overlay" v-model="dialog" width="50%">
+    <div id="overlay" v-show="dialog">
       <div id="content">
         <div class="write">
           <p>テキストを入力してください</p>
-          <button style="border:solid 2px #000" @click="dialog = false">&nbsp;閉じる&nbsp;</button>
+          <button class="closeButton" style="border:solid 2px #000" @click="dialog = false">&nbsp;閉じる&nbsp;</button>
         </div>
       </div>
-    </v-dialog>
+    </div>
     <!-- モーダルここまで -->
+    <!-- 文字数 -->
     <!-- ボタンたち -->
     <div class="buttons">
-      <!-- 文字数 -->
+        <!-- 戻るボタン -->
+        <div>
+          <v-img
+            :src="'/img/write-page/close.png'"
+            class="close"
+            alt="close"
+            @click="$router.go(-1)"
+          />
+        </div>
+        <!-- プレビューボタン -->
+        <div>
+          <v-img :src="'/img/write-page/preview.png'" class="close" alt="preview" />
+        </div>
+        <!-- 一時保存ボタン -->
+        <div>
+          <v-img :src="'/img/write-page/save.png'" class="close" alt="save" @click="editPaper" />
+        </div>
+        <!-- ヒント -->
+        <div>
+          <hint />
+        </div>
+    </div>
+
+    <div class="count">
       {{charaCount}}/5000文字
-      <!-- 戻るボタン -->
-      <div>
-        <v-img
-          :src="'/img/write-page/close.png'"
-          class="close"
-          alt="close"
-          @click="$router.go(-1)"
-        />
-      </div>
-      <!-- プレビューボタン -->
-      <div>
-        <v-img :src="'/img/write-page/preview.png'" class="close" alt="preview" />
-      </div>
-      <!-- 一時保存ボタン -->
-      <div>
-        <v-img :src="'/img/write-page/save.png'" class="close" alt="save" @click="editPaper" />
-      </div>
-      <!-- ヒント -->
-      <div>
-        <hint />
-      </div>
     </div>
 
     <v-row>
@@ -214,6 +217,11 @@ export default {
 *:focus {
   outline: none;
 }
+.cont {
+  height: 100%;
+  display: flex;
+  background-color: #ffe8ae;
+}
 
 /* モーダル */
 #modal_text {
@@ -221,9 +229,34 @@ export default {
   margin: auto;
   padding-top: 10%;
 }
+#content {
+  z-index: 2;
+  width: 30%;
+  padding: 1em;
+  background-color: #fff;
+  border: 1px solid #000;
+  font-weight:bold;
+}
+#overlay {
+  /*要素を重ねた時の順番*/
+  z-index: 1;
+
+  /*画面全体を覆う設定*/
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  /*画面の中央に要素を表示させる設定*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 /* 入力 */
-
 [contenteditable="true"]:empty:before {
   content: attr(placeholder);
   pointer-events: none;
@@ -231,27 +264,10 @@ export default {
   color: #a9a9a9;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0px;
-  padding: 0px;
-  border: 0;
-  height: 100%;
-}
-
+/* 入力エリア */
 .paper {
   display: block;
-  /* width: 10%; */
   margin: auto;
-  /* margin-top: 10px; */
-  /* padding: 40px; */
   -webkit-writing-mode: vertical-rl;
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
@@ -262,18 +278,8 @@ body {
   overflow-x: scroll;
   outline: none;
 }
-.episode_num {
-  -webkit-writing-mode: vertical-rl;
-  -ms-writing-mode: tb-rl;
-  writing-mode: vertical-rl;
-}
-
 .paper span {
   display: block;
-}
-#save {
-  display: block;
-  margin: auto;
 }
 .input-area {
   margin: auto;
@@ -287,6 +293,8 @@ body {
   background-color: white;
   cursor: url("/img/write-page/cursor.png"), auto;
   overflow-x: scroll;
+  margin-bottom: 3em;
+
 }
 #paper_text {
   width: 800px;
@@ -299,81 +307,45 @@ body {
 }
 
 #story_text_input {
-  margin: 0 50px 0 auto;
+  margin: 0 20px 0 auto;
   /* border: 1px solid #000000; */
 }
 
-.icons {
-  display: flex;
-  flex-direction: column;
-  margin: 2em 2em;
+p{
+  text-align: center;
+}
+.write{
+  text-align:center;
+  background-color: #ffce97;
+  margin: 1em;
+  padding:1em;
 }
 
+/* 話数 */
+.episode_num {
+  -webkit-writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  margin: 2em 12em 0 -10em;
+
+}
+.count{
+  margin: 500px -12em 0 3.5em;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+/* ボタン */
 .buttons {
   display: flex;
   flex-direction: column-reverse;
   height: 120px;
-  margin-left: 3em;
+  margin-left: 230px;
   margin-top: 500px;
 }
-
-.icon,
-.v-responsive__sizer,
-#app > div > main > div > div > div.buttons > div > div.v-responsive__content,
-.v-image__image,
-.v-image__image--cover,
-#app
-  > div
-  > main
-  > div
-  > div
-  > div.buttons
-  > div
-  > div.v-image__image.v-image__image--cover {
-  width: 60px;
-  height: 60px !important;
-}
-.v-application {
-  background-color: #ffe8ae;
-}
-.cont {
-  height: 100%;
-  display: flex;
-  background-color: #ffe8ae;
-}
-
-#content {
-  z-index: 2;
-  width: 100%;
-  padding: 1em;
-  background-color: #fff;
-  border: 1px dashed #000;
-}
-
-.write {
-  font-family: "Futura", "游ゴシック体", "YuGothic";
-  font-weight: bold;
-  background-color: #ffce97;
-  text-align: center;
-  margin: 1em;
-}
-
-p {
-  margin-block-end: 0.5em;
-}
-span,
-.v-btn,
-.v-btn--contained,
-.theme--light,
-.v-size--default,
-.v-btn__content {
-  writing-mode: initial;
-  transform: rotate(90deg);
-  transform-origin: top left;
-
-  width: 80px;
-  height: 30px;
-  margin-right: -80px;
+.close{
+  margin-top: 0.5em;
 }
 
 </style>

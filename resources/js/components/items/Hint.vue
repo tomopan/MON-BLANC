@@ -109,7 +109,7 @@ export default {
   width: 50%;
   padding: 1em;
   background-color: #fff;
-  border: 1px dashed #000;
+  border: 1px solid #000;
 }
 
 .write {

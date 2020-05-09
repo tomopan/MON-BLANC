@@ -28,18 +28,17 @@
 
             <!-- 主人公の画像 -->
             <figure class="relative">
-              <v-img :src="'img/flamebooks/' + novel.img_url" width="200px"></v-img>
-              <figcaption class="absolute"><p class="novelTitle">{{novel.title}}</p></figcaption>
-              <!-- 最初の50文字 -->
-              <figcaption class="absolute"><p class="novelTitle">{{novel.text}}</p></figcaption>
+              <v-img :src="'img/timeline/' + novel.img_url" class="backImage"></v-img>
+              <div class="wrap">
+                <figcaption class="absolute"><p class="novelTitle">{{novel.title}}</p></figcaption>
+                <!-- 最初の50文字 -->
+                <figcaption class="absolute"><p class="novelTitle">{{novel.text}}</p></figcaption>
+              </div>
             </figure>
 
             </router-link>
           </v-col>
         </div>
-        <!-- 吹き出し部分 -->
-
-        <p class="fukidashi">ある朝のことだ。スミレはふと思った。「ああ、私は幸せも・・・</p>
 
         <v-pagination
           v-model="page"
@@ -155,46 +154,25 @@ span{
 }
 .relative {
     position: relative;
+    display:flex;
 }
-/* .relative:hover{
-  
-} */
+
+.backImage{
+  width:400px;
+}
+
+.wrap{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
 
 .absolute {
     position: absolute;
     bottom: 0.3em;
-    left:2.8em
+    left:2.8em;
 }
-
-    /* .fukidashi {
-      display: none;
-      width: 200px;
-      position: absolute;
-      top: 0;
-      left: 250px;
-      padding: 16px;
-      border-radius: 5px;
-      background: #33cc99;
-      color: #fff;
-      font-weight: bold;
-    }
-    .fukidashi:after {
-      position: absolute;
-      width: 0;
-      height: 0;
-      left: 0;
-      bottom: -19px;
-      margin-left: 10px;
-      border: solid transparent;
-      border-color: rgba(51, 204, 153, 0);
-      border-top-color: #33cc99;
-      border-width: 10px;
-      pointer-events: none;
-      content: " ";
-    }
-    .text:hover + .fukidashi {
-      display: block;
-    } */
 
 @media screen and (max-width: 415px) {
 .rubi{
