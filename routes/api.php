@@ -92,8 +92,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     // -----------StoryPapersテーブル----------- //
 
-    //paper_novel_idからストーリーペーパーのデータを取得
+    //paper_novel_idから小説のデータを取得
     Route::get('get/story_papers/{paper_novel_id}', 'Api\StoryPapersController@showPapers');
+
+    //paper_novel_idから小説のテキストデータを取得
+    Route::get('fetch/story_paper/{paper_novel_id}', 'Api\StoryPapersController@showPapers');
 
     //user_paper_orderからストーリーペーパーのデータを取得
     Route::get('get/story_papers_edit/{user_paper_order}', 'Api\StoryPapersController@showEditPapers');

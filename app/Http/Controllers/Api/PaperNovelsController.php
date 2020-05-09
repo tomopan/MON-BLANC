@@ -124,8 +124,9 @@ use App\StoryPaper;
             // else if($status->status == 1){
                 $paper_novel_title = DB::table('paper_novels as p')
                 ->join('users as u','u.id','=','p.user_id')
+                ->join('heroes as h','h.id','=','p.hero_id')
                 ->where('p.id','=',$paper_novel_id)
-                ->select('p.title','u.user_name','u.name','p.status')
+                ->select('p.title','u.user_name','u.name','p.status','h.img_url')
                 ->first();
             // }
 
