@@ -40,14 +40,14 @@
         <div id="paper_text">
           <div
             v-if="title_toggle"
-            class="paper"
+            class="paper min"
             contenteditable="true"
             id="story_text_input"
             placeholder="小説のタイトルを入力してください"
           >{{ novelData.title }}</div>
           <div
             v-else
-            class="paper"
+            class="paper min"
             contenteditable="true"
             id="story_text_input"
             placeholder="小説のタイトルを入力してください"
@@ -137,8 +137,25 @@ export default {
 </script>
 
 <style scoped>
+/* 全体 */
 *:focus {
   outline: none;
+}
+.cont {
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 2em;
+  background-color: #ffe8ae;
+}
+
+/* 小見出し */
+.write {
+  font-family: "Futura", "游ゴシック体", "YuGothic";
+  font-weight: bold;
+  background-color: #ffce97;
+  text-align: center;
+  margin: 1em;
 }
 
 /* モーダル */
@@ -147,9 +164,15 @@ export default {
   margin: auto;
   padding-top: 10%;
 }
+#content {
+  z-index: 2;
+  width: 100%;
+  padding: 1em;
+  background-color: #fff;
+  border: 1px dashed #000;
+}
 
 /* 入力 */
-
 [contenteditable="true"]:empty:before {
   content: attr(placeholder);
   pointer-events: none;
@@ -157,22 +180,10 @@ export default {
   color: #a9a9a9;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0px;
-  padding: 0px;
-  border: 0;
-  height: 100%;
-}
+/* 入力エリア */
 .wrap-input-area {
   display: flex;
+  margin-bottom: 3em;
 }
 .paper {
   display: block;
@@ -186,13 +197,13 @@ body {
   overflow-x: scroll;
   outline: none;
 }
-
 .paper span {
   display: block;
 }
-#save {
-  display: block;
-  margin: auto;
+.min{
+  font-family: 'ヒラギノ明朝 ProN','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
+  cursor: url("/img/write-page/cursor.png"), auto;
+
 }
 .input-area {
   margin: auto;
@@ -202,7 +213,7 @@ body {
   margin-top: 2em;
   border: 1px solid #a9a9a9;
   background-color: white;
-  cursor: url("/img/write-page/cursor.png"), auto;
+
 }
 #story_text_input {
   display: block;
@@ -214,82 +225,18 @@ body {
   font-size: 18px;
 }
 
-.icons {
-  display: flex;
-  flex-direction: column;
-  margin: 2em 2em;
-}
-
+/* ボタン */
 .buttons {
-  /* display: flex; */
+  display: flex;
   justify-content: center;
   flex-direction: column-reverse;
   height: 100px;
-  /* margin-left: 3em; */
-  /* margin-top: 450px; */
+  margin-left: 5em;
+  margin-top: 380px;
 }
-
-.icon,
-.v-responsive__sizer,
-#app > div > main > div > div > div.buttons > div > div.v-responsive__content,
-.v-image__image,
-.v-image__image--cover,
-#app
-  > div
-  > main
-  > div
-  > div
-  > div.buttons
-  > div
-  > div.v-image__image.v-image__image--cover {
-  width: 60px;
-  height: 60px !important;
-}
-.v-application {
-  background-color: #ffe8ae;
-}
-.cont {
-  height: 100%;
-  display: flex;
-  justify-content: space-around;
-  padding-top: 2em;
-  background-color: #ffe8ae;
-}
-
-#content {
-  z-index: 2;
-  width: 100%;
-  padding: 1em;
-  background-color: #fff;
-  border: 1px dashed #000;
-}
-
-.write {
-  font-family: "Futura", "游ゴシック体", "YuGothic";
-  font-weight: bold;
-  background-color: #ffce97;
-  text-align: center;
-  margin: 1em;
-}
-
-p {
-  margin-block-end: 0.5em;
-}
-a {
-  margin-top: 0.5em;
-}
-
-.hint > a {
-  margin-bottom: 1em;
-}
-
-.save{
-  margin-bottom: 0;
-}
-
 .close{
   opacity: 1;
-  /* margin-bottom: 0.5em; */
+  margin-top: 0.5em;
 }
 
 </style>
