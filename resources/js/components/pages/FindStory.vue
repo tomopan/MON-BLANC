@@ -22,7 +22,9 @@
             <router-link
               :to="{
                   name: 'ReadPaper',
-                  params: { paper_novel_id: novel.id }
+                  params: {
+                    hero_id:novel.hero_id,
+                     paper_novel_id: novel.id }
               }"
             >
 

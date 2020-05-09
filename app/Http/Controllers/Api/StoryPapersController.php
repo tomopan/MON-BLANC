@@ -158,8 +158,10 @@ use App\User;
         public function showPapers($paper_novel_id)
         {
             //ペーパーを取得
-            $story_papers =  StoryPaper::where('paper_novel_id','=',$paper_novel_id)
-                                ->orderBy('story_number')
+            $story_papers =  DB::table('story_papers as s')
+                                ->where('s.paper_novel_id','=',$paper_novel_id)
+                                ->orderBy('s.story_number')
+                                ->select('s.text','s.story_number')
                                 ->get();
 
             return response()->json($story_papers);
