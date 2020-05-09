@@ -62,6 +62,78 @@ use Illuminate\Database\Seeder;
                 "updated_at" => $faker->dateTime("now")
             ]
             );
+            DB::table('paper_novels')->insert(
+            [
+                "hero_id" => 3,
+                "user_id" => 1,
+                "user_paper_order" => 3,
+                "title" => "じゅんのタイトル",
+                "first_sentence" => "ラーメンみたいな名前をつけられて、呼ばれるたびに私はお腹が空く。",
+                "status" => 1,
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('paper_novels')->insert(
+            [
+                "hero_id" => 4,
+                "user_id" => 1,
+                "user_paper_order" => 4,
+                "title" => "まりのタイトル",
+                "first_sentence" => "ラーメンみたいな名前をつけられて、呼ばれるたびに私はお腹が空く。",
+                "status" => 1,
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('paper_novels')->insert(
+            [
+                "hero_id" => 5,
+                "user_id" => 1,
+                "user_paper_order" => 5,
+                "title" => "ゆりのタイトル",
+                "first_sentence" => "ラーメンみたいな名前をつけられて、呼ばれるたびに私はお腹が空く。",
+                "status" => 1,
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('paper_novels')->insert(
+            [
+                "hero_id" => 6,
+                "user_id" => 1,
+                "user_paper_order" => 6,
+                "title" => "ななのタイトル",
+                "first_sentence" => "ラーメンみたいな名前をつけられて、呼ばれるたびに私はお腹が空く。",
+                "status" => 1,
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('paper_novels')->insert(
+            [
+                "hero_id" => 7,
+                "user_id" => 1,
+                "user_paper_order" => 7,
+                "title" => "けいたのタイトル",
+                "first_sentence" => "ラーメンみたいな名前をつけられて、呼ばれるたびに私はお腹が空く。",
+                "status" => 1,
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('paper_novels')->insert(
+            [
+                "hero_id" => 8,
+                "user_id" => 1,
+                "user_paper_order" => 8,
+                "title" => "だいきのタイトル",
+                "first_sentence" => "ラーメンみたいな名前をつけられて、呼ばれるたびに私はお腹が空く。",
+                "status" => 1,
+                "created_at" => $faker->dateTime("now"),
+                "updated_at" => $faker->dateTime("now")
+            ]
+            );
 
         }
     }
