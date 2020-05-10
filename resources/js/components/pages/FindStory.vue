@@ -144,6 +144,7 @@ export default {
   font-weight: bold;
   font-size: 2em;
   text-align:center;
+  margin-top: 3em;;
 
 }
 #app > div > main > div > div > p.futura{
