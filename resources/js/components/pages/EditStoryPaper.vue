@@ -328,7 +328,6 @@ p{
   writing-mode: vertical-rl;
   text-orientation: upright;
   margin: 2em 12em 0 -10em;
-
 }
 .count{
   margin: 500px -12em 0 3.5em;
