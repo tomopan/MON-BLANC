@@ -1,33 +1,35 @@
 <template>
   <v-container class="pa-4 text-center">
-    <div class="font">
-      <v-row>
-        <v-col cols="12">
+    <div class="hero-find">
           <p class="futura"><span class="line">BOOKMARK</span></p>
           <p class="rubi">ブックマーク</p>
-          <v-row :align="alignment" :justify="justify" style="height: 300px;">
-            <v-card
-              v-for="(bookmarkNovel, i) in BookmarkNovels"
-              :key="i"
-              width="200px"
-              class="novel_card ma-4"
-            >
-              <router-link
-                :to="{
-                                name: 'ReadPaper',
-                                params: {
-                                    hero_id: bookmarkNovel.hero_id,
-                                    paper_novel_id: bookmarkNovel.paper_novel_id
-                                }
-                            }"
-              >
-                <v-img :src="'img/flamebooks/' +bookmarkNovel.img_url"></v-img>
-                <p class="paper_text">{{ bookmarkNovel.title }}</p>
-              </router-link>
+
+          <!-- ブックマーク -->
+          <v-row class="fill-height" align="center" justify="center">
+            <div v-for="(bookmarkNovel, i) in BookmarkNovels" :key="i" class="text">
+              <v-col :key="id">
+                <router-link
+                  :to="{
+                      name: 'ReadPaper',
+                      params: {
+                          hero_id: bookmarkNovel.hero_id,
+                          paper_novel_id: bookmarkNovel.paper_novel_id
+                      }
+                  }"
+                >
+                  <!-- 主人公の画像 -->
+                  <figure class="relative">
+                    <v-img :src="'img/flamebooks/' + bookmarkNovel.img_url" width="200px"></v-img>
+                    <figcaption class="absolute"><p class="novelTitle">{{ bookmarkNovel.title }}</p></figcaption>
+                    <!-- 最初の50文字 -->
+                    <!-- <figcaption class="absolute"><p class="novelTitle">{{bookmarkNovel.text}}</p></figcaption> -->
+                  </figure>
+                </router-link>
+              </v-col>
               <!-- 削除ボタン -->
-              <v-btn class="ma-2" tile outlined @click.native.stop="dialog = true">削除</v-btn>
+              <!-- <v-btn class="ma-2" tile outlined @click.native.stop="dialog = true">削除</v-btn> -->
               <!-- 削除のモーダル -->
-              <v-layout row justify-center>
+              <!-- <v-layout row justify-center>
                 <v-dialog v-model="dialog" max-width="290">
                   <v-card>
                     <v-card-title class="headline">削除しますか?</v-card-title>
@@ -36,21 +38,16 @@
                       <v-btn @click.native="dialog = false">戻る</v-btn>
                       <v-btn
                         @click="
-                                                destroy(i, bookmarkNovel.id)
-                                            "
+                            destroy(i, bookmarkNovel.id)
+                        "
                       >削除する</v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
-              </v-layout>
+              </v-layout> -->
               <!-- モーダルここまで -->
-
-              <!-- 最初の50文字 -->
-              {{bookmarkNovel.text}}
-            </v-card>
+            </div>
           </v-row>
-        </v-col>
-      </v-row>
     </div>
   </v-container>
 </template>
@@ -145,12 +142,6 @@ span.line{
   border-bottom:2px solid #000;
 }
 
-
-/* .font {
-  font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
-    "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
-} */
-
 .novel_card {
   text-align: center;
 }
@@ -161,6 +152,35 @@ span.line{
 p {
   color: #333;
 }
+
+.futura{
+  font-family: "Futura", "游ゴシック体", "YuGothic";
+  font-weight: bold;
+  font-size: 2em;
+}
+#app > div > main > div > div > p.futura{
+  margin-bottom: 0.2em;
+}
+.rubi{
+  font-size: 1.2em;
+}
+span{
+  border-bottom:2px solid #000;
+}
+
+.novelTitle{
+  margin-bottom: 0!important;
+}
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+    bottom: 0.3em;
+    left:2.8em
+}
+
 
 @media screen and (max-width: 415px) {
 .rubi{
