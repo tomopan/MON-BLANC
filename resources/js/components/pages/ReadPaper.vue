@@ -1,8 +1,9 @@
 <template>
-  <div id="container">
-    <!-- <p>マークされた数：{{ MarkCount }}</p>
-        <p>選択中ストーリー番号：{{ markedStoryId }}</p>
-    <p>選択中テキスト：{{ markedText }}</p>-->
+  <div id="cont">
+    <!-- 戻るボタンエリア -->
+    <div id="turn_area">
+      <img id="turn_icon" class="icon" src="img/book-bg/uturn.png" @click="$router.go(-1)" />
+    </div>
     <!-- 本エリア -->
     <div class="wrap_book">
       <div id="book" @mouseup="getMarkText()">
@@ -39,8 +40,19 @@
     <!-- ボタンエリア -->
     <div v-if="$store.state.login" class="btns">
       <!-- ブックマークボタン（切り替え） -->
-      <v-icon v-if="!bookmarkToggle" color="#000" @click="saveBookmark" large>mdi-bookmark-outline</v-icon>
-      <v-icon v-else-if="bookmarkToggle" color="#000" @click="deleteBookmark" large>mdi-bookmark</v-icon>
+      <v-icon
+        v-if="!bookmarkToggle"
+        size="60px"
+        color="#000"
+        @click="saveBookmark"
+      >mdi-bookmark-outline</v-icon>
+      <v-icon
+        v-else-if="bookmarkToggle"
+        size="60px"
+        color="#000"
+        @click="deleteBookmark"
+      >mdi-bookmark</v-icon>
+      <br />
       <!-- ツイートボタン -->
       <img class="icon" src="/img/sns/Twitter_Logo_Blue.png" alt @click="openTweet" />
     </div>
@@ -264,14 +276,16 @@ https://mon-blanc.com${this.$route.path}`;
   outline: none;
 }
 
-.container {
+.cont {
   font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
     "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
   background-color: white;
 }
 
-#container {
+#cont {
   background-color: white;
+  display: flex;
+  justify-content: center;
 }
 
 /* ---------------------------
@@ -296,7 +310,7 @@ https://mon-blanc.com${this.$route.path}`;
 /* タイトル */
 .title_area {
   -webkit-writing-mode: vertical-rl;
-  /* -moz-linear-gradient(right, #FFF 90%, #e6e6e6); */
+  background: -moz-linear-gradient(right, #fff 90%, #e6e6e6);
   background: -webkit-linear-gradient(right, #fff 90%, #e6e6e6);
   background: linear-gradient(to left, #fff 90%, #e6e6e6);
   -ms-writing-mode: tb-rl;
@@ -329,7 +343,16 @@ https://mon-blanc.com${this.$route.path}`;
             ボタン
 --------------------------- */
 .icon {
-  width: 100px;
+  width: 60px;
   cursor: pointer;
+}
+#turn_area {
+  position: relative;
+  height: 700px;
+}
+#turn_icon {
+  position: absolute;
+  bottom: 0;
+  right: 2em;
 }
 </style>

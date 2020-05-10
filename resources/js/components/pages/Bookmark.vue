@@ -1,21 +1,24 @@
 <template>
   <v-container class="pa-4 text-center">
     <div class="hero-find">
-          <p class="futura"><span class="line">BOOKMARK</span></p>
-          <p class="rubi">ブックマーク</p>
+      <p class="futura">
+        <span class="line">BOOKMARK</span>
+      </p>
+      <p class="rubi">ブックマーク</p>
 
-          <!-- ブックマーク -->
-          <v-row class="fill-height" align="center" justify="center">
-            <div v-for="(bookmarkNovel, i) in BookmarkNovels" :key="i" class="text">
-              <v-col :key="id">
-                <router-link
-                  :to="{
+      <!-- ブックマーク -->
+      <v-row class="fill-height" align="center" justify="center">
+        <div v-for="(bookmarkNovel, i) in BookmarkNovels" :key="i" class="text">
+          <v-col :key="id">
+            <router-link
+              :to="{
                       name: 'ReadPaper',
                       params: {
                           hero_id: bookmarkNovel.hero_id,
                           paper_novel_id: bookmarkNovel.paper_novel_id
                       }
                   }"
+
                 >
                   <!-- 主人公の画像 -->
                   <figure class="relative novel_title">
@@ -29,6 +32,7 @@
               <!-- <v-btn class="ma-2" tile outlined @click.native.stop="dialog = true">削除</v-btn> -->
               <!-- 削除のモーダル -->
               <!-- <v-layout row justify-center>
+
                 <v-dialog v-model="dialog" max-width="290">
                   <v-card>
                     <v-card-title class="headline">削除しますか?</v-card-title>
@@ -43,10 +47,10 @@
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
-              </v-layout> -->
-              <!-- モーダルここまで -->
-            </div>
-          </v-row>
+          </v-layout>-->
+          <!-- モーダルここまで -->
+        </div>
+      </v-row>
     </div>
   </v-container>
 </template>
@@ -100,6 +104,11 @@ export default {
             if (e.text && e.text.length >= 50)
               e.text = e.text.substr(0, 50) + "・・・";
           });
+          //タイトルを16字で省略
+          this.BookmarkNovels.forEach(e => {
+            if (e.title && e.title.length >= 9)
+              e.title = e.title.substr(0, 8) + "...";
+          });
         })
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
@@ -126,8 +135,10 @@ export default {
   outline: none;
 }
 
+
 span.line{
   border-bottom:2px solid #000;
+
 }
 
 .novel_card {
@@ -144,27 +155,28 @@ p {
   margin-bottom: 7em;
 }
 
-.futura{
+.futura {
   font-family: "Futura", "游ゴシック体", "YuGothic";
   font-weight: bold;
   font-size: 2em;
 }
-#app > div > main > div > div > p.futura{
+#app > div > main > div > div > p.futura {
   margin-bottom: 0.2em;
 }
-.rubi{
+.rubi {
   font-size: 1.2em;
 }
-span{
-  border-bottom:2px solid #000;
+span {
+  border-bottom: 2px solid #000;
 }
 
 .novelTitle{
   margin-bottom: 0!important;
   font-weight: bold;
+
 }
 .relative {
-    position: relative;
+  position: relative;
 }
 
 .absolute {
@@ -220,10 +232,10 @@ span{
   font-weight: normal;
 }
 
-@media screen and (max-width: 415px) {
-.rubi{
-  font-size: 1em;
-}
-}
 
+@media screen and (max-width: 415px) {
+  .rubi {
+    font-size: 1em;
+  }
+}
 </style>

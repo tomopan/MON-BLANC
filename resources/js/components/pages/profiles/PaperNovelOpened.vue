@@ -121,7 +121,7 @@ export default {
         "space-around",
         "space-between"
       ],
-      justify: "center",
+      justify: "center"
     };
   },
   watch: {
@@ -150,6 +150,11 @@ export default {
             obj["img_url"] = data.img_url;
             obj["user_paper_order"] = data.user_paper_order;
             return obj;
+          });
+          //タイトルを16字で省略
+          this.OpenPaperNovels.forEach(e => {
+            if (e.title && e.title.length >= 9)
+              e.title = e.title.substr(0, 8) + "...";
           });
         })
         .catch(err => {
