@@ -2,8 +2,9 @@
   <v-container class="pa-4">
     <!-- 主人公から探す -->
     <div class="hero-find">
-
-      <p class="futura"><span class="line">READ</span></p>
+      <p class="futura">
+        <span class="line">READ</span>
+      </p>
       <p class="rubi">よむ</p>
       <!-- タブ -->
       <v-tabs grow v-model="active_tab" show-arrows>
@@ -27,20 +28,22 @@
                      paper_novel_id: novel.id }
               }"
             >
-
-            <!-- 主人公の画像 -->
-            <figure class="relative">
-              <v-img :src="'img/timeline/' + novel.img_url" class="backImage"></v-img>
-              <div class="wrap">
-                <div class="blank"></div>
-                <div>
-                  <figcaption class="absolute novelTitle"><p class="novelTitle title">{{novel.title}}</p></figcaption>
-                  <!-- 最初の50文字 -->
-                  <figcaption class="absolute novelText"><p class="novelText text">{{novel.text}}</p></figcaption>
+              <!-- 主人公の画像 -->
+              <figure class="relative">
+                <v-img :src="'img/timeline/' + novel.img_url" class="backImage"></v-img>
+                <div class="wrap">
+                  <div class="blank"></div>
+                  <div>
+                    <figcaption class="absolute novelTitle">
+                      <p class="novelTitle title">{{novel.title}}</p>
+                    </figcaption>
+                    <!-- 最初の50文字 -->
+                    <figcaption class="absolute novelText">
+                      <p class="novelText text">{{novel.text}}</p>
+                    </figcaption>
+                  </div>
                 </div>
-              </div>
-            </figure>
-
+              </figure>
             </router-link>
           </v-col>
         </div>
@@ -98,15 +101,18 @@ export default {
         .get("api/get/novels/")
         .then(res => {
           this.allNovels = res.data;
-          //50字で省略
+          //文章を50字で省略
           this.allNovels.forEach(e => {
             if (e.text && e.text.length >= 50)
-              e.text = e.text.substr(0, 50) + "・・・";
+              e.text = e.text.substr(0, 50) + "...";
           });
-
+          //タイトルを16字で省略
+          this.allNovels.forEach(e => {
+            if (e.title && e.title.length >= 16)
+              e.title = e.title.substr(0, 16) + "...";
+          });
           this.page_length = Math.ceil(this.allNovels.length / this.parPage);
           this.Novels = this.allNovels.slice(0, this.parPage);
-          console.log(res.data);
         })
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
@@ -118,9 +124,18 @@ export default {
         .get("api/get/hero_novels/" + $hero_id)
         .then(res => {
           this.allNovels = res.data;
+          //文章を50字で省略
+          this.allNovels.forEach(e => {
+            if (e.text && e.text.length >= 50)
+              e.text = e.text.substr(0, 50) + "...";
+          });
+          //タイトルを16字で省略
+          this.allNovels.forEach(e => {
+            if (e.title && e.title.length >= 16)
+              e.title = e.title.substr(0, 16) + "...";
+          });
           this.page_length = Math.ceil(this.allNovels.length / this.parPage);
           this.Novels = this.allNovels.slice(0, this.parPage);
-          console.log(res.data);
         })
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
@@ -139,63 +154,59 @@ export default {
 </script>
 
 <style scoped>
-.futura{
+.futura {
   font-family: "Futura", "游ゴシック体", "YuGothic";
   font-weight: bold;
   font-size: 2em;
-  text-align:center;
-
+  text-align: center;
 }
-#app > div > main > div > div > p.futura{
+#app > div > main > div > div > p.futura {
   margin-bottom: 0.2em;
 }
-.rubi{
+.rubi {
   font-size: 1.2em;
-    text-align:center;
-
+  text-align: center;
 }
-span{
-  border-bottom:2px solid #000;
+span {
+  border-bottom: 2px solid #000;
 }
 
-.novelTitle{
-  margin-bottom: 1em!important;
+.novelTitle {
+  margin-bottom: 1em !important;
   width: 180px;
   margin-top: 1em;
-
 }
-.novelText{
-  margin-top: 6em!important;
-  margin-bottom: 1em!important;
+.novelText {
+  margin-top: 6em !important;
+  margin-bottom: 1em !important;
   width: 180px;
 }
 
-.title{
+.title {
   font-weight: bold;
   font-size: 14px;
   color: #000;
 }
-.text{
+.text {
   font-size: 10px;
 }
 
 .relative {
-    position: relative;
-    display:flex;
+  position: relative;
+  display: flex;
 }
 
-.backImage{
-  width:400px;
+.backImage {
+  width: 400px;
 }
 
-.wrap{
+.wrap {
   display: flex;
   justify-content: center;
   position: absolute;
-
 }
 
-.blank{
+.blank {
   height: 200px;
   width: 200px;
 }
@@ -205,15 +216,14 @@ span{
   top: 30px;
 }
 
-.novelText{
+.novelText {
   margin-top: 3em;
   color: #000;
 }
 
 @media screen and (max-width: 415px) {
-.rubi{
-  font-size: 1em;
+  .rubi {
+    font-size: 1em;
+  }
 }
-}
-
 </style>
