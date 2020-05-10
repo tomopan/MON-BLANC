@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pa-4 text-center">
+  <v-container class="pa-4">
     <!-- 主人公から探す -->
     <div class="hero-find">
 
@@ -30,9 +30,12 @@
             <figure class="relative">
               <v-img :src="'img/timeline/' + novel.img_url" class="backImage"></v-img>
               <div class="wrap">
-                <figcaption class="absolute"><p class="novelTitle">{{novel.title}}</p></figcaption>
-                <!-- 最初の50文字 -->
-                <figcaption class="absolute"><p class="novelTitle">{{novel.text}}</p></figcaption>
+                <div class="blank"></div>
+                <div>
+                  <figcaption class="absolute novelTitle"><p class="novelTitle title">{{novel.title}}</p></figcaption>
+                  <!-- 最初の50文字 -->
+                  <figcaption class="absolute novelText"><p class="novelText text">{{novel.text}}</p></figcaption>
+                </div>
               </div>
             </figure>
 
@@ -138,20 +141,42 @@ export default {
   font-family: "Futura", "游ゴシック体", "YuGothic";
   font-weight: bold;
   font-size: 2em;
+  text-align:center;
+
 }
 #app > div > main > div > div > p.futura{
   margin-bottom: 0.2em;
 }
 .rubi{
   font-size: 1.2em;
+    text-align:center;
+
 }
 span{
   border-bottom:2px solid #000;
 }
 
 .novelTitle{
-  margin-bottom: 0!important;
+  margin-bottom: 1em!important;
+  width: 180px;
+  margin-top: 1em;
+
 }
+.novelText{
+  margin-top: 6em!important;
+  margin-bottom: 1em!important;
+  width: 180px;
+}
+
+.title{
+  font-weight: bold;
+  font-size: 14px;
+  color: #000;
+}
+.text{
+  font-size: 10px;
+}
+
 .relative {
     position: relative;
     display:flex;
@@ -163,15 +188,24 @@ span{
 
 .wrap{
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  position: absolute;
 
 }
 
+.blank{
+  height: 200px;
+  width: 200px;
+}
+
 .absolute {
-    position: absolute;
-    bottom: 0.3em;
-    left:2.8em;
+  position: absolute;
+  top: 30px;
+}
+
+.novelText{
+  margin-top: 3em;
+  color: #000;
 }
 
 @media screen and (max-width: 415px) {
