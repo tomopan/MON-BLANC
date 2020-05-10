@@ -2,61 +2,70 @@
   <div>
     <div class="content">
       <div v-for="(paper, i) in active_page_novels" :key="i">
-        <div v-if="paper.titleToggle">
-          <p v-if="title_toggle" class="title_text">{{ paper.text }}</p>
-          <p v-else class="title_text">タイトルを編集</p>
-          <router-link
-            :to="{
-                        name: 'WriteTitlePaper',
-                        params: {
-                            user_paper_order: $route.params.user_paper_order
-                        }
-                    }"
-          >
-            <button>編集</button>
-          </router-link>
+          <div v-if="paper.titleToggle" class="add_wrap">
+              <!-- ボタンたち -->
+              <!-- ペーパー追加ボタン -->
+              <router-link
+                :to="{
+                                name: 'EditStoryPaper',
+                                params: {
+                                    hero_id:PaperNovelData.hero_id,
+                                    user_paper_order: $route.params.user_paper_order,
+                                    story_number: story_number
+                                }
+                            }"
+              >
+              <v-btn class="add-btn btn">エピソードを追加</v-btn>
+              </router-link>
+              <!-- 本完成ボタン -->
+              <v-btn class="open-btn btn" @click="openNovel">公開する</v-btn>
+          </div>
+
+        <div class="title_wrap">
+          <div v-if="paper.titleToggle" class="title_wrap">
+            <div v-if="title_toggle" class="title_text">{{ paper.text }}</div>
+            <div v-else class="title_text">タイトルを編集</div>
+          </div>
+          <div v-if="paper.titleToggle">
+                <router-link
+                  :to="{
+                              name: 'WriteTitlePaper',
+                              params: {
+                                  user_paper_order: $route.params.user_paper_order
+                              }
+                          }"
+                >
+                  <v-btn class="btn title-btn">タイトル編集</v-btn>
+                </router-link>
+          </div>
         </div>
         <div v-if="!paper.titleToggle">
           <p class="episode_text">第{{paper.story_number}}話</p>
           <p class="paper_text" v-html="paper.text.replace(/\\n|\r\n|\r|\n/g, '<br>')"></p>
-          <button>プレビュー</button>
-          <router-link
-            :to="{
-                        name: 'EditStoryPaper',
-                        params: {
-                            hero_id:PaperNovelData.hero_id,
-                            user_paper_order: $route.params.user_paper_order,
-                            story_number: paper.story_number
-                        }
-                    }"
-          >
-            <button>編集</button>
-          </router-link>
+          <div class="buttonRight">
+            <button class="btn epi_button">プレビュー</button>
+            <router-link
+              :to="{
+                          name: 'EditStoryPaper',
+                          params: {
+                              hero_id:PaperNovelData.hero_id,
+                              user_paper_order: $route.params.user_paper_order,
+                              story_number: paper.story_number
+                          }
+                      }"
+            >
+              <button class="btn epi_button">編集</button>
+            </router-link>
 
-          <button>削除</button>
-          <v-divider></v-divider>
+            <button class="btn epi_button">削除</button>
+          </div>
+
+            <v-divider></v-divider>
         </div>
       </div>
 
-      <!-- ボタンたち -->
-      <!-- ペーパー追加ボタン -->
-      <router-link
-        :to="{
-                        name: 'EditStoryPaper',
-                        params: {
-                            hero_id:PaperNovelData.hero_id,
-                            user_paper_order: $route.params.user_paper_order,
-                            story_number: story_number
-                        }
-                    }"
-      >
-        <v-btn class="add-btn">エピソードを追加</v-btn>
-      </router-link>
-      <!-- 本完成ボタン -->
-      <v-btn @click="openNovel">公開する</v-btn>
 
       <!-- <div>
-      
       <br />
       <br />
       <br />-->
@@ -218,7 +227,9 @@ export default {
   outline: none;
 }
 .content {
-  margin: 10%;
+  margin: 3% 10%;
+  padding: 4%;
+  background: #fff;
 }
 
 .paper_text {
@@ -233,23 +244,45 @@ export default {
 }
 .episode_text {
   font-size: 20px;
+  font-weight: bold;
 }
 /* .text_paper {
 } */
+
+.add_wrap{
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 3em;
+}
 
 .title_paper {
   border: 3px solid;
 }
 
-a,
-p {
+a,p {
   color: #333;
-  font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
-    "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
+  font-family: YuGothic,'Yu Gothic','Yu Gothic UI','Hiragino Sans','ヒラギノ角ゴシック','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
 }
 
 a:hover {
   text-decoration: none;
+}
+
+p{
+  margin-bottom: 0.2em;
+}
+
+.buttonRight{
+  display: flex;
+  justify-content:flex-end;
+}
+
+.epi_button{
+  border:1px solid #000;
+  padding:0.2em;
+  font-size: 12px;
+  background-color:#fff!important;
+
 }
 
 .icon {
@@ -258,10 +291,47 @@ a:hover {
   /* position: fixed; */
 }
 
-/* .add-btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
+.title_wrap{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.add-btn {
+    background-color:#D2E8D6!important;
+    color:#000;
+}
+.add-btn:hover{
+    background-color:rgb(228, 249, 232)!important;
+}
+
+.open-btn{
+    background-color:#FCC8DB!important;
+    color: #000;
+}
+.open-btn:hover{
+    background-color:rgb(254, 226, 236)!important;
+}
+
+.title-btn{
+    background-color:#C9EFF5!important;
+    color: #000;
+}
+.title-btn:hover{
+    background-color:rgb(218, 243, 247)!important;
+}
+
+
+.btn{
+    margin:0.5em 0.2em;
+    padding:8px;
+    border-radius:14px;
+    text-align:center;
+    cursor: pointer;
+    font-weight: bold;
+}
+.editButton{
+  margin:auto 1em;
+}
+
 </style>

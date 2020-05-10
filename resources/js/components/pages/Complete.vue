@@ -1,16 +1,13 @@
 <template>
   <div class="container">
-    <p>あなたの小説が完成しました！</p>
-    <router-link
-      :to="{
-                name: 'EditNovel',
-                params: {
-                    user_paper_order: $route.params.user_paper_order
-                }
-            }"
-    >
-      <v-img class="icon" src="img/write-page/continue.png"></v-img>
-    </router-link>
+    <vue-typer
+      :repeat="0"
+      :type-delay="100"
+      text="This is your story.|"
+      style="white-space:pre-line; word-wrap:break-word;"
+      class="typer"
+    ></vue-typer>
+    <p>あなたの小説が完成しました。</p>
 
     <v-row align="center" justify="center">
       <router-link
@@ -22,10 +19,17 @@
                     }
                 }"
       >
-        <v-img :src="'img/books/' + HeroData.img_url" max-width="300px"></v-img>
+        <v-img :src="'img/books/' + HeroData.img_url" max-width="250px"></v-img>
       </router-link>
     </v-row>
-    <p>{{ PaperNovelData.title }}</p>
+    <p class="novelTitle">{{ PaperNovelData.title }}</p>
+
+    <!-- ボタンたち -->
+    <div class="buttons">
+      <v-btn class="mypage-btn btn">マイページ</v-btn>
+      <v-btn class="read-btn btn">投稿を読む</v-btn>
+      <v-btn class="top-btn btn">TOPへ戻る</v-btn>
+    </div>
   </div>
 </template>
 
@@ -79,7 +83,7 @@ export default {
   text-align: center;
 }
 .content {
-  margin: 0 auto;
+  margin: 10% auto;
   text-align: center;
 }
 .icon {
@@ -87,4 +91,50 @@ export default {
   cursor: pointer;
   position: fixed;
 }
+.vue-typer, .typer{
+  font-family: 'ヒラギノ明朝 ProN','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
+  font-size:30px;
+}
+.novelTitle{
+  margin: 1em;
+}
+
+/* ボタン類 */
+.buttons{
+  margin: 2em;
+}
+.btn{
+    margin:0.5em 0.2em;
+    padding:8px;
+    border-radius:14px;
+    text-align:center;
+    cursor: pointer;
+    font-weight: bold;
+}
+.mypage-btn {
+    background-color:#C9EFF5!important;
+    color:#000;
+}
+.mypage-btn:hover{
+    background-color:rgb(183, 239, 247)!important;
+}
+
+.read-btn{
+    background-color:#FFE8AE!important;
+    color: #000;
+}
+.read-btn:hover{
+    background-color:rgb(250, 220, 143)!important;
+}
+
+.top-btn{
+    background-color:#F2F2F2!important;
+    color: #000;
+}
+.top-btn:hover{
+    background-color:rgb(255, 255, 255)!important;
+}
+
+
+
 </style>
