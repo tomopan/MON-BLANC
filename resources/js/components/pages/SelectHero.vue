@@ -82,6 +82,8 @@ a:hover {
   font-family: "Futura", "游ゴシック体", "YuGothic";
   font-weight: bold;
   font-size: 2em;
+  margin-top: 2em;;
+
 }
 #app > div > main > div > div > div > p.futura{
   margin-bottom: 0.2em;

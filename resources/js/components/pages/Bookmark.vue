@@ -159,6 +159,7 @@ p {
   font-family: "Futura", "游ゴシック体", "YuGothic";
   font-weight: bold;
   font-size: 2em;
+  margin-top: 3em;;
 }
 #app > div > main > div > div > p.futura {
   margin-bottom: 0.2em;
