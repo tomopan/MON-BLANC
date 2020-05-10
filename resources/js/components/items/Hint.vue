@@ -31,17 +31,21 @@
 
 <script>
 export default {
-  props: {},
-  data: () => ({
-    dialog: false,
-    answers: {
-      q_1: "",
-      q_2: "",
-      q_3: "",
-      q_4: "",
-      q_5: ""
-    }
-  }),
+  props: {
+    propsDialog: Boolean
+  },
+  data() {
+    return {
+      dialog: this.propsDialog,
+      answers: {
+        q_1: "",
+        q_2: "",
+        q_3: "",
+        q_4: "",
+        q_5: ""
+      }
+    };
+  },
 
   created() {
     this.showAnswers();

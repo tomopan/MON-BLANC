@@ -31,7 +31,7 @@
       <v-img :src="'/img/write-page/save.png'" class="close save" alt="save" @click="saveTitle" />
 
       <!-- ヒント -->
-      <Hint />
+      <Hint :propsDialog="true" />
     </div>
     <!-- ボタンここまで -->
     <!-- 入力エリア -->
