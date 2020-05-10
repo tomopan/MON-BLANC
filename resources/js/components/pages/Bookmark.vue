@@ -10,7 +10,6 @@
               v-for="(bookmarkNovel, i) in BookmarkNovels"
               :key="i"
               width="200px"
-              height="200px"
               class="novel_card ma-4"
             >
               <router-link
@@ -22,7 +21,7 @@
                                 }
                             }"
               >
-                <v-img :src="'img/books/' +bookmarkNovel.img_url" height="170px"></v-img>
+                <v-img :src="'img/flamebooks/' +bookmarkNovel.img_url"></v-img>
                 <p class="paper_text">{{ bookmarkNovel.title }}</p>
               </router-link>
               <!-- 削除ボタン -->
