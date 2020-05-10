@@ -18,22 +18,21 @@
                           paper_novel_id: bookmarkNovel.paper_novel_id
                       }
                   }"
-            >
-              <!-- 主人公の画像 -->
-              <figure class="relative">
-                <v-img :src="'img/flamebooks/' + bookmarkNovel.img_url" width="200px"></v-img>
-                <figcaption class="absolute">
-                  <p class="novelTitle">{{ bookmarkNovel.title }}</p>
-                </figcaption>
-                <!-- 最初の50文字 -->
-                <!-- <figcaption class="absolute"><p class="novelTitle">{{bookmarkNovel.text}}</p></figcaption> -->
-              </figure>
-            </router-link>
-          </v-col>
-          <!-- 削除ボタン -->
-          <!-- <v-btn class="ma-2" tile outlined @click.native.stop="dialog = true">削除</v-btn> -->
-          <!-- 削除のモーダル -->
-          <!-- <v-layout row justify-center>
+
+                >
+                  <!-- 主人公の画像 -->
+                  <figure class="relative novel_title">
+                    <v-img :src="'img/flamebooks/' + bookmarkNovel.img_url" width="250px" class=" novel_title"></v-img>
+                    <figcaption class="absolute novel_title"><p class="novelTitle novel_title">{{ bookmarkNovel.title }}</p></figcaption>
+                  </figure>
+                  <figcaption class="absolute fukidashi"><p class="novelText">{{ bookmarkNovel.text }}</p></figcaption>
+                </router-link>
+              </v-col>
+              <!-- 削除ボタン -->
+              <!-- <v-btn class="ma-2" tile outlined @click.native.stop="dialog = true">削除</v-btn> -->
+              <!-- 削除のモーダル -->
+              <!-- <v-layout row justify-center>
+
                 <v-dialog v-model="dialog" max-width="290">
                   <v-card>
                     <v-card-title class="headline">削除しますか?</v-card-title>
@@ -136,19 +135,10 @@ export default {
   outline: none;
 }
 
-.futura {
-  font-family: "Futura", "游ゴシック体", "YuGothic";
-  font-weight: bold;
-  font-size: 2em;
-}
-#app > div > main > div > div > p.futura {
-  margin-bottom: 0.2em;
-}
-.rubi {
-  font-size: 1.2em;
-}
-span.line {
-  border-bottom: 2px solid #000;
+
+span.line{
+  border-bottom:2px solid #000;
+
 }
 
 .novel_card {
@@ -160,6 +150,9 @@ span.line {
 }
 p {
   color: #333;
+}
+.row{
+  margin-bottom: 7em;
 }
 
 .futura {
@@ -177,18 +170,68 @@ span {
   border-bottom: 2px solid #000;
 }
 
-.novelTitle {
-  margin-bottom: 0 !important;
+.novelTitle{
+  margin-bottom: 0!important;
+  font-weight: bold;
+
 }
 .relative {
   position: relative;
 }
 
 .absolute {
-  position: absolute;
-  bottom: 0.3em;
-  left: 2.8em;
+    position: absolute;
+    bottom: 0.6em;
+    left:3em;
 }
+
+.fukidashi {
+  display: none;
+  width: 250px;
+  height: 160px;
+  position: absolute;
+  top: 200px;
+  left: -1em;
+  padding: 16px;
+  border-radius: 15px;
+  border: solid 3px #555;
+  background: #fff;
+  color: #000;
+  font-weight: bold;
+  z-index: 4;
+}
+
+.fukidashi:before {
+  content: "";
+  position: absolute;
+  top: -24px;
+  left: 70%;
+  margin-left: -17px;
+  border: 12px solid transparent;
+  border-bottom: 12px solid #FFF;
+  z-index: 6;
+}
+
+.fukidashi:after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 70%;
+  margin-left: -19px;
+  border: 14px solid transparent;
+  border-bottom: 14px solid #555;
+  z-index: 5;
+}
+
+.novel_title:hover + .fukidashi {
+  display: block;
+}
+
+.novelText{
+  text-align: left;
+  font-weight: normal;
+}
+
 
 @media screen and (max-width: 415px) {
   .rubi {
