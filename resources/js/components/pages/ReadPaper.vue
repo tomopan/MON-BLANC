@@ -1,5 +1,5 @@
 <template>
-  <div id="cont">
+  <div class="cont">
     <!-- 戻るボタンエリア -->
     <div id="turn_area">
       <img id="turn_icon" class="icon" src="img/book-bg/uturn.png" @click="$router.go(-1)" />
@@ -9,7 +9,7 @@
       <div id="book" @mouseup="getMarkText()">
         <!-- 表紙 -->
         <div class="book_cover hard">
-          <v-img :src="'img/books/' + coverImg" />
+          <img style="width:500px;height:700px" :src="'img/books/' + coverImg" />
         </div>
         <!-- タイトル&作者 -->
         <div class="title_area hard">
@@ -68,6 +68,8 @@ export default {
     return {
       //小説のデータ
       StoryPapersData: [],
+      // ページごとに表示するテキストデータ
+      showText: [],
       // 表紙画像
       coverImg: "",
       //タイトル
@@ -99,22 +101,52 @@ export default {
         .get("api/get/story_papers/" + this.$route.params.paper_novel_id)
         .then(res => {
           this.StoryPapersData = res.data;
-          //改行コードを<br>に変換
+          // 表示用の配列に420文字ずつ格納
           this.StoryPapersData.forEach((el, i) => {
+            // エピソードを挿入
+            el.text = `第${i + 1}話\n\n${el.text}`;
+            //改行の数をカウント
+            const lineCount = (el.text.match(/\\n|\r\n|\r|\n/g) || []).length;
+            //改行コードを空欄40個に変換
+            // el.text = el.text.replace(
+            //   /\\n|\r\n|\r|\n/g,
+            //   "　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　"
+            // );
+            // 420文字以下なら、そのままpush
+            if (el.text.length <= 420) {
+              this.showText.push({
+                text: el.text
+              });
+            } else {
+              const t = [...el.text];
+              let text = t.reduce(
+                (acc, c, i) =>
+                  i % 420 ? acc : [...acc, t.slice(i, i + 420).join("")],
+                []
+              );
+              text.forEach((el, i) => {
+                this.showText.push({ text: el });
+              });
+            }
+          });
+
+          //改行コードを<br>に変換
+          this.showText.forEach((el, i) => {
             el.text = el.text.replace(/\\n|\r\n|\r|\n/g, "<br>");
+            // ページの文字数を制限
             // DOMを追加（ここからじゃないとTurn.js使えない）
             console.log(i);
             // ページごとにエフェクトを変更
             if (i % 2 == 1) {
               $("#insert_area").append(
-                "<div class='story_text hard' style='writing-mode: vertical-rl; background-color:#fff;font-size:20px;background: -moz-linear-gradient(right, #FFF 90%, #e6e6e6);background: -webkit-linear-gradient(right, #FFF 90%, #e6e6e6);background: linear-gradient(to left, #fff 90%, #e6e6e6);'>" +
+                "<div class='story_text hard' style='writing-mode:vertical-rl; text-orientation: upright;background-color:#fff;font-size:20px;background: -moz-linear-gradient(right, #FFF 90%, #e6e6e6);background: -webkit-linear-gradient(right, #FFF 90%, #e6e6e6);background: linear-gradient(to left, #fff 90%, #e6e6e6);'>" +
                   "<span class='text_area'>" +
                   el.text +
                   "</span></div>"
               );
             } else {
               $("#insert_area").append(
-                "<div class='story_text hard' style='writing-mode: vertical-rl; background-color:#fff;font-size:20px;background: -moz-linear-gradient(left, #FFF 90%, #e6e6e6);background: -webkit-linear-gradient(left, #FFF 90%, #e6e6e6);background: linear-gradient(to right, #fff 90%, #e6e6e6);'>" +
+                "<div class='story_text hard' style='display: flex;justify-content: center;writing-mode: vertical-rl; text-orientation: upright;background-color:#fff;font-size:20px;background: -moz-linear-gradient(left, #FFF 90%, #e6e6e6);background: -webkit-linear-gradient(left, #FFF 90%, #e6e6e6);background: linear-gradient(to right, #fff 90%, #e6e6e6);'>" +
                   "<span>" +
                   el.text +
                   "</span></div>"
@@ -123,7 +155,7 @@ export default {
           });
 
           //   奇数ページの時は最後に白紙を追加
-          if (this.StoryPapersData.length % 2 == 0) {
+          if (this.showText.length % 2 == 0) {
             $("#insert_area").append(
               "<div class='story_text hard' style='writing-mode: vertical-rl; background-color:#fff;background: -moz-linear-gradient(left, #FFF 90%, #e6e6e6);background: -webkit-linear-gradient(left, #FFF 90%, #e6e6e6);background: linear-gradient(to right, #fff 90%, #e6e6e6);'></div>"
             );
@@ -133,7 +165,11 @@ export default {
           $(".story_text").unwrap("#insert_area");
           // turn.jsを発動
           this.turnPage();
-          $(".story_text").css("padding", "50px");
+          $(".story_text").css({ padding: "50px" });
+          // $(".story_text").css({position:'absolute',top:'50%',left:'50%',transform:' translate(-50%, -50'});
+
+          // $(".story_text").unwrap("div");
+          // $(".story_text").css("padding", "50px");
         })
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜
@@ -238,7 +274,7 @@ export default {
       // DOMを追加（ここからじゃないとTurn.js使えない）
       $("#book").turn({
         direction: "rtl",
-        width: 1076,
+        width: 1000,
         height: 700
       });
     },
@@ -280,12 +316,10 @@ https://mon-blanc.com${this.$route.path}`;
   font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
     "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
   background-color: white;
-}
-
-#cont {
-  background-color: white;
   display: flex;
   justify-content: center;
+  height: 100%;
+  padding-top: 5em;
 }
 
 /* ---------------------------
@@ -294,12 +328,13 @@ https://mon-blanc.com${this.$route.path}`;
 
 /* 全体 */
 .book_caver {
-  margin-top: 10px;
+  /* padding-top: 50px; */
 }
 #book {
-  height: 600px;
+  /* height: 600px; */
   /* width: 500px;
   height: 700px; */
+  /* position: absolute; */
 }
 
 /* 表紙 */
@@ -315,6 +350,7 @@ https://mon-blanc.com${this.$route.path}`;
   background: linear-gradient(to left, #fff 90%, #e6e6e6);
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
+  text-orientation: upright;
   margin-right: 30%;
   text-align: center;
   background-color: white;
@@ -336,7 +372,8 @@ https://mon-blanc.com${this.$route.path}`;
 
 /* 裏表紙 */
 .book_cover {
-  height: 640px;
+  /* width: 500px;
+  height: 700px; */
 }
 
 /* ---------------------------
@@ -348,11 +385,11 @@ https://mon-blanc.com${this.$route.path}`;
 }
 #turn_area {
   position: relative;
-  height: 700px;
+  /* height: 700px; */
 }
 #turn_icon {
   position: absolute;
-  bottom: 0;
+  bottom: 7em;
   right: 2em;
 }
 </style>
