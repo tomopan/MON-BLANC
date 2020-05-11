@@ -91,7 +91,7 @@ use Illuminate\Database\Seeder;
                 "hero_id" => 5,
                 "user_id" => 1,
                 "user_paper_order" => 5,
-                "title" => "ゆりのタイトル",
+                "title" => "ミチのタイトル",
                 "first_sentence" => "ラーメンみたいな名前をつけられて、呼ばれるたびに私はお腹が空く。",
                 "status" => 1,
                 "created_at" => $faker->dateTime("now"),

@@ -51,8 +51,8 @@ use Illuminate\Database\Seeder;
             );
             DB::table('heroes')->insert(
             [
-            'img_url' => 'YURI.png',
-            'hero_name' => 'YURI',
+            'img_url' => 'MICHI.png',
+            'hero_name' => 'MICHI',
             'hero_birth' => '27',
             "created_at" => $faker->dateTime("now"),
             "updated_at" => $faker->dateTime("now")

@@ -5,7 +5,11 @@
       <div id="content">
         <div class="write">
           <p>テキストを入力してください</p>
-          <button class="closeButton" style="border:solid 2px #000" @click="dialog = false">&nbsp;閉じる&nbsp;</button>
+          <button
+            class="closeButton"
+            style="border:solid 2px #000"
+            @click="dialog = false"
+          >&nbsp;閉じる&nbsp;</button>
         </div>
       </div>
     </div>
@@ -13,32 +17,32 @@
     <!-- 文字数 -->
     <!-- ボタンたち -->
     <div class="buttons">
-        <!-- 戻るボタン -->
-        <div>
-          <v-img
-            :src="'/img/write-page/close.png'"
-            class="close"
-            alt="close"
-            @click="$router.go(-1)"
-          />
-        </div>
-        <!-- プレビューボタン -->
-        <div>
-          <v-img :src="'/img/write-page/preview.png'" class="close" alt="preview" />
-        </div>
-        <!-- 一時保存ボタン -->
-        <div>
-          <v-img :src="'/img/write-page/save.png'" class="close" alt="save" @click="editPaper" />
-        </div>
-        <!-- ヒント -->
-        <div>
-          <hint />
-        </div>
+      <!-- 戻るボタン -->
+      <div>
+        <v-img
+          :src="'/img/write-page/close.png'"
+          class="close"
+          alt="close"
+          @click="$router.go(-1)"
+        />
+      </div>
+      <!-- プレビューボタン -->
+      <div>
+        <v-img :src="'/img/write-page/preview.png'" class="close" alt="preview" />
+      </div>
+      <!-- 一時保存ボタン -->
+      <div>
+        <v-img :src="'/img/write-page/save.png'" class="close" alt="save" @click="editPaper" />
+      </div>
+      <!-- ヒント -->
+      <div>
+        <hint />
+      </div>
+      <!-- 主人公のアイコン -->
+      <img class="hero-icon" :src="'img/charactors/' + HeroData.img_url" />
     </div>
 
-    <div class="count">
-      {{charaCount}}/5000文字
-    </div>
+    <div class="count">{{charaCount}}/5000文字</div>
 
     <v-row>
       <!-- 小説入力 -->
@@ -219,6 +223,7 @@ export default {
 }
 .cont {
   height: 100%;
+  padding: 5em;
   display: flex;
   background-color: #ffe8ae;
 }
@@ -235,7 +240,7 @@ export default {
   padding: 1em;
   background-color: #fff;
   border: 1px solid #000;
-  font-weight:bold;
+  font-weight: bold;
 }
 #overlay {
   /*要素を重ねた時の順番*/
@@ -254,7 +259,6 @@ export default {
   align-items: center;
   justify-content: center;
 }
-
 
 /* 入力 */
 [contenteditable="true"]:empty:before {
@@ -294,7 +298,6 @@ export default {
   cursor: url("/img/write-page/cursor.png"), auto;
   overflow-x: scroll;
   margin-bottom: 3em;
-
 }
 #paper_text {
   width: 800px;
@@ -311,14 +314,14 @@ export default {
   /* border: 1px solid #000000; */
 }
 
-p{
+p {
   text-align: center;
 }
-.write{
-  text-align:center;
+.write {
+  text-align: center;
   background-color: #ffce97;
   margin: 1em;
-  padding:1em;
+  padding: 1em;
 }
 
 /* 話数 */
@@ -329,7 +332,7 @@ p{
   text-orientation: upright;
   margin: 2em 12em 0 -10em;
 }
-.count{
+.count {
   margin: 500px -12em 0 3.5em;
   writing-mode: vertical-rl;
   text-orientation: upright;
@@ -343,10 +346,14 @@ p{
   margin-left: 230px;
   margin-top: 500px;
 }
-.close{
+.close {
   margin-top: 0.5em;
 }
-
+/* 主人公アイコン */
+.hero-icon {
+  width: 100px;
+  top: 0;
+}
 </style>
 <style>
 #app > div > main {
@@ -354,8 +361,7 @@ p{
   height: 100%;
 }
 
-.close{
+.close {
   opacity: 1;
 }
-
 </style>
