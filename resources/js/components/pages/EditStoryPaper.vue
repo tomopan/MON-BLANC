@@ -39,7 +39,13 @@
         <hint />
       </div>
       <!-- 主人公のアイコン -->
-      <img class="hero-icon" :src="'img/charactors/' + HeroData.img_url" />
+      <figure class="relative novel_title">
+        <img class="hero-icon" :src="'img/charactors/' + HeroData.img_url" />
+      </figure>
+      <figcaption class="absolute fukidashi">
+        <p class="novelText">{{ HeroData.hero_name }}</p>
+        <p class="novelText">Age {{ HeroData.hero_birth }}</p>
+      </figcaption>
     </div>
 
     <div class="count">{{charaCount}}/5000文字</div>
@@ -353,6 +359,62 @@ p {
 .hero-icon {
   width: 100px;
   top: 0;
+}
+/* 主人公アイコンホバー */
+.novelTitle {
+  margin-bottom: 0 !important;
+  font-weight: bold;
+}
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+  bottom: 0.6em;
+  left: 3em;
+}
+
+.fukidashi {
+  display: none;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 200px;
+  left: 18em;
+  padding: 16px;
+  border-radius: 15px;
+  border: solid 3px #555;
+  background: #fff;
+  color: #000;
+  font-weight: bold;
+  z-index: 4;
+}
+
+.fukidashi:before {
+  content: "";
+  position: absolute;
+  top: -24px;
+  left: 70%;
+  margin-left: -17px;
+  border: 12px solid transparent;
+  border-bottom: 12px solid #fff;
+  z-index: 6;
+}
+
+.fukidashi:after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 70%;
+  margin-left: -19px;
+  border: 14px solid transparent;
+  border-bottom: 14px solid #555;
+  z-index: 5;
+}
+
+.novel_title:hover + .fukidashi {
+  display: block;
 }
 </style>
 <style>

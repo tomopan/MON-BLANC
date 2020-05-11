@@ -12,7 +12,7 @@
     <!-- モーダルここまで -->
     <!-- ボタンたち -->
     <div class="buttons">
-      <div class="buttons">
+      <div id="buttons_icons">
         <!-- 戻るボタン -->
         <v-img
           :src="'/img/write-page/close.png'"
@@ -42,9 +42,6 @@
       <figure class="relative novel_title">
         <img class="hero-icon" :src="'img/charactors/' + HeroData.img_url" />
       </figure>
-      <!-- <figcaption class="absolute novel_title">
-        <p class="novelTitle novel_title">{{ HeroData.hero_name }}</p>
-      </figcaption>-->
       <figcaption class="absolute fukidashi">
         <p class="novelText">{{ HeroData.hero_name }}</p>
         <p class="novelText">Age {{ HeroData.hero_birth }}</p>
@@ -252,7 +249,7 @@ export default {
   display: flex;
   justify-content: center;
   flex-direction: column-reverse;
-  height: 100px;
+  height: 200px;
   margin-left: 5em;
   margin-top: 15em;
 }
@@ -260,10 +257,19 @@ export default {
   opacity: 1;
   margin-top: 0.5em;
 }
+
+#buttons_icons {
+  display: flex;
+  flex-direction: column-reverse;
+  height: 300px;
+  margin-left: 5em;
+  margin-top: 15em;
+}
 /* 主人公アイコン */
 .hero-icon {
   width: 100px;
   top: 0;
+  margin-left: 1em;
 }
 /* 主人公アイコンホバー */
 .novelTitle {
