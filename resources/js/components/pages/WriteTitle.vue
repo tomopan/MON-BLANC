@@ -12,11 +12,17 @@
     <!-- モーダルここまで -->
     <!-- ボタンたち -->
     <div class="buttons">
-      <!-- 戻るボタン -->
-      <v-img :src="'/img/write-page/close.png'" class="close" alt="close" @click="$router.go(-1)" />
-      <!-- あとでボタン -->
-      <router-link
-        :to="{
+      <div class="buttons">
+        <!-- 戻るボタン -->
+        <v-img
+          :src="'/img/write-page/close.png'"
+          class="close"
+          alt="close"
+          @click="$router.go(-1)"
+        />
+        <!-- あとでボタン -->
+        <router-link
+          :to="{
             name: 'EditStoryPaper',
             param: {
               hero_id: this.$route.params.hero_id,
@@ -24,15 +30,27 @@
               story_number: this.$route.params.story_number
             }
             }"
-      >
-        <v-img :src="'/img/write-page/atode.png'" class="close" alt="preview" />
-      </router-link>
-      <!-- 保存ボタン -->
-      <v-img :src="'/img/write-page/save.png'" class="close save" alt="save" @click="saveTitle" />
-
-      <!-- ヒント -->
-      <Hint :propsDialog="true" />
+        >
+          <v-img :src="'/img/write-page/atode.png'" class="close" alt="preview" />
+        </router-link>
+        <!-- 保存ボタン -->
+        <v-img :src="'/img/write-page/save.png'" class="close save" alt="save" @click="saveTitle" />
+        <!-- ヒント -->
+        <Hint :propsDialog="false" />
+      </div>
+      <!-- 主人公のアイコン -->
+      <figure class="relative novel_title">
+        <img class="hero-icon" :src="'img/charactors/' + HeroData.img_url" />
+      </figure>
+      <!-- <figcaption class="absolute novel_title">
+        <p class="novelTitle novel_title">{{ HeroData.hero_name }}</p>
+      </figcaption>-->
+      <figcaption class="absolute fukidashi">
+        <p class="novelText">{{ HeroData.hero_name }}</p>
+        <p class="novelText">Age {{ HeroData.hero_birth }}</p>
+      </figcaption>
     </div>
+
     <!-- ボタンここまで -->
     <!-- 入力エリア -->
     <div class="wrap-input-area">
@@ -64,6 +82,7 @@
 <!-- 以下にscript/cssを記述 -->
 <script>
 // インポート
+import { mapActions, mapGetters } from "vuex";
 import Hint from "../items/Hint.vue";
 // Vueの処理
 export default {
@@ -82,19 +101,23 @@ export default {
       dialog: false
     };
   },
-
+  computed: {
+    ...mapGetters(["HeroData"])
+  },
   created() {
     this.showNovel();
+    //主人公データを取得
+    this.fetchHeroData(this.$route.params.hero_id);
   },
   methods: {
+    //API叩いてマッチした主人公データを取得
+    ...mapActions(["fetchHeroData"]),
     //ペーパーノベルの情報を取得
     showNovel: function() {
       axios
         .get("api/fetch/paper_novel/" + this.$route.params.user_paper_order)
         .then(res => {
-          console.log(res);
           this.novelData = res.data;
-
           if (this.novelData.title) this.title_toggle = true;
         })
         .catch(err => {
@@ -200,10 +223,10 @@ export default {
 .paper span {
   display: block;
 }
-.min{
-  font-family: 'ヒラギノ明朝 ProN','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
+.min {
+  font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
+    "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
   cursor: url("/img/write-page/cursor.png"), auto;
-
 }
 .input-area {
   margin: auto;
@@ -213,7 +236,6 @@ export default {
   margin-top: 2em;
   border: 1px solid #a9a9a9;
   background-color: white;
-
 }
 #story_text_input {
   display: block;
@@ -232,13 +254,73 @@ export default {
   flex-direction: column-reverse;
   height: 100px;
   margin-left: 5em;
-  margin-top: 330px;
+  margin-top: 15em;
 }
-.close{
+.close {
   opacity: 1;
   margin-top: 0.5em;
 }
+/* 主人公アイコン */
+.hero-icon {
+  width: 100px;
+  top: 0;
+}
+/* 主人公アイコンホバー */
+.novelTitle {
+  margin-bottom: 0 !important;
+  font-weight: bold;
+}
+.relative {
+  position: relative;
+}
 
+.absolute {
+  position: absolute;
+  bottom: 0.6em;
+  left: 3em;
+}
+
+.fukidashi {
+  display: none;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 200px;
+  left: 18em;
+  padding: 16px;
+  border-radius: 15px;
+  border: solid 3px #555;
+  background: #fff;
+  color: #000;
+  font-weight: bold;
+  z-index: 4;
+}
+
+.fukidashi:before {
+  content: "";
+  position: absolute;
+  top: -24px;
+  left: 70%;
+  margin-left: -17px;
+  border: 12px solid transparent;
+  border-bottom: 12px solid #fff;
+  z-index: 6;
+}
+
+.fukidashi:after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 70%;
+  margin-left: -19px;
+  border: 14px solid transparent;
+  border-bottom: 14px solid #555;
+  z-index: 5;
+}
+
+.novel_title:hover + .fukidashi {
+  display: block;
+}
 </style>
 <style>
 #app > div > main {
