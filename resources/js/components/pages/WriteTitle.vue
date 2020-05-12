@@ -36,7 +36,7 @@
         <!-- 保存ボタン -->
         <v-img :src="'/img/write-page/save.png'" class="close save" alt="save" @click="saveTitle" />
         <!-- ヒント -->
-        <Hint :propsDialog="false" />
+        <Hint :propsDialog="true" />
       </div>
       <!-- 主人公のアイコン -->
       <figure class="relative novel_title">
@@ -105,6 +105,8 @@ export default {
     this.showNovel();
     //主人公データを取得
     this.fetchHeroData(this.$route.params.hero_id);
+    //ログインしてなかったらモーダル表示
+    if (!this.$store.state.login) this.$store.state.drawerLoginModal = true;
   },
   methods: {
     //API叩いてマッチした主人公データを取得

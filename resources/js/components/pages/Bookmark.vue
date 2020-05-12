@@ -7,7 +7,7 @@
       <p class="rubi">ブックマーク</p>
 
       <!-- ブックマーク -->
-      <v-row class="fill-height" align="center" justify="center">
+      <v-row v-if="$store.state.login" class="fill-height" align="center" justify="center">
         <div v-for="(bookmarkNovel, i) in BookmarkNovels" :key="i" class="text">
           <v-col :key="id">
             <router-link
@@ -18,39 +18,45 @@
                           paper_novel_id: bookmarkNovel.paper_novel_id
                       }
                   }"
-
-                >
-                  <!-- 主人公の画像 -->
-                  <figure class="relative novel_title">
-                    <v-img :src="'img/flamebooks/' + bookmarkNovel.img_url" width="250px" class=" novel_title"></v-img>
-                    <figcaption class="absolute novel_title"><p class="novelTitle novel_title">{{ bookmarkNovel.title }}</p></figcaption>
-                  </figure>
-                  <figcaption class="absolute fukidashi"><p class="novelText">{{ bookmarkNovel.text }}</p></figcaption>
-                </router-link>
-              </v-col>
-              <!-- 削除ボタン -->
-              <!-- <v-btn class="ma-2" tile outlined @click.native.stop="dialog = true">削除</v-btn> -->
-              <!-- 削除のモーダル -->
-              <!-- <v-layout row justify-center>
-
-                <v-dialog v-model="dialog" max-width="290">
-                  <v-card>
-                    <v-card-title class="headline">削除しますか?</v-card-title>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn @click.native="dialog = false">戻る</v-btn>
-                      <v-btn
-                        @click="
-                            destroy(i, bookmarkNovel.id)
-                        "
-                      >削除する</v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-          </v-layout>-->
-          <!-- モーダルここまで -->
+            >
+              <!-- 主人公の画像 -->
+              <figure class="relative novel_title">
+                <v-img
+                  :src="'img/flamebooks/' + bookmarkNovel.img_url"
+                  width="250px"
+                  class="novel_title"
+                ></v-img>
+                <figcaption class="absolute novel_title">
+                  <p class="novelTitle novel_title">{{ bookmarkNovel.title }}</p>
+                </figcaption>
+              </figure>
+              <figcaption class="absolute fukidashi">
+                <p class="novelText">{{ bookmarkNovel.text }}</p>
+              </figcaption>
+            </router-link>
+          </v-col>
+        </div>
+        <!-- ブックマークがゼロのユーザー -->
+        <div v-if="BookmarkNovels.length == 0">
+          <p class="first">お気に入りの小説をブックマークしよう。</p>
+          <!-- タイムラインへのリンク -->
+          <router-link :to="{ name: 'FindStory' }" style="text-decoration: none">
+            <div class="menuButton">
+              <div>
+                <img :src="'/img/header/read.png'" class="read" alt="read" />
+              </div>
+              <div style="color:#333">よむ</div>
+            </div>
+          </router-link>
         </div>
       </v-row>
+      <!-- ログインしていないユーザー -->
+      <div v-else>
+        <p class="first">ログインして、お気に入りの小説をブックマークしよう。</p>
+        <button class="button btn01" cols="9" @click="$store.state.drawerLoginModal=true">
+          <p class="btnlink">ログイン</p>
+        </button>
+      </div>
     </div>
   </v-container>
 </template>
@@ -135,10 +141,8 @@ export default {
   outline: none;
 }
 
-
-span.line{
-  border-bottom:2px solid #000;
-
+span.line {
+  border-bottom: 2px solid #000;
 }
 
 .novel_card {
@@ -151,7 +155,7 @@ span.line{
 p {
   color: #333;
 }
-.row{
+.row {
   margin-bottom: 7em;
 }
 
@@ -159,7 +163,7 @@ p {
   font-family: "Futura", "游ゴシック体", "YuGothic";
   font-weight: bold;
   font-size: 2em;
-  margin-top: 3em;;
+  margin-top: 3em;
 }
 #app > div > main > div > div > p.futura {
   margin-bottom: 0.2em;
@@ -171,19 +175,18 @@ span {
   border-bottom: 2px solid #000;
 }
 
-.novelTitle{
-  margin-bottom: 0!important;
+.novelTitle {
+  margin-bottom: 0 !important;
   font-weight: bold;
-
 }
 .relative {
   position: relative;
 }
 
 .absolute {
-    position: absolute;
-    bottom: 0.6em;
-    left:3em;
+  position: absolute;
+  bottom: 0.6em;
+  left: 3em;
 }
 
 .fukidashi {
@@ -209,7 +212,7 @@ span {
   left: 70%;
   margin-left: -17px;
   border: 12px solid transparent;
-  border-bottom: 12px solid #FFF;
+  border-bottom: 12px solid #fff;
   z-index: 6;
 }
 
@@ -228,11 +231,27 @@ span {
   display: block;
 }
 
-.novelText{
+.novelText {
   text-align: left;
   font-weight: normal;
 }
-
+/* ログインしてないユーザー */
+.first {
+  margin-top: 5em;
+}
+.btn01 {
+  background: #ffce98;
+  border: none;
+  border-radius: 30px;
+  color: #707070;
+  padding: 5px 0;
+  width: 15em;
+  margin: 1em auto;
+}
+.btnlink {
+  margin: 0 auto;
+  text-decoration: none;
+}
 
 @media screen and (max-width: 415px) {
   .rubi {
