@@ -111,6 +111,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::post('edit/story_paper', 'Api\StoryPapersController@edit');
 
 
+    //エピソードを削除
+    Route::post('destroy/episode/{paper_novel_id}/{story_number}', 'Api\StoryPapersController@destroy');
+
+
 
 
 

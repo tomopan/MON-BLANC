@@ -336,10 +336,11 @@ p {
   -ms-writing-mode: tb-rl;
   writing-mode: vertical-rl;
   text-orientation: upright;
-  margin: 2em 12em 0 -10em;
+  margin: 2em 12em 5em -2em;
 }
 .count {
-  margin: 500px -12em 0 3.5em;
+  margin: 30em 0em -3em 0em;
+  /* margin-top: 30em; */
   writing-mode: vertical-rl;
   text-orientation: upright;
 }
@@ -349,7 +350,7 @@ p {
   display: flex;
   flex-direction: column-reverse;
   height: 120px;
-  margin-left: 230px;
+  margin-left: 100px;
   margin-top: 500px;
 }
 .close {
@@ -381,7 +382,7 @@ p {
   height: 100px;
   position: absolute;
   top: 200px;
-  left: 18em;
+  left: 10em;
   padding: 16px;
   border-radius: 15px;
   border: solid 3px #555;

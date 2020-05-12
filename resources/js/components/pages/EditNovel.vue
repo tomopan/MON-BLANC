@@ -2,11 +2,11 @@
   <div>
     <div class="content">
       <div v-for="(paper, i) in active_page_novels" :key="i">
-          <div v-if="paper.titleToggle" class="add_wrap">
-              <!-- ボタンたち -->
-              <!-- ペーパー追加ボタン -->
-              <router-link
-                :to="{
+        <div v-if="paper.titleToggle" class="add_wrap">
+          <!-- ボタンたち -->
+          <!-- ペーパー追加ボタン -->
+          <router-link
+            :to="{
                                 name: 'EditStoryPaper',
                                 params: {
                                     hero_id:PaperNovelData.hero_id,
@@ -14,36 +14,36 @@
                                     story_number: story_number
                                 }
                             }"
-              >
-              <v-btn class="add-btn btn">エピソードを追加</v-btn>
-              </router-link>
-              <!-- 本完成ボタン -->
-              <v-btn class="open-btn btn" @click="openNovel">公開する</v-btn>
-          </div>
+          >
+            <v-btn class="add-btn btn">エピソードを追加</v-btn>
+          </router-link>
+          <!-- 本完成ボタン -->
+          <v-btn class="open-btn btn" @click="openNovel">公開する</v-btn>
+        </div>
 
         <div class="title_wrap">
           <div v-if="paper.titleToggle" class="title_wrap">
             <div v-if="title_toggle" class="title_text">{{ paper.text }}</div>
-            <div v-else class="title_text">タイトルを編集</div>
+            <div v-else class="title_text">タイトルを編集しましょう</div>
           </div>
           <div v-if="paper.titleToggle">
-                <router-link
-                  :to="{
+            <router-link
+              :to="{
                               name: 'WriteTitlePaper',
                               params: {
                                   user_paper_order: $route.params.user_paper_order
                               }
                           }"
-                >
-                  <v-btn class="btn title-btn">タイトル編集</v-btn>
-                </router-link>
+            >
+              <v-btn class="btn title-btn">タイトルを編集</v-btn>
+            </router-link>
           </div>
         </div>
         <div v-if="!paper.titleToggle">
           <p class="episode_text">第{{paper.story_number}}話</p>
           <p class="paper_text" v-html="paper.text.replace(/\\n|\r\n|\r|\n/g, '<br>')"></p>
           <div class="buttonRight">
-            <button class="btn epi_button">プレビュー</button>
+            <!-- <button class="btn epi_button">プレビュー</button> -->
             <router-link
               :to="{
                           name: 'EditStoryPaper',
@@ -57,55 +57,53 @@
               <button class="btn epi_button">編集</button>
             </router-link>
 
-            <button class="btn epi_button">削除</button>
+            <!-- 削除のモーダル -->
+            <v-dialog v-model="DeleteDialog" max-width="290">
+              <div id="modal-cont">
+                <div class="write">
+                  <p>第{{selectedStory}}話を削除しますか？</p>
+                  <br />
+                  <button
+                    style="border:solid 2px #000;"
+                    @click="DeleteDialog = false"
+                  >&nbsp;戻る&nbsp;</button>
+                  <br />
+                  <br />
+                  <button
+                    style="border:solid 2px #000;"
+                    @click="destroy(PaperNovelData.id,selectedStory)"
+                  >&nbsp;削除する&nbsp;</button>
+                </div>
+              </div>
+            </v-dialog>
+            <!-- モーダルここまで -->
+            <!-- <v-btn class="btn epi_button" @click="deleteModal(paper.story_number)">削除</v-btn> -->
           </div>
 
-            <v-divider></v-divider>
+          <v-divider></v-divider>
+          <!-- タイトル未入力の時のモーダル -->
+          <v-dialog id="overlay" v-model="dialog" width="50%">
+            <div id="modal-cont">
+              <div class="write">
+                <p>タイトルを入力してください</p>
+                <button style="border:solid 2px #000;" @click="dialog = false">&nbsp;閉じる&nbsp;</button>
+              </div>
+            </div>
+          </v-dialog>
+          <!-- モーダルここまで -->
         </div>
       </div>
-
-
-      <!-- <div>
-      <br />
-      <br />
-      <br />-->
-      <!-- 本追加ボタン -->
-      <!-- <router-link
-      :to="{
-                    name: 'WriteStoryPaper',
-                    params: {
-                        user_paper_order: $route.params.user_paper_order,
-                        story_number: story_number
-                    }
-                }"
-    >
-      <v-img class="icon" src="img/write-page/write.png"></v-img>
-      </router-link>-->
-      <!-- <br />
-      <br />
-      <br />
-      <v-img class="icon" src="img/write-page/tutorial.png"></v-img>
-      <br />
-      <br />
-      <br />
-      <v-img class="icon" src="img/write-page/continue.png" @click="$router.go(-1)"></v-img>
-      </div>-->
     </div>
   </div>
 </template>
 
 <!-- 以下にscript/cssを記述 -->
-<script src="vue-grid-layout.umd.min.js"></script>
 <script>
 // インポート
-import VueGridLayout from "vue-grid-layout";
 
 // Vueの処理
 export default {
-  components: {
-    GridLayout: VueGridLayout.GridLayout,
-    GridItem: VueGridLayout.GridItem
-  },
+  components: {},
   data() {
     return {
       //GridLayout用
@@ -123,7 +121,9 @@ export default {
       tab: null,
       active_page_novels: "",
       // モーダル
-      dialog: false
+      dialog: false,
+      DeleteDialog: false,
+      selectedStory: ""
     };
   },
   created() {
@@ -216,10 +216,25 @@ export default {
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
         });
+    },
+    //削除ボタン
+    destroy(paper_novel_id, story_number) {
+      axios
+        .post("api/destroy/episode/" + paper_novel_id + "/" + story_number)
+        .then(res => {})
+        .catch(err => {
+          console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
+        });
+      // 配列からも削除してデータバインディング
+      this.active_page_novels.splice(story_number, 1);
+      this.DeleteDialog = false;
+    },
+    deleteModal(story_number) {
+      this.selectedStory = story_number;
+      this.DeleteDialog = true;
     }
   }
 };
-
 </script>
 
 <style scoped>
@@ -249,7 +264,7 @@ export default {
 /* .text_paper {
 } */
 
-.add_wrap{
+.add_wrap {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 3em;
@@ -259,30 +274,32 @@ export default {
   border: 3px solid;
 }
 
-a,p {
+a,
+p {
   color: #333;
-  font-family: YuGothic,'Yu Gothic','Yu Gothic UI','Hiragino Sans','ヒラギノ角ゴシック','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+  font-family: YuGothic, "Yu Gothic", "Yu Gothic UI", "Hiragino Sans",
+    "ヒラギノ角ゴシック", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic",
+    sans-serif;
 }
 
 a:hover {
   text-decoration: none;
 }
 
-p{
+p {
   margin-bottom: 0.2em;
 }
 
-.buttonRight{
+.buttonRight {
   display: flex;
-  justify-content:flex-end;
+  justify-content: flex-end;
 }
 
-.epi_button{
-  border:1px solid #000;
-  padding:0.2em;
+.epi_button {
+  border: 1px solid #000;
+  padding: 0.2em;
   font-size: 12px;
-  background-color:#fff!important;
-
+  background-color: #fff !important;
 }
 
 .icon {
@@ -291,47 +308,75 @@ p{
   /* position: fixed; */
 }
 
-.title_wrap{
+.title_wrap {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1em;
 }
 
 .add-btn {
-    background-color:#D2E8D6!important;
-    color:#000;
+  background-color: #d2e8d6 !important;
+  color: #000;
 }
-.add-btn:hover{
-    background-color:rgb(228, 249, 232)!important;
-}
-
-.open-btn{
-    background-color:#FCC8DB!important;
-    color: #000;
-}
-.open-btn:hover{
-    background-color:rgb(254, 226, 236)!important;
+.add-btn:hover {
+  background-color: rgb(228, 249, 232) !important;
 }
 
-.title-btn{
-    background-color:#C9EFF5!important;
-    color: #000;
+.open-btn {
+  background-color: #fcc8db !important;
+  color: #000;
 }
-.title-btn:hover{
-    background-color:rgb(218, 243, 247)!important;
-}
-
-
-.btn{
-    margin:0.5em 0.2em;
-    padding:8px;
-    border-radius:14px;
-    text-align:center;
-    cursor: pointer;
-    font-weight: bold;
-}
-.editButton{
-  margin:auto 1em;
+.open-btn:hover {
+  background-color: rgb(254, 226, 236) !important;
 }
 
+.title-btn {
+  background-color: #c9eff5 !important;
+  color: #000;
+}
+.title-btn:hover {
+  background-color: rgb(218, 243, 247) !important;
+}
+
+.btn {
+  margin: 0.5em 0.2em;
+  padding: 8px;
+  border-radius: 14px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+.editButton {
+  margin: auto 1em;
+}
+
+/* モーダル */
+/* 小見出し */
+.write {
+  font-family: "Futura", "游ゴシック体", "YuGothic";
+  font-weight: bold;
+  background-color: #ffce97;
+  text-align: center;
+  margin: 1em;
+}
+
+#modal_text {
+  /* writing-mode: vertical-rl; */
+  margin: auto;
+  padding-top: 10%;
+}
+#content {
+  z-index: 2;
+  width: 100%;
+  padding: 1em;
+  background-color: #fff;
+  border: 1px dashed #000;
+}
+#modal-cont {
+  z-index: 2;
+  width: 100%;
+  padding: 1em;
+  background-color: #fff;
+  border: 1px dashed #000;
+}
 </style>
