@@ -5,7 +5,7 @@
       <!-- 戻るボタン -->
       <v-img :src="'/img/write-page/close.png'" class="close" alt="close" @click="$router.go(-1)" />
       <!-- あとでボタン -->
-      <router-link
+      <!-- <router-link
         :to="{
             name: 'EditStoryPaper',
             param: {
@@ -16,7 +16,7 @@
             }"
       >
         <v-img :src="'/img/write-page/atode.png'" class="close" alt="preview" />
-      </router-link>
+      </router-link>-->
       <!-- 保存ボタン -->
       <v-img :src="'/img/write-page/save.png'" class="close save" alt="save" @click="saveTitle" />
       <!-- ヒント -->
@@ -182,10 +182,10 @@ export default {
 .paper span {
   display: block;
 }
-.min{
-  font-family: 'ヒラギノ明朝 ProN','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
+.min {
+  font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
+    "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
   cursor: url("/img/write-page/cursor.png"), auto;
-
 }
 .input-area {
   margin: auto;
@@ -195,7 +195,6 @@ export default {
   margin-top: 2em;
   border: 1px solid #a9a9a9;
   background-color: white;
-
 }
 #story_text_input {
   display: block;
@@ -216,7 +215,7 @@ export default {
   margin-left: 5em;
   margin-top: 330px;
 }
-.close{
+.close {
   opacity: 1;
   margin-top: 0.5em;
 }

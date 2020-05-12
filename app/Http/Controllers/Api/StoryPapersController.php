@@ -167,6 +167,13 @@ use App\User;
             return response()->json($story_papers);
         }
 
+        //エピソードの削除
+        public function destroy($paper_novel_id,$story_number){
+            //story_papersテーブルから削除
+            $story_papers = StoryPaper::where('paper_novel_id','=',$paper_novel_id)
+                            ->where('story_number','=',$story_number)
+                            ->delete();
+        }
 
 
     }

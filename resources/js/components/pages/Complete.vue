@@ -26,9 +26,31 @@
 
     <!-- ボタンたち -->
     <div class="buttons">
-      <v-btn class="mypage-btn btn">マイページ</v-btn>
-      <v-btn class="read-btn btn">投稿を読む</v-btn>
-      <v-btn class="top-btn btn">TOPへ戻る</v-btn>
+      <!-- <router-link
+        v-if="$store.state.login"
+        :to="{
+                        name: 'Profile',
+                        params: { user_name: loginUser.user_name }
+                    }"
+        id="mypage"
+      >
+        <v-btn class="mypage-btn btn">マイページ</v-btn>
+      </router-link>-->
+      <v-btn class="mypage-btn btn" @click="$router.go(-1)">編集へ戻る</v-btn>
+      <router-link
+        :to="{
+                    name: 'ReadPaper',
+                    params: {
+                        hero_id: PaperNovelData.hero_id,
+                        paper_novel_id: PaperNovelData.id
+                    }
+                }"
+      >
+        <v-btn class="read-btn btn">投稿を読む</v-btn>
+      </router-link>
+      <router-link :to="{ name: 'SelectHero' }">
+        <v-btn class="top-btn btn">TOPへ戻る</v-btn>
+      </router-link>
     </div>
   </div>
 </template>
@@ -91,50 +113,49 @@ export default {
   cursor: pointer;
   position: fixed;
 }
-.vue-typer, .typer{
-  font-family: 'ヒラギノ明朝 ProN','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
-  font-size:30px;
+.vue-typer,
+.typer {
+  font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
+    "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
+  font-size: 30px;
 }
-.novelTitle{
+.novelTitle {
   margin: 1em;
 }
 
 /* ボタン類 */
-.buttons{
+.buttons {
   margin: 2em;
 }
-.btn{
-    margin:0.5em 0.2em;
-    padding:8px;
-    border-radius:14px;
-    text-align:center;
-    cursor: pointer;
-    font-weight: bold;
+.btn {
+  margin: 0.5em 0.2em;
+  padding: 8px;
+  border-radius: 14px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
 }
 .mypage-btn {
-    background-color:#C9EFF5!important;
-    color:#000;
+  background-color: #c9eff5 !important;
+  color: #000;
 }
-.mypage-btn:hover{
-    background-color:rgb(183, 239, 247)!important;
-}
-
-.read-btn{
-    background-color:#FFE8AE!important;
-    color: #000;
-}
-.read-btn:hover{
-    background-color:rgb(250, 220, 143)!important;
+.mypage-btn:hover {
+  background-color: rgb(183, 239, 247) !important;
 }
 
-.top-btn{
-    background-color:#F2F2F2!important;
-    color: #000;
+.read-btn {
+  background-color: #ffe8ae !important;
+  color: #000;
 }
-.top-btn:hover{
-    background-color:rgb(255, 255, 255)!important;
+.read-btn:hover {
+  background-color: rgb(250, 220, 143) !important;
 }
 
-
-
+.top-btn {
+  background-color: #f2f2f2 !important;
+  color: #000;
+}
+.top-btn:hover {
+  background-color: rgb(255, 255, 255) !important;
+}
 </style>
