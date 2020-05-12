@@ -64,13 +64,13 @@
                                     必須項目です
                                 </div>
                             </v-col>
-                            <v-col cols="9">
+                            <!-- <v-col cols="9">
                                 <p class="link">
                                     <a href="#" class="link"
                                         >パスワードを忘れた場合</a
                                     >
                                 </p>
-                            </v-col>
+                            </v-col> -->
 
                             <button
                                 class="button btn01"

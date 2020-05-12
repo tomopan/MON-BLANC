@@ -1,9 +1,7 @@
 <template>
   <div class="font">
-    <v-row>
-      <v-col cols="12">
         <v-row :align="alignment" :justify="justify" style="height: 300px;">
-          <v-card
+          <div
             v-for="(closeNovel, i) in closePaperNovels"
             :key="i"
             width="200px"
@@ -12,39 +10,48 @@
           >
             <v-hover v-slot:default="{ hover }" open-delay="100">
               <div>
-                <v-img :src="'img/books/' + closeNovel.img_url" height="170px">
+                <!-- <v-img :src="'img/uncomplete.png'" width="250px" height="300px"> -->
+                <v-img :src="'img/flamebooks/' + closeNovel.img_url" width="250px">
+                  <p class="paper_text absolute novelTitle">{{ closeNovel.title }}</p>
+                <v-expand-transition>
+                  <div
+                    v-if="hover"
+                    class="d-flex center transition-fast-in-fast-out white darken-2 v-card--reveal display-3 white--text"
+                    style="height: 100%;"
+                  >
+
                   <v-btn
-                    :class="{ 'show-btns': hover }"
-                    color="transparent"
+                    class="ma-2 hoverButton"
                     tile
                     outlined
+                    :class="{ 'show-btns': hover }"
+                    color="transparent"
                     @click="
-                                            openNovel(
-                                                i,
-                                                closeNovel.user_paper_order,
-                                                closeNovel.title
-                                            )
-                                        "
+                            openNovel(
+                                i,
+                                closeNovel.user_paper_order,
+                                closeNovel.title
+                            )
+                        "
                   >公開する</v-btn>
                   <router-link
                     :to="{
-                                            name: 'EditNovel',
-                                            params: {
-                                                user_paper_order:
-                                                    closeNovel.user_paper_order
-                                            }
-                                        }"
+                            name: 'EditNovel',
+                            params: {
+                                user_paper_order:
+                                    closeNovel.user_paper_order
+                            }
+                        }"
                   >
-                    <v-btn :class="{ 'show-btns': hover }" color="transparent" tile outlined>編集</v-btn>
+                    <v-btn :class="{ 'show-btns': hover }" class="mx-2 hoverButton" color="transparent" tile outlined>編集</v-btn>
                   </router-link>
+                  </div>
+                </v-expand-transition>
                 </v-img>
-                <p class="paper_text">{{ closeNovel.title }}</p>
               </div>
             </v-hover>
-          </v-card>
+          </div>
         </v-row>
-      </v-col>
-    </v-row>
     <!-- タイトル未入力の時のモーダル -->
     <v-row justify="center">
       <v-dialog v-model="dialog" persistent max-width="300">
@@ -149,11 +156,6 @@ export default {
   outline: none;
 }
 
-.font {
-  font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
-    "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
-}
-
 .novel_card {
   text-align: center;
 }
@@ -164,8 +166,49 @@ export default {
 p {
   color: #333;
 }
+a{
+  text-decoration: none;
+}
+
 /* ホバー時に出すボタン */
 .show-btns {
   color: rgba(0, 0, 1) !important;
 }
+
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  flex-direction: column;
+  justify-content: center;
+  opacity: .7;
+  position: absolute;
+  width: 100%;
+}
+
+.hoverButton{
+  border-radius: 3px;
+  background-color: #fff;
+  opacity:1;
+  display: block;
+  justify-content: center;
+
+}
+
+.hoverButton:hover{
+  border-radius: 3px;
+  background-color: #ffe7ad;
+  opacity:1;
+  justify-content: center;
+
+}
+.novelTitle{
+  margin-bottom: 0!important;
+  font-weight: bold;
+}
+.absolute {
+    position: absolute;
+    bottom: 0.6em;
+    left:3em;
+}
+
 </style>
