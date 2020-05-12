@@ -1,8 +1,6 @@
 <template>
-  <div class="font">
-    <v-col cols="12">
       <v-row :align="alignment" :justify="justify" style="height: 300px;">
-        <v-card
+        <div
           v-for="(openNovel, i) in OpenPaperNovels"
           :key="i"
           width="200px"
@@ -11,25 +9,43 @@
         >
           <v-hover v-slot:default="{ hover }" open-delay="100">
             <div>
-              <v-img :src="'img/books/' + openNovel.img_url" height="200px">
+              <v-img :src="'img/flamebooks/' + openNovel.img_url" width="250px">
+              <router-link
+                :to="{
+                        name: 'ReadPaper',
+                        params: {
+                            hero_id: openNovel.hero_id,
+                            paper_novel_id: openNovel.id
+                        }
+                    }"
+              >
+                <p class="paper_text absolute novelTitle">{{ openNovel.title }}</p>
+              </router-link>
+
+                <v-expand-transition>
+                  <div
+                    v-if="hover"
+                    class="d-flex center transition-fast-in-fast-out white darken-2 v-card--reveal display-3 white--text"
+                    style="height: 100%;"
+                  >
                 <div
                   v-if="
-                                        loginUserName == $route.params.user_name
-                                    "
+                          loginUserName == $route.params.user_name
+                      "
                 >
                   <router-link
                     :to="{
-                                            name: 'EditNovel',
-                                            params: {
-                                                user_paper_order:
-                                                    openNovel.user_paper_order
-                                            }
-                                        }"
+                          name: 'EditNovel',
+                          params: {
+                              user_paper_order:
+                                  openNovel.user_paper_order
+                          }
+                      }"
                   >
-                    <v-btn :class="{ 'show-btns': hover }" color="transparent" tile outlined>編集</v-btn>
+                    <v-btn :class="{ 'show-btns': hover } " class="mx-2 hoverButton" color="transparent" tile outlined>編集</v-btn>
                   </router-link>
                   <v-btn
-                    class="ma-2"
+                    class="ma-2 hoverButton"
                     tile
                     outlined
                     :class="{ 'show-btns': hover }"
@@ -42,7 +58,7 @@
                                         "
                   >非公開にする</v-btn>
                   <v-btn
-                    class="ma-2"
+                    class="mx-2 mt-2 mb-5 hoverButton"
                     tile
                     outlined
                     :class="{ 'show-btns': hover }"
@@ -75,25 +91,14 @@
                   </v-layout>
                   <!-- モーダルここまで -->
                 </div>
+                </div>
+                </v-expand-transition>
               </v-img>
 
-              <router-link
-                :to="{
-                                    name: 'ReadPaper',
-                                    params: {
-                                        hero_id: openNovel.hero_id,
-                                        paper_novel_id: openNovel.id
-                                    }
-                                }"
-              >
-                <p class="paper_text">{{ openNovel.title }}</p>
-              </router-link>
             </div>
           </v-hover>
-        </v-card>
+        </div>
       </v-row>
-    </v-col>
-  </div>
 </template>
 
 <!-- 以下にscript/cssを記述 -->
@@ -203,15 +208,57 @@ export default {
 }
 
 .v-btn {
-  color: #333;
+  color: #000;
 }
 
 p {
-  color: #333;
+  color: #000;
 }
+a{
+  text-decoration: none;
+}
+
 
 /* ホバー時に出すボタン */
 .show-btns {
   color: rgba(0, 0, 1) !important;
 }
+
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  flex-direction: column;
+  justify-content: center;
+  opacity: .7;
+  position: absolute;
+  width: 100%;
+}
+
+.hoverButton{
+  border-radius: 3px;
+  background-color: #fff;
+  opacity:1;
+  display: block;
+  justify-content: center;
+
+}
+
+.hoverButton:hover{
+  border-radius: 3px;
+  background-color: #ffe7ad;
+  opacity:1;
+  justify-content: center;
+
+}
+
+.novelTitle{
+  margin-bottom: 0!important;
+  font-weight: bold;
+}
+.absolute {
+    position: absolute;
+    bottom: 0.6em;
+    left:3em;
+}
+
 </style>

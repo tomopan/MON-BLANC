@@ -28,7 +28,7 @@
             <v-btn @click="editUserData">更新</v-btn>
           </v-card-actions>
         </v-card>
-      </v-dialog>∫
+      </v-dialog>
     </v-layout>
     <!-- モーダルここまで -->
     <!-- プロフィール表示 -->
@@ -65,7 +65,9 @@
         <v-btn icon @click="openEditModal">
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
-        <v-icon id="logout_btn" @click="logout" color="#000">mdi-logout</v-icon>
+        <v-btn icon  @click="logout" id="logout_btn">
+          <v-icon>mdi-logout</v-icon>
+        </v-btn>
       </div>
     </div>
 
@@ -199,6 +201,7 @@ export default {
   background-repeat: no-repeat !important;
   background-size: cover !important;
   background-color: #fff !important;
+  width: 930px;
 }
 
 p {
@@ -218,6 +221,10 @@ a:hover {
 .text {
   margin: 100px auto 0 auto;
   width: 500px;
+}
+
+.container{
+  margin-bottom: 5em;
 }
 
 .v-divider {

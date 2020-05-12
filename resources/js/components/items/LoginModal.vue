@@ -14,30 +14,61 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
 
-        <v-card-title>
-          <div>
-            <img :src="'/img/lp/welcome.png'" class="img welcome" alt="welcom" />
-          </div>
-          <div>
-            <img :src="'/img/lp/logo.png'" class="img logo" alt="logo" />
-          </div>
-        </v-card-title>
-        <v-card-actions>
-          <v-container>
-            <v-row>
-              <v-col cols="9">
-                <v-text-field label="メールアドレス" required v-model="email"></v-text-field>
-                <div class="alert alert-danger" v-if="errors.email">必須項目です</div>
-              </v-col>
-              <v-col cols="9">
-                <v-text-field label="パスワード" type="password" required v-model="password"></v-text-field>
-                <div class="alert alert-danger" v-if="errors.password">必須項目です</div>
-              </v-col>
-              <v-col cols="9">
-                <p class="link">
-                  <a href="#" class="link">パスワードを忘れた場合</a>
-                </p>
-              </v-col>
+
+                <v-card-title>
+                    <div>
+                        <img
+                            :src="'/img/lp/welcome.png'"
+                            class="img welcome"
+                            alt="welcom"
+                        />
+                    </div>
+                    <div>
+                        <img
+                            :src="'/img/lp/logo.png'"
+                            class="img logo"
+                            alt="logo"
+                        />
+                    </div>
+                </v-card-title>
+                <v-card-actions>
+                    <v-container>
+                        <v-row>
+                            <v-col cols="9">
+                                <v-text-field
+                                    label="メールアドレス"
+                                    required
+                                    v-model="email"
+                                ></v-text-field>
+                                <div
+                                    class="alert alert-danger"
+                                    v-if="errors.email"
+                                >
+                                    必須項目です
+                                </div>
+                            </v-col>
+                            <v-col cols="9">
+                                <v-text-field
+                                    label="パスワード"
+                                    type="password"
+                                    required
+                                    v-model="password"
+                                ></v-text-field>
+                                <div
+                                    class="alert alert-danger"
+                                    v-if="errors.password"
+                                >
+                                    必須項目です
+                                </div>
+                            </v-col>
+                            <!-- <v-col cols="9">
+                                <p class="link">
+                                    <a href="#" class="link"
+                                        >パスワードを忘れた場合</a
+                                    >
+                                </p>
+                            </v-col> -->
+
 
               <button class="button btn01" cols="9" @click="postLogin">
                 <a href="#" class="btnlink">ログイン</a>
