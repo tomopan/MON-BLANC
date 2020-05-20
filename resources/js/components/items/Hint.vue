@@ -58,7 +58,6 @@ export default {
       axios
         .post("api/post/hints/", this.answers)
         .then(res => {
-          console.log(res.data);
           $("#save_text").fadeIn(1500);
           $("#save_text").fadeOut(1500);
         })
@@ -71,7 +70,6 @@ export default {
       axios
         .get("api/get/hints/" + this.$route.params.user_paper_order)
         .then(res => {
-          console.log(res.data);
           this.answers = res.data;
         })
         .catch(err => {

@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="content">
-      <div v-for="(paper, i) in active_page_novels" :key="i">
+      <div v-for="(paper, i) in papers" :key="i">
         <div v-if="paper.titleToggle" class="add_wrap">
           <!-- ボタンたち -->
-          <!-- ペーパー追加ボタン -->
+          <!-- エピソード追加ボタン -->
           <router-link
             :to="{
                                 name: 'EditStoryPaper',
@@ -40,7 +40,7 @@
           </div>
         </div>
         <div v-if="!paper.titleToggle">
-          <p class="episode_text">第{{paper.story_number}}話</p>
+          <p class="episode_text">第{{i}}話</p>
           <p class="paper_text" v-html="paper.text.replace(/\\n|\r\n|\r|\n/g, '<br>')"></p>
           <div class="buttonRight">
             <!-- <button class="btn epi_button">プレビュー</button> -->
@@ -61,7 +61,7 @@
             <v-dialog v-model="DeleteDialog" max-width="290">
               <div id="modal-cont">
                 <div class="write">
-                  <p>第{{selectedStory}}話を削除しますか？</p>
+                  <p>第{{selectedOrder}}話を削除しますか？</p>
                   <br />
                   <button
                     style="border:solid 2px #000;"
@@ -71,13 +71,13 @@
                   <br />
                   <button
                     style="border:solid 2px #000;"
-                    @click="destroy(PaperNovelData.id,selectedStory)"
+                    @click="destroy(PaperNovelData.id,selectedStory,selectedOrder)"
                   >&nbsp;削除する&nbsp;</button>
                 </div>
               </div>
             </v-dialog>
             <!-- モーダルここまで -->
-            <!-- <v-btn class="btn epi_button" @click="deleteModal(paper.story_number)">削除</v-btn> -->
+            <v-btn class="btn epi_button" @click="deleteModal(paper.story_number,i)">削除</v-btn>
           </div>
 
           <v-divider></v-divider>
@@ -123,7 +123,8 @@ export default {
       // モーダル
       dialog: false,
       DeleteDialog: false,
-      selectedStory: ""
+      selectedStory: "",
+      selectedOrder: ""
     };
   },
   created() {
@@ -155,19 +156,17 @@ export default {
             text: this.PaperNovelData.title,
             titleToggle: true
           });
-          //追加ボタン用のインデックスを追加
-          // if (this.papers.length <= 5)
-          //   this.papers.push({ text: "", add: true });
           //ページ数を計算
-          const pageCount = Math.ceil(this.papers.length / 6);
-          //2ページ以上の時、タブを増やす
-          if (pageCount >= 2) {
-            this.page_length = [...Array(pageCount).keys()]
-              .map(i => ++i)
-              .reverse();
-          }
-          this.showPapers(0);
-          this.story_number = this.papers.length;
+          // const pageCount = Math.ceil(this.papers.length / 6);
+          // //2ページ以上の時、タブを増やす
+          // if (pageCount >= 2) {
+          //   this.page_length = [...Array(pageCount).keys()]
+          //     .map(i => ++i)
+          //     .reverse();
+          // }
+          // this.showPapers(0);
+          this.story_number =
+            this.papers[this.papers.length - 1].story_number + 1;
         })
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
@@ -218,7 +217,7 @@ export default {
         });
     },
     //削除ボタン
-    destroy(paper_novel_id, story_number) {
+    destroy(paper_novel_id, story_number, selected_order) {
       axios
         .post("api/destroy/episode/" + paper_novel_id + "/" + story_number)
         .then(res => {})
@@ -226,11 +225,12 @@ export default {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
         });
       // 配列からも削除してデータバインディング
-      this.active_page_novels.splice(story_number, 1);
+      this.papers.splice(selected_order, 1);
       this.DeleteDialog = false;
     },
-    deleteModal(story_number) {
+    deleteModal(story_number, selected_order) {
       this.selectedStory = story_number;
+      this.selectedOrder = selected_order;
       this.DeleteDialog = true;
     }
   }

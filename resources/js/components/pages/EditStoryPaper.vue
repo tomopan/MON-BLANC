@@ -70,7 +70,7 @@
       </div>
     </v-row>
     <!-- 入力エリアここまで -->
-    <div class="episode_num">第{{$route.params.story_number}}話</div>
+    <div class="episode_num">第{{episodeOrder}}話</div>
   </div>
 </template>
 
@@ -89,6 +89,8 @@ export default {
     return {
       //ペーパーノベルの情報を格納
       PaperNovelData: "",
+      //エピソードの順番
+      episodeOrder: "",
       //タイトルとテキストを格納
       PaperNovelPost: {},
       //最初か追加かを判定
@@ -108,7 +110,6 @@ export default {
     this.PaperNovelPost.user_paper_order = this.$route.params.user_paper_order;
     //Postデータにhero_idを入れる
     this.PaperNovelPost.hero_id = this.$route.params.hero_id;
-    console.log(this.PaperNovelPost.hero_id);
     //ペーパーノベルのデータを取得
     this.showNovel();
   },
@@ -139,6 +140,21 @@ export default {
             "<br/>"
           );
           $("#story_text_input").append(this.PaperNovelData.text);
+        })
+        .catch(err => {
+          console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
+        });
+
+      // エピソードの順番を取得
+      //ストーリーペーパーを取得
+      axios
+        .get("api/get/story_papers_edit/" + this.$route.params.user_paper_order)
+        .then(res => {
+          const target = res.data.findIndex(episode => {
+            return episode.story_number == this.$route.params.story_number;
+          });
+          if (target === -1) this.episodeOrder = res.data.length + 1;
+          else this.episodeOrder = target + 1;
         })
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
