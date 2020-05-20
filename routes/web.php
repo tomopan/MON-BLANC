@@ -26,7 +26,9 @@ use Illuminate\Support\Facades\Route;
     });
 
 // });
-
+// Route::get('/', function () {
+//     return view('lp');
+// });
 // Route::get('/', function() {
 //   return view('index');
 // })->middleware('auth');
