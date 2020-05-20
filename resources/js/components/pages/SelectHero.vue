@@ -3,8 +3,10 @@
     <v-row class="fill-height" align="center" justify="center">
       <!-- choice your charactorここから -->
       <v-container class="pa-4 text-center">
-          <p class="futura"><span class="line">WRITE</span></p>
-          <p class="rubi">かく</p>
+        <p class="futura">
+          <span class="line">WRITE</span>
+        </p>
+        <p class="rubi">かく</p>
 
         <!-- typerのtextのインデントこのままでお願いします -->
         <vue-typer
@@ -37,6 +39,13 @@ export default {
   }),
 
   created() {
+    //初回アクセスのユーザーはLPページへ
+    if (sessionStorage.getItem("acs") === null) {
+      location.href = window.location.origin + "/lp";
+      // 1回目の場合はWebStorageを設定
+      sessionStorage.setItem("acs", "on");
+    }
+
     //主人公を表示
     this.showHeroes();
   },
@@ -56,17 +65,16 @@ export default {
   }
 };
 
-  (function() {
-    // スクロールを禁止する関数
-    function noScroll(event) {
-      event.preventDefault();
-    }
-    // スクロール禁止(SP)
-    document.addEventListener('touchmove', noScroll, { passive: false });
-    // スクロール禁止(PC)
-    // document.addEventListener('mousewheel', noScroll, { passive: false });
-  })();
-
+(function() {
+  // スクロールを禁止する関数
+  function noScroll(event) {
+    event.preventDefault();
+  }
+  // スクロール禁止(SP)
+  document.addEventListener("touchmove", noScroll, { passive: false });
+  // スクロール禁止(PC)
+  // document.addEventListener('mousewheel', noScroll, { passive: false });
+})();
 </script>
 
 <style scoped>
@@ -78,23 +86,21 @@ a:hover {
   text-decoration: none;
 }
 
-.futura{
+.futura {
   font-family: "Futura", "游ゴシック体", "YuGothic";
   font-weight: bold;
   font-size: 2em;
-  margin-top: 2em;;
-
+  margin-top: 2em;
 }
-#app > div > main > div > div > div > p.futura{
+#app > div > main > div > div > div > p.futura {
   margin-bottom: 0.2em;
 }
-.rubi{
+.rubi {
   font-size: 1.2em;
 }
-span.line{
-  border-bottom:2px solid #000;
+span.line {
+  border-bottom: 2px solid #000;
 }
-
 
 .v-card {
   transition: opacity 0.4s ease-in-out;
@@ -105,9 +111,10 @@ span.line{
   opacity: 0.8;
 }
 
-.typer{
-  font-family: 'ヒラギノ明朝 ProN','Hiragino Mincho ProN','Yu Mincho Light','YuMincho','Yu Mincho','游明朝体',sans-serif;
-  font-size:30px;
+.typer {
+  font-family: "ヒラギノ明朝 ProN", "Hiragino Mincho ProN", "Yu Mincho Light",
+    "YuMincho", "Yu Mincho", "游明朝体", sans-serif;
+  font-size: 30px;
 }
 
 .show-btns {
@@ -119,43 +126,44 @@ span.line{
   height: 400px;
 }
 
-.v-application .first{
+.v-application .first {
   margin-bottom: 0;
 }
 
 @media screen and (max-width: 415px) {
-  html, body {
-  overflow: hidden;
+  html,
+  body {
+    overflow: hidden;
   }
 
-.vue-typer, .typer{
-  font-size:14px;
-}
-p{
-  font-size:12px;
-}
-.first{
-  margin-top: 0.5em;
-}
-.rubi{
-  font-size: 1em;
-}
+  .vue-typer,
+  .typer {
+    font-size: 14px;
+  }
+  p {
+    font-size: 12px;
+  }
+  .first {
+    margin-top: 0.5em;
+  }
+  .rubi {
+    font-size: 1em;
+  }
 
-#people{
-  width: 550px;
-  height: 300px;
-  object-fit: cover;
-  margin-left: -6.1em;
+  #people {
+    width: 550px;
+    height: 300px;
+    object-fit: cover;
+    margin-left: -6.1em;
+  }
 }
-}
-
 </style>
 <style>
 #app > div > header {
   display: block;
 }
 
-.v-application--wrap{
+.v-application--wrap {
   background-image: url(/img/write-page/background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
