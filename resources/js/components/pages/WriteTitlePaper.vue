@@ -4,19 +4,6 @@
     <div class="buttons">
       <!-- 戻るボタン -->
       <v-img :src="'/img/write-page/close.png'" class="close" alt="close" @click="$router.go(-1)" />
-      <!-- あとでボタン -->
-      <!-- <router-link
-        :to="{
-            name: 'EditStoryPaper',
-            param: {
-              hero_id: this.$route.params.hero_id,
-              user_paper_order: this.$route.params.user_paper_order,
-              story_number: this.$route.params.story_number
-            }
-            }"
-      >
-        <v-img :src="'/img/write-page/atode.png'" class="close" alt="preview" />
-      </router-link>-->
       <!-- 保存ボタン -->
       <v-img :src="'/img/write-page/save.png'" class="close save" alt="save" @click="saveTitle" />
       <!-- ヒント -->

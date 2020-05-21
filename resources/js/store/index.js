@@ -19,6 +19,9 @@ export default new Vuex.Store({
         setLoginUser(state, loginUser) {
             state.loginUser = loginUser;
             if (loginUser) state.login = true;
+            //ログインしてなかったらモーダル表示
+            if (!state.login)
+                state.drawerLoginModal = true;
         },
         setHero(state, HeroData) {
             state.HeroData = HeroData;
