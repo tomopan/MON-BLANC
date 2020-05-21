@@ -122,17 +122,23 @@ use App\User;
         // 編集ページに表示するペーパーを取得:api/get/story_papers_edit/
         public function showEditPapers($user_paper_order)
         {
-            //ペーパーノベルidを取得
-            $paper_novel_id = PaperNovel::where('user_id','=',Auth::id())
+            $novel_toggle =  PaperNovel::where('user_id','=',Auth::id())
                         ->where('user_paper_order','=',$user_paper_order)
-                        ->select('id')
-                        ->first();
-            //ペーパーを取得
-            $story_papers =  StoryPaper::where('paper_novel_id','=',$paper_novel_id->id)
-                                ->orderBy('story_number')
-                                ->get();
-
-            return response()->json($story_papers);
+                        ->exists();
+            if($novel_toggle){
+                //ペーパーノベルidを取得
+                $paper_novel_id = PaperNovel::where('user_id','=',Auth::id())
+                            ->where('user_paper_order','=',$user_paper_order)
+                            ->select('id')
+                            ->first();
+                //ペーパーを取得
+                $story_papers =  StoryPaper::where('paper_novel_id','=',$paper_novel_id->id)
+                                    ->orderBy('story_number')
+                                    ->get();
+                return response()->json($story_papers);
+            }else{
+                return response()->json($novel_toggle);
+            }
         }
 
         // 編集ページに表示するペーパーを取得:api/get/story_papers_edit/

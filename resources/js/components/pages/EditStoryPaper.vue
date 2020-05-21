@@ -90,7 +90,7 @@ export default {
       //ペーパーノベルの情報を格納
       PaperNovelData: "",
       //エピソードの順番
-      episodeOrder: "",
+      episodeOrder: null,
       //タイトルとテキストを格納
       PaperNovelPost: {},
       //最初か追加かを判定
@@ -105,16 +105,16 @@ export default {
   created() {
     //主人公データを取得
     this.fetchHeroData(this.$route.params.hero_id);
-
+    // エピソードの順番を取得
+    this.showEpisodeOrder();
     //Postデータにuser_paper_orderを入れる
     this.PaperNovelPost.user_paper_order = this.$route.params.user_paper_order;
     //Postデータにhero_idを入れる
     this.PaperNovelPost.hero_id = this.$route.params.hero_id;
-    //ペーパーノベルのデータを取得
-    this.showNovel();
   },
   mounted() {
     this.stopText();
+    if (this.episodeOrder == null) this.episodeOrder = 1;
   },
   computed: {
     ...mapGetters(["HeroData"])
@@ -122,7 +122,31 @@ export default {
   methods: {
     //API叩いてマッチした主人公データを取得
     ...mapActions(["fetchHeroData"]),
-
+    // エピソードの順番を取得
+    showEpisodeOrder: function() {
+      // エピソードの順番を取得
+      //ストーリーペーパーを取得
+      axios
+        .get("api/get/story_papers_edit/" + this.$route.params.user_paper_order)
+        .then(res => {
+          //エピソードが既にあるか確認
+          const target = res.data.findIndex(episode => {
+            return episode.story_number == this.$route.params.story_number;
+          });
+          //なければ新規
+          if (target === -1) {
+            this.episodeOrder = res.data.length + 1;
+          }
+          // あればデータ取得
+          else {
+            this.episodeOrder = target + 1;
+            this.showNovel();
+          }
+        })
+        .catch(err => {
+          console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
+        });
+    },
     //ストーリーペーパーの情報を取得
     showNovel: function() {
       axios
@@ -140,21 +164,6 @@ export default {
             "<br/>"
           );
           $("#story_text_input").append(this.PaperNovelData.text);
-        })
-        .catch(err => {
-          console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）
-        });
-
-      // エピソードの順番を取得
-      //ストーリーペーパーを取得
-      axios
-        .get("api/get/story_papers_edit/" + this.$route.params.user_paper_order)
-        .then(res => {
-          const target = res.data.findIndex(episode => {
-            return episode.story_number == this.$route.params.story_number;
-          });
-          if (target === -1) this.episodeOrder = res.data.length + 1;
-          else this.episodeOrder = target + 1;
         })
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜（添付画像参照）

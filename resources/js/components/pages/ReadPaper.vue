@@ -135,19 +135,18 @@ export default {
             el.text = el.text.replace(/\\n|\r\n|\r|\n/g, "<br>");
             // ページの文字数を制限
             // DOMを追加（ここからじゃないとTurn.js使えない）
-            console.log(i);
             // ページごとにエフェクトを変更
             if (i % 2 == 1) {
               $("#insert_area").append(
-                "<div class='story_text hard' style='writing-mode:vertical-rl; text-orientation: upright;background-color:#fff;font-size:20px;background: -moz-linear-gradient(right, #FFF 90%, #e6e6e6);background: -webkit-linear-gradient(right, #FFF 90%, #e6e6e6);background: linear-gradient(to left, #fff 90%, #e6e6e6);'>" +
-                  "<span class='text_area'>" +
+                "<div class='story_text hard own-size' style='width:480px;height:650px; writing-mode:vertical-rl; text-orientation: upright;background-color:#fff;font-size:20px;background: -moz-linear-gradient(right, #FFF 90%, #e6e6e6);background: -webkit-linear-gradient(right, #FFF 90%, #e6e6e6);background: linear-gradient(to left, #fff 90%, #e6e6e6);'>" +
+                  "<span class='text_area'><br/>" +
                   el.text +
                   "</span></div>"
               );
             } else {
               $("#insert_area").append(
-                "<div class='story_text hard' style='display: flex;justify-content: center;writing-mode: vertical-rl; text-orientation: upright;background-color:#fff;font-size:20px;background: -moz-linear-gradient(left, #FFF 90%, #e6e6e6);background: -webkit-linear-gradient(left, #FFF 90%, #e6e6e6);background: linear-gradient(to right, #fff 90%, #e6e6e6);'>" +
-                  "<span>" +
+                "<div class='story_text hard own-size' style='width:480px;height:650px;writing-mode: vertical-rl; text-orientation: upright;background-color:#fff;font-size:20px;background: -moz-linear-gradient(left, #FFF 90%, #e6e6e6);background: -webkit-linear-gradient(left, #FFF 90%, #e6e6e6);background: linear-gradient(to right, #fff 90%, #e6e6e6);'>" +
+                  "<span><br/>" +
                   el.text +
                   "</span></div>"
               );
@@ -165,7 +164,7 @@ export default {
           $(".story_text").unwrap("#insert_area");
           // turn.jsを発動
           this.turnPage();
-          $(".story_text").css({ padding: "50px" });
+          // $(".story_text").css({ padding: "50px" });
           // $(".story_text").css({position:'absolute',top:'50%',left:'50%',transform:' translate(-50%, -50'});
 
           // $(".story_text").unwrap("div");
@@ -263,7 +262,6 @@ export default {
         .then(res => {
           if (!res.data) this.bookmarkToggle = false;
           else this.bookmarkToggle = res.data[0].id;
-          console.log(this.bookmarkToggle);
         })
         .catch(err => {
           console.log(err.response.data); //ここにエラーの箇所とどんなエラーなのか書いてあります〜

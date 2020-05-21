@@ -9,6 +9,15 @@
         </div>
       </div>
     </v-dialog>
+    <!-- テキスト100字以上の時のモーダル -->
+    <v-dialog id="overlay" v-model="stopDialog" width="50%">
+      <div id="content">
+        <div class="write">
+          <p>100文字以内で入力してください</p>
+          <button style="border:solid 2px #000;" @click="stopDialog = false">&nbsp;閉じる&nbsp;</button>
+        </div>
+      </div>
+    </v-dialog>
     <!-- モーダルここまで -->
     <!-- ボタンたち -->
     <div class="buttons">
@@ -47,8 +56,8 @@
         <p class="novelText">Age {{ HeroData.hero_birth }}</p>
       </figcaption>
     </div>
-
     <!-- ボタンここまで -->
+
     <!-- 入力エリア -->
     <div class="wrap-input-area">
       <div class="input-area">
@@ -95,22 +104,27 @@ export default {
       //タイトルとテキストを格納
       titlePost: {},
       // モーダル
-      dialog: false
+      dialog: false,
+      stopDialog: false
     };
   },
   computed: {
-    ...mapGetters(["HeroData"])
+    ...mapGetters(["HeroData"]),
+    ...mapGetters(["loginUser"])
   },
   created() {
+    // ログインチェック
+    this.getLoginUserData();
     this.showNovel();
     //主人公データを取得
     this.fetchHeroData(this.$route.params.hero_id);
-    //ログインしてなかったらモーダル表示
-    if (!this.$store.state.login) this.$store.state.drawerLoginModal = true;
   },
+  mounted() {},
   methods: {
     //API叩いてマッチした主人公データを取得
     ...mapActions(["fetchHeroData"]),
+    //ログインしているユーザーの情報
+    ...mapActions(["getLoginUserData"]),
     //ペーパーノベルの情報を取得
     showNovel: function() {
       axios
@@ -133,6 +147,8 @@ export default {
       if (this.titlePost.title.length == 0) {
         this.dialog = !this.dialog;
         return;
+      } else if (this.titlePost.title.length >= 100) {
+        this.stopDialog = !this.stopDialog;
       }
       // Post
       axios
@@ -216,8 +232,8 @@ export default {
   white-space: pre-wrap;
   font-size: 18px;
   line-height: 2em;
-  overflow-x: scroll;
   outline: none;
+  overflow-x: scroll;
 }
 .paper span {
   display: block;
@@ -235,6 +251,7 @@ export default {
   margin-top: 2em;
   border: 1px solid #a9a9a9;
   background-color: white;
+  overflow-x: scroll;
 }
 #story_text_input {
   display: block;
