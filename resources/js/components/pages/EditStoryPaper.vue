@@ -178,7 +178,8 @@ export default {
       //テキスト
       this.PaperNovelPost.text = document
         .getElementById("story_text_input")
-        .innerHTML.replace(/(<(p|div))/gi, "\\n$1")
+        // .innerHTML.replace(/(<br)/gi, "\\n$1")
+        .innerHTML.replace(/(<(p|div|br))/gi, "\\n$1")
         .replace(/(<([^>]+)>)/gi, "");
       //5000字で制限
       // テキストのバリデーション
