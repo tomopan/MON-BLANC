@@ -106,28 +106,68 @@ export default {
             // エピソードを挿入
             el.text = `第${i + 1}話\n\n${el.text}`;
             //改行の数をカウント
-            const lineCount = (el.text.match(/\\n|\r\n|\r|\n/g) || []).length;
-            //改行コードを空欄40個に変換
-            // el.text = el.text.replace(
-            //   /\\n|\r\n|\r|\n/g,
-            //   "　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　"
-            // );
-            // 420文字以下なら、そのままpush
-            if (el.text.length <= 420) {
+            const lineCodeCount = (el.text.match(/\\n|\r\n|\r|\n/g) || [])
+              .length;
+            //文字数(改行コードを引く)
+            const charaCount = el.text.length - lineCodeCount * 2;
+            // 行数を計算
+            const lineCount = Math.ceil(lineCodeCount + charaCount / 32);
+            console.log(lineCount);
+            // 15行以下ならそのままpush
+            if (lineCount <= 15) {
               this.showText.push({
                 text: el.text
               });
-            } else {
+            }
+            // 15行以上なら分割
+            else {
               const t = [...el.text];
-              let text = t.reduce(
-                (acc, c, i) =>
-                  i % 420 ? acc : [...acc, t.slice(i, i + 420).join("")],
-                []
-              );
-              text.forEach((el, i) => {
+              let textCount = 0;
+              let lineCount = 2;
+              let start = 0;
+              let cutText = [];
+              let text = t.reduce((acc, c, i) => {
+                if (acc + c == "\\n") {
+                  lineCount += 1;
+                  textCount =0;
+                }
+                else {
+                  textCount += 1;
+                  if (textCount == 32) {
+                    lineCount += 1;
+                    textCount = 0;
+                  }
+                }
+                if (lineCount == 15) {
+                  cutText.push(t.slice(start, i).join(""));
+                  start = i;
+                  lineCount = 0;
+                }
+                return c;
+              });
+              cutText.push(t.slice(start).join(""));
+              
+              cutText.forEach((el, i) => {
                 this.showText.push({ text: el });
               });
             }
+
+            // 420文字以下なら、そのままpush
+            // if (el.text.length <= 420) {
+            //   this.showText.push({
+            //     text: el.text
+            //   });
+            // } else {
+            //   const t = [...el.text];
+            //   let text = t.reduce(
+            //     (acc, c, i) =>
+            //       i % 420 ? acc : [...acc, t.slice(i, i + 420).join("")],
+            //     []
+            //   );
+            //   text.forEach((el, i) => {
+            //     this.showText.push({ text: el });
+            //   });
+            // }
           });
 
           //改行コードを<br>に変換
