@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "ismobilejs": "^1.1.1",
         "turn-js": "^0.5.4",
         "turn.js": "^1.0.5",
         "vue-grid-layout": "^2.3.7",
