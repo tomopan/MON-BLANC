@@ -431,7 +431,7 @@ export default {
 /* ------------------- */
 /*      レスポンシブ     */
 /*---------------------*/
-@media screen and (max-width: 415px) {
+@media screen and (max-width: 480px) {
     .cont {
         height: 100%;
         padding-top: 2em;
@@ -443,7 +443,8 @@ export default {
         display: none;
     }
     #m-title {
-        display: inline;
+        display: block;
+        margin-top:4em;
     }
     /* 小見出し */
     .write {

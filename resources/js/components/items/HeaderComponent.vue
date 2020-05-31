@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar>
+  <v-app-bar fixed>
       <router-link :to="{ name: 'SelectHero' }" style="text-decoration: none" id="logo">
         <v-toolbar-title floating="true">
           <img :src="'/img/header/headerLogo.png'" class="logo" alt="logo" />
@@ -170,7 +170,7 @@ a{
 }
 
 
-@media screen and (max-width: 415px) {
+@media screen and (max-width: 480px) {
   /*画面幅が415pxまでの時*/
   .logo {
     width: 200px;
@@ -206,11 +206,10 @@ a{
 }
 </style>
 <style>
-@media screen and (max-width: 415px) {
+@media screen and (max-width: 480px) {
   .v-toolbar__content {
     display: block !important;
     border-bottom: 1px solid #000!important;
-
   }
 }
 </style>

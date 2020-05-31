@@ -222,9 +222,57 @@ span {
   color: #000;
 }
 
-@media screen and (max-width: 415px) {
+@media screen and (max-width: 480px) {
   .rubi {
     font-size: 1em;
   }
+
+  .v-tabs-bar{
+    height: 30px;
+  }
+
+  .col {
+    width: 80%;
+    height: 80%;
+    margin-left: 4.7em;
+  }
+
+  .novelTitle[data-v-726afbd4] {
+    margin-bottom: 1em !important;
+    width: 180px;
+    margin-top: .6em;
+    margin-left: -.4em;
+}
+.novelText[data-v-726afbd4] {
+    margin-top: 5em !important;
+    margin-bottom: 1em !important;
+    width: 140px;
+    margin-left: -.4em;
+}
+}
+</style>
+<style>
+  .hero-find .v-tabs-bar{
+    height: 40px;
+    padding: .3em 0;
+    background-color: rgba(255,255,255,0)!important;
+  }
+
+@media screen and (max-width: 768px) {
+
+  .hero-find .v-tabs-bar{
+    height: 30px;
+    margin: 2em 0;
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+
+  .hero-find .v-tabs-bar{
+    height: 30px;
+    margin: 2em 0;
+  }
+
 }
 </style>

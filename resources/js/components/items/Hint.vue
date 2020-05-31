@@ -186,15 +186,22 @@ button {
 .m_close {
     display: none;
 }
+/* レスポンシブ */
+@media screen and (max-width: 768px) {
+    #content {
+        width: 80%;
+    }
+}
 
 /* レスポンシブ */
-@media screen and (max-width: 415px) {
+@media screen and (max-width: 480px) {
     #content {
         z-index: 2;
-        width: 100%;
+        width: 90%;
         padding: 1em;
         background-color: #fff;
         border: 1px solid #000;
+        font-size: 14px;
     }
     textarea {
         width: 80%;
