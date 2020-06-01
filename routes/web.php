@@ -14,12 +14,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 //ログイン後に表示されるホーム画面のルート
-Route::group(['middleware' => 'auth'], function () {
+// Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
         return view('index');
     });
-});
+    Route::get('/lp', function () {
+        return view('lp');
+    });
+    Route::get('/lpScroll', function () {
+        return view('lpScroll');
+    });
 
+// });
+// Route::get('/', function () {
+//     return view('lp');
+// });
 // Route::get('/', function() {
 //   return view('index');
 // })->middleware('auth');

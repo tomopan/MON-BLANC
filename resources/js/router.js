@@ -2,21 +2,26 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 // ページコンポーネントをインポート
-import Top from "./components/pages/Top.vue";
+import SelectHero from "./components/pages/SelectHero.vue";
 import Hero from "./components/pages/Hero.vue";
-import Read from "./components/pages/Read.vue";
-import Write from "./components/pages/Write.vue";
+import ReadPaper from "./components/pages/ReadPaper.vue";
 import Profile from "./components/pages/Profile.vue";
-import Bookmark from "./components/pages/profiles/Bookmark.vue";
-import Bookshelf from "./components/pages/profiles/Bookshelf.vue";
-import Writedbooks from "./components/pages/profiles/Writedbooks.vue";
-import Writingbooks from "./components/pages/profiles/Writingbooks.vue";
-import Episodes from "./components/pages/Episodes.vue";
-import NovelTitle from "./components/pages/NovelTitle.vue";
+import PaperNovelOpened from "./components/pages/profiles/PaperNovelOpened.vue";
+import PaperNovelClosed from "./components/pages/profiles/PaperNovelClosed.vue";
+import MarkedText from "./components/pages/profiles/MarkedText.vue";
+import Bookmarks from "./components/pages/profiles/Bookmarks.vue";
 import ReadFirstSentence from "./components/pages/ReadFirstSentence.vue";
 import WriteFirstSentence from "./components/pages/WriteFirstSentence.vue";
-import PaperEdit from "./components/pages/PaperEdit.vue";
-import AddPaper from "./components/pages/AddPaper.vue";
+import EditPaperNovel from "./components/pages/EditPaperNovel.vue";
+import WriteTitlePaper from "./components/pages/WriteTitlePaper.vue";
+import EditStoryPaper from "./components/pages/EditStoryPaper.vue";
+import SelectWrite from "./components/pages/SelectWrite.vue";
+import Complete from "./components/pages/Complete.vue";
+import MeetStory from "./components/pages/MeetStory.vue";
+import FindStory from "./components/pages/FindStory.vue";
+import TopBase from "./components/pages/TopBase.vue";
+import Bookmark from "./components/pages/Bookmark.vue";
+import EditNovel from "./components/pages/EditNovel.vue";
 import WriteTitle from "./components/pages/WriteTitle.vue";
 
 Vue.use(VueRouter);
@@ -24,8 +29,28 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: "/",
-        component: Top,
-        name: "Top"
+        component: SelectHero,
+        name: "SelectHero"
+    },
+    {
+        path: "/top-base",
+        component: TopBase,
+        name: "TopBase"
+    },
+    {
+        path: "/meet-story",
+        component: MeetStory,
+        name: "MeetStory"
+    },
+    {
+        path: "/find-story",
+        component: FindStory,
+        name: "FindStory"
+    },
+    {
+        path: "/bookmark",
+        component: Bookmark,
+        name: "Bookmark"
     },
     {
         path: "/hero/:hero_id",
@@ -33,76 +58,82 @@ const routes = [
         name: "Hero"
     },
     {
-        path: "/readfirst/:hero_id/",
+        path: "/read-first-sentence/:hero_id/",
         component: ReadFirstSentence,
         name: "ReadFirst"
     },
     {
-        path: "/read/:hero_id/:novel_id",
-        component: Read,
-        name: "Read"
+        path: "/read-paper/:hero_id/:paper_novel_id",
+        component: ReadPaper,
+        name: "ReadPaper"
+    },
+    {
+        path: "/select-write/:hero_id",
+        component: SelectWrite,
+        name: "SelectWrite"
     },
 
     {
-        path: "/noveltitle/:hero_id",
-        component: NovelTitle,
-        name: "NovelTitle"
-    },
-    {
-        path: "/write/firstsentence/:hero_id",
+        path: "/write-first-sentence/:hero_id",
         component: WriteFirstSentence,
         name: "WriteFirstSentence"
     },
     {
-        path: "/write/paperedit/:novel_id",
-        component: PaperEdit,
-        name: "PaperEdit"
+        path: "/edit-paper-novel/:user_paper_order",
+        component: EditPaperNovel,
+        name: "EditPaperNovel"
+    },
+
+    {
+        path: "/write-title/:user_paper_order",
+        component: WriteTitlePaper,
+        name: "WriteTitlePaper"
     },
     {
-        path: "/write/addpaper/:novel_id",
-        component: AddPaper,
-        name: "AddPaper"
-    },
-    {
-        path: "/write/title/:novel_id",
+        path: "/title/:hero_id/:user_paper_order/:story_number",
         component: WriteTitle,
         name: "WriteTitle"
     },
     {
-        path: "/write/:hero_id/:novel_id",
-        component: Write,
-        name: "Write"
+        path: "/edit-novel/:user_paper_order",
+        component: EditNovel,
+        name: "EditNovel"
     },
     {
-        path: "/episodes",
-        component: Episodes,
-        name: "Episodes"
+        path: "/edit-story-paper/:hero_id/:user_paper_order/:story_number",
+        component: EditStoryPaper,
+        name: "EditStoryPaper"
     },
     {
-        path: "/profile",
+        path: "/complete/:user_paper_order",
+        component: Complete,
+        name: "Complete"
+    },
+    {
+        path: "/profile/:user_name",
         component: Profile,
         name: "Profile",
-        redirect: "/profile/writedbooks",
+        redirect: "/profile/:user_name/PaperNovelOpened",
         children: [
             {
-                path: "/profile/bookshelf",
-                component: Bookshelf,
-                name: "Bookshelf"
+                path: "/profile/:user_name/PaperNovelOpened",
+                component: PaperNovelOpened,
+                name: "PaperNovelOpened"
             },
             {
-                path: "/profile/bookmark",
-                component: Bookmark,
-                name: "Bookmark"
+                path: "/profile/:user_name/PaperNovelClosed",
+                component: PaperNovelClosed,
+                name: "PaperNovelClosed"
             },
             {
-                path: "/profile/writedbooks",
-                component: Writedbooks,
-                name: "Writedbooks"
+                path: "/profile/:user_name/marker",
+                component: MarkedText,
+                name: "MarkedText"
             },
             {
-                path: "/profile/writingbooks",
-                component: Writingbooks,
-                name: "Writingbooks"
+                path: "/profile/:user_name/bookmark",
+                component: Bookmarks,
+                name: "Bookmarks"
             }
         ]
     }

@@ -15,20 +15,75 @@ use Illuminate\Database\Seeder;
 
             DB::table('heroes')->insert(
             [
-            'img_url' => 'https://assets.st-note.com/production/uploads/images/17220311/rectangle_large_type_2_e0050b10549e41bb8deb5a3d00e732d4.jpeg?fit=bounds&format=jpeg&quality=45&width=960',
-            'hero_description' => 'ルネ・デカルト',
+            'img_url' => 'AKIRA.png',
+            'hero_name' => 'AKIRA',
+            'hero_birth' => '28',
             "created_at" => $faker->dateTime("now"),
             "updated_at" => $faker->dateTime("now")
             ]
             );
             DB::table('heroes')->insert(
             [
-            'img_url' => 'data:image/jpeg;base64,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',
-            'hero_description' => '玉井詩織',
+            'img_url' => 'SUMIRE.png',
+            'hero_name' => 'SUMIRE',
+            'hero_birth' => '28',
             "created_at" => $faker->dateTime("now"),
             "updated_at" => $faker->dateTime("now")
             ]
             );
-
+            DB::table('heroes')->insert(
+            [
+            'img_url' => 'JUN.png',
+            'hero_name' => 'JUN',
+            'hero_birth' => '24',
+            "created_at" => $faker->dateTime("now"),
+            "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('heroes')->insert(
+            [
+            'img_url' => 'MARI.png',
+            'hero_name' => 'MARI',
+            'hero_birth' => '35',
+            "created_at" => $faker->dateTime("now"),
+            "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('heroes')->insert(
+            [
+            'img_url' => 'MICHI.png',
+            'hero_name' => 'MICHI',
+            'hero_birth' => '27',
+            "created_at" => $faker->dateTime("now"),
+            "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('heroes')->insert(
+            [
+            'img_url' => 'NANA.png',
+            'hero_name' => 'NANA',
+            'hero_birth' => '25',
+            "created_at" => $faker->dateTime("now"),
+            "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('heroes')->insert(
+            [
+            'img_url' => 'KEITA.png',
+            'hero_name' => 'KEITA',
+            'hero_birth' => '32',
+            "created_at" => $faker->dateTime("now"),
+            "updated_at" => $faker->dateTime("now")
+            ]
+            );
+            DB::table('heroes')->insert(
+            [
+            'img_url' => 'DAIKI.png',
+            'hero_name' => 'DAIKI',
+            'hero_birth' => '30',
+            "created_at" => $faker->dateTime("now"),
+            "updated_at" => $faker->dateTime("now")
+            ]
+            );
         }
     }

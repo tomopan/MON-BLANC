@@ -14,15 +14,33 @@ use App\User;
 
 class UsersController extends Controller
 {
-    //プロフィールを表示
+    //ログイン中のユーザー情報を取得
     public function show()
     {
-        $userData = Auth::user();              
+        if(Auth::user()){
+            $userData = Auth::user();              
+            return response()->json($userData);
+        }
+    }
 
-        // $userData = User::where('id', '=', $user_id)
-        //             ->get();
-
+    //ログイン中のユーザー情報を取得
+    public function showProfile($user_name)
+    { 
+        $userData = User::where('user_name','=',$user_name)
+                    ->first();
         return response()->json($userData);
+    }
+
+    //プロフィールを編集して更新
+    public function edit(Request $request)
+    {           
+        $user = User::find(Auth::id());
+        $user->name     = $request->name;
+        $user->user_name     = $request->user_name;
+        $user->bio     = $request->bio;
+
+        $user->save();
+        return $user;
     }
 
 }

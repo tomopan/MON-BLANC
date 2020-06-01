@@ -1,129 +1,75 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 use Auth;
 use Validate;
 use DB;
 use App\Bookmark;
+use App\Hero;
+use App\PaperNovel;
+use App\StoryPaper;
     
     //=======================================================================
     class BookmarksController extends Controller
     {
-        /**
-         * Display a listing of the resource.
-         *
-         * @return \Illuminate\View\View
-         */
-        public function index(Request $request)
-        {
-            $keyword = $request->get("search");
-            $perPage = 25;
-    
-            if (!empty($keyword)) {
-                $bookmark = Bookmark::where("id","LIKE","%$keyword%")->orWhere("user_id", "LIKE", "%$keyword%")->orWhere("novel_id", "LIKE", "%$keyword%")->paginate($perPage);
-            } else {
-                    $bookmark = Bookmark::paginate($perPage);              
-            }          
-            return view("bookmark.index", compact("bookmark"));
-        }
-    
-        /**
-         * Show the form for creating a new resource.
-         *
-         * @return \Illuminate\View\View
-         */
-        public function create()
-        {
-            return view("bookmark.create");
-        }
-    
-        /**
-         * Store a newly created resource in storage.
-         *
-         * @param \Illuminate\Http\Request $request
-         *
-         * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-         */
-        public function store(Request $request)
-        {
-            $this->validate($request, [
-				"user_id" => "nullable|integer", //integer('user_id')->nullable()
-				"novel_id" => "nullable|integer", //integer('novel_id')->nullable()
+        public function save($paper_novel_id)
+        { 
+            //ユーザー情報取得
+            $userId = Auth::id();
 
-            ]);
-            $requestData = $request->all();
-            
-            Bookmark::create($requestData);
-    
-            return redirect("bookmark")->with("flash_message", "bookmark added!");
-        }
-    
-        /**
-         * Display the specified resource.
-         *
-         * @param  int  $id
-         *
-         * @return \Illuminate\View\View
-         */
-        public function show($id)
-        {
-            $bookmark = Bookmark::findOrFail($id);
-            return view("bookmark.show", compact("bookmark"));
-        }
-    
-        /**
-         * Show the form for editing the specified resource.
-         *
-         * @param  int  $id
-         *
-         * @return \Illuminate\View\View
-         */
-        public function edit($id)
-        {
-            $bookmark = Bookmark::findOrFail($id);
-    
-            return view("bookmark.edit", compact("bookmark"));
-        }
-    
-        /**
-         * Update the specified resource in storage.
-         *
-         * @param  int  $id
-         * @param \Illuminate\Http\Request $request
-         *
-         * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-         */
-        public function update(Request $request, $id)
-        {
-            $this->validate($request, [
-				"user_id" => "nullable|integer", //integer('user_id')->nullable()
-				"novel_id" => "nullable|integer", //integer('novel_id')->nullable()
+            //登録する情報を格納
+            $bookmark_novel = new Bookmark;
+            $bookmark_novel->user_id=$userId;
+            $bookmark_novel->paper_novel_id=$paper_novel_id;
+            $bookmark_novel->save();
 
-            ]);
-            $requestData = $request->all();
-            
-            $bookmark = Bookmark::findOrFail($id);
-            $bookmark->update($requestData);
-    
-            return redirect("bookmark")->with("flash_message", "bookmark updated!");
         }
-    
-        /**
-         * Remove the specified resource from storage.
-         *
-         * @param  int  $id
-         *
-         * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-         */
-        public function destroy($id)
-        {
-            Bookmark::destroy($id);
-    
-            return redirect("bookmark")->with("flash_message", "bookmark deleted!");
+
+        public function check($paper_novel_id)
+        { 
+            //ユーザー情報取得
+            $userId = Auth::id();
+            //登録する情報を格納
+            $bookmark = Bookmark::where('user_id','=',$userId)
+                                ->where('paper_novel_id','=',$paper_novel_id)
+                                ->exists();
+            if($bookmark) {
+                $bookmark  = Bookmark::where('user_id','=',$userId)
+                        ->where('paper_novel_id','=',$paper_novel_id)
+                        ->select('id')
+                        ->get();
+            }
+            return response()->json($bookmark);
+        }
+
+        public function show()
+        { 
+            //ユーザー情報取得
+            $userId = Auth::id();
+            //登録する情報を格納
+            $bookmark_novels = DB::table('bookmarks as b')
+                                ->join('paper_novels as p','p.id','=','b.paper_novel_id')
+                                ->join('story_papers as s','s.paper_novel_id','=','p.id')
+                                ->join('heroes as h','h.id','=','p.hero_id')
+                                ->where('b.user_id','=',$userId)
+                                ->where('s.story_number','=',1)
+                                ->select('b.id','p.title','b.paper_novel_id','h.img_url','p.hero_id','s.text')
+                                ->get();
+            return response()->json($bookmark_novels);
+        }
+
+        public function destroy($bookmark_id){
+            //bookmarksテーブルから削除
+            $bookmark_novel = Bookmark::where('user_id','=',Auth::id())
+                            ->where('id','=',$bookmark_id)
+                            ->delete();
         }
     }
+
     //=======================================================================
     
     
