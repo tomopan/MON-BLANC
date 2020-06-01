@@ -244,4 +244,34 @@ a:hover {
 .v-tab{
     margin: 0;
 }
+
+@media screen and (max-width: 480px) {
+body{
+  font-size:80%;
+}
+
+#app > div > main > div > div.prpfile_area > div.icon{
+  width: 2em;
+}
+#app > div > main > div > div.prpfile_area > div.icon > div > div.v-responsive__content{
+  width:30px;
+}
+#app > div > main > div > hr.v-divider{
+  margin-top:1em;
+}
+#tabs > div > div > div.v-slide-group__wrapper > div > div > a > div
+{
+  font-size:90%;
+}
+#tabs > div > div > div.v-slide-group__wrapper > div > div,
+#tabs > div > div > div.v-slide-group__wrapper > div,
+#tabs > div,
+#tabs{
+  height:30px;
+}
+#app > div > main > .container{
+  width:100%;
+}
+
+}
 </style>

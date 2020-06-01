@@ -443,6 +443,11 @@ p {
 .novel_title:hover + .fukidashi {
   display: block;
 }
+
+/* レスポンシブ */
+@media screen and (max-width: 480px) {
+}
+
 </style>
 <style>
 #app > div > main {

@@ -26,7 +26,7 @@
                         rows="2"
                         v-model="answers.q_1"
                     ></textarea>
-                    <p>この主人公の最後はハッピーエンド？バッドエンド？</p>
+                    <p>この主人公の最後はハッピーエンド？<br class="sp_br">バッドエンド？</p>
                     <textarea
                         name
                         id
@@ -34,7 +34,7 @@
                         rows="2"
                         v-model="answers.q_2"
                     ></textarea>
-                    <p>その主人公は今、どういう心情？もしくは状況？</p>
+                    <p>その主人公は今、どういう心情？<br class="sp_br"もしくは状況？</p>
                     <textarea
                         name
                         id
@@ -42,7 +42,7 @@
                         rows="2"
                         v-model="answers.q_3"
                     ></textarea>
-                    <p>主人公は今どこにいる？どんな風景が見えている？</p>
+                    <p>主人公は今どこにいる？<br class="sp_br">どんな風景が見えている？</p>
                     <textarea
                         name
                         id
@@ -50,7 +50,7 @@
                         rows="2"
                         v-model="answers.q_4"
                     ></textarea>
-                    <p>この小説がもし手紙だとしたら、誰に向けて書く？</p>
+                    <p>この小説がもし手紙だとしたら、<br class="sp_br">誰に向けて書く？</p>
                     <textarea
                         name
                         id
@@ -186,6 +186,10 @@ button {
 .m_close {
     display: none;
 }
+.sp_br{
+    display:none;
+}
+
 /* レスポンシブ */
 @media screen and (max-width: 768px) {
     #content {
@@ -211,6 +215,10 @@ button {
     }
     .m_close {
     display: inline;
+    }
+        .sp_br{
+        display:block;
+    }
+
   }
-}
 </style>

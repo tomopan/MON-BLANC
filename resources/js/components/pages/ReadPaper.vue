@@ -9,7 +9,7 @@
       <div id="book" @mouseup="getMarkText()">
         <!-- 表紙 -->
         <div class="book_cover hard">
-          <img style="width:500px;height:700px" :src="'img/books/' + coverImg" />
+          <img :src="'img/books/' + coverImg" />
         </div>
         <!-- タイトル&作者 -->
         <div class="title_area hard">
@@ -366,8 +366,16 @@ https://mon-blanc.com${this.$route.path}`;
 
 /* 全体 */
 .book_caver {
-  /* padding-top: 50px; */
+  width:500px;
+  height:700px;
+  width:100%;
+  height:100%;
 }
+#book > div:nth-child(1) > div:nth-child(1) > div > img{
+  width:500px;
+  height:700px;
+}
+
 #book {
   /* height: 600px; */
   /* width: 500px;
@@ -380,6 +388,8 @@ https://mon-blanc.com${this.$route.path}`;
   /* width: 600px;
   height: 640px; */
 }
+
+
 /* タイトル */
 .title_area {
   -webkit-writing-mode: vertical-rl;
@@ -430,4 +440,35 @@ https://mon-blanc.com${this.$route.path}`;
   bottom: 7em;
   right: 2em;
 }
+</style>
+<style>
+/* レスポンシブ */
+@media screen and (max-width: 480px) {
+#book{
+    width:300px;
+  height:500px;
+
+}
+.book_caver {
+  width:300px;
+  height:500px;
+  width:100%;
+  height:100%;
+}
+#book > div:nth-child(1) > div:nth-child(1) > div > img{
+  width:300px;
+  height:500px;
+}
+#book > div:nth-child(1) > div:nth-child(1) > div{
+  width:300px;
+  height:500px;
+}
+#book > div:nth-child(1) > div{
+  width:300px;
+  height:500px;
+
+}
+}
+
+
 </style>
