@@ -191,6 +191,7 @@ span.line {
 
    body{
     overflow:hidden!important;
+    overflow-y: scroll!important;
   }
 }
 </style>

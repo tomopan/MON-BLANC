@@ -16,6 +16,7 @@
                 color="#000"
                 @click="deleteBookmark"
                 >mdi-bookmark</v-icon
+
             >
             <!-- ツイートボタン -->
             <img
@@ -511,8 +512,16 @@ https://mon-blanc.com${this.$route.path}`;
 
 /* 全体 */
 .book_caver {
-    /* padding-top: 50px; */
+  width:500px;
+  height:700px;
+  width:100%;
+  height:100%;
 }
+#book > div:nth-child(1) > div:nth-child(1) > div > img{
+  width:500px;
+  height:700px;
+}
+
 #book {
     /* height: 600px; */
     /* width: 500px;
@@ -525,10 +534,12 @@ https://mon-blanc.com${this.$route.path}`;
     /* width: 600px;
   height: 640px; */
 }
+
 .book_cover_img {
     width: 500px;
     height: 700px;
 }
+
 /* タイトル */
 .title_area {
     -webkit-writing-mode: vertical-rl;
@@ -639,4 +650,35 @@ https://mon-blanc.com${this.$route.path}`;
         height: 600px;
     }
 }
+</style>
+<style>
+/* レスポンシブ */
+@media screen and (max-width: 480px) {
+#book{
+    width:300px;
+  height:500px;
+
+}
+.book_caver {
+  width:300px;
+  height:500px;
+  width:100%;
+  height:100%;
+}
+#book > div:nth-child(1) > div:nth-child(1) > div > img{
+  width:300px;
+  height:500px;
+}
+#book > div:nth-child(1) > div:nth-child(1) > div{
+  width:300px;
+  height:500px;
+}
+#book > div:nth-child(1) > div{
+  width:300px;
+  height:500px;
+
+}
+}
+
+
 </style>

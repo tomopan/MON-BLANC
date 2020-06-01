@@ -581,6 +581,11 @@ p {
         font-size: 20px;
     }
 }
+
+/* レスポンシブ */
+@media screen and (max-width: 480px) {
+}
+
 </style>
 <style>
 #app > div > main {

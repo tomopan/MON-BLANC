@@ -217,7 +217,9 @@ p {
 a{
   text-decoration: none;
 }
-
+#app > div > main > div{
+  width:100%;
+}
 
 /* ホバー時に出すボタン */
 .show-btns {
@@ -260,5 +262,9 @@ a{
     bottom: 0.6em;
     left:3em;
 }
-
+@media screen and (max-width: 480px) {
+#app > div > main > div > div.layout.row.justify-center{
+  margin-bottom:100px;
+}
+}
 </style>

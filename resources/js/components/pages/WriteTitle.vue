@@ -258,7 +258,7 @@ export default {
     height: 100%;
     display: flex;
     justify-content: space-around;
-    padding-top: 2em;
+    padding-top: 8em;
     background-color: #ffe8ae;
 }
 
@@ -269,6 +269,7 @@ export default {
     background-color: #ffce97;
     text-align: center;
     margin: 1em;
+    padding: 1em;
 }
 
 /* モーダル */
@@ -282,7 +283,7 @@ export default {
     width: 100%;
     padding: 1em;
     background-color: #fff;
-    border: 1px dashed #000;
+    border: 1px solid #000;
 }
 
 /* 入力 */
@@ -489,7 +490,7 @@ export default {
         width: 100%;
         padding: 1em;
         background-color: #fff;
-        border: 1px dashed #000;
+        border: 1px solid #000;
     }
 
     /* 入力 */
