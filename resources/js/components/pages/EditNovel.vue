@@ -388,8 +388,5 @@ p {
     display: block;
     margin-bottom: 1em;
 }
-div.title_text {
-    font-size:　16px!important;
-}
 }
 </style>
