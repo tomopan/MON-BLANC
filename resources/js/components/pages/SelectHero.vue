@@ -130,12 +130,7 @@ span.line {
   margin-bottom: 0;
 }
 
-@media screen and (max-width: 415px) {
-  html,
-  body {
-    overflow: hidden;
-  }
-
+@media screen and (max-width: 480px) {
   .vue-typer,
   .typer {
     font-size: 14px;
@@ -152,11 +147,35 @@ span.line {
 
   #people {
     width: 550px;
-    height: 300px;
-    object-fit: cover;
-    margin-left: -6.1em;
+    margin-top:2em;
+    margin-left: -3.5em;
   }
 }
+@media screen and (max-width: 375px) {
+  #people {
+    margin-left: -6.3em;
+  }
+}
+@media screen and (max-width: 320px) {
+  #people {
+    width: 450px;
+    margin-top:0;
+    margin-left: -5em;
+  }
+
+  .futura{
+    margin-top:1.5em;
+  }
+  p{
+    font-size:10px;
+  }
+  .vue-typer{
+    font-size:11.2px;
+  }
+
+}
+
+
 </style>
 <style>
 #app > div > header {
@@ -167,5 +186,11 @@ span.line {
   background-image: url(/img/write-page/background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+}
+@media screen and (max-width: 480px) {
+
+   body{
+    overflow:hidden!important;
+  }
 }
 </style>

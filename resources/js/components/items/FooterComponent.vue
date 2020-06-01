@@ -1,6 +1,7 @@
 <template>
-  <v-bottom-navigation fixed absolute hide-on-scroll>
+  <v-bottom-navigation fixed active-class grow>
     <v-btn value="write">
+      <span>WRITE</span>
       <router-link :to="{ name: 'SelectHero' }" style="text-decoration: none">
         <v-avatar tile size="30" value="write">
           <img :src="'/img/header/write.png'" alt="write" />
@@ -9,6 +10,7 @@
     </v-btn>
 
     <v-btn value="favorites">
+      <span>READ</span>
       <router-link :to="{ name: 'FindStory'}">
         <v-avatar tile size="30">
           <img :src="'/img/header/read.png'" alt="read" />
@@ -17,6 +19,7 @@
     </v-btn>
 
     <v-btn value="nearby">
+      <span>BOOKMARK</span>
       <router-link :to="{ name: 'Bookmark' }">
         <v-avatar tile size="30">
           <img :src="'/img/header/books.png'" alt="books" />
@@ -25,6 +28,7 @@
     </v-btn>
 
     <v-btn value="mypage" v-if="$store.state.login">
+      <span>MYPAGE</span>
       <router-link
         v-if="$store.state.login"
         :to="{ name: 'Profile',params:{user_name:loginUser.user_name} }"
@@ -92,10 +96,21 @@ a {
   display: none;
 }
 
-@media screen and (max-width: 415px) {
+@media screen and (max-width: 480px) {
 
   .v-item-group.v-bottom-navigation {
     display: flex;
   }
+
+  .v-btn--active span{
+    display:block;
+  }
+
+  span{
+    display:none;
+    font-size:8px;
+    margin-top:.3em;
+  }
+
 }
 </style>

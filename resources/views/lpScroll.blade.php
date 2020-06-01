@@ -73,7 +73,7 @@
             margin:2em 2em 4em 2em;
             width:800px;
             height:400px;
-            box-shadow:8px 8px 8px rgba(0,0,0,0.16);
+            /* box-shadow:8px 8px 8px rgba(0,0,0,0.16); */
         }
         .title{
             font-weight:bold;
@@ -111,21 +111,25 @@
         }
 
         button{
-            background-color:#100D08;
-            opacity:32%;
-            color:#EFECEC;
+            background-color:#fff;
+            color:#4B4949;
             width:300px;
             margin:1em 1em 4em 1em;
             padding:8px;
+            border:none;
             border-radius:14px;
             font-size:20px;
-            letter-spacing:1em;
+            letter-spacing:.5em;
             text-align:center;
             text-indent:1em;
             cursor: pointer;
+            font-weight: bold;
+            font-family: YuGothic,'Yu Gothic','Yu Gothic UI','Hiragino Sans','ヒラギノ角ゴシック','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+
         }
+
         button:hover{
-            background-color:#4f3f26;
+            opacity:0.6;
         }
 
 
@@ -136,7 +140,7 @@
             display:block;
         }
 
-        @media screen and (max-width: 415px) {
+        @media screen and (max-width: 480px) {
         .pre{
             font-size:18px;
             text-align:center;
@@ -151,14 +155,16 @@
             justify-content: center;
             width:250px;
             height:500px;
-            padding:1em 2.5em;
-            margin:2em 2em 4em 2em;
+            padding:2em 2.5em;
+            margin:4em 2em 2em;
         }
+        .card_adjust{
+            padding-top:0em;
+            margin-top:3em;
+        }
+
         img{
             height:200px;
-        }
-        button{
-            border-radius:40px;
         }
         .sentence{
             font-size:0.9em;
@@ -167,6 +173,16 @@
             font-size:18px;
             text-align:center;
             margin:0em auto 0 auto;
+        }
+        .section_title{
+            font-size: 1.1em;
+            letter-spacing: 0.08em;
+            margin-top: 8px;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-weight: bold;
         }
         .mainTitle{
             margin-top:3em;
@@ -189,10 +205,12 @@
         .meet{
             order:1;
         }
+
         button{
+            border-radius:14px;
             width:250px;
             font-size:18px;
-
+            margin-top:2em;
         }
         .sp_br{
             display:block;
@@ -210,16 +228,18 @@
     <div class="wrap">
         <div class="white">
             <div>
-                <p class="pre">一言で表現できない物事に<br class="sp_br">直面したとき<br class="pc_br">物語は<br class="sp_br">初めてその意義を発揮する。</p>
-                <p class="mainMessage">小説は、<br class="sp_br">「読む」から<br class="sp_br">「書く」へ。</p>
+                <p class="pre">一言で表現できない物事に<br class="sp_br">直面したとき<br class="pc_br">物語は<br class="sp_br">初めてその意義を発揮する</p>
+                <p class="mainMessage">小説は<br class="sp_br">「読む」から<br class="sp_br">「書く」へ</p>
             </div>
         </div>
         <div class="orange">
             <div class="first">
-                <p class="mainTitle title"><span>MON BLANC</span> での過ごし方</p>
-                <div class="card">
+                <p class="mainTitle title"><span>MON BLANC</span><br class="sp_br">での過ごし方</p>
+                <div class="card card_adjust">
                     <div>
-                        <p class="title">物語の主人公を選ぼう。</p>
+                        <div class="section_title">
+                            <p class="title">物語の主人公を選ぼう</p>
+                        </div>
                         <div class="sentences">
                             <p class="sentence">あなたの気になる主人公が見つかれば、</p>
                             <p class="sentence">その気になった理由こそが、</p>
@@ -234,7 +254,7 @@
                     <img class="meet" src="{{asset('img/lp/meet.png')}}" alt="">
                     <div class="right">
                         <p class="title">思いついたままに</p>
-                        <p class="title">描写してみよう！</p>
+                        <p class="title">描写してみよう</p>
                         <div class="sentences">
                             <p class="sentence">質問に答えながら描写を<br class="sp_br">イメージしてみましょう。</p>
                             <p class="sentence">小説は自由です。</p>
@@ -247,7 +267,7 @@
                 <div class="card">
                     <div>
                         <p class="title">主人公を起点に</p>
-                        <p class="title">読みたい物語を選ぼう。</p>
+                        <p class="title">読みたい物語を選ぼう</p>
                         <div class="sentences">
                             <p class="sentence">1人の主人公に対して、</p>
                             <p class="sentence">様々な視点での物語が綴られています。</p>
