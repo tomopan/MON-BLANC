@@ -103,7 +103,6 @@ export default {
       axios
         .get("api/get/bookmarks")
         .then(res => {
-          console.log(res.data);
           this.BookmarkNovels = res.data;
           //50字で省略
           this.BookmarkNovels.forEach(e => {

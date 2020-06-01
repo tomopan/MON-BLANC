@@ -111,7 +111,6 @@ export default {
       axios
         .get("api/get/close_paper_novels")
         .then(res => {
-          console.log(res);
           this.closePaperNovels = res.data.map(data => {
             const obj = {};
             obj["id"] = data.id;

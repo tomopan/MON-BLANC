@@ -179,7 +179,6 @@ export default {
         active_tab * 6,
         active_tab * 6 + 6
       );
-      console.log(this.active_page_novels);
 
       this.active_page_novels.forEach(function(e, i) {
         if (e.text && e.text.length >= 50)
