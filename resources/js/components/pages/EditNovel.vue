@@ -24,7 +24,7 @@
         <div class="title_wrap">
           <div v-if="paper.titleToggle" class="title_wrap">
             <div v-if="title_toggle" class="title_text">{{ paper.text }}</div>
-            <div v-else class="title_text">タイトルを編集しましょう</div>
+            <div v-else class="title_text">タイトルを編集しましょう！</div>
           </div>
           <div v-if="paper.titleToggle">
             <router-link
@@ -254,7 +254,7 @@ export default {
 /* .title_card {
 } */
 .title_text {
-  font-size: 30px;
+  font-size: 1.3em;
   font-weight: bold;
 }
 .episode_text {
@@ -378,5 +378,18 @@ p {
   padding: 1em;
   background-color: #fff;
   border: 1px dashed #000;
+}
+@media screen and (max-width: 480px) {
+
+#app > div > main > div > div.content{
+  margin-top:80px;
+}
+.title_wrap {
+    display: block;
+    margin-bottom: 1em;
+}
+div.title_text {
+    font-size:　16px!important;
+}
 }
 </style>
